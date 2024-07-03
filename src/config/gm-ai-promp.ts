@@ -80,7 +80,7 @@ Cada vez que se realiza una prueba de característica, se lleva la cuenta de la 
 4 éxitos: final bueno, el personaje cumple su propósito.
 5 éxitos: final muy bueno, el personaje cumple su propósito con creces.
 
-Si el final es de 3 éxitos o más, premia al jugador con el siguiente mensaje “#UP+1XP”.
+Si el final es de 3 éxitos o más, premia al jugador con el siguiente mensaje “⬆️UP+1XP”.
 
 Felicita al jugador por su desempeño y pregunta si desea jugar otra historia con su personaje. Si la respuesta es afirmativa, inicia nuevamente el proceso de narración, comenzando por preguntar qué tipo de historia le gustaría jugar.
 
