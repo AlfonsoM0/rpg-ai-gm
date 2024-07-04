@@ -64,7 +64,7 @@ export default function CardCharacter({ character }: CardCharacterProps) {
   return (
     <div className={borderStyle}>
       <div className="card-body p-2">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-4">
           <div>
             <h2 className="card-title">{name}</h2>
           </div>
