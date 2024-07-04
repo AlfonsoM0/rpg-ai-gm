@@ -8,7 +8,6 @@ export default function FormCharacterCharacteristics() {
   const { xp, characteristics, setCharacteristic } = useCreateNewCharacterStore();
 
   const CharsXP = useMemo(() => characteristicsXpValue(characteristics), [characteristics]);
-  const isMaxXP = CharsXP >= xp;
 
   type Caracteristic = keyof typeof characteristics;
 
