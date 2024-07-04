@@ -2,11 +2,13 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Content } from '@google/generative-ai';
 import { gmAiPrompt } from 'config/gm-ai-promp';
+import runAIChat from 'server/gm-ai';
 
 interface GmAiStore {
   storyId: string;
   storyName: string;
   content: Content[];
+  isLoadingContent: boolean;
 }
 
 interface GmAiActions {
@@ -29,6 +31,7 @@ const initialGmAiState: GmAiStore = {
       ],
     },
   ],
+  isLoadingContent: false,
 };
 
 export const useGmAiStore = create<GmAiStore & GmAiActions>()(
@@ -45,7 +48,39 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
 
         setStoryName: (storyName) => set(() => ({ storyName })),
 
-        addContent: (newContent) => set((state) => ({ content: [...state.content, newContent] })),
+        addContent: async (newContent) => {
+          set(() => ({ isLoadingContent: true }));
+
+          const newContentText = newContent.parts.map((part) => part.text).join('');
+
+          try {
+            const gMAiResponse = await runAIChat(newContentText, get().content as Content[]);
+
+            set((state) => ({
+              content: [
+                ...state.content,
+                newContent,
+                {
+                  role: 'model',
+                  parts: [{ text: gMAiResponse }],
+                },
+              ],
+              isLoadingContent: false,
+            }));
+          } catch (error) {
+            set((state) => ({
+              content: [
+                ...state.content,
+                newContent,
+                {
+                  role: 'model',
+                  parts: [{ text: 'Lo lamento, ocurrió un error y no puedo responderte' }],
+                },
+              ],
+              isLoadingContent: false,
+            }));
+          }
+        },
 
         resetChat: () => set(() => initialGmAiState),
       }),
