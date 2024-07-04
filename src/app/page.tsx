@@ -27,13 +27,13 @@ export default function Home() {
         <div className="flex flex-wrap justify-center gap-4">
           <div className="card w-80 h-60 border border-primary-content rounded-lg shadow-md">
             <button
-              className="flex flex-col justify-center items-center gap-4 mt-[15%]"
+              className="flex flex-col justify-center items-center mt-[15%]"
               onClick={onCreateNewCharacterClick}
             >
               <div>
                 <h2 className="card-title">¡Crear un personaje Nuevo!</h2>
               </div>
-              <div className="text-7xl">➕</div>
+              <div className="text-9xl text-success">+</div>
             </button>
           </div>
 
