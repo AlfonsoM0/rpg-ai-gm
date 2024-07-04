@@ -9,8 +9,10 @@ interface ChatMsgStart {
 }
 
 export default function ChatMessage({ userName, message, position }: ChatMsgStart) {
+  const chatPosition = position === 'start' ? 'chat chat-start' : 'chat chat-end';
+
   return (
-    <div className={`chat chat-${position}`}>
+    <div className={chatPosition}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img
@@ -20,7 +22,7 @@ export default function ChatMessage({ userName, message, position }: ChatMsgStar
         </div>
       </div>
       <div className="chat-header">{userName}</div>
-      <div className="chat-bubble">
+      <div className="chat-bubble bg-primary-content text-inherit text-sm">
         <Markdown options={mdOpt}>{message}</Markdown>
       </div>
     </div>
@@ -30,16 +32,16 @@ export default function ChatMessage({ userName, message, position }: ChatMsgStar
 const mdOpt = {
   overrides: {
     strong: {
-      props: { className: 'text-blue-500 text-lg' },
+      props: { className: 'text-info text-md' },
     },
     li: {
       props: { className: 'list-disc ml-5' },
     },
     p: {
-      props: { className: 'mb-2' },
+      props: { className: 'my-2' },
     },
     a: {
-      props: { className: 'text-blue-500' },
+      props: { className: 'text-info' },
     },
   },
 };
