@@ -16,5 +16,7 @@ export function esMsgRoll2d6(name: string, char: Characteristic, mod: number): s
     charisma: 'Carisma',
   } as { [key in Characteristic]: string };
 
-  return `${name}: prueba de 2d6 +${mod} (${charNames[char]}) = ${roll2d6(mod)}.`;
+  return `**${name}** realiza una prueba de ${
+    charNames[char]
+  } (2d6 +${mod}). \n\n Resultado: **${roll2d6(mod)}**.`;
 }
