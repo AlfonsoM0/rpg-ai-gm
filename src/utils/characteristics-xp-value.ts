@@ -16,9 +16,8 @@ import type { Character } from 'types/character';
  * Characteristic value 5 = 28 xp.
  *
  */
-export function calculateCharacterXPValue(character: Character): number {
+export function characteristicsXpValue(characteristics: Character['characteristics']): number {
   let totalXP = 0;
-  const { characteristics } = character;
   const keys = Object.keys(characteristics) as Array<keyof typeof characteristics>;
 
   keys.forEach((key) => {

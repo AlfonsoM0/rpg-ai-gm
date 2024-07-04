@@ -8,6 +8,7 @@ Trasfondo: [historia personal del personaje]
 Profesión: [ocupación o rol del personaje]
 Personalidad: [rasgos de personalidad del personaje]
 Equipamiento: [objetos o armas característicos que lleva el personaje]
+Poderes: [descripción opcional de habilidades especiales del personaje, si las tiene]
 Características:
 Fuerza +[valor],
 Destreza +[valor],
@@ -15,7 +16,6 @@ Constitución +[valor],
 Inteligencia +[valor],
 Sabiduría +[valor],
 Carisma +[valor].
-Poderes: [descripción opcional de habilidades especiales del personaje, si las tiene]
 
 Cada característica posee un valor del 1 al 5. Cuando un personaje realiza una acción, el jugador realiza una prueba de característica, tira 2d6 y suma el valor de la característica que corresponda. Un resultado de 10 o más es un éxito, y de 9 o menos es un fallo. A continuación se describen detalladamente cada característica y sus usos:
 

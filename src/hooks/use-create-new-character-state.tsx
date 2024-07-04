@@ -28,12 +28,12 @@ export const useCreateNewCharacterStore = create<Character & CreateNewCharacterS
     profession: '',
     powers: '',
     characteristics: {
-      strength: 1,
-      dexterity: 1,
-      constitution: 1,
-      intelligence: 1,
-      wisdom: 1,
-      charisma: 1,
+      strength: 3,
+      dexterity: 3,
+      constitution: 3,
+      intelligence: 3,
+      wisdom: 3,
+      charisma: 3,
     },
 
     // Actions
