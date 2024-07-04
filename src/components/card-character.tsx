@@ -2,6 +2,7 @@
 
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
+import { useModalState } from 'hooks/use-modal-state';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { Character } from 'types/character';
@@ -14,8 +15,8 @@ interface CardCharacterProps {
 export default function CardCharacter({ character }: CardCharacterProps) {
   const router = useRouter();
   const { setAllCharacterInfo } = useCreateNewCharacterStore();
-  const { removeAllCharacter, removeInGameCharacter, inGameCharacters, addInGameCharacter } =
-    useCharacterStore();
+  const { removeInGameCharacter, inGameCharacters, addInGameCharacter } = useCharacterStore();
+  const { setModalContent, setModalIsOpen } = useModalState();
 
   const {
     id,
@@ -35,9 +36,8 @@ export default function CardCharacter({ character }: CardCharacterProps) {
   const [check, setCheck] = useState(false);
 
   function deleteCharacter() {
-    alert('Se removerá el personaje');
-    // removeAllCharacter(id);
-    // removeInGameCharacter(id);
+    setModalContent(<ModalDeleteCharacter id={id} />);
+    setModalIsOpen(true);
   }
 
   function editCharacter() {
@@ -138,9 +138,37 @@ export default function CardCharacter({ character }: CardCharacterProps) {
             Editar
           </button>
           <button className="btn btn-sm btn-success" onClick={selectCharacter}>
-            {isInGame ? 'Quitar' : 'Agregar'}
+            {isInGame ? 'Despedir' : 'Reclutar'}
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ModalDeleteCharacter({ id }: { id: string }) {
+  const { setModalIsOpen } = useModalState();
+  const { removeAllCharacter, removeInGameCharacter } = useCharacterStore();
+
+  return (
+    <div>
+      <h3 className="font-bold text-lg">¿Estás seguro de borrar este personaje?</h3>
+      <p className="py-4">Esta acción no se puede deshacer.</p>
+
+      <div className="modal-action">
+        <button
+          className="btn btn-error"
+          onClick={() => {
+            removeAllCharacter(id);
+            removeInGameCharacter(id);
+            setModalIsOpen(false);
+          }}
+        >
+          Si, borrar
+        </button>
+        <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+          No, cancelar
+        </button>
       </div>
     </div>
   );

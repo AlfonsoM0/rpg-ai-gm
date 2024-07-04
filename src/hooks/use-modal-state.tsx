@@ -15,10 +15,10 @@ const initialModalState: ModalState = {
   content: <></>,
 };
 
-export const useModalState = create<ModalState & ModalStateActions>()((set) => {
+export const useModalState = create<ModalState & ModalStateActions>((set) => ({
   ...initialModalState,
 
   // Actions
   setModalIsOpen: (isOpen) => set({ isOpen }),
   setModalContent: (content) => set({ content }),
-});
+}));
