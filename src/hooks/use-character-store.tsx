@@ -26,7 +26,7 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
 
         // Actions
         addInGameCharacter: (character) =>
-          set((state) => ({ inGameCharacters: [character, ...state.inGameCharacters] })),
+          set((state) => ({ inGameCharacters: [...state.inGameCharacters, character] })),
 
         removeInGameCharacter: (id) =>
           set((state) => ({ inGameCharacters: state.inGameCharacters.filter((c) => c.id !== id) })),
