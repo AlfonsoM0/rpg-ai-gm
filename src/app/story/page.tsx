@@ -2,15 +2,13 @@
 
 import CardPlayCharacter from 'components/card-play-character';
 import { useCharacterStore } from 'hooks/use-character-store';
-import { Character } from 'types/character';
+import { Character, Characteristic } from 'types/character';
 import { esMsgRoll2d6 } from 'utils/roll-2d6';
-
-type characteristic = keyof Character['characteristics'];
 
 export default function Page() {
   const { inGameCharacters } = useCharacterStore();
 
-  function rollCharacteristic(name: string, characteristic: characteristic, value: number): void {
+  function rollCharacteristic(name: string, characteristic: Characteristic, value: number): void {
     const rolResult = esMsgRoll2d6(name, characteristic, value);
     console.log(rolResult);
   }

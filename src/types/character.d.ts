@@ -17,3 +17,5 @@ export type Character = {
     charisma: number;
   };
 };
+
+export type Characteristic = keyof Character['characteristics'];

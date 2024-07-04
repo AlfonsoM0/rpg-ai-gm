@@ -1,13 +1,11 @@
 'use client';
 
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
-import { Character } from 'types/character';
-
-type characteristic = keyof Character['characteristics'];
+import { Character, Characteristic } from 'types/character';
 
 interface CardPlayCharacterProps {
   character: Character;
-  rollCharacteristic: (name: string, characteristic: characteristic, value: number) => void;
+  rollCharacteristic: (name: string, characteristic: Characteristic, value: number) => void;
 }
 
 export default function CardPlayCharacter({
