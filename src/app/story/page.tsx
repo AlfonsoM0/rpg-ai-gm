@@ -1,49 +1,46 @@
 'use client';
 
 import CardPlayCharacter from 'components/card-play-character';
+import ChatInputMsg from 'components/chat/chat-input-msg';
+import ChatOptionsABC from 'components/chat/chat-options-abc';
+import ChatWindow from 'components/chat/chat-window';
 import { useCharacterStore } from 'hooks/use-character-store';
-import { Characteristic } from 'types/character';
-import { esMsgRoll2d6 } from 'utils/roll-2d6';
+import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
+import { useEffect } from 'react';
 
 export default function Page() {
   const { inGameCharacters } = useCharacterStore();
 
-  function rollCharacteristic(name: string, characteristic: Characteristic, value: number): void {
-    const rolResult = esMsgRoll2d6(name, characteristic, value);
-    console.log(rolResult);
-  }
+  const { content, addContent, resetChat } = useGmAiStore();
 
-  function onHistoryOptionClick(option: 'A' | 'B' | 'C'): void {
-    console.log('Option => ', `Elijo la opción "${option}".`);
-  }
+  useEffect(() => {
+    if (content.length < 2) {
+      addContent({
+        role: 'user',
+        parts: [
+          {
+            text: `**Player Characters** \n\n ${JSON.stringify(inGameCharacters)}`,
+          },
+        ],
+      });
+    }
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <h1>Historia</h1>
 
-      <section className="flex justify-center items-center gap-4">
-        <h3 className="font-bold">Opciones: </h3>
-        <button className="btn btn-circle" onClick={() => onHistoryOptionClick('A')}>
-          A
-        </button>
-        <button className="btn btn-circle" onClick={() => onHistoryOptionClick('B')}>
-          B
-        </button>
-        <button className="btn btn-circle" onClick={() => onHistoryOptionClick('C')}>
-          C
-        </button>
+      <section>
+        <ChatWindow />
+        <ChatInputMsg />
       </section>
 
-      <section className="my-4">
-        <h2 className="text-center text-2xl font-bold mb-4">Personajes Jugadores</h2>
+      <ChatOptionsABC />
 
+      <section className="my-4">
         <div className="flex flex-wrap gap-4 justify-center">
           {inGameCharacters.map((character) => (
-            <CardPlayCharacter
-              key={character.id}
-              character={character}
-              rollCharacteristic={rollCharacteristic}
-            />
+            <CardPlayCharacter key={character.id} character={character} />
           ))}
         </div>
       </section>
