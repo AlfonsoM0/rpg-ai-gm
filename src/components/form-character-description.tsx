@@ -58,7 +58,7 @@ export default function FormCharacterDescription() {
         value={appareance}
         onChange={(e) => setDescription({ key: 'appareance', value: e.target.value })}
         required
-      ></textarea>
+      />
     </label>,
 
     <label className="form-control w-full max-w-xs" key={'step-2'}>
@@ -71,7 +71,7 @@ export default function FormCharacterDescription() {
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
         required
-      ></textarea>
+      />
     </label>,
 
     <label className="form-control w-full max-w-xs" key={'step-3'}>
@@ -84,7 +84,7 @@ export default function FormCharacterDescription() {
         value={profession}
         onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
         required
-      ></textarea>
+      />
     </label>,
 
     <label className="form-control w-full max-w-xs" key={'step-4'}>
@@ -97,7 +97,7 @@ export default function FormCharacterDescription() {
         value={personality}
         onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
         required
-      ></textarea>
+      />
     </label>,
 
     <label className="form-control w-full max-w-xs" key={'step-5'}>
@@ -110,7 +110,7 @@ export default function FormCharacterDescription() {
         value={equipment}
         onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
         required
-      ></textarea>
+      />
     </label>,
 
     <label className="form-control w-full max-w-xs" key={'step-6'}>
@@ -122,7 +122,7 @@ export default function FormCharacterDescription() {
         placeholder="¿Tiene poderes o habilidades especiales? Descríbelos aquí. ¿Cuáles son sus fortalezas y debilidades? ¿Cómo utilizan esos poderes?"
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
-      ></textarea>
+      />
     </label>,
 
     <FormCharacterCharacteristics key={'step-7'} />,
