@@ -3,25 +3,50 @@
 import CardCharacter from 'components/card-character';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
+import { useModalState } from 'hooks/use-modal-state';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
 
-  const { allCharacters } = useCharacterStore();
+  const { allCharacters, inGameCharacters } = useCharacterStore();
   const { clearAllCharacterInfo } = useCreateNewCharacterStore();
+  const { setModalContent, setModalIsOpen } = useModalState();
 
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
     router.push('/new-character');
   }
 
+  function playStory() {
+    if (!inGameCharacters.length) {
+      setModalContent(ModalNoCharactersToPlay);
+      return setModalIsOpen(true);
+    }
+
+    router.push('/story');
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between">
       <h1>Main Page</h1>
 
-      <section>
+      <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
+        <button className="btn btn-lg" onClick={playStory}>
+          ▶️ JUGAR UNA HISTORIA
+        </button>
+        <div>
+          <h2 className="text-center font-bold text-2xl my-2">Personajes Reclutados</h2>
+          <p className="text-center">
+            {inGameCharacters.length
+              ? `${inGameCharacters.map((character) => character.name).join(', ')}.`
+              : 'No hay personajes reclutados.'}
+          </p>
+        </div>
+      </section>
+
+      <section className="my-4">
         <h2 className="text-center font-bold text-2xl my-2">Mis Personajes</h2>
 
         <div className="flex flex-wrap justify-center gap-4">
@@ -45,3 +70,10 @@ export default function Home() {
     </main>
   );
 }
+
+const ModalNoCharactersToPlay = (
+  <div>
+    <h3 className="font-bold text-lg">No tienes personajes reclutados</h3>
+    <p className="py-4">Recluta al menos un personaje.</p>
+  </div>
+);
