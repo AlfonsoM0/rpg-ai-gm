@@ -3,6 +3,7 @@
 import CardCharacter from 'components/card-character';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
+import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -19,10 +20,45 @@ export default function Home() {
     router.push('/new-character');
   }
 
+  const { content, addContent, resetChat } = useGmAiStore();
   function playStory() {
     if (!inGameCharacters.length) {
       setModalContent(ModalNoCharactersToPlay);
       return setModalIsOpen(true);
+    }
+
+    resetChat();
+    if (content.length < 2) {
+      addContent({
+        role: 'user',
+        parts: [
+          {
+            text: `**Player Characters** \n\n ${JSON.stringify(inGameCharacters)}`,
+          },
+        ],
+      });
+    }
+
+    if (content.length > 3) {
+      let charactersChanged = false;
+      inGameCharacters.forEach((character) => {
+        const { id } = character;
+        const contentToString = JSON.stringify(content);
+
+        if (!contentToString.includes(id)) charactersChanged = true;
+      });
+
+      if (charactersChanged)
+        addContent({
+          role: 'user',
+          parts: [
+            {
+              text: `**Player Characters** \n Update my list of characters information as follows. \n\n ${JSON.stringify(
+                inGameCharacters
+              )}`,
+            },
+          ],
+        });
     }
 
     router.push('/story');

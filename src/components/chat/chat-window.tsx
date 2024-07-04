@@ -6,7 +6,7 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 
 export default function ChatWindow() {
   const { content } = useGmAiStore();
-  const contentToRender = content.slice(0); //TODO: chage to 2 (delete prompt and characters info)
+  const contentToRender = content.slice(2);
 
   return (
     <div className="h-[50vh] w-[90vw] flex flex-col">
