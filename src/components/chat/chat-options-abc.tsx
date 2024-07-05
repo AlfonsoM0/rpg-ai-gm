@@ -60,9 +60,9 @@ export default function ChatOptionsABC() {
 
 function ModalEndHistory() {
   const router = useRouter();
-  const { setModalIsOpen } = useModalState();
+  const { setModalContent, setModalIsOpen } = useModalState();
   const { storyName, storyId, setStoryName, setHistoryId, content, resetChat } = useGmAiStore();
-  const { inGameCharacters } = useCharacterStore();
+  const { inGameCharacters, findCharacterByIdAndIcrementXp } = useCharacterStore();
 
   const { addBook } = useLibraryStore();
 
@@ -72,6 +72,7 @@ function ModalEndHistory() {
   }, []);
 
   function onSaveBookClick() {
+    // save book to library
     if (storyName)
       addBook({
         id: storyId,
@@ -80,6 +81,24 @@ function ModalEndHistory() {
         content,
       });
 
+    // give XP to characters
+    const modelMsgs = content
+      .filter((c) => c.role === 'model')
+      .map((c) => c.parts[0].text)
+      .join(' | ');
+    const win1XP = modelMsgs.includes('⬆️UP+1XP') ? 1 : 0;
+    const win2XP = modelMsgs.includes('⬆️UP+2XP') ? 2 : 0;
+    const winXp = win1XP + win2XP;
+    if (winXp) {
+      inGameCharacters.forEach((character) => {
+        findCharacterByIdAndIcrementXp(character.id, winXp);
+      });
+
+      setModalContent(<ModalWinXp xp={winXp} />);
+      setModalIsOpen(true);
+    }
+
+    // reset all states to initial state
     resetChat(); // reset to inital state
     setModalIsOpen(false);
     router.push('/');
@@ -113,3 +132,10 @@ function ModalEndHistory() {
     </div>
   );
 }
+
+const ModalWinXp = ({ xp }: { xp: number }) => (
+  <div>
+    <h3 className="font-bold text-lg">Has ganado {xp} Puntos de Experiencia (XP)</h3>
+    <p className="py-4">Regresa a la pagina principal para editar tu personaje.</p>
+  </div>
+);

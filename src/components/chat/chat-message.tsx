@@ -1,7 +1,3 @@
-'use client';
-
-import { useCharacterStore } from 'hooks/use-character-store';
-import { useModalState } from 'hooks/use-modal-state';
 import Markdown from 'markdown-to-jsx';
 import Image from 'next/image';
 
@@ -14,22 +10,6 @@ interface ChatMsgStart {
 }
 
 export default function ChatMessage({ userName, message, position }: ChatMsgStart) {
-  const { inGameCharacters, findCharacterByIdAndIcrementXp } = useCharacterStore();
-  const { setModalContent, setModalIsOpen } = useModalState();
-
-  const win1XP = message.includes('⬆️UP+1XP') ? 1 : 0;
-  const win2XP = message.includes('⬆️UP+2XP') ? 2 : 0;
-
-  if (win1XP || win2XP) {
-    const winXp = win1XP + win2XP;
-    inGameCharacters.forEach((character) => {
-      findCharacterByIdAndIcrementXp(character.id, winXp);
-    });
-
-    setModalContent(ModalWinXp);
-    setModalIsOpen(true);
-  }
-
   if (message.includes('**Player Characters**'))
     return (
       <div>
@@ -43,7 +23,7 @@ export default function ChatMessage({ userName, message, position }: ChatMsgStar
     <div className={chatPosition}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <Image
+          <img //TODO: Change this
             alt={userName}
             src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
             width={10}
@@ -75,10 +55,3 @@ const mdOpt = {
     },
   },
 };
-
-const ModalWinXp = (
-  <div>
-    <h3 className="font-bold text-lg">Has ganado Puntos de Experiencia (XP)</h3>
-    <p className="py-4">Regresa a la pagina principal para editar tu personaje.</p>
-  </div>
-);
