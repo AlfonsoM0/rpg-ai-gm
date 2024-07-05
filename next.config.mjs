@@ -2,3 +2,5 @@
 const nextConfig = {};
 
 export default nextConfig;
+
+// TODO: PWA
