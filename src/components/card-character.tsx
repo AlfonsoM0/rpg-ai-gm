@@ -58,15 +58,14 @@ export default function CardCharacter({ character }: CardCharacterProps) {
       return;
     }
 
-    if (inGameCharacters.length > 2) {
-      setModalContent(ModalMaximumCharacters);
-      setModalIsOpen(true);
-      return;
-    }
-
     if (isInGame) {
       removeInGameCharacter(id);
     } else {
+      if (inGameCharacters.length >= 2) {
+        setModalContent(ModalMaximumCharacters);
+        setModalIsOpen(true);
+        return;
+      }
       addInGameCharacter(character);
     }
   }
