@@ -2,6 +2,7 @@
 
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
+import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -17,6 +18,7 @@ export default function CardCharacter({ character }: CardCharacterProps) {
   const { setAllCharacterInfo } = useCreateNewCharacterStore();
   const { removeInGameCharacter, inGameCharacters, addInGameCharacter } = useCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
+  const { content } = useGmAiStore();
 
   const {
     id,
@@ -50,6 +52,18 @@ export default function CardCharacter({ character }: CardCharacterProps) {
     [inGameCharacters, id]
   );
   function selectCharacter() {
+    if (content.length > 3) {
+      setModalContent(ModalCharacterInPlay);
+      setModalIsOpen(true);
+      return;
+    }
+
+    if (inGameCharacters.length > 2) {
+      setModalContent(ModalMaximumCharacters);
+      setModalIsOpen(true);
+      return;
+    }
+
     if (isInGame) {
       removeInGameCharacter(id);
     } else {
@@ -173,3 +187,21 @@ function ModalDeleteCharacter({ id }: { id: string }) {
     </div>
   );
 }
+
+const ModalCharacterInPlay = (
+  <div>
+    <h3 className="font-bold text-lg">Personaje en Juego</h3>
+    <p className="py-4">
+      No puedes reclutar o despedir personajes si tu historia actual no ha terminado.
+    </p>
+  </div>
+);
+
+const ModalMaximumCharacters = (
+  <div>
+    <h3 className="font-bold text-lg">Tienes demasiados personajes en juego</h3>
+    <p className="py-4">
+      Solo puedes tener 2 personajes en juego a la vez. Elimina alguno para poder reclutar otro.
+    </p>
+  </div>
+);
