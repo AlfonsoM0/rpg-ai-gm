@@ -4,7 +4,7 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useState } from 'react';
 
 export default function ChatInputMsg() {
-  const { addContent, resetChat } = useGmAiStore();
+  const { addContent, isLoadingContent, resetChat } = useGmAiStore();
 
   const [chatMsg, setChatMsg] = useState('');
 
@@ -24,10 +24,11 @@ export default function ChatInputMsg() {
         placeholder="..."
         value={chatMsg}
         onChange={(e) => setChatMsg(e.target.value)}
+        disabled={isLoadingContent}
       />
 
-      <button className="btn" type="submit">
-        ✍️
+      <button className="btn" type="submit" disabled={isLoadingContent}>
+        {isLoadingContent ? <span className="loading loading-spinner loading-xs"></span> : '✍️'}
       </button>
     </form>
   );

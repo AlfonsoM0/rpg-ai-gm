@@ -11,6 +11,13 @@ interface ChatMsgStart {
 export default function ChatMessage({ userName, message, position }: ChatMsgStart) {
   const chatPosition = position === 'start' ? 'chat chat-start' : 'chat chat-end';
 
+  if (message.includes('**Player Characters**'))
+    return (
+      <div>
+        <p className="text-center">Actualizando personajes de la historia...</p>
+      </div>
+    );
+
   return (
     <div className={chatPosition}>
       <div className="chat-image avatar">

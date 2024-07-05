@@ -14,7 +14,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
   const { strength, dexterity, constitution, intelligence, wisdom, charisma } = characteristics;
   const CharsXP = characteristicsXpValue(characteristics);
 
-  const { addContent } = useGmAiStore();
+  const { addContent, isLoadingContent } = useGmAiStore();
   function rollCharacteristic(characteristic: Characteristic, value: number): void {
     const rolResult = esMsgRoll2d6(name, characteristic, value);
     addContent({
@@ -41,15 +41,24 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
         <p className="text-xs">Selecciona característica para lanzar los dados.</p>
         <div className="flex justify-around items-center mt-2 font-bold">
           <div className="flex flex-col justify-center items-center gap-2">
-            <button className="btn" onClick={() => rollCharacteristic('strength', strength)}>
+            <button
+              className="btn"
+              onClick={() => rollCharacteristic('strength', strength)}
+              disabled={isLoadingContent}
+            >
               <h3>FUE +{strength}</h3>
             </button>
-            <button className="btn" onClick={() => rollCharacteristic('dexterity', dexterity)}>
+            <button
+              className="btn"
+              onClick={() => rollCharacteristic('dexterity', dexterity)}
+              disabled={isLoadingContent}
+            >
               <h3>DES +{dexterity}</h3>
             </button>
             <button
               className="btn"
               onClick={() => rollCharacteristic('constitution', constitution)}
+              disabled={isLoadingContent}
             >
               <h3>CON +{constitution}</h3>
             </button>
@@ -58,13 +67,22 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
             <button
               className="btn"
               onClick={() => rollCharacteristic('intelligence', intelligence)}
+              disabled={isLoadingContent}
             >
               <h3>INT +{intelligence}</h3>
             </button>
-            <button className="btn" onClick={() => rollCharacteristic('wisdom', wisdom)}>
+            <button
+              className="btn"
+              onClick={() => rollCharacteristic('wisdom', wisdom)}
+              disabled={isLoadingContent}
+            >
               <h3>SAB +{wisdom}</h3>
             </button>
-            <button className="btn" onClick={() => rollCharacteristic('charisma', charisma)}>
+            <button
+              className="btn"
+              onClick={() => rollCharacteristic('charisma', charisma)}
+              disabled={isLoadingContent}
+            >
               <h3>CAR +{charisma}</h3>
             </button>
           </div>

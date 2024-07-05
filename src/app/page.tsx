@@ -27,7 +27,6 @@ export default function Home() {
       return setModalIsOpen(true);
     }
 
-    resetChat();
     if (content.length < 2) {
       addContent({
         role: 'user',
@@ -42,10 +41,10 @@ export default function Home() {
     if (content.length > 3) {
       let charactersChanged = false;
       inGameCharacters.forEach((character) => {
-        const { id } = character;
         const contentToString = JSON.stringify(content);
+        const characterToString = JSON.stringify(character);
 
-        if (!contentToString.includes(id)) charactersChanged = true;
+        if (!contentToString.includes(characterToString)) charactersChanged = true;
       });
 
       if (charactersChanged)
@@ -53,7 +52,7 @@ export default function Home() {
           role: 'user',
           parts: [
             {
-              text: `**Player Characters** \n Update my list of characters information as follows. \n\n ${JSON.stringify(
+              text: `**Player Characters** \n Update the list of characters information as follows. \n\n ${JSON.stringify(
                 inGameCharacters
               )}`,
             },

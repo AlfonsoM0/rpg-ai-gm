@@ -1,11 +1,10 @@
 'use client';
 
-import { Content } from '@google/generative-ai';
 import ChatMessage from './chat-message';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 
 export default function ChatWindow() {
-  const { content } = useGmAiStore();
+  const { content, isLoadingContent } = useGmAiStore();
   const contentToRender = content.slice(2);
 
   return (
@@ -13,7 +12,7 @@ export default function ChatWindow() {
       <div className="overflow-y-scroll">
         {contentToRender.map((msg, index) => {
           const position = msg.role === 'model' ? 'start' : 'end';
-          const userName = msg.role === 'model' ? 'Game Master' : 'Player';
+          const userName = msg.role === 'model' ? 'Game Master AI' : 'Player';
 
           return (
             <ChatMessage
@@ -24,6 +23,12 @@ export default function ChatWindow() {
             />
           );
         })}
+
+        {isLoadingContent ? (
+          <div className="flex justify-center items-center h-[10vh]">
+            <span className="loading loading-dots loading-lg"></span>
+          </div>
+        ) : null}
       </div>
     </div>
   );
