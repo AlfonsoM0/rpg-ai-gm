@@ -7,6 +7,8 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useMemo } from 'react';
+import { isCharacterHaveTheSameInfo } from 'utils/is-characters-info-changed';
 
 export default function Home() {
   const router = useRouter();
@@ -14,13 +16,15 @@ export default function Home() {
   const { allCharacters, inGameCharacters } = useCharacterStore();
   const { clearAllCharacterInfo } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
+  const { content, addContent, resetChat } = useGmAiStore();
+
+  const isStoryStarted = useMemo(() => content.length > 3, [content]);
 
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
     router.push('/new-character');
   }
 
-  const { content, addContent, resetChat } = useGmAiStore();
   function playStory() {
     if (!inGameCharacters.length) {
       setModalContent(ModalNoCharactersToPlay);
@@ -41,10 +45,7 @@ export default function Home() {
     if (content.length > 3) {
       let charactersChanged = false;
       inGameCharacters.forEach((character) => {
-        const contentToString = JSON.stringify(content);
-        const characterToString = JSON.stringify(character);
-
-        if (!contentToString.includes(characterToString)) charactersChanged = true;
+        if (!isCharacterHaveTheSameInfo(inGameCharacters, character)) charactersChanged = true;
       });
 
       if (charactersChanged)
@@ -69,7 +70,7 @@ export default function Home() {
 
       <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
         <button className="btn btn-lg" onClick={playStory}>
-          ▶️ JUGAR UNA HISTORIA
+          ▶️ {isStoryStarted ? 'CONTINUAR HISTORIA' : 'JUGAR UNA HISTORIA'}
         </button>
         <div>
           <h2 className="text-center font-bold text-2xl my-2">Personajes Reclutados</h2>
