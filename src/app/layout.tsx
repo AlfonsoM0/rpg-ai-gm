@@ -18,6 +18,8 @@ export default function RootLayout({
   return (
     <html lang="es" data-theme="light">
       <body className={inter.className}>
+        {/* TODO: Navbar, Footer, etc. here */}
+
         {children}
         <Modal />
       </body>
