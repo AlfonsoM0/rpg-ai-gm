@@ -1,9 +1,8 @@
 import type { Characteristic } from 'types/character';
 
 export function roll2d6(mod: number) {
-  const r1d6 = () => Math.floor(Math.random() * 6);
-  const result = r1d6() + r1d6();
-  return result + mod;
+  const r1d6 = () => Math.ceil(Math.random() * 6);
+  return r1d6() + r1d6() + mod;
 }
 
 export function esMsgRoll2d6(name: string, char: Characteristic, mod: number): string {
