@@ -24,7 +24,7 @@ export default function ChatOptionsABC() {
   }
 
   return (
-    <section className="flex flex-wrap justify-center items-center gap-4">
+    <div className="flex flex-wrap justify-center items-center gap-4">
       <h3 className="font-bold">Opciones: </h3>
 
       <div className="flex gap-2">
@@ -54,7 +54,7 @@ export default function ChatOptionsABC() {
       <button className="btn btn-error" onClick={onEndHistoryClick} disabled={isLoadingContent}>
         Finalizar Historia
       </button>
-    </section>
+    </div>
   );
 }
 

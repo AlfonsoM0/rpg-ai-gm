@@ -21,7 +21,9 @@ export default function Page() {
         <ChatInputMsg />
       </section>
 
-      <ChatOptionsABC />
+      <section className={content.length < 5 ? 'hidden' : ''}>
+        <ChatOptionsABC />
+      </section>
 
       <section>
         <div className="flex flex-wrap gap-4 justify-center">
