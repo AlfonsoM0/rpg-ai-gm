@@ -1,5 +1,6 @@
 'use client';
 
+import { Icon } from 'components/icons';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useState } from 'react';
 
@@ -28,7 +29,11 @@ export default function ChatInputMsg() {
       />
 
       <button className="btn" type="submit" disabled={isLoadingContent}>
-        {isLoadingContent ? <span className="loading loading-spinner loading-xs"></span> : '✍️'}
+        {isLoadingContent ? (
+          <span className="loading loading-spinner loading-xs"></span>
+        ) : (
+          <Icon.Stars className="w-8 h-8 fill-info" />
+        )}
       </button>
     </form>
   );
