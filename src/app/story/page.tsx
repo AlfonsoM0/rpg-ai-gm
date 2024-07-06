@@ -17,7 +17,7 @@ export default function Page() {
       <h1>Historia</h1>
 
       <section>
-        <ChatWindow content={content} isLoadingContent={isLoadingContent} />
+        <ChatWindow content={content.slice(2)} isLoadingContent={isLoadingContent} />
         <ChatInputMsg />
       </section>
 

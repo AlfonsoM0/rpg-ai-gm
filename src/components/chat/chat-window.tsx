@@ -10,9 +10,8 @@ interface ChatWindowProps {
 }
 
 export default function ChatWindow({ content, isLoadingContent }: ChatWindowProps) {
-  const contentToRender = content.slice(2);
-
   const refLoader = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // If isLoadingContent is true, scroll to the bottom.
     if (isLoadingContent) {
@@ -26,7 +25,7 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
   return (
     <div className="h-[50vh] w-[90vw] flex flex-col">
       <div className="overflow-y-scroll">
-        {contentToRender.map((msg, index) => {
+        {content.map((msg, index) => {
           const position = msg.role === 'model' ? 'start' : 'end';
           const userName = msg.role === 'model' ? 'Game Master AI' : 'Player';
 
