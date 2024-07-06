@@ -51,7 +51,7 @@ export default function ChatOptionsABC() {
         </button>
       </div>
 
-      <button className="btn btn-error" onClick={onEndHistoryClick}>
+      <button className="btn btn-error" onClick={onEndHistoryClick} disabled={isLoadingContent}>
         Finalizar Historia
       </button>
     </section>
