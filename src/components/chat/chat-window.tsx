@@ -1,10 +1,12 @@
-'use client';
-
+import { Content } from '@google/generative-ai';
 import ChatMessage from './chat-message';
-import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 
-export default function ChatWindow() {
-  const { content, isLoadingContent } = useGmAiStore();
+interface ChatWindowProps {
+  content: Content[];
+  isLoadingContent: boolean;
+}
+
+export default function ChatWindow({ content, isLoadingContent }: ChatWindowProps) {
   const contentToRender = content.slice(2);
 
   return (
