@@ -24,9 +24,8 @@ export default function FormCharacterDescription() {
     setDescription,
   } = useCreateNewCharacterStore();
 
-  const { removeAllCharacter, addAllCharacter } = useCharacterStore();
+  const { removeAllCharacter, addAllCharacter, step, setStep } = useCharacterStore();
 
-  const [step, setStep] = useState(0);
   const steps = [
     <label className="form-control w-full max-w-xs" key={'step-0'}>
       <div className="label">
@@ -165,25 +164,28 @@ export default function FormCharacterDescription() {
       <form onSubmit={handleSubmit} className="min-w-80 flex flex-col gap-2">
         {steps[step]}
 
-        {step === steps.length - 1 ? (
+        <div className="flex justify-between mt-4">
+          <button
+            className="btn"
+            onClick={() => setStep((s) => s - 1)}
+            disabled={step === 0}
+            type="button"
+          >
+            Anterior
+          </button>
           <button className="btn btn-primary" type="submit">
             Guardar
           </button>
-        ) : null}
+          <button
+            className="btn"
+            onClick={() => setStep((s) => s + 1)}
+            disabled={step === steps.length - 1}
+            type="button"
+          >
+            Siguiente
+          </button>
+        </div>
       </form>
-
-      <div className="flex justify-between mt-4">
-        <button className="btn" onClick={() => setStep((s) => s - 1)} disabled={step === 0}>
-          Anterior
-        </button>
-        <button
-          className="btn"
-          onClick={() => setStep((s) => s + 1)}
-          disabled={step === steps.length - 1}
-        >
-          Siguiente
-        </button>
-      </div>
     </div>
   );
 }
