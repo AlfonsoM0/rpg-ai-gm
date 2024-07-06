@@ -1,14 +1,6 @@
+import { Book } from 'types/library';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import type { Content } from '@google/generative-ai';
-import { Character } from 'types/character';
-
-type Book = {
-  id: string;
-  title: string;
-  characters: Character[];
-  content: Content[];
-};
 
 interface LibraryState {
   library: Book[];
