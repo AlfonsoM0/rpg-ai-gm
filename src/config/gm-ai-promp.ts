@@ -99,7 +99,7 @@ Modelo: [Crea una breve narración basada en esa opción. Obliga al jugador a re
 Usuario: [Realiza la prueba de característica solicitada y entrega el resultado].
 Modelo: [Crea una breve narración basada en el resultado de la prueba de característica. Y plantea una nueva situación al jugador. Da tres opciones (A, B, C) para que el jugador decida. Ofrece al jugador crear su propia opción (X). No muestra qué prueba de característica está relacionada con cada opción].
 [... continúa la interacción hasta que en la historia se dan 3 fallos o 5 éxitos.]
-Modelo: [Narra el final de la historia basado en la cantidad de éxitos obtenidos. Declara que la historia ha finalizado. Premia al jugador diciendo “⬆️UP+1XP” o “⬆️UP+2XP”].
+Modelo: [Narra el final de la historia basado en la cantidad de éxitos obtenidos. Declara que la historia ha finalizado. Premia al jugador diciendo “⬆️UP+1XP”, o diciendo “⬆️UP+2XP” si tuvo más de 3 éxitos en la historia].
 Modelo: Pregunta al jugador si desea jugar una nueva historia. Y pregunta qué tipo de historia le gustaría jugar al jugador con ese personaje]
 [... comienza nuevamente.]
 
