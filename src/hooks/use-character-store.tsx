@@ -10,6 +10,7 @@ interface CharacterStore {
 interface CharacterActions {
   addInGameCharacter: (character: Character) => void;
   removeInGameCharacter: (id: string) => void;
+  removeAllInGameCharacter: () => void;
 
   addAllCharacter: (character: Character) => void;
   removeAllCharacter: (id: string) => void;
@@ -30,6 +31,8 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
 
         removeInGameCharacter: (id) =>
           set((state) => ({ inGameCharacters: state.inGameCharacters.filter((c) => c.id !== id) })),
+
+        removeAllInGameCharacter: () => set(() => ({ inGameCharacters: [] })),
 
         addAllCharacter: (character) =>
           set((state) => ({ allCharacters: [character, ...state.allCharacters] })),

@@ -62,7 +62,8 @@ function ModalEndHistory() {
   const router = useRouter();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { storyName, storyId, setStoryName, setHistoryId, content, resetChat } = useGmAiStore();
-  const { inGameCharacters, findCharacterByIdAndIcrementXp } = useCharacterStore();
+  const { inGameCharacters, findCharacterByIdAndIcrementXp, removeAllInGameCharacter } =
+    useCharacterStore();
 
   const { addBook } = useLibraryStore();
 
@@ -103,6 +104,7 @@ function ModalEndHistory() {
     } else {
       // reset all states to initial state
       resetChat(); // reset to inital state
+      removeAllInGameCharacter();
       setModalIsOpen(false);
       router.push('/');
     }
