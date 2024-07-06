@@ -3,6 +3,7 @@
 import { Content } from '@google/generative-ai';
 import ChatMessage from './chat-message';
 import { useEffect, useRef } from 'react';
+import imgGmAi from 'public/android-chrome-512x512.png';
 
 interface ChatWindowProps {
   content: Content[];
@@ -28,6 +29,8 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
         {content.map((msg, index) => {
           const position = msg.role === 'model' ? 'start' : 'end';
           const userName = msg.role === 'model' ? 'Game Master AI' : 'Player';
+          const avatarSrc = msg.role === 'model' ? imgGmAi.src : undefined;
+          const avatarAlt = msg.role === 'model' ? 'Game Master AI Avatar' : 'Player Avatar';
 
           return (
             <ChatMessage
@@ -35,6 +38,8 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
               message={msg.parts.map((p) => p.text).join('\n')}
               position={position}
               userName={userName}
+              avatarSrc={avatarSrc}
+              avatarAlt={avatarAlt}
             />
           );
         })}

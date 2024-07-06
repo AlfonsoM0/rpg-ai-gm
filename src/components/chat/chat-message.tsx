@@ -31,7 +31,7 @@ export default function ChatMessage({
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           {avatarSrc ? (
-            <Image src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
+            <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
           ) : (
             <Icon.User />
           )}
