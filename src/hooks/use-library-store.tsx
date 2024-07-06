@@ -23,7 +23,7 @@ export const useLibraryStore = create<LibraryState & LibraryActions>()(
         removeBook: (id) =>
           set((state) => ({ library: state.library.filter((book) => book.id !== id) })),
       }),
-      { name: 'library-store' }
+      { name: 'library-storage' }
     )
   )
 );
