@@ -89,6 +89,7 @@ function ModalEndHistory() {
     const win1XP = modelMsgs.includes('⬆️UP+1XP') ? 1 : 0;
     const win2XP = modelMsgs.includes('⬆️UP+2XP') ? 2 : 0;
     const winXp = win1XP + win2XP;
+
     if (winXp) {
       inGameCharacters.forEach((character) => {
         findCharacterByIdAndIcrementXp(character.id, winXp);
@@ -96,12 +97,15 @@ function ModalEndHistory() {
 
       setModalContent(<ModalWinXp xp={winXp} />);
       setModalIsOpen(true);
-    }
 
-    // reset all states to initial state
-    resetChat(); // reset to inital state
-    setModalIsOpen(false);
-    router.push('/');
+      resetChat();
+      router.push('/');
+    } else {
+      // reset all states to initial state
+      resetChat(); // reset to inital state
+      setModalIsOpen(false);
+      router.push('/');
+    }
   }
 
   return (
@@ -136,6 +140,6 @@ function ModalEndHistory() {
 const ModalWinXp = ({ xp }: { xp: number }) => (
   <div>
     <h3 className="font-bold text-lg">Has ganado {xp} Puntos de Experiencia (XP)</h3>
-    <p className="py-4">Regresa a la pagina principal para editar tu personaje.</p>
+    <p className="py-4">Edita tu personaje para mejorar tus caracteristicas.</p>
   </div>
 );
