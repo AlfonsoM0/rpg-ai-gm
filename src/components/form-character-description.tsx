@@ -5,6 +5,7 @@ import { useState } from 'react';
 import FormCharacterCharacteristics from './form-character-characteristics';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useRouter } from 'next/navigation';
+import NewCharacterNav from './form-character-description-nav';
 
 export default function FormCharacterDescription() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function FormCharacterDescription() {
   const { removeAllCharacter, addAllCharacter, step, setStep } = useCharacterStore();
 
   const steps = [
-    <label className="form-control w-full max-w-xs" key={'step-0'}>
+    <label className="form-control w-full max-w-xs h-60" key={'step-0'}>
       <div className="label">
         <span className="label-text">Nombre de tu personaje *</span>
       </div>
@@ -155,11 +156,14 @@ export default function FormCharacterDescription() {
 
   return (
     <div className="min-h-96 flex flex-col justify-between">
-      <progress
-        className="progress progress-primary w-full"
-        value={step}
-        max={steps.length - 1}
-      ></progress>
+      <div>
+        <NewCharacterNav />
+        <progress
+          className="progress progress-primary w-full"
+          value={step}
+          max={steps.length - 1}
+        ></progress>
+      </div>
 
       <form onSubmit={handleSubmit} className="min-w-80 flex flex-col gap-2">
         {steps[step]}
