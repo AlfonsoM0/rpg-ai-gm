@@ -24,7 +24,7 @@ export default function CardCharacter({ character }: CardCharacterProps) {
     id,
     xp,
     name,
-    appareance,
+    appearance,
     background,
     profession,
     personality,
@@ -109,7 +109,7 @@ export default function CardCharacter({ character }: CardCharacterProps) {
             <h3>
               <strong>Apariencia: </strong>
             </h3>
-            <p>{appareance}</p>
+            <p>{appearance}</p>
             <br />
 
             <h3>

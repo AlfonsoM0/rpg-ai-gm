@@ -17,7 +17,7 @@ const generationConfig = {
   temperature: 2,
   topP: 0.95,
   topK: 64,
-  maxOutputTokens: 1000,
+  maxOutputTokens: 500,
   responseMimeType: 'text/plain',
 };
 

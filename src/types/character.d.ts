@@ -2,7 +2,7 @@ export type Character = {
   id: string;
   xp: number;
   name: string;
-  appareance: string;
+  appearance: string;
   background: string;
   profession: string;
   personality: string;

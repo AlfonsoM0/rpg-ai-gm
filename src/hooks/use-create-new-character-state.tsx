@@ -7,7 +7,7 @@ const initialCharacterState: Character & { step: number } = {
   id: crypto.randomUUID(),
   xp: 60,
   name: '',
-  appareance: '',
+  appearance: '',
   background: '',
   equipment: '',
   personality: '',

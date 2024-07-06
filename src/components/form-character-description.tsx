@@ -14,7 +14,7 @@ export default function FormCharacterDescription() {
     id,
     xp,
     name,
-    appareance,
+    appearance,
     background,
     profession,
     personality,
@@ -57,8 +57,8 @@ export default function FormCharacterDescription() {
       <textarea
         className="textarea textarea-bordered h-60"
         placeholder="Describe su forma de vestir, sus accesorios y cualquier otro detalle distintivo."
-        value={appareance}
-        onChange={(e) => setDescription({ key: 'appareance', value: e.target.value })}
+        value={appearance}
+        onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
         required
       />
     </label>,
@@ -133,7 +133,7 @@ export default function FormCharacterDescription() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name) return setStep(0);
-    if (!appareance) return setStep(1);
+    if (!appearance) return setStep(1);
     if (!background) return setStep(2);
     if (!profession) return setStep(3);
     if (!personality) return setStep(4);
@@ -144,7 +144,7 @@ export default function FormCharacterDescription() {
       id,
       xp,
       name,
-      appareance,
+      appearance,
       background,
       profession,
       personality,
