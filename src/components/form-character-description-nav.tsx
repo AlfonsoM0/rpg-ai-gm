@@ -1,9 +1,9 @@
 'use client';
 
-import { useCharacterStore } from 'hooks/use-character-store';
+import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 
 export default function NewCharacterNav() {
-  const { step, setStep } = useCharacterStore();
+  const { step, setStep } = useCreateNewCharacterStore();
 
   function onLiClick(step: number) {
     setStep(step);

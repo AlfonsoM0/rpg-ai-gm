@@ -15,9 +15,8 @@ interface CardCharacterProps {
 
 export default function CardCharacter({ character }: CardCharacterProps) {
   const router = useRouter();
-  const { setAllCharacterInfo } = useCreateNewCharacterStore();
-  const { removeInGameCharacter, inGameCharacters, addInGameCharacter, setStep } =
-    useCharacterStore();
+  const { setAllCharacterInfo, setStep } = useCreateNewCharacterStore();
+  const { removeInGameCharacter, inGameCharacters, addInGameCharacter } = useCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { content } = useGmAiStore();
 

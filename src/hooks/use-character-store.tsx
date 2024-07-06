@@ -5,7 +5,6 @@ import { Character } from 'types/character';
 interface CharacterStore {
   inGameCharacters: Character[];
   allCharacters: Character[];
-  step: number;
 }
 
 interface CharacterActions {
@@ -16,7 +15,6 @@ interface CharacterActions {
   removeAllCharacter: (id: string) => void;
 
   findCharacterByIdAndIcrementXp: (id: string, amount: number) => void;
-  setStep: (step: number | ((state: number) => number)) => void;
 }
 
 export const useCharacterStore = create<CharacterStore & CharacterActions>()(
@@ -25,7 +23,6 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
       (set, get) => ({
         inGameCharacters: [],
         allCharacters: [],
-        step: 0,
 
         // Actions
         addInGameCharacter: (character) =>
@@ -59,9 +56,6 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
               }));
             }
           }
-        },
-        setStep: (step: number | ((state: number) => number)) => {
-          set((state) => ({ step: typeof step === 'function' ? step(state.step) : step }));
         },
       }),
       { name: 'character-storage' }

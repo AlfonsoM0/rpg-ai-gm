@@ -23,9 +23,11 @@ export default function FormCharacterDescription() {
     characteristics,
 
     setDescription,
+    step,
+    setStep,
   } = useCreateNewCharacterStore();
 
-  const { removeAllCharacter, addAllCharacter, step, setStep } = useCharacterStore();
+  const { removeAllCharacter, addAllCharacter } = useCharacterStore();
 
   const steps = [
     <label className="form-control w-full max-w-xs h-60" key={'step-0'}>
