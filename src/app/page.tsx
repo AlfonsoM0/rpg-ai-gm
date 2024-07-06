@@ -1,6 +1,7 @@
 'use client';
 
 import CardCharacter from 'components/card-character';
+import { Player_Characters } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -13,7 +14,8 @@ import { isCharacterHaveTheSameInfo } from 'utils/is-characters-info-changed';
 export default function Home() {
   const router = useRouter();
 
-  const { allCharacters, inGameCharacters } = useCharacterStore();
+  const { allCharacters, inGameCharacters, removeInGameCharacter, addInGameCharacter } =
+    useCharacterStore();
   const { clearAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { content, addContent, resetChat } = useGmAiStore();
@@ -37,7 +39,7 @@ export default function Home() {
         role: 'user',
         parts: [
           {
-            text: `**Player Characters** \n\n ${JSON.stringify(inGameCharacters)}`,
+            text: `${Player_Characters} \n\n ${JSON.stringify(inGameCharacters)}`,
           },
         ],
       });
@@ -46,22 +48,29 @@ export default function Home() {
     if (content.length > 3) {
       let charactersChanged = false;
       inGameCharacters.forEach((character) => {
-        if (!isCharacterHaveTheSameInfo(inGameCharacters, character)) charactersChanged = true;
+        if (!isCharacterHaveTheSameInfo(allCharacters, character)) {
+          charactersChanged = true;
+
+          // Update the inGameCharacters with the new info from allCharacters
+          const charId = character.id;
+          removeInGameCharacter(charId);
+          addInGameCharacter(allCharacters.find((c) => c.id === charId) || character);
+        }
       });
 
-      if (charactersChanged)
+      if (charactersChanged) {
         addContent({
           role: 'user',
           parts: [
             {
-              text: `**Player Characters** \n Update the list of characters information as follows. \n\n ${JSON.stringify(
+              text: `${Player_Characters} \n Update the list of characters information as follows. \n\n ${JSON.stringify(
                 inGameCharacters
               )}`,
             },
           ],
         });
+      }
     }
-
     router.push('/story');
   }
 

@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Modal } from 'components/modal';
+import { Game_Master_AI } from 'config/constants';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Game Master AI',
-  description: 'Play your historys with Game Master AI',
+  title: Game_Master_AI,
+  description: `Play your historys with ${Game_Master_AI}`,
 };
 
 export default function RootLayout({

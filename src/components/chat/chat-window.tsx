@@ -4,6 +4,7 @@ import { Content } from '@google/generative-ai';
 import ChatMessage from './chat-message';
 import { useEffect, useRef } from 'react';
 import imgGmAi from 'public/android-chrome-512x512.png';
+import { Game_Master_AI } from 'config/constants';
 
 interface ChatWindowProps {
   content: Content[];
@@ -28,9 +29,9 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
       <div className="overflow-y-scroll">
         {content.map((msg, index) => {
           const position = msg.role === 'model' ? 'start' : 'end';
-          const userName = msg.role === 'model' ? 'Game Master AI' : 'Player';
+          const userName = msg.role === 'model' ? Game_Master_AI : 'Player';
           const avatarSrc = msg.role === 'model' ? imgGmAi.src : undefined;
-          const avatarAlt = msg.role === 'model' ? 'Game Master AI Avatar' : 'Player Avatar';
+          const avatarAlt = msg.role === 'model' ? `${Game_Master_AI} Avatar` : 'Player Avatar';
 
           return (
             <ChatMessage

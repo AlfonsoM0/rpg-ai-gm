@@ -1,4 +1,5 @@
 import { Icon } from 'components/icons';
+import { Game_Master_AI, Player_Characters } from 'config/constants';
 import Markdown from 'markdown-to-jsx';
 import Image from 'next/image';
 
@@ -17,7 +18,7 @@ export default function ChatMessage({
   avatarSrc,
   avatarAlt,
 }: ChatMsgStart) {
-  if (message.includes('**Player Characters**'))
+  if (message.includes(Player_Characters))
     return (
       <div>
         <p className="text-center">Actualizando personajes de la historia...</p>

@@ -52,6 +52,6 @@ export default async function runAIChat(userInput: string, history: Content[] | 
   const response = result.response;
   const text = response.text();
 
-  console.log('AI result/response/text => ', text);
+  // console.log('AI result/response/text => ', text);
   return text;
 }
