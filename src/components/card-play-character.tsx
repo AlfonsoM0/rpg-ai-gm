@@ -37,8 +37,6 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
           </div>
         </div>
 
-        <h3 className="text-center font-bold">Pruebas de Caracteristicas</h3>
-        <p className="text-xs">Selecciona característica para lanzar los dados.</p>
         <div className="flex justify-around items-center mt-2 font-bold">
           <div className="flex flex-col justify-center items-center gap-2">
             <button

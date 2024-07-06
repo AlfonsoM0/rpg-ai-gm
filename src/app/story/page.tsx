@@ -13,7 +13,7 @@ export default function Page() {
   const { content, isLoadingContent } = useGmAiStore();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center justify-between gap-4">
       <h1>Historia</h1>
 
       <section>
@@ -23,7 +23,7 @@ export default function Page() {
 
       <ChatOptionsABC />
 
-      <section className="my-4">
+      <section>
         <div className="flex flex-wrap gap-4 justify-center">
           {inGameCharacters.map((character) => (
             <CardPlayCharacter key={character.id} character={character} />
