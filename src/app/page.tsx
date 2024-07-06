@@ -13,7 +13,7 @@ import { isCharacterHaveTheSameInfo } from 'utils/is-characters-info-changed';
 export default function Home() {
   const router = useRouter();
 
-  const { allCharacters, inGameCharacters } = useCharacterStore();
+  const { allCharacters, inGameCharacters, setStep } = useCharacterStore();
   const { clearAllCharacterInfo } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { content, addContent, resetChat } = useGmAiStore();
@@ -22,6 +22,7 @@ export default function Home() {
 
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
+    setStep(0);
     router.push('/new-character');
   }
 
