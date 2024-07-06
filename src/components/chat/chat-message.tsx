@@ -1,3 +1,4 @@
+import { Icon } from 'components/icons';
 import Markdown from 'markdown-to-jsx';
 import Image from 'next/image';
 
@@ -5,11 +6,17 @@ interface ChatMsgStart {
   userName: string;
   message: string;
   position: 'start' | 'end';
-  avatarAlt?: string;
   avatarSrc?: string;
+  avatarAlt?: string;
 }
 
-export default function ChatMessage({ userName, message, position }: ChatMsgStart) {
+export default function ChatMessage({
+  userName,
+  message,
+  position,
+  avatarSrc,
+  avatarAlt,
+}: ChatMsgStart) {
   if (message.includes('**Player Characters**'))
     return (
       <div>
@@ -23,12 +30,11 @@ export default function ChatMessage({ userName, message, position }: ChatMsgStar
     <div className={chatPosition}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img //TODO: Change this
-            alt={userName}
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-            width={10}
-            height={10}
-          />
+          {avatarSrc ? (
+            <Image src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
+          ) : (
+            <Icon.User />
+          )}
         </div>
       </div>
       <div className="chat-header">{userName}</div>
