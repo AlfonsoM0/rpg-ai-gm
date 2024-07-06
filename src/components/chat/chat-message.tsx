@@ -60,5 +60,11 @@ const mdOpt = {
     a: {
       props: { className: 'text-info' },
     },
+    pre: {
+      component: 'div',
+    },
+    code: {
+      component: Markdown,
+    },
   },
 };

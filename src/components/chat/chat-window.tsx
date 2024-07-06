@@ -46,7 +46,7 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
         })}
 
         {isLoadingContent ? (
-          <div className="flex justify-center items-center h-[40vh]" ref={refLoader}>
+          <div className="flex justify-center items-center h-[50vh]" ref={refLoader}>
             <span className="loading loading-dots loading-lg"></span>
           </div>
         ) : null}
