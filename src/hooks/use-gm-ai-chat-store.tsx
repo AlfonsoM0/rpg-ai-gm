@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Content } from '@google/generative-ai';
-import { gmAiPrompt } from 'config/gm-ai-promp';
 import runAIChat from 'server/gm-ai';
 
 interface GmAiStore {
@@ -21,16 +20,7 @@ interface GmAiActions {
 const initialGmAiState: GmAiStore = {
   storyId: '',
   storyName: '',
-  content: [
-    {
-      role: 'user',
-      parts: [
-        {
-          text: gmAiPrompt,
-        },
-      ],
-    },
-  ],
+  content: [],
   isLoadingContent: false,
 };
 

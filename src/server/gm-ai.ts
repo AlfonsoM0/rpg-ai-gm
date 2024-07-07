@@ -8,6 +8,7 @@ import {
   HarmBlockThreshold,
   Content,
 } from '@google/generative-ai';
+import { gmAiPrompt } from 'config/gm-ai-promp';
 
 const API_KEY = process.env.AI_APY_KEY || '';
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -42,10 +43,22 @@ const safetySettings = [
 ];
 
 export default async function runAIChat(userInput: string, history: Content[] | undefined) {
+  const contents = history ? history : [];
+
   const chat = model.startChat({
     generationConfig,
     safetySettings,
-    history,
+    history: [
+      {
+        role: 'user',
+        parts: [
+          {
+            text: gmAiPrompt,
+          },
+        ],
+      },
+      ...contents,
+    ],
   });
 
   const result = await chat.sendMessage(userInput);
