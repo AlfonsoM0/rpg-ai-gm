@@ -1,6 +1,6 @@
 import { Icon } from 'components/icons';
-import { Game_Master_AI, Player_Characters } from 'config/constants';
-import Markdown from 'markdown-to-jsx';
+import { Player_Characters } from 'config/constants';
+import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import Image from 'next/image';
 
 interface ChatMsgStart {
@@ -32,6 +32,7 @@ export default function ChatMessage({
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           {avatarSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
           ) : (
             <Icon.User />
@@ -40,56 +41,31 @@ export default function ChatMessage({
       </div>
       <div className="chat-header">{userName}</div>
       <div className="chat-bubble bg-primary-content text-inherit text-sm">
-        <Markdown
-          options={{
-            overrides: {
-              strong: {
-                props: { className: 'text-info text-md' },
-              },
-              li: {
-                props: { className: 'list-disc ml-5' },
-              },
-              p: {
-                props: { className: 'my-2' },
-              },
-              a: {
-                props: { className: 'text-info' },
-              },
-              pre: {
-                component: 'div',
-              },
-              code: {
-                component: Markdown,
-              },
-            },
-          }}
-        >
-          {message}
-        </Markdown>
+        <Markdown options={mdOpt}>{message}</Markdown>
       </div>
     </div>
   );
 }
 
-// const mdOpt = {
-//   overrides: {
-//     strong: {
-//       props: { className: 'text-info text-md' },
-//     },
-//     li: {
-//       props: { className: 'list-disc ml-5' },
-//     },
-//     p: {
-//       props: { className: 'my-2' },
-//     },
-//     a: {
-//       props: { className: 'text-info' },
-//     },
-//     pre: {
-//       component: 'div',
-//     },
-//     code: {
-//       component: Markdown,
-//     },
-//   },
-// };
+const mdOpt: MarkdownToJSX.Options = {
+  overrides: {
+    strong: {
+      props: { className: 'text-info text-md' },
+    },
+    li: {
+      props: { className: 'list-disc ml-5' },
+    },
+    p: {
+      props: { className: 'my-2' },
+    },
+    a: {
+      props: { className: 'text-info' },
+    },
+    pre: {
+      component: 'div',
+    },
+    code: {
+      component: Markdown,
+    },
+  },
+};
