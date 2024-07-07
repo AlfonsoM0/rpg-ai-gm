@@ -40,31 +40,56 @@ export default function ChatMessage({
       </div>
       <div className="chat-header">{userName}</div>
       <div className="chat-bubble bg-primary-content text-inherit text-sm">
-        <Markdown options={mdOpt}>{message}</Markdown>
+        <Markdown
+          options={{
+            overrides: {
+              strong: {
+                props: { className: 'text-info text-md' },
+              },
+              li: {
+                props: { className: 'list-disc ml-5' },
+              },
+              p: {
+                props: { className: 'my-2' },
+              },
+              a: {
+                props: { className: 'text-info' },
+              },
+              pre: {
+                component: 'div',
+              },
+              code: {
+                component: Markdown,
+              },
+            },
+          }}
+        >
+          {message}
+        </Markdown>
       </div>
     </div>
   );
 }
 
-const mdOpt = {
-  overrides: {
-    strong: {
-      props: { className: 'text-info text-md' },
-    },
-    li: {
-      props: { className: 'list-disc ml-5' },
-    },
-    p: {
-      props: { className: 'my-2' },
-    },
-    a: {
-      props: { className: 'text-info' },
-    },
-    pre: {
-      component: 'div',
-    },
-    code: {
-      component: Markdown,
-    },
-  },
-};
+// const mdOpt = {
+//   overrides: {
+//     strong: {
+//       props: { className: 'text-info text-md' },
+//     },
+//     li: {
+//       props: { className: 'list-disc ml-5' },
+//     },
+//     p: {
+//       props: { className: 'my-2' },
+//     },
+//     a: {
+//       props: { className: 'text-info' },
+//     },
+//     pre: {
+//       component: 'div',
+//     },
+//     code: {
+//       component: Markdown,
+//     },
+//   },
+// };
