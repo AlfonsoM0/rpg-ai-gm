@@ -16,7 +16,7 @@ export default function Home() {
     useCharacterStore();
   const { clearAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
-  const { content, addContent, isStoryStarted } = useGmAiStore();
+  const { content, addContent, isStoryStarted, setIsStoryStarted } = useGmAiStore();
 
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
@@ -59,14 +59,15 @@ export default function Home() {
           role: 'user',
           parts: [
             {
-              text: `${Player_Characters} \n Update the list of characters information as follows. \n\n ${JSON.stringify(
+              text: `${Player_Characters} \n Actualiza mis personajes con la siguiente información: \n\n ${JSON.stringify(
                 inGameCharacters
               )}`,
             },
           ],
         });
       }
-    }
+    } else setIsStoryStarted(true);
+
     router.push('/story');
   }
 

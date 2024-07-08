@@ -11,9 +11,10 @@ import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 
 interface CardCharacterProps {
   character: Character;
+  isViewOnly?: boolean;
 }
 
-export default function CardCharacter({ character }: CardCharacterProps) {
+export default function CardCharacter({ character, isViewOnly }: CardCharacterProps) {
   const router = useRouter();
   const { setAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { removeInGameCharacter, inGameCharacters, addInGameCharacter } = useCharacterStore();
@@ -144,17 +145,19 @@ export default function CardCharacter({ character }: CardCharacterProps) {
           </div>
         </div>
 
-        <div className="card-actions justify-between">
-          <button className="btn btn-sm btn-error" onClick={deleteCharacter}>
-            Borrar
-          </button>
-          <button className="btn btn-sm btn-info" onClick={editCharacter}>
-            Editar
-          </button>
-          <button className="btn btn-sm btn-success" onClick={selectCharacter}>
-            {isInGame ? 'Despedir' : 'Reclutar'}
-          </button>
-        </div>
+        {isViewOnly ? null : (
+          <div className="card-actions justify-between">
+            <button className="btn btn-sm btn-error" onClick={deleteCharacter}>
+              Borrar
+            </button>
+            <button className="btn btn-sm btn-info" onClick={editCharacter}>
+              Editar
+            </button>
+            <button className="btn btn-sm btn-success" onClick={selectCharacter}>
+              {isInGame ? 'Despedir' : 'Reclutar'}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

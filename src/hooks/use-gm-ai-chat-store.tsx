@@ -16,6 +16,7 @@ interface GmAiActions {
   setStoryName: (storyName: string) => void;
   addContent: (newContent: Content) => void;
   resetChat: () => void;
+  setIsStoryStarted: (isStoryStarted: boolean) => void;
 }
 
 const initialGmAiState: GmAiStore = {
@@ -45,10 +46,6 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
 
           const newContentText = newContent.parts.map((part) => part.text).join('');
           const { content } = get();
-
-          // 1. User: Characters, 2. Model: Story?, 3. User: response.
-          if (content.length > 2) set(() => ({ isStoryStarted: true }));
-          else set(() => ({ isStoryStarted: false }));
 
           try {
             const gMAiResponse = await runAIChat(newContentText, content);
@@ -100,6 +97,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         },
 
         resetChat: () => set(() => initialGmAiState),
+
+        setIsStoryStarted: (isStoryStarted) => set({ isStoryStarted }),
       }),
       { name: 'gm-ai' }
     )
