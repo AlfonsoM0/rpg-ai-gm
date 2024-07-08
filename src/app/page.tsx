@@ -6,9 +6,7 @@ import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
 import { isCharacterHaveTheSameInfo } from 'utils/is-characters-info-changed';
 
 export default function Home() {
@@ -18,9 +16,7 @@ export default function Home() {
     useCharacterStore();
   const { clearAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
-  const { content, addContent, resetChat } = useGmAiStore();
-
-  const isStoryStarted = useMemo(() => content.length > 3, [content]);
+  const { content, addContent, isStoryStarted } = useGmAiStore();
 
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
@@ -34,7 +30,7 @@ export default function Home() {
       return setModalIsOpen(true);
     }
 
-    if (content.length < 2) {
+    if (!content.length) {
       addContent({
         role: 'user',
         parts: [
@@ -45,7 +41,7 @@ export default function Home() {
       });
     }
 
-    if (content.length > 3) {
+    if (isStoryStarted) {
       let charactersChanged = false;
       inGameCharacters.forEach((character) => {
         if (!isCharacterHaveTheSameInfo(allCharacters, character)) {

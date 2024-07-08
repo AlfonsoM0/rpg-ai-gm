@@ -8,6 +8,7 @@ interface GmAiStore {
   storyName: string;
   content: Content[];
   isLoadingContent: boolean;
+  isStoryStarted: boolean;
 }
 
 interface GmAiActions {
@@ -22,6 +23,7 @@ const initialGmAiState: GmAiStore = {
   storyName: '',
   content: [],
   isLoadingContent: false,
+  isStoryStarted: false,
 };
 
 export const useGmAiStore = create<GmAiStore & GmAiActions>()(
@@ -42,9 +44,14 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           set(() => ({ isLoadingContent: true }));
 
           const newContentText = newContent.parts.map((part) => part.text).join('');
+          const { content } = get();
+
+          // 1. User: Characters, 2. Model: Story?, 3. User: response.
+          if (content.length > 3) set(() => ({ isStoryStarted: true }));
+          else set(() => ({ isStoryStarted: false }));
 
           try {
-            const gMAiResponse = await runAIChat(newContentText, get().content as Content[]);
+            const gMAiResponse = await runAIChat(newContentText, content);
 
             set((state) => ({
               content: [

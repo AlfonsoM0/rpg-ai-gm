@@ -10,18 +10,18 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 export default function Page() {
   const { inGameCharacters } = useCharacterStore();
 
-  const { content, isLoadingContent } = useGmAiStore();
+  const { content, isLoadingContent, isStoryStarted } = useGmAiStore();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between gap-4">
       <h1>Historia</h1>
 
       <section>
-        <ChatWindow content={content.slice(2)} isLoadingContent={isLoadingContent} />
+        <ChatWindow content={content.slice(1)} isLoadingContent={isLoadingContent} />
         <ChatInputMsg />
       </section>
 
-      <section className={content.length < 5 ? 'hidden' : ''}>
+      <section className={isStoryStarted ? '' : 'hidden'}>
         <ChatOptionsABC />
       </section>
 

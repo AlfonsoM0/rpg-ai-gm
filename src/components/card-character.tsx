@@ -18,7 +18,7 @@ export default function CardCharacter({ character }: CardCharacterProps) {
   const { setAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { removeInGameCharacter, inGameCharacters, addInGameCharacter } = useCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
-  const { content } = useGmAiStore();
+  const { isStoryStarted } = useGmAiStore();
 
   const {
     id,
@@ -53,7 +53,7 @@ export default function CardCharacter({ character }: CardCharacterProps) {
     [inGameCharacters, id]
   );
   function selectCharacter() {
-    if (content.length > 3) {
+    if (isStoryStarted) {
       setModalContent(ModalCharacterInPlay);
       setModalIsOpen(true);
       return;
