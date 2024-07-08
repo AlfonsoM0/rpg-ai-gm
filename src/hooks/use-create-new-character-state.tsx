@@ -14,12 +14,12 @@ const initialCharacterState: Character & { step: number } = {
   profession: '',
   powers: '',
   characteristics: {
-    strength: 3,
-    dexterity: 3,
-    constitution: 3,
-    intelligence: 3,
-    wisdom: 3,
-    charisma: 3,
+    strength: 1,
+    dexterity: 1,
+    constitution: 1,
+    intelligence: 1,
+    wisdom: 1,
+    charisma: 1,
   },
 
   step: 0,
