@@ -47,31 +47,51 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           const { content } = get();
 
           // 1. User: Characters, 2. Model: Story?, 3. User: response.
-          if (content.length > 3) set(() => ({ isStoryStarted: true }));
+          if (content.length > 2) set(() => ({ isStoryStarted: true }));
           else set(() => ({ isStoryStarted: false }));
 
           try {
             const gMAiResponse = await runAIChat(newContentText, content);
 
-            set((state) => ({
-              content: [
-                ...state.content,
-                newContent,
-                {
-                  role: 'model',
-                  parts: [{ text: gMAiResponse }],
-                },
-              ],
-              isLoadingContent: false,
-            }));
+            if (!gMAiResponse) {
+              console.warn('Empty response => ', gMAiResponse);
+              // Avoid empty response.
+              set((state) => ({
+                content: [
+                  ...state.content,
+                  newContent,
+                  {
+                    role: 'model',
+                    parts: [{ text: '🤔... ' }],
+                  },
+                ],
+                isLoadingContent: false,
+              }));
+            } else
+              set((state) => ({
+                content: [
+                  ...state.content,
+                  newContent,
+                  {
+                    role: 'model',
+                    parts: [{ text: gMAiResponse }],
+                  },
+                ],
+                isLoadingContent: false,
+              }));
           } catch (error) {
+            console.error(error);
             set((state) => ({
               content: [
                 ...state.content,
                 newContent,
                 {
                   role: 'model',
-                  parts: [{ text: 'Lo lamento, ocurrió un error y no puedo responderte' }],
+                  parts: [
+                    {
+                      text: 'Lo lamento, ocurrió un error y no puedo responderte. \n\n Intenta nuevamente. 👍',
+                    },
+                  ],
                 },
               ],
               isLoadingContent: false,
