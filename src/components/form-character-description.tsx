@@ -56,7 +56,7 @@ export default function FormCharacterDescription() {
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Describe su forma de vestir, sus accesorios y cualquier otro detalle distintivo."
+        placeholder="Describe su forma de vestir, sus accesorios y cualquier otro detalle distintivo. ¿Es humano? ¿Cuál es su aspecto más llamativo?"
         value={appearance}
         onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
         required
@@ -69,7 +69,7 @@ export default function FormCharacterDescription() {
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Cuenta una brebe historia sobre su pasado, sus origenes y como se relaciona con el mundo."
+        placeholder="Cuenta una breve historia sobre su pasado, sus origenes y como se relaciona con el mundo."
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
         required
@@ -121,7 +121,7 @@ export default function FormCharacterDescription() {
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="¿Tiene poderes o habilidades especiales? Descríbelos aquí. ¿Cuáles son sus fortalezas y debilidades? ¿Cómo utilizan esos poderes?"
+        placeholder="¿Cuál es el origen de sus poderes? ¿Qué poderes tiene y qué hacen? ¿Cómo utiliza esos poderes? ¿Cuáles son sus fortalezas y debilidades?"
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
       />
