@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Content } from '@google/generative-ai';
 import runAIChat from 'server/gm-ai';
+import { generateAiConfig } from 'utils/generate-ai-config';
 
 interface GmAiStore {
   storyId: string;
@@ -48,7 +49,11 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           const { content } = get();
 
           try {
-            const gMAiResponse = await runAIChat(newContentText, content);
+            const gMAiResponse = await runAIChat(
+              newContentText,
+              content,
+              generateAiConfig(content.length)
+            );
 
             if (!gMAiResponse) {
               console.warn('Empty response => ', gMAiResponse);

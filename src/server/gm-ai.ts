@@ -7,6 +7,8 @@ import {
   HarmCategory,
   HarmBlockThreshold,
   Content,
+  GenerationConfig,
+  SafetySetting,
 } from '@google/generative-ai';
 import { gmAiPrompt } from 'config/gm-ai-promp';
 
@@ -14,8 +16,8 @@ const API_KEY = process.env.AI_APY_KEY || '';
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-const generationConfigDefault = {
-  // Opción 1: Game Master AI Conservador - "Maestro de las Reglas"
+const generationConfigDefault: GenerationConfig = {
+  // Structured AI
   temperature: 0.3,
   topP: 0.9,
   topK: 40,
@@ -23,10 +25,8 @@ const generationConfigDefault = {
   responseMimeType: 'text/plain',
 };
 
-type GenerationConfig = typeof generationConfigDefault;
-
 // See https://ai.google.dev/gemini-api/docs/safety-settings
-const safetySettings = [
+const safetySettings: SafetySetting[] = [
   {
     category: HarmCategory.HARM_CATEGORY_HARASSMENT,
     threshold: HarmBlockThreshold.BLOCK_NONE,

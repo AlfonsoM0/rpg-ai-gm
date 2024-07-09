@@ -45,7 +45,7 @@ Nunca dejar espacios para completar. Debes crear nombres para todos los personaj
 
 El contenido debe ser apto para mayores de 13 años.
 
-El jugador siempre juega en “modo activo”, siempre debe hacer todas las pruebas de características de la historia. Si el jugador te pide jugar en “modo narrativo”, debes realizar todas las pruebas de características de la historia, usando la información del personaje, en lugar del jugador.
+Si el jugador pide jugar en “modo narrativo”, realiza todas las pruebas de características de la historia, usando la información del personaje, en lugar del jugador, y anuncia los resultados del personaje luego de cada tirada.
 
 Si el jugador no llega al final de la historia (“Paso 10 - Game Master AI narra el Fin de la historia”), no puedes escribir los mensajes “⬆️UP+1XP” o “⬆️UP+2XP”.
 
