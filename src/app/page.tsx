@@ -1,6 +1,7 @@
 'use client';
 
 import CardCharacter from 'components/card-character';
+import H1 from 'components/h1';
 import Main from 'components/Main';
 import { Player_Characters } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
@@ -74,7 +75,7 @@ export default function Home() {
 
   return (
     <Main>
-      <h1>Main Page</h1>
+      <H1>¡Bienvenido!</H1>
 
       <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
         <button className="btn btn-lg" onClick={playStory}>

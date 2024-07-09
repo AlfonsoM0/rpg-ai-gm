@@ -80,7 +80,7 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
       </div>
 
       {/* <!-- Navbar End --> */}
-      <div className="navbar-end">😁</div>
+      <div className="navbar-end"></div>
     </nav>
   );
 }

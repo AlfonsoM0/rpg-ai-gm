@@ -2,6 +2,7 @@
 
 import CardCharacter from 'components/card-character';
 import ChatWindow from 'components/chat/chat-window';
+import H1 from 'components/h1';
 import Main from 'components/Main';
 import { useLibraryStore } from 'hooks/use-library-store';
 
@@ -13,7 +14,9 @@ export default function Page() {
 
   return (
     <Main>
-      <h1>{title}</h1>
+      <H1>
+        Libro <br /> <span className="font-semibold">{title}</span>
+      </H1>
 
       <section>
         <ChatWindow content={content} isLoadingContent={false} />

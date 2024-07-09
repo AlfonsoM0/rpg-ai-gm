@@ -22,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="es" data-theme="light">
       <body className={inter.className}>
-        <Navbar menuOps={navbarLinks} />
+        <header className="h-16">
+          <Navbar menuOps={navbarLinks} />
+        </header>
 
         {children}
         <Modal />
