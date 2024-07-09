@@ -25,7 +25,7 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
   }, [isLoadingContent]);
 
   return (
-    <div className="h-[70vh] w-[90vw] flex flex-col">
+    <div className="h-[70vh] w-[90vw] flex flex-col border rounded-xl p-2">
       <div className="overflow-y-scroll">
         {content.map((msg, index) => {
           const position = msg.role === 'model' ? 'start' : 'end';

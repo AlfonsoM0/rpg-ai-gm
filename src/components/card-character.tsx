@@ -73,8 +73,8 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
   }
 
   const borderStyle = isInGame
-    ? 'card w-80 border-2 border-success rounded-lg shadow-md'
-    : 'card w-80 border border-primary-content rounded-lg shadow-md';
+    ? 'card w-80 border-2 border-success rounded-lg shadow-xl'
+    : 'card w-80 border border-primary-content rounded-lg shadow-xl';
 
   return (
     <div className={borderStyle}>
