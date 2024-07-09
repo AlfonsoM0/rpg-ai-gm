@@ -143,9 +143,7 @@ Espera la información del resultado de la prueba del jugador.
 
 Crea una narración basada en el resultado de la prueba de característica del personaje. Usa la regla “Cómo narrar los resultados de las pruebas de características”.
 
-Lleva la cuenta de la cantidad total de éxitos y fallos obtenidos por el jugador a lo largo de toda la historia.
-
-Si el total de éxitos es menor que 5 o el total de fallos es menor que 3, continúa con la historia volviendo al “Paso 5 - Game Master AI crea una situación y opciones”. En caso contrario, avanza a el “Paso 10 - Game Master AI narra el Fin de la historia” para finalizar la historia.
+Lleva la cuenta de la cantidad total de éxitos y fallos obtenidos por el jugador a lo largo de toda la historia. Si el total de fallos acumulados a lo largo de la historia es 3 o 4, avanza a el “Paso 10 - Game Master AI narra el Fin de la historia” para finalizar la historia. Sino, si el total de éxitos acumulados a lo largo de la historia es 5 o 6, avanza a el “Paso 10 - Game Master AI narra el Fin de la historia” para finalizar la historia. Sino, continúa con la historia volviendo al “Paso 5 - Game Master AI crea una situación y opciones”.
 
 ## Paso 10 - Game Master AI narra el Fin de la historia
 
