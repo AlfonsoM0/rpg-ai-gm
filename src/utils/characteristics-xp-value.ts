@@ -10,10 +10,10 @@ import type { Character } from 'types/character';
  * The total character xp value is calculated as follows:
  * - Sumatory of all the characteristics xp values.
  * Characteristic value 1 = 0 xp.
- * Characteristic value 2 = 4 xp.
- * Characteristic value 3 = 10 xp.
- * Characteristic value 4 = 18 xp.
- * Characteristic value 5 = 28 xp.
+ * Characteristic value 2 = 20 xp.
+ * Characteristic value 3 = 50 xp.
+ * Characteristic value 4 = 90 xp.
+ * Characteristic value 5 = 140 xp.
  *
  */
 export function characteristicsXpValue(characteristics: Character['characteristics']): number {
@@ -27,16 +27,16 @@ export function characteristicsXpValue(characteristics: Character['characteristi
         totalXP += 0;
         break;
       case 2:
-        totalXP += 4;
+        totalXP += 20;
         break;
       case 3:
-        totalXP += 10;
+        totalXP += 50;
         break;
       case 4:
-        totalXP += 18;
+        totalXP += 90;
         break;
       case 5:
-        totalXP += 28;
+        totalXP += 140;
         break;
       default:
         throw new Error('Invalid characteristic value');

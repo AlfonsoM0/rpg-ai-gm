@@ -5,7 +5,7 @@ type CharacterKey = keyof Character;
 
 const initialCharacterState: Character & { step: number } = {
   id: crypto.randomUUID(),
-  xp: 60,
+  xp: 250,
   name: '',
   appearance: '',
   background: '',
