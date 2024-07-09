@@ -2,6 +2,7 @@
 
 import CardCharacter from 'components/card-character';
 import H1 from 'components/h1';
+import H2 from 'components/h2';
 import Main from 'components/Main';
 import { Player_Characters } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
@@ -92,7 +93,7 @@ export default function Home() {
       </section>
 
       <section className="my-4">
-        <h2 className="text-center font-bold text-2xl my-2">Mis Personajes</h2>
+        <H2>Mis Personajes</H2>
 
         <div className="flex flex-wrap justify-center gap-4">
           <div className="card w-80 h-60 border border-primary-content rounded-lg shadow-md">
