@@ -25,7 +25,7 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
   }, [isLoadingContent]);
 
   return (
-    <div className="h-[50vh] w-[90vw] flex flex-col">
+    <div className="h-[70vh] w-[90vw] flex flex-col">
       <div className="overflow-y-scroll">
         {content.map((msg, index) => {
           const position = msg.role === 'model' ? 'start' : 'end';
@@ -46,7 +46,7 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
         })}
 
         {isLoadingContent ? (
-          <div className="flex justify-center items-center h-[50vh]" ref={refLoader}>
+          <div className="flex justify-center items-center h-[70vh]" ref={refLoader}>
             <span className="loading loading-dots loading-lg"></span>
           </div>
         ) : null}
