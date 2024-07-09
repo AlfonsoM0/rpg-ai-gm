@@ -17,7 +17,7 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 const generationConfigDefault: GenerationConfig = {
-  // Structured AI
+  // Strict AI
   temperature: 0.3,
   topP: 0.9,
   topK: 40,

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Content } from '@google/generative-ai';
 import runAIChat from 'server/gm-ai';
-import { generateAiConfig } from 'utils/generate-ai-config';
+import { AiModels, generateAiConfig } from 'utils/generate-ai-config';
 
 interface GmAiStore {
   storyId: string;
@@ -10,6 +10,9 @@ interface GmAiStore {
   content: Content[];
   isLoadingContent: boolean;
   isStoryStarted: boolean;
+
+  aiConfig: AiModels;
+  // TODO: aiVoiceConfig: {}
 }
 
 interface GmAiActions {
@@ -18,6 +21,7 @@ interface GmAiActions {
   addContent: (newContent: Content) => void;
   resetChat: () => void;
   setIsStoryStarted: (isStoryStarted: boolean) => void;
+  setAiConfig: (aiConfig: AiModels) => void;
 }
 
 const initialGmAiState: GmAiStore = {
@@ -26,6 +30,7 @@ const initialGmAiState: GmAiStore = {
   content: [],
   isLoadingContent: false,
   isStoryStarted: false,
+  aiConfig: 'Progresive_AI',
 };
 
 export const useGmAiStore = create<GmAiStore & GmAiActions>()(
@@ -52,7 +57,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
             const gMAiResponse = await runAIChat(
               newContentText,
               content,
-              generateAiConfig(content.length)
+              generateAiConfig(content.length, 'Progresive_AI')
             );
 
             if (!gMAiResponse) {
@@ -104,6 +109,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         resetChat: () => set(() => initialGmAiState),
 
         setIsStoryStarted: (isStoryStarted) => set({ isStoryStarted }),
+
+        setAiConfig: (aiConfig) => set({ aiConfig }),
       }),
       { name: 'gm-ai' }
     )
