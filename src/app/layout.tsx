@@ -4,6 +4,8 @@ import './globals.css';
 import { Modal } from 'components/modal';
 import { Game_Master_AI } from 'config/constants';
 import { Footer } from 'components/footer';
+import Navbar from 'components/navbar';
+import { navbarLinks } from 'config/navbar-links';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="es" data-theme="light">
       <body className={inter.className}>
-        {/* TODO: Navbar, Footer, etc. here */}
+        <Navbar menuOps={navbarLinks} />
 
         {children}
         <Modal />
