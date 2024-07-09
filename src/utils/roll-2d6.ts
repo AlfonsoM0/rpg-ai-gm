@@ -17,5 +17,5 @@ export function esMsgRoll2d6(name: string, char: Characteristic, mod: number): s
 
   return `**${name}** realiza una prueba de ${
     charNames[char]
-  } (2d6 +${mod}). \n\n Resultado: **${roll2d6(mod)}**.`;
+  } (2d6 +${mod})... \n\n y obtiene un resultado de: **${roll2d6(mod)}**.`;
 }
