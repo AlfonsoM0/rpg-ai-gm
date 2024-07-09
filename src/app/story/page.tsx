@@ -4,6 +4,7 @@ import CardPlayCharacter from 'components/card-play-character';
 import ChatInputMsg from 'components/chat/chat-input-msg';
 import ChatOptionsABC from 'components/chat/chat-options-abc';
 import ChatWindow from 'components/chat/chat-window';
+import Main from 'components/Main';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 
@@ -13,7 +14,7 @@ export default function Page() {
   const { content, isLoadingContent } = useGmAiStore();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between gap-4">
+    <Main>
       <h1>Historia</h1>
 
       <section>
@@ -32,6 +33,6 @@ export default function Page() {
           ))}
         </div>
       </section>
-    </main>
+    </Main>
   );
 }

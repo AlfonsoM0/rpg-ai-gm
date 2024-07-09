@@ -1,6 +1,7 @@
 'use client';
 
 import CardCharacter from 'components/card-character';
+import Main from 'components/Main';
 import { Player_Characters } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
@@ -72,7 +73,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <Main>
       <h1>Main Page</h1>
 
       <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
@@ -110,7 +111,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </main>
+    </Main>
   );
 }
 

@@ -1,13 +1,14 @@
 'use client';
 
 import BookCard from 'components/card-book';
+import Main from 'components/Main';
 import { useLibraryStore } from 'hooks/use-library-store';
 
 export default function Page() {
   const { library } = useLibraryStore();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between gap-4">
+    <Main>
       <h1>Mi Biblioteca</h1>
 
       <section className="my-4">
@@ -17,6 +18,6 @@ export default function Page() {
           ))}
         </div>
       </section>
-    </main>
+    </Main>
   );
 }
