@@ -6,6 +6,7 @@ import { useModalState } from 'hooks/use-modal-state';
 import { useMemo } from 'react';
 import ModalEndHistory from './chat-options-modals/modal-end-story';
 import ModalConfigAI, { aiIconStyle } from './chat-options-modals/modal-ai-config';
+import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 
 export default function ChatOptionsABC() {
   const { addContent, isLoadingContent, content } = useGmAiStore();
@@ -26,6 +27,11 @@ export default function ChatOptionsABC() {
 
   function onConfigAiClick() {
     setModalContent(<ModalConfigAI />);
+    setModalIsOpen(true);
+  }
+
+  function onIdeasClick() {
+    setModalContent(<ModaIdeasForAI />);
     setModalIsOpen(true);
   }
 
@@ -57,13 +63,19 @@ export default function ChatOptionsABC() {
         </button>
       </div>
 
-      <button className="btn" onClick={onConfigAiClick} disabled={isLoadingContent}>
-        <Icon.AiBrain className={aiIconStyle[aiConfig]} />
-      </button>
+      <div className="flex gap-2">
+        <button className="btn" onClick={onConfigAiClick} disabled={isLoadingContent}>
+          <Icon.AiBrain className={aiIconStyle[aiConfig]} />
+        </button>
 
-      <button className="btn btn-error" onClick={onEndHistoryClick} disabled={isLoadingContent}>
-        Fin.
-      </button>
+        <button className="btn" onClick={onIdeasClick} disabled={isLoadingContent}>
+          <Icon.Idea className="w-8 h-8 stroke-info" />
+        </button>
+
+        <button className="btn btn-error" onClick={onEndHistoryClick} disabled={isLoadingContent}>
+          Fin.
+        </button>
+      </div>
     </div>
   );
 }
