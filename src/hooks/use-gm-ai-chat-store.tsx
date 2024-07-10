@@ -51,13 +51,13 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           set(() => ({ isLoadingContent: true }));
 
           const newContentText = newContent.parts.map((part) => part.text).join('');
-          const { content } = get();
+          const { content, aiConfig } = get();
 
           try {
             const gMAiResponse = await runAIChat(
               newContentText,
               content,
-              generateAiConfig(content.length, 'Progresive_AI')
+              generateAiConfig(content.length, aiConfig)
             );
 
             if (!gMAiResponse) {
