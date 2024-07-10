@@ -83,8 +83,10 @@ export default function Home() {
           ▶️ {isStoryStarted ? 'CONTINUAR HISTORIA' : 'JUGAR UNA HISTORIA'}
         </button>
         <div>
-          <h2 className="text-center font-bold text-2xl my-2">Personajes Reclutados</h2>
-          <p className="text-center">
+          <h2 className="text-center text-primary font-bold text-2xl my-2">
+            Personajes Reclutados
+          </h2>
+          <p className="text-center text-primary">
             {inGameCharacters.length
               ? `${inGameCharacters.map((character) => character.name).join(', ')}.`
               : 'No hay personajes reclutados.'}

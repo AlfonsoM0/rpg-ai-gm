@@ -40,7 +40,7 @@ export default function ChatMessage({
         </div>
       </div>
       <div className="chat-header">{userName}</div>
-      <div className="chat-bubble bg-primary-content text-inherit text-sm">
+      <div className="chat-bubble bg-primary-content text-primary text-sm">
         <Markdown options={mdOpt}>{message}</Markdown>
       </div>
     </div>

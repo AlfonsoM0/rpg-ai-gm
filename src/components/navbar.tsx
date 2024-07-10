@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import srcLogo from 'public/android-chrome-512x512.png';
+import ThemeController from './theme-controller';
 
 type SubOps = { name: string; url: string }[];
 
@@ -80,7 +81,9 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
       </div>
 
       {/* <!-- Navbar End --> */}
-      <div className="navbar-end"></div>
+      <div className="navbar-end">
+        <ThemeController />
+      </div>
     </nav>
   );
 }
