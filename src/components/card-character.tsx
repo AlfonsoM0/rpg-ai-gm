@@ -39,6 +39,11 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
   const [check, setCheck] = useState(false);
 
   function deleteCharacter() {
+    if (isStoryStarted) {
+      setModalContent(ModalCharacterInPlay);
+      setModalIsOpen(true);
+      return;
+    }
     setModalContent(<ModalDeleteCharacter id={id} />);
     setModalIsOpen(true);
   }
@@ -195,7 +200,7 @@ const ModalCharacterInPlay = (
   <div>
     <h3 className="font-bold text-lg">Personaje en Juego</h3>
     <p className="py-4">
-      No puedes reclutar o despedir personajes si tu historia actual no ha terminado.
+      No puedes reclutar, despedir o borrar personajes si tu historia actual no ha terminado.
     </p>
   </div>
 );
