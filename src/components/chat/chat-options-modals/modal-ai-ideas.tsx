@@ -10,11 +10,9 @@ const ideas = [
   'Sugiere distintas opciones de historias y enumérarlas para elegir una.',
   'Haz un resumen de mis personajes.',
   'Haz un resumen de las características de mis personajes.',
+  'Haz un resumen de mis tiradas y el total de éxitos y fallos.',
   'Haz un resumen de la historia.',
-  'Haz un resumen de mis tiradas y el total de éxitos y fracasos.',
-  'Juguemos "modo narrativo", haz todas las pruebas de característica por mí.',
-  'Juguemos "modo activo", yo quiero hacer todas las pruebas de característica.',
-  'Si ya hice todas las pruebas necesarias, finaliza la historia.',
+  'Finaliza la historia.',
 ];
 
 export default function ModaIdeasForAI() {

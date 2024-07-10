@@ -1,5 +1,5 @@
 import { Icon } from 'components/icons';
-import { CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
+import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import Image from 'next/image';
 
@@ -18,12 +18,13 @@ export default function ChatMessage({
   avatarSrc,
   avatarAlt,
 }: ChatMsgStart) {
-  if (message.includes(CODE_DONT_SHOW_IN_CHAT))
+  if (message.includes(CODE_CHARACTERS_CHANGE))
     return (
       <div>
         <p className="text-center">Actualizando los personajes de la historia...</p>
       </div>
     );
+  else if (message.includes(CODE_DONT_SHOW_IN_CHAT)) return <></>;
 
   const chatPosition = position === 'start' ? 'chat chat-start' : 'chat chat-end';
 

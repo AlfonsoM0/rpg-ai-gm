@@ -4,7 +4,7 @@ import CardCharacter from 'components/card-character';
 import H1 from 'components/h1';
 import H2 from 'components/h2';
 import Main from 'components/Main';
-import { CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
+import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -38,9 +38,9 @@ export default function Home() {
         role: 'user',
         parts: [
           {
-            text: `Información de mis personajes: ${JSON.stringify(
-              inGameCharacters
-            )} ${CODE_DONT_SHOW_IN_CHAT}`,
+            text: `Información de mis personajes: ${JSON.stringify(inGameCharacters)}
+            Total éxitos: 0. Total fallos: 0.
+            ${CODE_DONT_SHOW_IN_CHAT}`,
           },
         ],
       });
@@ -60,7 +60,9 @@ export default function Home() {
           {
             text: `Actualiza mis personajes con la siguiente información: ${JSON.stringify(
               newCharactersInGame
-            )}. \n Muéstrame los cambios para asegurarme de que todo está bien. ${CODE_DONT_SHOW_IN_CHAT}`,
+            )}.
+            Muéstrame los cambios para asegurarme de que todo está bien.
+            ${CODE_CHARACTERS_CHANGE}`,
           },
         ],
       });
