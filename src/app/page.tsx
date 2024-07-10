@@ -4,13 +4,13 @@ import CardCharacter from 'components/card-character';
 import H1 from 'components/h1';
 import H2 from 'components/h2';
 import Main from 'components/Main';
-import { Player_Characters } from 'config/constants';
+import { CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useRouter } from 'next/navigation';
-import { isCharacterHaveTheSameInfo } from 'utils/is-characters-info-changed';
+import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
 
 export default function Home() {
   const router = useRouter();
@@ -38,37 +38,32 @@ export default function Home() {
         role: 'user',
         parts: [
           {
-            text: `${Player_Characters} \n\n ${JSON.stringify(inGameCharacters)}`,
+            text: `Información de mis personajes: ${JSON.stringify(
+              inGameCharacters
+            )} ${CODE_DONT_SHOW_IN_CHAT}`,
           },
         ],
       });
     }
 
-    if (isStoryStarted) {
-      let charactersChanged = false;
-      inGameCharacters.forEach((character) => {
-        if (!isCharacterHaveTheSameInfo(allCharacters, character)) {
-          charactersChanged = true;
-
-          // Update the inGameCharacters with the new info from allCharacters
-          const charId = character.id;
-          removeInGameCharacter(charId);
-          addInGameCharacter(allCharacters.find((c) => c.id === charId) || character);
-        }
+    const areTheSameChars = areTheSameInGameCharacters(allCharacters, inGameCharacters);
+    if (isStoryStarted && !areTheSameChars) {
+      const newCharactersInGame = inGameCharacters.map((char) => {
+        const findUpdatedChar = allCharacters.find((c) => c.id === char.id) || char;
+        removeInGameCharacter(char.id);
+        addInGameCharacter(findUpdatedChar);
+        return findUpdatedChar;
       });
-
-      if (charactersChanged) {
-        addContent({
-          role: 'user',
-          parts: [
-            {
-              text: `${Player_Characters} \n Actualiza mis personajes con la siguiente información: \n\n ${JSON.stringify(
-                inGameCharacters
-              )}`,
-            },
-          ],
-        });
-      }
+      addContent({
+        role: 'user',
+        parts: [
+          {
+            text: `Actualiza mis personajes con la siguiente información: ${JSON.stringify(
+              newCharactersInGame
+            )}. \n Muéstrame los cambios para asegurarme de que todo está bien. ${CODE_DONT_SHOW_IN_CHAT}`,
+          },
+        ],
+      });
     } else setIsStoryStarted(true);
 
     router.push('/story');

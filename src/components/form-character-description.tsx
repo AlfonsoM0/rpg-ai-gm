@@ -6,6 +6,7 @@ import FormCharacterCharacteristics from './form-character-characteristics';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useRouter } from 'next/navigation';
 import NewCharacterNav from './form-character-description-nav';
+import { Character } from 'types/character';
 
 export default function FormCharacterDescription() {
   const router = useRouter();
@@ -139,8 +140,7 @@ export default function FormCharacterDescription() {
     if (!personality) return setStep(4);
     if (!equipment) return setStep(5);
 
-    removeAllCharacter(id);
-    addAllCharacter({
+    const newCharacter: Character = {
       id,
       xp,
       name,
@@ -151,7 +151,10 @@ export default function FormCharacterDescription() {
       equipment,
       powers,
       characteristics,
-    });
+    };
+
+    removeAllCharacter(id);
+    addAllCharacter(newCharacter);
 
     router.push('/');
   }

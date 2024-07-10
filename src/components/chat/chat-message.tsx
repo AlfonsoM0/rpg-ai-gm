@@ -1,5 +1,5 @@
 import { Icon } from 'components/icons';
-import { Player_Characters } from 'config/constants';
+import { CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import Image from 'next/image';
 
@@ -18,10 +18,10 @@ export default function ChatMessage({
   avatarSrc,
   avatarAlt,
 }: ChatMsgStart) {
-  if (message.includes(Player_Characters))
+  if (message.includes(CODE_DONT_SHOW_IN_CHAT))
     return (
       <div>
-        <p className="text-center">Actualizando personajes de la historia...</p>
+        <p className="text-center">Actualizando los personajes de la historia...</p>
       </div>
     );
 

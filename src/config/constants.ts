@@ -1,3 +1,3 @@
 export const Game_Master_AI = 'Game Master AI';
 
-export const Player_Characters = '**Player Characters**';
+export const CODE_DONT_SHOW_IN_CHAT = '(🆔:❌❌❌)';

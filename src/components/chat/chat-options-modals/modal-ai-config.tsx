@@ -58,10 +58,7 @@ export default function ModalConfigAI() {
   return (
     <div>
       <h3 className="font-bold text-lg">Game Master AI</h3>
-      <p className="py-4">
-        Configura la personalidad de tu Game Master AI. <br />
-        Elije un estilo y una voz.
-      </p>
+      <p className="py-4">Configura la personalidad de tu Game Master AI.</p>
 
       <h4 className="text-center my-4">
         <span>
