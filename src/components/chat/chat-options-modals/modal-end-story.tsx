@@ -6,12 +6,21 @@ import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { calculateStoryXp } from 'utils/calculate-story-xp';
 
 export default function ModalEndHistory() {
   const router = useRouter();
   const { setModalContent, setModalIsOpen } = useModalState();
-  const { storyName, storyId, setStoryName, setHistoryId, content, resetChat, setIsStoryStarted } =
-    useGmAiStore();
+  const {
+    storyName,
+    storyId,
+    setStoryName,
+    setHistoryId,
+    content,
+    resetChat,
+    setIsStoryStarted,
+    playersDiceRolls,
+  } = useGmAiStore();
   const { inGameCharacters, findCharacterByIdAndIcrementXp, removeAllInGameCharacter } =
     useCharacterStore();
 
@@ -32,20 +41,15 @@ export default function ModalEndHistory() {
         content,
       });
 
-    // give XP to characters
-    const modelMsgs = content
-      .filter((c) => c.role === 'model')
-      .map((c) => c.parts[0].text)
-      .join(' | ');
-    const win1XP = modelMsgs.includes('⬆️UP+1XP') ? 1 : 0;
-    const win2XP = modelMsgs.includes('⬆️UP+2XP') ? 2 : 0;
-    const winXp = win1XP + win2XP;
-
-    if (winXp) {
+    // update xp for all characters
+    const { isStoryOver, storyXp } = calculateStoryXp(playersDiceRolls);
+    if (isStoryOver) {
+      const xp = Math.ceil(storyXp / inGameCharacters.length);
       inGameCharacters.forEach((character) => {
-        findCharacterByIdAndIcrementXp(character.id, winXp);
+        findCharacterByIdAndIcrementXp(character.id, xp);
       });
-      setModalContent(<ModalWinXp xp={winXp} />);
+
+      setModalContent(<ModalWinXp xp={xp} PC={inGameCharacters.map((c) => c.name)} />);
     } else setModalIsOpen(false);
 
     // reset all states to initial state
@@ -85,9 +89,11 @@ export default function ModalEndHistory() {
   );
 }
 
-const ModalWinXp = ({ xp }: { xp: number }) => (
+const ModalWinXp = ({ xp, PC }: { xp: number; PC: string[] }) => (
   <div>
-    <h3 className="font-bold text-lg">Has ganado {xp} Puntos de Experiencia (XP)</h3>
+    <h3 className="font-bold text-lg">
+      Has ganado {xp}XP para {PC.join(' y ')}.
+    </h3>
     <p className="py-4">Edita tu personaje para mejorar tus caracteristicas.</p>
   </div>
 );

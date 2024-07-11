@@ -5,7 +5,7 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useState } from 'react';
 
 export default function ChatInputMsg() {
-  const { addContent, isLoadingContent, resetChat } = useGmAiStore();
+  const { addContent, isLoadingContent } = useGmAiStore();
 
   const [chatMsg, setChatMsg] = useState('');
 

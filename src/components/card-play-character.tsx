@@ -14,9 +14,9 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
   const { strength, dexterity, constitution, intelligence, wisdom, charisma } = characteristics;
   const CharsXP = characteristicsXpValue(characteristics);
 
-  const { addContent, isLoadingContent } = useGmAiStore();
+  const { addContent, isLoadingContent, addPlayersDiceRoll } = useGmAiStore();
   function rollCharacteristic(characteristic: Characteristic, value: number): void {
-    const rolResult = esMsgRoll2d6(name, characteristic, value);
+    const rolResult = esMsgRoll2d6(name, characteristic, value, addPlayersDiceRoll);
     addContent({
       role: 'user',
       parts: [{ text: rolResult }],

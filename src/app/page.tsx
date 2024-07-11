@@ -39,7 +39,6 @@ export default function Home() {
         parts: [
           {
             text: `Información de mis personajes: ${JSON.stringify(inGameCharacters)}
-            Total éxitos: 0. Total fallos: 0.
             ${CODE_DONT_SHOW_IN_CHAT}`,
           },
         ],
