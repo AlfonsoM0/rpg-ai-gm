@@ -13,6 +13,8 @@ const ideas = [
   'Haz un resumen de las características de mis personajes.',
   'Haz un resumen de mis tiradas y el total de éxitos y fallos.',
   'Haz un resumen de la historia.',
+  'Quiero continuar con esta historia.',
+  'Quiero jugar una nueva historia.',
   'Finaliza la historia.',
 ];
 
