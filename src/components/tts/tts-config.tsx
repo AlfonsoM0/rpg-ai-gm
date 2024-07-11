@@ -37,17 +37,14 @@ export default function TTSConfig() {
             type="checkbox"
             className="toggle"
             checked={isTTSEnabled}
-            onChange={() => {
-              setIsTTSEnabled(!isTTSEnabled);
-              setTTS('¡Hola! Soy Game Master AI... ¿Estás listo para jugar?');
-            }}
+            onChange={() => setIsTTSEnabled(!isTTSEnabled)}
           />
         </label>
       </div>
 
       {isTTSEnabled ? (
         <div className="flex flex-col gap-5 mb-4">
-          <TTSControls />
+          <TTSControls customTTS="¡Hola! soy Game Master AI. ¡A jugar!" />
 
           <div className="flex items-center gap-2">
             <div className="w-24">

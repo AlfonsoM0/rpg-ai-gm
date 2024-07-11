@@ -14,7 +14,7 @@ export default function TTSControls({ customTTS }: TTSControlsProps) {
   const styleStopped = isStopped ? 'btn btn-sm text-error' : 'btn btn-sm';
 
   return (
-    <div className="flex justify-center items-center gap-6 p-2">
+    <div className="flex justify-between items-center gap-4 p-2 w-44 m-auto">
       <button className={stylePlaying} onClick={() => handlePlay(customTTS)}>
         ▶
       </button>
