@@ -8,6 +8,7 @@ const ideas = [
   'Explícame las reglas de juego.',
   '¿Cuál es tu trabajo como Game Master AI?',
   'Sugiere distintas opciones de historias y enumérarlas para elegir una.',
+  'Quiero usar este juego para practicar un idioma.',
   'Pideme realizar pruebas de características para todas mis decisiones.',
   'Haz un resumen de mis personajes.',
   'Haz un resumen de las características de mis personajes.',
