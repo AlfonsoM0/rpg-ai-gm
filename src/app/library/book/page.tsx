@@ -19,7 +19,7 @@ export default function Page() {
       </H1>
 
       <section>
-        <ChatWindow content={content} isLoadingContent={false} />
+        <ChatWindow content={content.slice(1)} isLoadingContent={false} />
       </section>
 
       <section className="mb-4">
