@@ -17,9 +17,7 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
   useEffect(() => {
     // If isLoadingContent is true, scroll to the bottom.
     if (isLoadingContent) {
-      if (refLoader.current) {
-        refLoader.current.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (refLoader.current) refLoader.current.scrollIntoView({ behavior: 'smooth' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoadingContent]);
@@ -44,7 +42,6 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
             />
           );
         })}
-
         {isLoadingContent ? (
           <div className="flex justify-center items-center h-[70vh]" ref={refLoader}>
             <span className="loading loading-dots loading-lg"></span>

@@ -64,6 +64,14 @@ export default async function runAIChat(
           },
         ],
       },
+      {
+        role: 'user',
+        parts: [
+          {
+            text: 'Por cada decisión importante que tome durante la historia, pídeme una prueba de característica apropiada. La decisión es importante si es un riesgo para el personaje o produce un gran cambio en el desarrollo de la trama. Comienza desde el "Paso 2 - Game Master AI pide información sobre la historia".',
+          },
+        ],
+      },
       ...contents,
     ],
   });
