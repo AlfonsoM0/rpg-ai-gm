@@ -22,7 +22,7 @@ interface TTSActions {
 }
 
 interface TTSHandlers {
-  handlePlay: () => void;
+  handlePlay: (customTTS?: string) => void;
   handlePause: () => void;
   handleStop: () => void;
   handleChangeVoice: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -56,9 +56,9 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
         setTTS: (tts) => set({ tts }),
 
         // Handlers
-        handlePlay: () => {
+        handlePlay: (customTTS) => {
           const { isPaused, voiceIndex, pitch, rate, volume, tts } = get();
-          const utterance = new SpeechSynthesisUtterance(tts);
+          const utterance = new SpeechSynthesisUtterance(customTTS || tts);
 
           if (isPaused && speechSynthesis) {
             speechSynthesis.resume();

@@ -2,7 +2,11 @@
 
 import { useTTSStore } from 'hooks/use-tts-store';
 
-export default function TTSControls() {
+interface TTSControlsProps {
+  customTTS?: string;
+}
+
+export default function TTSControls({ customTTS }: TTSControlsProps) {
   const { handlePlay, handlePause, handleStop, isPlaying, isPaused, isStopped } = useTTSStore();
 
   const stylePlaying = isPlaying ? 'btn btn-sm text-success' : 'btn btn-sm';
@@ -11,7 +15,7 @@ export default function TTSControls() {
 
   return (
     <div className="flex justify-center items-center gap-6 p-2">
-      <button className={stylePlaying} onClick={handlePlay}>
+      <button className={stylePlaying} onClick={() => handlePlay(customTTS)}>
         ▶
       </button>
       <button className={stylePaused} onClick={handlePause}>
