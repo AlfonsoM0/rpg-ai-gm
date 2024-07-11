@@ -100,6 +100,9 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           };
           const infoStoryControl: Content[] =
             isStoryOver && !isStoryEndedBefore ? [contentStoryEnded] : [contentStoryProgress];
+          // console.info('isStoryOver && !isStoryEndedBefore => ', isStoryOver, !isStoryEndedBefore);
+          // console.info('newContent (text) => ', newContentText);
+          // console.info('infoStoryControl (text) => ', infoStoryControl[0].parts[0].text);
           //#endregion
 
           try {

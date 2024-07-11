@@ -11,25 +11,28 @@ export function calculateStoryXp(diceRolls: number[]) {
 
   let totalSuccesses = 0;
   let totalFailures = 0;
+  let storyXp = 0;
+  let isStoryOver = false;
 
   for (let i = 0; i <= diceRolls.length; i++) {
     totalFailures = roll7orMore.length + roll6orLess.length * 2;
     totalSuccesses = roll10orMore.length + roll14orMore.length * 2;
 
-    if (totalFailures < 3 || totalSuccesses < 5) {
+    if (totalFailures < 3 && totalSuccesses < 5) {
       const roll = diceRolls[i];
       if (roll <= 6) roll6orLess.push(roll);
       if (roll >= 7 && roll < 10) roll7orMore.push(roll);
       if (roll >= 10 && roll < 14) roll10orMore.push(roll);
       if (roll >= 14) roll14orMore.push(roll);
     } else {
-      let storyXp = 2;
+      storyXp = 2;
+      isStoryOver = true;
       if (totalSuccesses >= 4) storyXp += 2;
 
       return {
         totalSuccesses,
         totalFailures,
-        isStoryOver: true,
+        isStoryOver,
         storyXp,
       };
     }
@@ -38,7 +41,7 @@ export function calculateStoryXp(diceRolls: number[]) {
   return {
     totalSuccesses,
     totalFailures,
-    isStoryOver: false,
-    storyXp: 0,
+    isStoryOver,
+    storyXp,
   };
 }
