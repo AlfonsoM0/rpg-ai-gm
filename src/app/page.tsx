@@ -118,6 +118,15 @@ export default function Home() {
 const ModalNoCharactersToPlay = (
   <div>
     <h3 className="font-bold text-lg">No tienes personajes reclutados</h3>
-    <p className="py-4">Recluta al menos un personaje.</p>
+    <p className="mt-4 text-center">¡Recluta a un personaje!</p>
+
+    <p className="font-bold text-lg mt-4 mb-2 text-center">¿Es la primera vez que juegas?</p>
+    <ol className="max-w-80 m-auto">
+      <li className="list-decimal">Crea un nuevo personaje... o dos...</li>
+      <li className="list-decimal">Recluta tus personajes para la historia.</li>
+      <li className="list-decimal">Haz click en &quot;Jugar una Historia&quot; para comenzar.</li>
+      <li className="list-decimal">Pregunta a tu Game Master AI si necesitas ayuda.</li>
+      <li className="list-decimal">¡Disfruta de la aventura!</li>
+    </ol>
   </div>
 );
