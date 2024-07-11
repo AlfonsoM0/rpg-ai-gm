@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from 'components/icons';
+import TTSConfig from 'components/tts/tts-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { AiModels } from 'utils/generate-ai-config';
 
@@ -82,6 +83,8 @@ export default function ModalConfigAI() {
           <small className="ml-3">{model.desc}</small>
         </div>
       ))}
+
+      <TTSConfig />
     </div>
   );
 }

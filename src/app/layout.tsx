@@ -6,6 +6,7 @@ import { Game_Master_AI } from 'config/constants';
 import { Footer } from 'components/footer';
 import Navbar from 'components/navbar';
 import { navbarLinks } from 'config/navbar-links';
+import TTSLoader from 'components/tts/tts-loader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
 
         {children}
         <Modal />
+        <TTSLoader />
 
         <Footer />
       </body>

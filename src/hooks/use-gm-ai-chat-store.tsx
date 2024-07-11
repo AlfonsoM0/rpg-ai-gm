@@ -15,7 +15,7 @@ interface GmAiStore {
   isStoryStarted: boolean;
 
   // AI config
-  aiConfig: AiModels; // TODO: aiVoiceConfig: {}
+  aiConfig: AiModels;
 
   // Player stats
   playersDiceRolls: number[];
