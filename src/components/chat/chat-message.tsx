@@ -27,25 +27,8 @@ export default function ChatMessage({
   const { totalFailures, totalSuccesses, storyXp } = calculateStoryXp(playersDiceRolls);
   const { setTTS, handlePlay } = useTTSStore();
 
-  if (message.includes(CODE_CHARACTERS_CHANGE))
-    return (
-      <div>
-        <p className="text-center">Actualizando los personajes de la historia...</p>
-      </div>
-    );
-  else if (message.includes(CODE_STORY_END))
-    return (
-      <div className="card bg-secondary-content w-80 shadow-xl m-auto my-4">
-        <div className="card-body">
-          <h2 className="card-title text-info">Fin de la historia</h2>
-          <p className="text-center text-primary">
-            <strong>Total de fallos:</strong> {totalFailures}. <br />
-            <strong>Total de éxito:</strong> {totalSuccesses}. <br />
-            <strong>Experiencia de la historia:</strong> {storyXp}XP. <br />
-          </p>
-        </div>
-      </div>
-    );
+  if (message.includes(CODE_CHARACTERS_CHANGE)) return msgLoadingCharacters;
+  else if (message.includes(CODE_STORY_END)) return <MsgStoryEnd />;
   else if (message.includes(CODE_DONT_SHOW_IN_CHAT)) return <></>;
 
   function onAvatarClick() {
@@ -96,3 +79,27 @@ const mdOpt: MarkdownToJSX.Options = {
     },
   },
 };
+
+const msgLoadingCharacters = (
+  <div>
+    <p className="text-center">Actualizando los personajes de la historia...</p>
+  </div>
+);
+
+function MsgStoryEnd() {
+  const { playersDiceRolls } = useGmAiStore();
+  const { totalFailures, totalSuccesses, storyXp } = calculateStoryXp(playersDiceRolls);
+
+  return (
+    <div className="card bg-secondary-content w-80 shadow-xl m-auto my-4">
+      <div className="card-body">
+        <h2 className="card-title text-info">Fin de la historia</h2>
+        <p className="text-center text-primary">
+          <strong>Total de fallos:</strong> {totalFailures}. <br />
+          <strong>Total de éxito:</strong> {totalSuccesses}. <br />
+          <strong>Experiencia de la historia:</strong> {storyXp}XP. <br />
+        </p>
+      </div>
+    </div>
+  );
+}
