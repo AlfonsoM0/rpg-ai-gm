@@ -10,7 +10,7 @@ import {
   GenerationConfig,
   SafetySetting,
 } from '@google/generative-ai';
-import { gmAiPrompt } from 'config/gm-ai-promp';
+import { gmAiPromptArray } from 'config/gm-ai-promp';
 
 const API_KEY = process.env.AI_APY_KEY || '';
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -55,25 +55,7 @@ export default async function runAIChat(
   const chat = model.startChat({
     generationConfig: generationConfigCustom || generationConfigDefault,
     safetySettings,
-    history: [
-      {
-        role: 'user',
-        parts: [
-          {
-            text: gmAiPrompt,
-          },
-        ],
-      },
-      {
-        role: 'user',
-        parts: [
-          {
-            text: 'Por cada decisión importante que tome durante la historia, pídeme una prueba de característica apropiada. La decisión es importante si es un riesgo para el personaje o produce un gran cambio en el desarrollo de la trama. Comienza desde el "Paso 2 - Game Master AI pide información sobre la historia".',
-          },
-        ],
-      },
-      ...contents,
-    ],
+    history: [...gmAiPromptArray, ...contents],
   });
 
   const result = await chat.sendMessage(userInput);
