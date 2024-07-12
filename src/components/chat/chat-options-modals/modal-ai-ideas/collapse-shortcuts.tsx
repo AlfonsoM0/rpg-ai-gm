@@ -24,7 +24,7 @@ const ideas = [
 export default function CollapseShortcuts() {
   const { addContent } = useGmAiStore();
   const { setModalIsOpen } = useModalState();
-  const { addChatShortcut } = useUserPreferencesStore();
+  const { addChatShortcut, chatShortcuts } = useUserPreferencesStore();
 
   function handleClick(idea: string) {
     addContent({
@@ -39,19 +39,23 @@ export default function CollapseShortcuts() {
       <input type="radio" name="tips-y-atajos" />
       <div className="collapse-title text-xl font-medium">Atajos recomendados</div>
       <div className="collapse-content">
-        {ideas.map((idea, index) => (
-          <div key={index} className="flex gap-2 justify-between">
-            <button
-              onClick={() => handleClick(idea)}
-              className="btn w-[calc(100%-2rem)] mb-2 hover:font-bold"
-            >
-              {idea}
-            </button>
-            <button className="btn p-1" onClick={() => addChatShortcut(idea)}>
-              +
-            </button>
-          </div>
-        ))}
+        {ideas.map((idea, index) => {
+          const isIdeaInMyShortcuts = chatShortcuts.includes(idea);
+          const buttonStyle = isIdeaInMyShortcuts ? 'btn p-1 btn-success' : 'btn p-1';
+          return (
+            <div key={index} className="flex gap-2 justify-between">
+              <button
+                onClick={() => handleClick(idea)}
+                className="btn w-[calc(100%-2rem)] mb-2 hover:font-bold"
+              >
+                {idea}
+              </button>
+              <button className={buttonStyle} onClick={() => addChatShortcut(idea)}>
+                +
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
