@@ -98,8 +98,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
               },
             ],
           };
-          const infoStoryControl: Content[] =
-            isStoryOver && !isStoryEndedBefore ? [contentStoryEnded] : [contentStoryProgress];
+          const infoStoryControl: Content =
+            isStoryOver && !isStoryEndedBefore ? contentStoryEnded : contentStoryProgress;
           // console.info('isStoryOver && !isStoryEndedBefore => ', isStoryOver, !isStoryEndedBefore);
           // console.info('newContent (text) => ', newContentText);
           // console.info('infoStoryControl (text) => ', infoStoryControl[0].parts[0].text);
@@ -108,7 +108,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           try {
             const gMAiResponse = await runAIChat(
               newContentText,
-              [...content, ...infoStoryControl],
+              [...content, infoStoryControl],
               generateAiConfig(content.length, aiConfig)
             );
 
@@ -119,7 +119,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
                 content: [
                   ...state.content,
                   newContent,
-                  ...infoStoryControl,
+                  infoStoryControl,
                   {
                     role: 'model',
                     parts: [{ text: '🤔... ' }],
@@ -132,7 +132,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
                 content: [
                   ...state.content,
                   newContent,
-                  ...infoStoryControl,
+                  infoStoryControl,
                   {
                     role: 'model',
                     parts: [{ text: gMAiResponse }],
@@ -146,7 +146,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
               content: [
                 ...state.content,
                 newContent,
-                ...infoStoryControl,
+                infoStoryControl,
                 {
                   role: 'model',
                   parts: [
