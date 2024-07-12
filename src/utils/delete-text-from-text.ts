@@ -9,8 +9,8 @@ export function deleteCodesFromText(originalText: string): string {
   const regex2 = /\(🆔:(.*?)\)/g;
   newText = newText.replace(regex2, '');
 
-  console.log(originalText.includes('(🆔:'));
-  console.log(originalText);
-  console.log(newText);
+  // console.log(originalText.includes('(🆔:'));
+  // console.log(originalText);
+  // console.log(newText);
   return newText.trim();
 }

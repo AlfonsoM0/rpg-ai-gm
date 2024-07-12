@@ -33,10 +33,10 @@ export default function TTSConfig() {
     <>
       <div className="form-control w-24 m-auto mt-8">
         <label className="label cursor-pointer">
-          <span className="label-text font-bold text-lg">Voz</span>
+          <span className="label-text font-bold text-lg text-info">Voz</span>
           <input
             type="checkbox"
-            className="toggle"
+            className="toggle toggle-info"
             checked={isTTSEnabled}
             onChange={() => {
               handleStop();
@@ -110,6 +110,12 @@ export default function TTSConfig() {
               value={volume}
               onChange={handleChangeVolume}
             />
+          </div>
+
+          <div>
+            <p className="text-center text-info">
+              * Haz clic en los avatares del chat para reproducir el texto.
+            </p>
           </div>
         </div>
       ) : null}

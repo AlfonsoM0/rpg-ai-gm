@@ -3,6 +3,7 @@
 import { Icon } from 'components/icons';
 import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
+import { useTTSStore } from 'hooks/use-tts-store';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import Image from 'next/image';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
@@ -24,6 +25,7 @@ export default function ChatMessage({
 }: ChatMsgStart) {
   const { playersDiceRolls } = useGmAiStore();
   const { totalFailures, totalSuccesses, storyXp } = calculateStoryXp(playersDiceRolls);
+  const { setTTS, handlePlay } = useTTSStore();
 
   if (message.includes(CODE_CHARACTERS_CHANGE))
     return (
@@ -46,12 +48,16 @@ export default function ChatMessage({
     );
   else if (message.includes(CODE_DONT_SHOW_IN_CHAT)) return <></>;
 
-  const chatPosition = position === 'start' ? 'chat chat-start' : 'chat chat-end';
+  function onAvatarClick() {
+    setTTS(message);
+    handlePlay();
+  }
 
+  const chatPosition = position === 'start' ? 'chat chat-start' : 'chat chat-end';
   return (
     <div className={chatPosition}>
-      <div className="chat-image avatar">
-        <div className="w-10 rounded-full">
+      <div className="chat-image avatar" onClick={onAvatarClick}>
+        <div className="w-10 rounded-full btn btn-ghost btn-circle">
           {avatarSrc ? ( // TODO: TTS on click and border animation.
             // eslint-disable-next-line @next/next/no-img-element
             <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />

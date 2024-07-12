@@ -58,7 +58,7 @@ export default function ModalConfigAI() {
   const { aiConfig, setAiConfig } = useGmAiStore();
   return (
     <div>
-      <h3 className="font-bold text-lg">Game Master AI</h3>
+      <h3 className="font-bold text-lg text-info">Game Master AI</h3>
       <p className="py-4">Configura la personalidad de tu Game Master AI.</p>
 
       <h4 className="text-center my-4">
