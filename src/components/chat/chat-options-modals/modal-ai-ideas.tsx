@@ -53,8 +53,8 @@ export default function ModaIdeasForAI() {
           que se registran en el sistema. GmAI lleva su propio registro, pero no es muy confiable.
         </li>
         <li className="list-disc ml-2 text-sm my-1">
-          Aporta ideas a la trama de manera creativa y no solo respondiendo a las preguntas que te
-          hace GmAi. Conseguirás mejores resultados de historia.
+          Aporta ideas a la trama de manera creativa y no solo eligiendo las opciones que te da
+          GmAi. Conseguirás una mejor historia.
         </li>
         <li className="list-disc ml-2 text-sm my-1">
           Pedir &quot;realizar pruebas de características&quot; motivará a GmAi a darte más pruebas
