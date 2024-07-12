@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from 'components/button';
 import { Icon } from 'components/icons';
 import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -36,7 +37,7 @@ export default function ChatMessage({
     handlePlay();
   }
 
-  const chatPosition = position === 'start' ? 'chat chat-start' : 'chat chat-end';
+  const chatPosition = position === 'start' ? 'chat chat-start my-2' : 'chat chat-end my-2';
   return (
     <div className={chatPosition}>
       <div className="chat-image avatar" onClick={onAvatarClick}>
@@ -52,6 +53,12 @@ export default function ChatMessage({
       <div className="chat-header">{userName}</div>
       <div className="chat-bubble bg-secondary-content text-primary text-sm">
         <Markdown options={mdOpt}>{message}</Markdown>
+
+        {message.length > 30 ? (
+          <div className="flex justify-end mb-[-0.8rem] mt-[-0.5rem] mr-[-1rem]">
+            <Button.Copy text={message} toolTipPosition="left" />
+          </div>
+        ) : null}
       </div>
     </div>
   );

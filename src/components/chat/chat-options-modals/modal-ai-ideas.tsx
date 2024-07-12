@@ -45,25 +45,32 @@ export default function ModaIdeasForAI() {
         <div className="collapse-content">
           <ul>
             <li className="list-disc ml-2 text-sm my-1">
-              La historia termina a los 3 fallos o 5 éxitos. Si no quieres que termine rápido,
-              puedes escribir tus resultados de pruebas o pedirle a GmAi que las haga por ti. Así no
-              se guardarán en el sistema y evitarás que se active el final. Aunque GmAi puede
-              concluir por su cuenta, puedes pedirle que continúe hasta donde quieras.
+              <strong>La historia termina a los 3 fallos o 5 éxitos</strong> <br /> Si no quieres
+              que termine rápido, puedes escribir tus resultados de pruebas o pedirle a GmAi que las
+              haga por ti. Así no se guardarán en el sistema y evitarás que se active el final.
+              Aunque GmAi puede concluir por su cuenta, puedes pedirle que continúe hasta donde
+              quieras.
             </li>
             <li className="list-disc ml-2 text-sm my-1">
-              La XP ganada al final de la historia se calcula en base al resultado de tus pruebas de
-              característica. Solo las pruebas lanzadas desde las fichas de tus personajes cuentan,
-              ya que se registran en el sistema. GmAI lleva su propio registro, pero no es muy
-              confiable.
+              <strong>La XP ganada al final de la historia</strong> <br /> Se calcula en base al
+              resultado de tus pruebas de característica. Solo las pruebas lanzadas desde las fichas
+              de tus personajes cuentan, ya que se registran en el sistema. GmAI lleva su propio
+              registro, pero no es muy confiable.
             </li>
             <li className="list-disc ml-2 text-sm my-1">
-              Aporta ideas a la trama de manera creativa y no solo eligiendo las opciones que te da
-              GmAi. Conseguirás una mejor historia.
+              <strong>Conseguir una mejor historia</strong> <br /> Es fácil, aporta ideas a la trama
+              de manera creativa y no solo eligiendo las opciones que te da GmAi.
             </li>
             <li className="list-disc ml-2 text-sm my-1">
-              Pedir &quot;realizar pruebas de características&quot; motivará a GmAi a darte más
-              pruebas y detalles para avanzar más rápido en la historia. Si GmAi realiza tiradas por
-              tí, puedes decirle que tú quieres realziar todas las tiradas.
+              <strong>Jugar una historia más rápida</strong> <br />
+              Es posible, pide a tu GmAi &quot;realizar pruebas de características&quot;, eso lo
+              motivará a darte más pruebas y detalles para avanzar más rápido en la historia. Si
+              GmAi realiza tiradas por tí, puedes decirle que tú quieres realziar todas las tiradas.
+            </li>
+            <li className="list-disc ml-2 text-sm my-1">
+              <strong>¿Quiers jugar una campaña de varias historias?</strong> <br /> Pide a GmAi un
+              resumen de la historia y copia su mensaje. En tu próxima partida puedes decirle
+              &quot;Quiero continuar con esta historia: [pega el resumen de la historia aquí]&quot;.
             </li>
           </ul>
         </div>
@@ -87,22 +94,3 @@ export default function ModaIdeasForAI() {
     </div>
   );
 }
-
-/*
-
-<div className="collapse collapse-plus bg-base-200">
-  <input type="radio" name="my-accordion-3" defaultChecked />
-  <div className="collapse-title text-xl font-medium">Click to open this one and close others</div>
-  <div className="collapse-content">
-    <p>hello</p>
-  </div>
-</div>
-<div className="collapse collapse-plus bg-base-200">
-  <input type="radio" name="my-accordion-3" />
-  <div className="collapse-title text-xl font-medium">Click to open this one and close others</div>
-  <div className="collapse-content">
-    <p>hello</p>
-  </div>
-</div>
-
-*/

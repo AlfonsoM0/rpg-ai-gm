@@ -3,7 +3,13 @@
 import { Icon } from 'components/icons';
 import { useEffect, useState } from 'react';
 
-export function Copy({ text }: { text: string }): JSX.Element {
+export function Copy({
+  text,
+  toolTipPosition,
+}: {
+  text: string;
+  toolTipPosition?: 'left' | 'right';
+}): JSX.Element {
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -15,10 +21,15 @@ export function Copy({ text }: { text: string }): JSX.Element {
     };
   }, [isCopied]);
 
+  const toolTipPositionStyle =
+    toolTipPosition === 'left' ? 'tooltip tooltip-left' : 'tooltip tooltip-right';
   return (
-    <div className="tooltip" data-tip={`Copiar al portapapeles "${text.slice(0, 50)}..."`}>
+    <div
+      className={toolTipPosition ? toolTipPositionStyle : 'tooltip'}
+      data-tip={`Copiar: "${text.slice(0, 30)}..."`}
+    >
       <button
-        className="badge bg-secondary-content badge-sm cursor-pointer hover:badge-success h-6 p-2"
+        className="btn btn-xs btn-ghost hover:badge-success h-5 p-1"
         onClick={() => {
           void navigator.clipboard.writeText(text);
           setIsCopied(true);
