@@ -15,18 +15,18 @@ export default function TTSConfig() {
     handleChangePitch,
     handleChangeRate,
     handleChangeVolume,
-    setTTS,
   } = useTTSStore();
 
-  if (!speechSynthesis)
+  // Filter only local voices, because have unlimited usage.
+  const voices = speechSynthesis.getVoices().filter((v) => v.localService);
+
+  if (!speechSynthesis || !voices.length)
     return (
       <>
         <h4 className="text-center my-4 font-bold">Voz</h4>
-        <p>No disponible en tu navegador.</p>
+        <p className="text-center">No disponible en tu navegador.</p>
       </>
     );
-
-  const voices = speechSynthesis.getVoices();
 
   return (
     <>
