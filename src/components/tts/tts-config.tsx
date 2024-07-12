@@ -15,6 +15,7 @@ export default function TTSConfig() {
     handleChangePitch,
     handleChangeRate,
     handleChangeVolume,
+    handleStop,
   } = useTTSStore();
 
   // Filter only local voices, because have unlimited usage.
@@ -37,7 +38,10 @@ export default function TTSConfig() {
             type="checkbox"
             className="toggle"
             checked={isTTSEnabled}
-            onChange={() => setIsTTSEnabled(!isTTSEnabled)}
+            onChange={() => {
+              handleStop();
+              setIsTTSEnabled(!isTTSEnabled);
+            }}
           />
         </label>
       </div>
