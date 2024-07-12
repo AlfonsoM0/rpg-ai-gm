@@ -4,6 +4,10 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import srcLogo from 'public/android-chrome-512x512.png';
 import ThemeController from './theme-controller';
+import { Icon } from './icons';
+import { useModalState } from 'hooks/use-modal-state';
+import ModalConfigAI, { aiIconStyle } from './chat/chat-options-modals/modal-ai-config';
+import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 
 type SubOps = { name: string; url: string }[];
 
@@ -41,6 +45,13 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid circular dependency
   }, []);
 
+  const { setModalContent, setModalIsOpen } = useModalState();
+  const { aiConfig } = useGmAiStore();
+  function onConfigAiClick() {
+    setModalContent(<ModalConfigAI />);
+    setModalIsOpen(true);
+  }
+
   return (
     <nav className="navbar bg-base-100 shadow" id="navbar">
       {/* <!-- Navbar Start --> */}
@@ -66,6 +77,7 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
         </details>
 
         <Link className="btn btn-ghost text-sm md:text-xl" href={'/'}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img alt="Game Master AI" src={srcLogo.src} width={32} />
           Game Master AI
         </Link>
@@ -82,6 +94,9 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
 
       {/* <!-- Navbar End --> */}
       <div className="navbar-end">
+        <button className="btn btn-ghost" onClick={onConfigAiClick}>
+          <Icon.AiBrain className={aiIconStyle[aiConfig]} />
+        </button>
         <ThemeController />
       </div>
     </nav>

@@ -5,6 +5,7 @@ import runAIChat from 'server/gm-ai';
 import { AiModels, generateAiConfig } from 'utils/generate-ai-config';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
 import { CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
+import { deleteCodesFromText } from 'utils/delete-text-from-text';
 
 interface GmAiStore {
   // Chat history
@@ -74,13 +75,13 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
             role: 'user',
             parts: [
               {
-                text: `
+                text: `(((
               Crea el final de la historia considerando lo siguiente:
               Total de fallos ${totalFailures},
               Total de éxito ${totalSuccesses},
               XP de la historia ${storyXp}.
               ${CODE_STORY_END}
-              `,
+              )))`,
               },
             ],
           };
@@ -88,13 +89,13 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
             role: 'user',
             parts: [
               {
-                text: `
+                text: `(((
               Información sobre el progreso de la historia:
               Total de fallos ${totalFailures},
               Total de éxito ${totalSuccesses},
               XP de la historia ${storyXp}.
               ${CODE_DONT_SHOW_IN_CHAT}
-              `,
+              )))`,
               },
             ],
           };
@@ -135,7 +136,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
                   infoStoryControl,
                   {
                     role: 'model',
-                    parts: [{ text: gMAiResponse }],
+                    parts: [{ text: deleteCodesFromText(gMAiResponse) }],
                   },
                 ],
                 isLoadingContent: false,

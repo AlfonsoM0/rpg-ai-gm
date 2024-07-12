@@ -3,17 +3,19 @@
 import { Icon } from 'components/icons';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
-import { useMemo } from 'react';
 import ModalEndHistory from './chat-options-modals/modal-end-story';
 import ModalConfigAI, { aiIconStyle } from './chat-options-modals/modal-ai-config';
 import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
+import { useTTSStore } from 'hooks/use-tts-store';
 
 export default function ChatOptionsABC() {
   const { addContent, isLoadingContent, content } = useGmAiStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { aiConfig } = useGmAiStore();
+  const { handleStop, handlePause } = useTTSStore();
 
   function onHistoryOptionClick(option: 'A' | 'B' | 'C'): void {
+    handleStop();
     addContent({
       role: 'user',
       parts: [{ text: `Elijo la opción **"${option}"**.` }], //\n\n ¿Qué prueba debo realizar?
@@ -21,16 +23,19 @@ export default function ChatOptionsABC() {
   }
 
   function onEndHistoryClick(): void {
+    handlePause();
     setModalContent(<ModalEndHistory />);
     setModalIsOpen(true);
   }
 
   function onConfigAiClick() {
+    handlePause();
     setModalContent(<ModalConfigAI />);
     setModalIsOpen(true);
   }
 
   function onIdeasClick() {
+    handlePause();
     setModalContent(<ModaIdeasForAI />);
     setModalIsOpen(true);
   }

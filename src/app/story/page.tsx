@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 export default function Page() {
   const { inGameCharacters } = useCharacterStore();
   const { content, isLoadingContent } = useGmAiStore();
-  const { isTTSEnabled, handlePlay, setTTS } = useTTSStore();
+  const { isTTSEnabled, handlePlay, setTTS, handleStop } = useTTSStore();
 
   useEffect(() => {
     if (isTTSEnabled && content.length > 0) {
@@ -27,6 +27,11 @@ export default function Page() {
         handlePlay();
       }
     }
+
+    return () => {
+      handleStop();
+      setTTS('');
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 

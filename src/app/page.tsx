@@ -38,8 +38,8 @@ export default function Home() {
         role: 'user',
         parts: [
           {
-            text: `Información de mis personajes: ${JSON.stringify(inGameCharacters)}
-            ${CODE_DONT_SHOW_IN_CHAT}`,
+            text: `(((Información de mis personajes: ${JSON.stringify(inGameCharacters)}
+            ${CODE_DONT_SHOW_IN_CHAT})))`,
           },
         ],
       });
@@ -57,11 +57,11 @@ export default function Home() {
         role: 'user',
         parts: [
           {
-            text: `Actualiza mis personajes con la siguiente información: ${JSON.stringify(
+            text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(
               newCharactersInGame
             )}.
             Muéstrame los cambios para asegurarme de que todo está bien.
-            ${CODE_CHARACTERS_CHANGE}`,
+            ${CODE_CHARACTERS_CHANGE})))`,
           },
         ],
       });

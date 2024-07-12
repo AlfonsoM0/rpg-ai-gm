@@ -2,15 +2,18 @@
 
 import { Icon } from 'components/icons';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
+import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
 
 export default function ChatInputMsg() {
   const { addContent, isLoadingContent } = useGmAiStore();
+  const { handleStop } = useTTSStore();
 
   const [chatMsg, setChatMsg] = useState('');
 
   function submitChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    handleStop();
     addContent({
       role: 'user',
       parts: [{ text: chatMsg }],

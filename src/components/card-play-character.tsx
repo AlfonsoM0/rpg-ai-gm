@@ -4,6 +4,7 @@ import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 import { Character, Characteristic } from 'types/character';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { esMsgRoll2d6 } from 'utils/roll-2d6';
+import { useTTSStore } from 'hooks/use-tts-store';
 
 interface CardPlayCharacterProps {
   character: Character;
@@ -13,10 +14,12 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
   const { id, xp, name, characteristics } = character;
   const { strength, dexterity, constitution, intelligence, wisdom, charisma } = characteristics;
   const CharsXP = characteristicsXpValue(characteristics);
+  const { handleStop } = useTTSStore();
 
   const { addContent, isLoadingContent, addPlayersDiceRoll } = useGmAiStore();
   function rollCharacteristic(characteristic: Characteristic, value: number): void {
     const rolResult = esMsgRoll2d6(name, characteristic, value, addPlayersDiceRoll);
+    handleStop();
     addContent({
       role: 'user',
       parts: [{ text: rolResult }],
