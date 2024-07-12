@@ -1,11 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Content } from '@google/generative-ai';
-import runAIChat from 'server/gm-ai';
-import { AiModels, generateAiConfig } from 'utils/generate-ai-config';
-import { calculateStoryXp } from 'utils/calculate-story-xp';
-import { CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
-import { deleteCodesFromText } from 'utils/delete-text-from-text';
+import { AiModels } from 'utils/generate-ai-config';
+import { createGmAiResponseContent } from 'utils/gmai-utils';
 
 interface GmAiStore {
   // Chat history
@@ -64,102 +61,19 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         addContent: async (newContent) => {
           set(() => ({ isLoadingContent: true }));
 
-          const newContentText = newContent.parts.map((part) => part.text).join('');
           const { content, aiConfig, playersDiceRolls } = get();
 
-          //#region Story Progression Control
-          const { isStoryOver, totalFailures, totalSuccesses, storyXp } =
-            calculateStoryXp(playersDiceRolls);
-          const isStoryEndedBefore = JSON.stringify(content).includes(CODE_STORY_END);
-          const contentStoryEnded: Content = {
-            role: 'user',
-            parts: [
-              {
-                text: `(((
-              Crea el final de la historia considerando lo siguiente:
-              Total de fallos ${totalFailures},
-              Total de éxito ${totalSuccesses},
-              XP de la historia ${storyXp}.
-              ${CODE_STORY_END}
-              )))`,
-              },
-            ],
-          };
-          const contentStoryProgress: Content = {
-            role: 'user',
-            parts: [
-              {
-                text: `(((
-              Información sobre el progreso de la historia:
-              Total de fallos ${totalFailures},
-              Total de éxito ${totalSuccesses},
-              XP de la historia ${storyXp}.
-              ${CODE_DONT_SHOW_IN_CHAT}
-              )))`,
-              },
-            ],
-          };
-          const infoStoryControl: Content =
-            isStoryOver && !isStoryEndedBefore ? contentStoryEnded : contentStoryProgress;
-          // console.info('isStoryOver && !isStoryEndedBefore => ', isStoryOver, !isStoryEndedBefore);
-          // console.info('newContent (text) => ', newContentText);
-          // console.info('infoStoryControl (text) => ', infoStoryControl[0].parts[0].text);
-          //#endregion
+          const contentToSet = await createGmAiResponseContent(
+            aiConfig,
+            content,
+            newContent,
+            playersDiceRolls
+          );
 
-          try {
-            const gMAiResponse = await runAIChat(
-              newContentText,
-              [...content, infoStoryControl],
-              generateAiConfig(content.length, aiConfig)
-            );
-
-            if (!gMAiResponse) {
-              console.warn('Empty response => ', gMAiResponse);
-              // Avoid empty response.
-              set((state) => ({
-                content: [
-                  ...state.content,
-                  newContent,
-                  {
-                    role: 'model',
-                    parts: [{ text: '🤔... ' }],
-                  },
-                  infoStoryControl,
-                ],
-                isLoadingContent: false,
-              }));
-            } else
-              set((state) => ({
-                content: [
-                  ...state.content,
-                  newContent,
-                  {
-                    role: 'model',
-                    parts: [{ text: deleteCodesFromText(gMAiResponse) }],
-                  },
-                  infoStoryControl,
-                ],
-                isLoadingContent: false,
-              }));
-          } catch (error) {
-            console.error(error);
-            set((state) => ({
-              content: [
-                ...state.content,
-                newContent,
-                {
-                  role: 'model',
-                  parts: [
-                    {
-                      text: 'Lo lamento, ocurrió un error y no puedo responderte. \n\n Intenta nuevamente. 👍',
-                    },
-                  ],
-                },
-                infoStoryControl,
-              ],
-              isLoadingContent: false,
-            }));
-          }
+          set(() => ({
+            content: contentToSet,
+            isLoadingContent: false,
+          }));
         },
 
         resetChat: () => set(() => initialGmAiState),
