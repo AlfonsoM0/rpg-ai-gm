@@ -5,7 +5,7 @@ import CardBookButtonsActions from './card-book-buttons';
 
 export default function BookCard({ book }: { book: Book }) {
   return (
-    <article className="card bg-primary-content w-80 shadow-xl">
+    <article className="card bg-secondary-content text-primary w-80 shadow-xl">
       <div className="card-body justify-between">
         <h2 className="card-title font-bold">{book.title}</h2>
         <div className="my-2">
