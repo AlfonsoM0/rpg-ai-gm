@@ -120,11 +120,11 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
                 content: [
                   ...state.content,
                   newContent,
-                  infoStoryControl,
                   {
                     role: 'model',
                     parts: [{ text: '🤔... ' }],
                   },
+                  infoStoryControl,
                 ],
                 isLoadingContent: false,
               }));
@@ -133,11 +133,11 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
                 content: [
                   ...state.content,
                   newContent,
-                  infoStoryControl,
                   {
                     role: 'model',
                     parts: [{ text: deleteCodesFromText(gMAiResponse) }],
                   },
+                  infoStoryControl,
                 ],
                 isLoadingContent: false,
               }));
@@ -147,7 +147,6 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
               content: [
                 ...state.content,
                 newContent,
-                infoStoryControl,
                 {
                   role: 'model',
                   parts: [
@@ -156,6 +155,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
                     },
                   ],
                 },
+                infoStoryControl,
               ],
               isLoadingContent: false,
             }));

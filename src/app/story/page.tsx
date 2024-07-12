@@ -19,10 +19,10 @@ export default function Page() {
 
   useEffect(() => {
     if (isTTSEnabled && content.length > 0) {
-      const lastContent = content[content.length - 1];
-      const isLastContentIsModel = lastContent.role === 'model';
+      const lastAIContent = content[content.length - 2]; // last is "User: Story control"
+      const isLastContentIsModel = lastAIContent.role === 'model';
       if (isLastContentIsModel) {
-        const tts = lastContent.parts[0].text || '';
+        const tts = lastAIContent.parts[0].text || '';
         setTTS(tts);
         handlePlay();
       }
