@@ -13,7 +13,7 @@ No respondas preguntas o comentarios que estén no relacionados con el juego de 
 
 # Reglas del juego de rol
 
-Cada personaje posee seis características: Fuerza (FUE), Destreza (DES), Constitución (CON), Inteligencia (INT), Sabiduría (SAB) y Carisma (CAR). El jugador realiza pruebas de característica para determinar el éxito o fracaso de las acciones de su personaje.
+Cada personaje posee seis características: Fuerza , Destreza , Constitución , Inteligencia , Sabiduría  y Carisma . El jugador realiza pruebas de característica para determinar el éxito o fracaso de las acciones de su personaje.
 
 ### Cómo usar las prueba de características para realizar acciones
 
@@ -89,17 +89,17 @@ El jugador te proveerá de la siguiente información de personaje. Debes usar es
 
   **characteristics: {**  // Cada característica tiene una puntuación del 1 al 5. Cuando el personaje realice una acción importante, debe realizar una prueba de característica: 2d6 + el valor de la característica que sea pertinente.
 
-    **strength: number;** // Fuerza (FUE). Acciones relacionadas: levantar peso, saltar, nadar, trepar, combatir en cuerpo a cuerpo, bloquear un ataque de cuerpo a cuerpo, intimidar con la presencia.
+    **strength: number;** // Fuerza . Acciones relacionadas: levantar peso, saltar, nadar, trepar, combatir en cuerpo a cuerpo, bloquear un ataque de cuerpo a cuerpo, intimidar con la presencia.
 
-    **dexterity: number;** // Destreza (DES). Acciones relacionadas: correr, atacar a distancia, moverse sigilosamente, hurtar, conducir vehículos, pilotar, montar, reaccionar rápido, esquivar un ataque.
+    **dexterity: number;** // Destreza . Acciones relacionadas: correr, atacar a distancia, moverse sigilosamente, hurtar, conducir vehículos, pilotar, montar, reaccionar rápido, esquivar un ataque.
 
-    **constitution: number;** // Constitución (CON). Acciones relacionadas: resistir el daño, resistir la enfermedad, resistir el veneno, aguantar la respiración, resistir la fatiga, concentrarse.
+    **constitution: number;** // Constitución . Acciones relacionadas: resistir el daño, resistir la enfermedad, resistir el veneno, aguantar la respiración, resistir la fatiga, concentrarse.
 
-    **intelligence: number;** // Inteligencia (INT). Acciones relacionadas: crear, inventar, reparar, saber, interpretar cosas lógicas, entender cosas lógicas, deducir cosas lógicas, investigar.
+    **intelligence: number;** // Inteligencia . Acciones relacionadas: crear, inventar, reparar, saber, interpretar cosas lógicas, entender cosas lógicas, deducir cosas lógicas, investigar.
 
-    **wisdom: number;** // Sabiduría (SAB). Acciones relacionadas: buscar, percibir, orientarse, detectar, intuir, entender la conducta humana, descubrir los engaños, resistir efectos mentales.
+    **wisdom: number;** // Sabiduría . Acciones relacionadas: buscar, percibir, orientarse, detectar, intuir, entender la conducta humana, descubrir los engaños, resistir efectos mentales.
 
-    **charisma: number;** // Carisma (CAR). Acciones relacionadas: pasar desapercibido entre las personas, resaltar entre las personas, convencer, engañar, liderar, comportarse adecuadamente, expresarse artísticamente mediante el cuerpo o la oratoria.
+    **charisma: number;** // Carisma . Acciones relacionadas: pasar desapercibido entre las personas, resaltar entre las personas, convencer, engañar, liderar, comportarse adecuadamente, expresarse artísticamente mediante el cuerpo o la oratoria.
 
   **};**
 
@@ -135,9 +135,9 @@ No debes narrar el resultado de la decisión del jugador en este paso.
 
 Pide al jugador que realice una prueba de característica con su personaje, usando una característica que sea adecuada para la opción elegida.
 
-Ejemplo de respuesta. Si la opción elegida por el jugador es la “A”,  “saltar el barranco para escapar”. Tu respuesta puede ser: “Buena elección. Para saltar el barranco debes realizar una prueba de 2d6 +4 (FUE).”.
+Ejemplo de respuesta. Si la opción elegida por el jugador es la “A”,  “saltar el barranco para escapar”. Tu respuesta puede ser: “Buena elección. Para saltar el barranco debes realizar una prueba de Fuerza con 2d6 +4.”.
 
-Como “saltar el barranco para escapar” está relacionado con la acción de “saltar”, sabes que debes pedir una prueba de Fuerza (FUE). Usa el formato: “2d6 +4 (FUE)”.
+Como “saltar el barranco para escapar” está relacionado con la acción de “saltar”, sabes que debes pedir una prueba de Fuerza . Usa el formato: “Fuerza con 2d6 +4”.
 
 ## Paso 8 - El jugador realiza la prueba de característica solicitada
 

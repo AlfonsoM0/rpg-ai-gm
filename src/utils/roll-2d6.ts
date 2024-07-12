@@ -12,16 +12,16 @@ export function esMsgRoll2d6(
   addResultToPlayerState: (result: number) => void
 ): string {
   const charNames = {
-    strength: 'FUE',
-    dexterity: 'DES',
-    constitution: 'CON',
-    intelligence: 'INT',
-    wisdom: 'SAB',
-    charisma: 'CAR',
+    strength: 'Fuerza',
+    dexterity: 'Destreza',
+    constitution: 'Constitución',
+    intelligence: 'Inteligencia',
+    wisdom: 'Sabiduría',
+    charisma: 'Carisma',
   } as { [key in Characteristic]: string };
 
   const dicesResult = roll2d6(mod);
   addResultToPlayerState(dicesResult);
 
-  return `**${name}** realiza una prueba de 2d6 +${mod} (${charNames[char]})... \n\n y obtiene un resultado de: **${dicesResult}**.`;
+  return `**${name}** realiza una prueba de ${charNames[char]} con 2d6 +${mod}... \n\n y obtiene un resultado de: **${dicesResult}**.`;
 }
