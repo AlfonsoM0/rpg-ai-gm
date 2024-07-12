@@ -58,7 +58,7 @@ export default function ChatMessage({
     <div className={chatPosition}>
       <div className="chat-image avatar" onClick={onAvatarClick}>
         <div className="w-10 rounded-full btn btn-ghost btn-circle">
-          {avatarSrc ? ( // TODO: TTS on click and border animation.
+          {avatarSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
           ) : (
