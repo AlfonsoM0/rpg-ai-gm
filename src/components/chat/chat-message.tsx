@@ -5,6 +5,7 @@ import { Icon } from 'components/icons';
 import { useTTSStore } from 'hooks/use-tts-store';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import Image from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
 
 interface ChatMsgStart {
   userName: string;
@@ -21,18 +22,44 @@ export default function ChatMessage({
   avatarSrc,
   avatarAlt,
 }: ChatMsgStart) {
-  const { setTTS, handlePlay } = useTTSStore();
+  const { handleStop, handlePause, setTTS, handlePlay, isPlaying, isPaused, isStopped, tts } =
+    useTTSStore();
+
+  const isThisTTS = useMemo(() => tts === message, [tts, message]);
+
+  // Avatar On/Off effect
+  const avatarStylePlaying = 'w-12 btn btn-circle btn-success';
+  const avatarStylePaused = 'w-12 btn btn-circle btn-warning';
+  const avatarStyleStoped = 'w-12 btn btn-circle btn-ghost';
+
+  const [avatarStyle, setAvatarStyle] = useState(avatarStylePaused);
 
   function onAvatarClick() {
+    if (isThisTTS) {
+      if (isPlaying) handlePause();
+      else handlePlay();
+      return;
+    }
+
+    if (isPlaying || isPaused) handleStop();
     setTTS(message);
+    setAvatarStyle(avatarStylePlaying);
     handlePlay();
   }
+
+  useEffect(() => {
+    if (isStopped) setAvatarStyle(avatarStyleStoped);
+    if (isThisTTS) {
+      if (isPlaying) setAvatarStyle(avatarStylePlaying);
+      if (isPaused) setAvatarStyle(avatarStylePaused);
+    } else setAvatarStyle(avatarStyleStoped);
+  }, [isStopped, isPlaying, isPaused, isThisTTS]);
 
   const chatPosition = position === 'start' ? 'chat chat-start my-2' : 'chat chat-end my-2';
   return (
     <div className={chatPosition}>
       <div className="chat-image avatar" onClick={onAvatarClick}>
-        <div className="w-10 rounded-full btn btn-ghost btn-circle">
+        <div className={avatarStyle}>
           {avatarSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
