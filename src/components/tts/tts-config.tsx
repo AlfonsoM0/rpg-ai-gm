@@ -26,6 +26,7 @@ export default function TTSConfig() {
       <>
         <h4 className="text-center my-4 font-bold">Voz</h4>
         <p className="text-center">No disponible en tu navegador.</p>
+        {voiceConfigTips}
       </>
     );
 
@@ -116,16 +117,20 @@ export default function TTSConfig() {
         </div>
       ) : null}
 
-      <div className="mx-2">
-        <ul className="list-disc text-info">
-          <li>Haz clic en los avatares del chat para reproducir el texto.</li>
-          <li>
-            Es posible que tengas que configurar tu dispositivo y descargar paquetes de voz para
-            escuchar el texto. Busca &quot;salida de texto a voz&quot; (TTS) en la configuración de
-            idioma.
-          </li>
-        </ul>
-      </div>
+      {voiceConfigTips}
     </>
   );
 }
+
+const voiceConfigTips = (
+  <div className="m-2">
+    <ul className="list-disc text-info">
+      <li>Haz clic en los avatares del chat para reproducir el texto.</li>
+      <li>
+        Es posible que tengas que configurar tu dispositivo y descargar paquetes de voz para
+        escuchar el texto. Busca &quot;salida de texto a voz&quot; (TTS) en la configuración de
+        idioma.
+      </li>
+    </ul>
+  </div>
+);
