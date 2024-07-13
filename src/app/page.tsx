@@ -102,13 +102,15 @@ export default function Home() {
       <section className="my-4">
         <H2>Mis Personajes</H2>
 
-        <Input.Search
-          labelclassname="m-auto mb-5"
-          className="text-center"
-          placeholder="Buscar por Nombre"
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-        />
+        {allCharacters.length > 3 ? (
+          <Input.Search
+            labelclassname="m-auto mb-5"
+            className="text-center"
+            placeholder="Buscar por Nombre"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+          />
+        ) : null}
 
         <div className="flex flex-wrap justify-center gap-4">
           <div className="card w-80 h-60 border border-primary-content rounded-lg shadow-md">

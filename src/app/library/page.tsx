@@ -22,13 +22,15 @@ export default function Page() {
       <div>
         <H1>Biblioteca</H1>
 
-        <Input.Search
-          labelclassname="m-auto mb-5"
-          className="text-center"
-          placeholder="Buscar por Nombre"
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-        />
+        {library.length > 3 ? (
+          <Input.Search
+            labelclassname="m-auto mb-5"
+            className="text-center"
+            placeholder="Buscar por Nombre"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+          />
+        ) : null}
       </div>
 
       <section className="my-4">
