@@ -3,6 +3,7 @@
 import CardCharacter from 'components/card-character';
 import H1 from 'components/h1';
 import H2 from 'components/h2';
+import { Input } from 'components/input';
 import Main from 'components/Main';
 import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
@@ -10,6 +11,8 @@ import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
 
 export default function Home() {
@@ -20,6 +23,8 @@ export default function Home() {
   const { clearAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { content, addContent, isStoryStarted, setIsStoryStarted } = useGmAiStore();
+
+  const [search, setSearch] = useState('');
 
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
@@ -70,6 +75,10 @@ export default function Home() {
     router.push('/story');
   }
 
+  function searchCharacter(allCharacters: Character[]): Character[] {
+    return allCharacters.filter((c) => c.name.includes(search));
+  }
+
   return (
     <Main>
       <H1>¡Bienvenido!</H1>
@@ -93,6 +102,14 @@ export default function Home() {
       <section className="my-4">
         <H2>Mis Personajes</H2>
 
+        <Input.Search
+          labelclassname="m-auto mb-5"
+          className="text-center"
+          placeholder="Buscar por Nombre"
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+        />
+
         <div className="flex flex-wrap justify-center gap-4">
           <div className="card w-80 h-60 border border-primary-content rounded-lg shadow-md">
             <button
@@ -106,7 +123,7 @@ export default function Home() {
             </button>
           </div>
 
-          {allCharacters.map((character) => (
+          {searchCharacter(allCharacters).map((character) => (
             <CardCharacter key={character.id} character={character} />
           ))}
         </div>
