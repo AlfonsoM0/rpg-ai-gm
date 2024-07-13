@@ -59,9 +59,9 @@ export default function TTSConfig() {
               value={voices[voiceIndex].name}
               onChange={handleChangeVoice}
             >
-              {voices.map((v, idx) => {
+              {voices.map((v) => {
                 return (
-                  <option key={v.name} value={v.name} selected={voiceIndex === idx}>
+                  <option key={v.name} value={v.name} defaultValue={voices[voiceIndex].name}>
                     {v.name}
                   </option>
                 );

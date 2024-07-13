@@ -62,8 +62,8 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
 
           const cleanTTS = removeMarkdown(customTTS || tts);
           const utterance = new SpeechSynthesisUtterance(cleanTTS);
-          console.log('Markdown Text => ', customTTS || tts);
-          console.log('Clean Text => ', cleanTTS);
+          // console.log('Markdown Text => ', customTTS || tts);
+          // console.log('Clean Text => ', cleanTTS);
 
           if (isPaused && speechSynthesis) {
             speechSynthesis.resume();
