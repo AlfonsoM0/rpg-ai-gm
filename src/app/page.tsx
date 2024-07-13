@@ -5,7 +5,7 @@ import H1 from 'components/h1';
 import H2 from 'components/h2';
 import { Input } from 'components/input';
 import Main from 'components/Main';
-import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
+import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -40,7 +40,7 @@ export default function Home() {
 
     if (!content.length) {
       addContent({
-        role: 'user',
+        role: AI_ROLE.USER,
         parts: [
           {
             text: `(((Información de mis personajes: ${JSON.stringify(inGameCharacters)}
@@ -59,7 +59,7 @@ export default function Home() {
         return findUpdatedChar;
       });
       addContent({
-        role: 'user',
+        role: AI_ROLE.USER,
         parts: [
           {
             text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(

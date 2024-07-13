@@ -1,5 +1,6 @@
 'use client';
 
+import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
@@ -30,7 +31,7 @@ export default function CollapseMyShortcuts() {
 
   function handleClick(idea: string) {
     addContent({
-      role: 'user',
+      role: AI_ROLE.USER,
       parts: [{ text: idea }],
     });
     setModalIsOpen(false);

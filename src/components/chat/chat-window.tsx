@@ -4,7 +4,14 @@ import { Content } from '@google/generative-ai';
 import ChatMessage from './chat-message';
 import { useEffect, useRef } from 'react';
 import imgGmAi from 'public/android-chrome-512x512.png';
-import { Game_Master_AI } from 'config/constants';
+import {
+  AI_ROLE,
+  CODE_CHARACTERS_CHANGE,
+  CODE_DONT_SHOW_IN_CHAT,
+  CODE_STORY_END,
+  AI_NAME_TO_SHOW,
+} from 'config/constants';
+import MsgStoryEnd from './chat-message-end';
 
 interface ChatWindowProps {
   content: Content[];
@@ -25,22 +32,29 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
   return (
     <div className="h-[70vh] w-[90vw] flex flex-col border rounded-xl p-2">
       <div className="overflow-y-scroll">
-        {content.map((msg, index) => {
-          const position = msg.role === 'model' ? 'start' : 'end';
-          const userName = msg.role === 'model' ? Game_Master_AI : 'Player';
-          const avatarSrc = msg.role === 'model' ? imgGmAi.src : undefined;
-          const avatarAlt = msg.role === 'model' ? `${Game_Master_AI} Avatar` : 'Player Avatar';
+        {content.map((cont, idx) => {
+          const position = cont.role === AI_ROLE.MODEL ? 'start' : 'end';
+          const userName = cont.role === AI_ROLE.MODEL ? AI_NAME_TO_SHOW : 'Player';
+          const avatarSrc = cont.role === AI_ROLE.MODEL ? imgGmAi.src : undefined;
+          const avatarAlt =
+            cont.role === AI_ROLE.MODEL ? `${AI_NAME_TO_SHOW} Avatar` : 'Player Avatar';
 
-          return (
-            <ChatMessage
-              key={index}
-              message={msg.parts.map((p) => p.text).join('\n')}
-              position={position}
-              userName={userName}
-              avatarSrc={avatarSrc}
-              avatarAlt={avatarAlt}
-            />
-          );
+          const message = cont.parts.map((p) => p.text).join('\n');
+
+          if (message.includes(CODE_CHARACTERS_CHANGE)) return <MsgLoadingCharacters key={idx} />;
+          else if (message.includes(CODE_STORY_END)) return <MsgStoryEnd key={idx} />;
+          else if (message.includes(CODE_DONT_SHOW_IN_CHAT)) return <div key={idx} />;
+          else
+            return (
+              <ChatMessage
+                key={idx}
+                message={message}
+                position={position}
+                userName={userName}
+                avatarSrc={avatarSrc}
+                avatarAlt={avatarAlt}
+              />
+            );
         })}
         {isLoadingContent ? (
           <div className="flex justify-center items-center h-[70vh]" ref={refLoader}>
@@ -48,6 +62,14 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
           </div>
         ) : null}
       </div>
+    </div>
+  );
+}
+
+function MsgLoadingCharacters() {
+  return (
+    <div>
+      <p className="text-center">Actualizando los personajes de la historia...</p>
     </div>
   );
 }

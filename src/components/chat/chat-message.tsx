@@ -2,12 +2,9 @@
 
 import { Button } from 'components/button';
 import { Icon } from 'components/icons';
-import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
-import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import Image from 'next/image';
-import { calculateStoryXp } from 'utils/calculate-story-xp';
 
 interface ChatMsgStart {
   userName: string;
@@ -24,13 +21,7 @@ export default function ChatMessage({
   avatarSrc,
   avatarAlt,
 }: ChatMsgStart) {
-  const { playersDiceRolls } = useGmAiStore();
-  const { totalFailures, totalSuccesses, storyXp } = calculateStoryXp(playersDiceRolls);
   const { setTTS, handlePlay } = useTTSStore();
-
-  if (message.includes(CODE_CHARACTERS_CHANGE)) return msgLoadingCharacters;
-  else if (message.includes(CODE_STORY_END)) return <MsgStoryEnd />;
-  else if (message.includes(CODE_DONT_SHOW_IN_CHAT)) return <></>;
 
   function onAvatarClick() {
     setTTS(message);
@@ -86,27 +77,3 @@ const mdOpt: MarkdownToJSX.Options = {
     },
   },
 };
-
-const msgLoadingCharacters = (
-  <div>
-    <p className="text-center">Actualizando los personajes de la historia...</p>
-  </div>
-);
-
-function MsgStoryEnd() {
-  const { playersDiceRolls } = useGmAiStore();
-  const { totalFailures, totalSuccesses, storyXp } = calculateStoryXp(playersDiceRolls);
-
-  return (
-    <div className="card bg-secondary-content w-80 shadow-xl m-auto my-4">
-      <div className="card-body">
-        <h2 className="card-title text-info">Fin de la historia</h2>
-        <p className="text-center text-primary">
-          <strong>Total de fallos:</strong> {totalFailures}. <br />
-          <strong>Total de éxito:</strong> {totalSuccesses}. <br />
-          <strong>Experiencia de la historia:</strong> {storyXp}XP. <br />
-        </p>
-      </div>
-    </div>
-  );
-}

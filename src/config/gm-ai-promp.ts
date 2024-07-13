@@ -1,4 +1,5 @@
 import { Content } from '@google/generative-ai';
+import { AI_ROLE } from './constants';
 
 export const gmAiPrompt = `
 # Game Master AI - Juego de rol de mesa
@@ -193,7 +194,7 @@ Explica que para mejorar una característica se requiere de 10XP multiplicado el
 
 export const gmAiPromptArray: Content[] = [
   {
-    role: 'user',
+    role: AI_ROLE.USER,
     parts: [
       {
         text: gmAiPrompt,
@@ -201,7 +202,7 @@ export const gmAiPromptArray: Content[] = [
     ],
   },
   {
-    role: 'user',
+    role: AI_ROLE.USER,
     parts: [
       {
         text: 'Por cada decisión importante que tome durante la historia, pídeme una prueba de característica apropiada. La decisión es importante si es un riesgo para el personaje o produce un gran cambio en el desarrollo de la trama. Comienza desde el "Paso 2 - Game Master AI pide información sobre la historia".',

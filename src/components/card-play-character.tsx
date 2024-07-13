@@ -5,6 +5,7 @@ import { Character, Characteristic } from 'types/character';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { esMsgRoll2d6 } from 'utils/roll-2d6';
 import { useTTSStore } from 'hooks/use-tts-store';
+import { AI_ROLE } from 'config/constants';
 
 interface CardPlayCharacterProps {
   character: Character;
@@ -21,7 +22,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
     const rolResult = esMsgRoll2d6(name, characteristic, value, addPlayersDiceRoll);
     handleStop();
     addContent({
-      role: 'user',
+      role: AI_ROLE.USER,
       parts: [{ text: rolResult }],
     });
   }

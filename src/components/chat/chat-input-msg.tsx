@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from 'components/icons';
+import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
@@ -15,7 +16,7 @@ export default function ChatInputMsg() {
     e.preventDefault();
     handleStop();
     addContent({
-      role: 'user',
+      role: AI_ROLE.USER,
       parts: [{ text: chatMsg }],
     });
     setChatMsg('');

@@ -7,6 +7,7 @@ import ModalEndHistory from './chat-options-modals/modal-end-story';
 import ModalConfigAI, { aiIconStyle } from './chat-options-modals/modal-ai-config';
 import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 import { useTTSStore } from 'hooks/use-tts-store';
+import { AI_ROLE } from 'config/constants';
 
 export default function ChatOptionsABC() {
   const { addContent, isLoadingContent, content } = useGmAiStore();
@@ -17,7 +18,7 @@ export default function ChatOptionsABC() {
   function onHistoryOptionClick(option: 'A' | 'B' | 'C'): void {
     handleStop();
     addContent({
-      role: 'user',
+      role: AI_ROLE.USER,
       parts: [{ text: `Elijo la opción **"${option}"**.` }], //\n\n ¿Qué prueba debo realizar?
     });
   }

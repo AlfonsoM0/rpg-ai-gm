@@ -1,6 +1,6 @@
 import { Content } from '@google/generative-ai';
 import { calculateStoryXp } from './calculate-story-xp';
-import { CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
+import { AI_ROLE, CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
 import { deleteCodesFromText } from './delete-text-from-text';
 import { AiModels, generateAiConfig } from './generate-ai-config';
 import runAIChat from 'server/gm-ai';
@@ -12,7 +12,7 @@ function createStoryContentControl(stateContent: Content[], playersDiceRolls: nu
   const isStoryEndedBefore = JSON.stringify(stateContent).includes(CODE_STORY_END);
 
   const contentStoryEnded: Content = {
-    role: 'user',
+    role: AI_ROLE.USER,
     parts: [
       {
         text: `(((
@@ -27,7 +27,7 @@ function createStoryContentControl(stateContent: Content[], playersDiceRolls: nu
   };
 
   const contentStoryProgress: Content = {
-    role: 'user',
+    role: AI_ROLE.USER,
     parts: [
       {
         text: `(((
@@ -78,11 +78,11 @@ export async function createGmAiResponseContent(
 
     const contentForAI: Content = gmAiResponse
       ? {
-          role: 'model',
+          role: AI_ROLE.MODEL,
           parts: [{ text: deleteCodesFromText(gmAiResponse) }],
         }
       : {
-          role: 'model',
+          role: AI_ROLE.MODEL,
           parts: [{ text: '🤔... ' }],
         };
 
@@ -95,7 +95,7 @@ export async function createGmAiResponseContent(
       ...stateContent,
       newContent,
       {
-        role: 'model',
+        role: AI_ROLE.MODEL,
         parts: [
           {
             text: 'Lo lamento, ocurrió un error y no puedo responderte. \n\n Intenta nuevamente. 👍',
