@@ -13,6 +13,11 @@ export default function TTSLoader() {
       setVoiceIndex(0);
     });
 
+    // TODO: delete alert
+    alert(
+      '¡Advertencia! \n\n Este juego no está completo. \n\n Tu configuración, personajes y partidas solo se guardan en tu navegador. \n\n Para notificar un error o dar una sugerencia puedes escribirme en alfonso.ar/contact \n\n Muchas gracias y... ¡Que te diviertas con GmAi! 😁'
+    );
+
     // Clean up the event listener when the component unmounts to prevent memory leaks
     return () => {
       speechSynthesis.cancel();
