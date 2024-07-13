@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertMarkdownToText } from 'utils/convert-markdown-to-text';
+import removeMarkdown from 'markdown-to-text';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -60,8 +60,10 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
         handlePlay: (customTTS) => {
           const { isPaused, voiceIndex, pitch, rate, volume, tts } = get();
 
-          const cleanTTS = convertMarkdownToText(customTTS || tts);
+          const cleanTTS = removeMarkdown(customTTS || tts);
           const utterance = new SpeechSynthesisUtterance(cleanTTS);
+          console.log('Markdown Text => ', customTTS || tts);
+          console.log('Clean Text => ', cleanTTS);
 
           if (isPaused && speechSynthesis) {
             speechSynthesis.resume();
