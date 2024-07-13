@@ -76,7 +76,7 @@ export default function Home() {
   }
 
   function searchCharacter(allCharacters: Character[]): Character[] {
-    return allCharacters.filter((c) => c.name.includes(search));
+    return allCharacters.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()));
   }
 
   return (
