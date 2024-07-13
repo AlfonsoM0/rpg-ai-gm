@@ -58,7 +58,8 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
 
         // Handlers
         handlePlay: (customTTS) => {
-          const { isPaused, voiceIndex, pitch, rate, volume, tts } = get();
+          const { isTTSEnabled, isPaused, voiceIndex, pitch, rate, volume, tts } = get();
+          if (!isTTSEnabled) return;
 
           const cleanTTS = removeMarkdown(customTTS || tts);
           const utterance = new SpeechSynthesisUtterance(cleanTTS);
