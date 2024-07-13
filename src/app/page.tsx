@@ -83,7 +83,7 @@ export default function Home() {
     <Main>
       <H1>¡Bienvenido!</H1>
 
-      <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
+      <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 mx-4 rounded-md shadow-lg bg-primary-content">
         <button className="btn btn-lg" onClick={playStory}>
           ▶️ {isStoryStarted ? 'CONTINUAR HISTORIA' : 'JUGAR UNA HISTORIA'}
         </button>
