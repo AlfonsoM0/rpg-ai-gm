@@ -113,14 +113,19 @@ export default function TTSConfig() {
               onChange={handleChangeVolume}
             />
           </div>
-
-          <div>
-            <p className="text-center text-info">
-              * Haz clic en los avatares del chat para reproducir el texto.
-            </p>
-          </div>
         </div>
       ) : null}
+
+      <div className="mx-2">
+        <ul className="list-disc text-info">
+          <li>Haz clic en los avatares del chat para reproducir el texto.</li>
+          <li>
+            Es posible que tengas que configurar tu dispositivo y descargar paquetes de voz para
+            escuchar el texto. Busca &quot;salida de texto a voz&quot; (TTS) en la configuración de
+            idioma.
+          </li>
+        </ul>
+      </div>
     </>
   );
 }
