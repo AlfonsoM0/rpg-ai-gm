@@ -7,14 +7,16 @@ export default function TTSLoader() {
   const { setVoices, voiceIndex, setVoiceIndex } = useTTSStore();
 
   useEffect(() => {
+    const voices = speechSynthesis.getVoices().filter((v) => v.localService);
+    setVoices(voices);
+    if (voices.length < 0 || voiceIndex > voices.length - 1) setVoiceIndex(0);
+
     // Add an event listener to the speechSynthesis object to listen for the voiceschanged event
     speechSynthesis.addEventListener('voiceschanged', () => {
       // Get the list of available voices and set the voice state variable accordingly
       // Filter only local voices, because have unlimited usage.
       const voices = speechSynthesis.getVoices().filter((v) => v.localService);
-
       setVoices(voices);
-
       if (voices.length < 0 || voiceIndex > voices.length - 1) setVoiceIndex(0);
     });
 
