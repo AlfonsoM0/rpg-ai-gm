@@ -4,12 +4,11 @@ import { useEffect } from 'react';
 import { useTTSStore } from 'hooks/use-tts-store';
 
 export default function TTSLoader() {
-  const { setVoices, voiceIndex, setVoiceIndex } = useTTSStore();
+  const { setVoices } = useTTSStore();
 
   useEffect(() => {
     const voices = speechSynthesis.getVoices().filter((v) => v.localService);
     setVoices(voices);
-    if (voices.length < 0 || voiceIndex > voices.length - 1) setVoiceIndex(0);
 
     // Add an event listener to the speechSynthesis object to listen for the voiceschanged event
     speechSynthesis.addEventListener('voiceschanged', () => {
@@ -17,7 +16,6 @@ export default function TTSLoader() {
       // Filter only local voices, because have unlimited usage.
       const voices = speechSynthesis.getVoices().filter((v) => v.localService);
       setVoices(voices);
-      if (voices.length < 0 || voiceIndex > voices.length - 1) setVoiceIndex(0);
     });
 
     // TODO: delete alert

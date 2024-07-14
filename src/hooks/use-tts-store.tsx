@@ -77,7 +77,7 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
           if (isPaused) {
             speechSynthesis.resume();
           } else if (!isPaused) {
-            const voice = voices[voiceIndex];
+            const voice = voices[voiceIndex] || voices[0];
             utterance.voice = voice;
             utterance.pitch = pitch;
             utterance.rate = rate;
