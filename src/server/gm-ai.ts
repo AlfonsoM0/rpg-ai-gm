@@ -60,10 +60,13 @@ export default async function runAIChat(
 
   const result = await chat.sendMessage(userInput);
   const response = result.response;
-  const text = response.text();
+  const { text, promptFeedback, usageMetadata } = response;
 
+  // console.log('AI result/response/promptFeedback => ', promptFeedback);
+  // console.log('AI result/response/usageMetadata => ', usageMetadata);
   // console.log('AI result/response/text => ', text);
-  return text;
+
+  return text();
 }
 
 /* //|> Opciones de configuraciones

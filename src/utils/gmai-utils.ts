@@ -83,14 +83,18 @@ export async function createGmAiResponseContent(
         }
       : {
           role: AI_ROLE.MODEL,
-          parts: [{ text: '🤔... ' }],
+          parts: [
+            {
+              text: '🤔... No se me ocurre una respuesta... \n\n Dame más información e intenta nuevamente. ✨',
+            },
+          ],
         };
 
     contentToSet = [...stateContent, newContent, contentForAI, infoStoryControl];
 
     return contentToSet;
   } catch (error) {
-    console.error('🛑 GmAi error', error);
+    console.error('❌ GmAi error', error);
     contentToSet = [
       ...stateContent,
       newContent,
@@ -98,7 +102,7 @@ export async function createGmAiResponseContent(
         role: AI_ROLE.MODEL,
         parts: [
           {
-            text: 'Lo lamento, ocurrió un error y no puedo responderte. \n\n Intenta nuevamente. 👍',
+            text: '⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e intenta nuevamente. ✨',
           },
         ],
       },
