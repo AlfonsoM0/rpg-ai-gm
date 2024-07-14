@@ -5,6 +5,8 @@ import { devtools, persist } from 'zustand/middleware';
 
 interface TTSStore {
   isTTSEnabled: boolean;
+  voices: SpeechSynthesisVoice[];
+
   isPlaying: boolean;
   isStopped: boolean;
   isPaused: boolean;
@@ -17,6 +19,8 @@ interface TTSStore {
 
 interface TTSActions {
   setIsTTSEnabled: (isTTSEnabled: boolean) => void;
+  setVoices: (voices: SpeechSynthesisVoice[]) => void;
+
   setIsPaused: (isPaused: boolean) => void;
   setVoiceIndex: (voiceIndex: number) => void;
   setTTS: (tts: string) => void;
@@ -34,10 +38,12 @@ interface TTSHandlers {
 
 const initialTTSState: TTSStore = {
   isTTSEnabled: false,
+  voices: [],
+
   isPlaying: false,
   isStopped: true,
   isPaused: false,
-  voiceIndex: -1,
+  voiceIndex: 0,
   pitch: 1,
   rate: 1,
   volume: 1,
@@ -52,24 +58,25 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
 
         // Actions
         setIsTTSEnabled: (isTTSEnabled) => set({ isTTSEnabled }),
+        setVoices: (voices) => set({ voices }),
+
         setIsPaused: (isPaused) => set({ isPaused }),
         setVoiceIndex: (voiceIndex) => set({ voiceIndex }),
         setTTS: (tts) => set({ tts }),
 
         // Handlers
         handlePlay: (customTTS) => {
-          const { isTTSEnabled, isPaused, voiceIndex, pitch, rate, volume, tts } = get();
-          if (!isTTSEnabled) return;
+          const { isTTSEnabled, isPaused, voices, voiceIndex, pitch, rate, volume, tts } = get();
+          if (!isTTSEnabled || !speechSynthesis) return;
 
           const cleanTTS = removeMarkdown(customTTS || tts);
           const utterance = new SpeechSynthesisUtterance(cleanTTS);
           // console.log('Markdown Text => ', customTTS || tts);
           // console.log('Clean Text => ', cleanTTS);
 
-          if (isPaused && speechSynthesis) {
+          if (isPaused) {
             speechSynthesis.resume();
-          } else if (!isPaused && speechSynthesis) {
-            const voices = speechSynthesis.getVoices();
+          } else if (!isPaused) {
             const voice = voices[voiceIndex];
             utterance.voice = voice;
             utterance.pitch = pitch;
@@ -95,7 +102,7 @@ export const useTTSStore = create<TTSStore & TTSActions & TTSHandlers>()(
         },
         handleChangeVoice: (event) => {
           if (speechSynthesis) {
-            const voices = speechSynthesis.getVoices();
+            const { voices } = get();
             const voiceFinded = voices.find((voice) => voice.name === event.target.value);
             if (voiceFinded) {
               set({ voiceIndex: voices.indexOf(voiceFinded) });

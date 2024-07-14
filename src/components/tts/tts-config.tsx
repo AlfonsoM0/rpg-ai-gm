@@ -6,6 +6,7 @@ import TTSControls from './tts-controls';
 export default function TTSConfig() {
   const {
     isTTSEnabled,
+    voices,
     setIsTTSEnabled,
     voiceIndex,
     pitch,
@@ -17,9 +18,6 @@ export default function TTSConfig() {
     handleChangeVolume,
     handleStop,
   } = useTTSStore();
-
-  // Filter only local voices, because have unlimited usage.
-  const voices = speechSynthesis.getVoices().filter((v) => v.localService);
 
   if (!speechSynthesis || !voices.length)
     return (

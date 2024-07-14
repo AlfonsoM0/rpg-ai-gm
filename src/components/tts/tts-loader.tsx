@@ -1,17 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
-// import { useTTSStore } from 'hooks/use-tts-store';
+import { useTTSStore } from 'hooks/use-tts-store';
 
 export default function TTSLoader() {
-  // const { setVoiceIndex } = useTTSStore();
+  const { setVoices, voiceIndex, setVoiceIndex } = useTTSStore();
 
   useEffect(() => {
     // Add an event listener to the speechSynthesis object to listen for the voiceschanged event
-    // speechSynthesis.addEventListener('voiceschanged', () => {
-    //   // Get the list of available voices and set the voice state variable accordingly
-    //   // setVoiceIndex(0); // In future, set the voice index to the first available voice if platform changes
-    // });
+    speechSynthesis.addEventListener('voiceschanged', () => {
+      // Get the list of available voices and set the voice state variable accordingly
+      // Filter only local voices, because have unlimited usage.
+      const voices = speechSynthesis.getVoices().filter((v) => v.localService);
+
+      setVoices(voices);
+
+      if (voices.length < 0 || voiceIndex > voices.length - 1) setVoiceIndex(0);
+    });
 
     // TODO: delete alert
     alert(
@@ -21,7 +26,7 @@ export default function TTSLoader() {
     // Clean up the event listener when the component unmounts to prevent memory leaks
     return () => {
       speechSynthesis.cancel();
-      // speechSynthesis.removeEventListener('voiceschanged', () => {});
+      speechSynthesis.removeEventListener('voiceschanged', () => {});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
