@@ -32,10 +32,10 @@ export function generateAiConfig(contentLeng: number, aiType: AiModels): Generat
   if (aiType === 'Progresive_AI') {
     const nInteractions = Math.ceil(contentLeng / 2);
 
-    const temp = nInteractions * 0.03;
-    const tP = nInteractions * 0.01;
-    const tK = nInteractions * 2;
-    const mxOT = nInteractions * 25;
+    const temp = nInteractions * 0.06;
+    const tP = nInteractions * 0.02;
+    const tK = nInteractions * 4;
+    const mxOT = nInteractions * 50;
 
     const newGenerationConfig: GenerationConfig = {
       temperature: Math.min(0.3 + temp, 2),
