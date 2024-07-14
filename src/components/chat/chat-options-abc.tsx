@@ -70,7 +70,7 @@ export default function ChatOptionsABC() {
       </div>
 
       <div className="flex gap-2">
-        <button className="btn" onClick={onConfigAiClick} disabled={isLoadingContent}>
+        <button className="btn" onClick={onConfigAiClick}>
           <Icon.AiBrain className={aiIconStyle[aiConfig]} />
         </button>
 

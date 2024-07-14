@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: AI_NAME_TO_SHOW,
-  description: `Play your historys with ${AI_NAME_TO_SHOW}`,
+  description: `Play your story with ${AI_NAME_TO_SHOW}`,
 };
 
 export default function RootLayout({
