@@ -102,7 +102,7 @@ export async function createGmAiResponseContent(
         role: AI_ROLE.MODEL,
         parts: [
           {
-            text: '⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e intenta nuevamente. ✨',
+            text: '⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cando hay un error en el juego o cuando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e intenta nuevamente. ✨',
           },
         ],
       },
