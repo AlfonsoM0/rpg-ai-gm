@@ -41,10 +41,8 @@ export default function ThemeController() {
   const { theme, setTheme } = useUserPreferencesStore();
 
   return (
-    <div className="dropdown dropdown-end">
-      <button tabIndex={0} type="button" className="btn btn-ghost">
-        Tema
-      </button>
+    <details className="dropdown dropdown-end">
+      <summary className="btn btn-ghost">Tema</summary>
       <div
         tabIndex={0}
         className="dropdown-content menu bg-secondary-content rounded-box z-[1] w-80 p-2 shadow"
@@ -67,7 +65,7 @@ export default function ThemeController() {
           ))}
         </div>
       </div>
-    </div>
+    </details>
   );
 }
 
