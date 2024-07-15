@@ -3,6 +3,7 @@
 import CardPlayCharacter from 'components/card-play-character';
 import ChatInputMsg from 'components/chat/chat-input-msg';
 import ChatOptionsABC from 'components/chat/chat-options-abc';
+import ChatOptionsConfig from 'components/chat/chat-options-config';
 import ChatWindow from 'components/chat/chat-window';
 import H1 from 'components/h1';
 import Main from 'components/Main';
@@ -51,8 +52,9 @@ export default function Page() {
         <ChatInputMsg />
       </section>
 
-      <section>
+      <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
         <ChatOptionsABC />
+        <ChatOptionsConfig />
       </section>
 
       <section>

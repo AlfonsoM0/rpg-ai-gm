@@ -1,19 +1,12 @@
 'use client';
 
-import { Icon } from 'components/icons';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
-import { useModalState } from 'hooks/use-modal-state';
-import ModalEndHistory from './chat-options-modals/modal-end-story';
-import ModalConfigAI, { aiIconStyle } from './chat-options-modals/modal-ai-config';
-import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 
 export default function ChatOptionsABC() {
   const { addContent, isLoadingContent, content } = useGmAiStore();
-  const { setModalContent, setModalIsOpen } = useModalState();
-  const { aiConfig } = useGmAiStore();
-  const { handleStop, handlePause } = useTTSStore();
+  const { handleStop } = useTTSStore();
 
   function onHistoryOptionClick(option: 'A' | 'B' | 'C'): void {
     handleStop();
@@ -23,63 +16,30 @@ export default function ChatOptionsABC() {
     });
   }
 
-  function onEndHistoryClick(): void {
-    handlePause();
-    setModalContent(<ModalEndHistory />);
-    setModalIsOpen(true);
-  }
-
-  function onConfigAiClick() {
-    handlePause();
-    setModalContent(<ModalConfigAI />);
-    setModalIsOpen(true);
-  }
-
-  function onIdeasClick() {
-    handlePause();
-    setModalContent(<ModaIdeasForAI />);
-    setModalIsOpen(true);
-  }
-
   return (
-    <div className="flex flex-wrap justify-center items-center gap-4">
-      <h3 className="font-bold">Opciones: </h3>
-
+    <div>
+      <p className="text-center text-sm mb-1 font-bold">Opciones de historia</p>
       <div className={content.length > 2 ? 'flex gap-2' : 'hidden'}>
         <button
-          className="btn btn-circle"
+          className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('A')}
           disabled={isLoadingContent}
         >
           A
         </button>
         <button
-          className="btn btn-circle"
+          className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('B')}
           disabled={isLoadingContent}
         >
           B
         </button>
         <button
-          className="btn btn-circle"
+          className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('C')}
           disabled={isLoadingContent}
         >
           C
-        </button>
-      </div>
-
-      <div className="flex gap-2">
-        <button className="btn" onClick={onConfigAiClick}>
-          <Icon.AiBrain className={aiIconStyle[aiConfig]} />
-        </button>
-
-        <button className="btn" onClick={onIdeasClick} disabled={isLoadingContent}>
-          <Icon.Idea className="w-8 h-8 stroke-info" />
-        </button>
-
-        <button className="btn btn-error" onClick={onEndHistoryClick} disabled={isLoadingContent}>
-          Fin.
         </button>
       </div>
     </div>

@@ -44,21 +44,21 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
         <div className="flex justify-around items-center mt-2 font-bold">
           <div className="flex flex-col justify-center items-center gap-2">
             <button
-              className="btn"
+              className="btn hover:border-info"
               onClick={() => rollCharacteristic('strength', strength)}
               disabled={isLoadingContent}
             >
               <h3>FUE +{strength}</h3>
             </button>
             <button
-              className="btn"
+              className="btn hover:border-info"
               onClick={() => rollCharacteristic('dexterity', dexterity)}
               disabled={isLoadingContent}
             >
               <h3>DES +{dexterity}</h3>
             </button>
             <button
-              className="btn"
+              className="btn hover:border-info"
               onClick={() => rollCharacteristic('constitution', constitution)}
               disabled={isLoadingContent}
             >
@@ -67,21 +67,21 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <button
-              className="btn"
+              className="btn hover:border-info"
               onClick={() => rollCharacteristic('intelligence', intelligence)}
               disabled={isLoadingContent}
             >
               <h3>INT +{intelligence}</h3>
             </button>
             <button
-              className="btn"
+              className="btn hover:border-info"
               onClick={() => rollCharacteristic('wisdom', wisdom)}
               disabled={isLoadingContent}
             >
               <h3>SAB +{wisdom}</h3>
             </button>
             <button
-              className="btn"
+              className="btn hover:border-info"
               onClick={() => rollCharacteristic('charisma', charisma)}
               disabled={isLoadingContent}
             >
