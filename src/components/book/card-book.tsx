@@ -1,7 +1,7 @@
 'use client';
 
 import { Book } from 'types/library';
-import CardBookButtonsActions from './card-book-buttons';
+import BookButtons from './book-buttons-actions.tsx';
 
 export default function BookCard({ book }: { book: Book }) {
   return (
@@ -21,7 +21,7 @@ export default function BookCard({ book }: { book: Book }) {
           </ul>
         </div>
         <div className="card-actions justify-around">
-          <CardBookButtonsActions book={book} />
+          <BookButtons book={book} />
         </div>
       </div>
     </article>

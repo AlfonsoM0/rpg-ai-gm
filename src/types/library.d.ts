@@ -6,4 +6,5 @@ export type Book = {
   title: string;
   characters: Character[];
   content: Content[];
+  playersDiceRolls: number[];
 };

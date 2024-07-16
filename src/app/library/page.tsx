@@ -1,6 +1,6 @@
 'use client';
 
-import BookCard from 'components/card-book';
+import BookCard from 'components/book/card-book';
 import H1 from 'components/h1';
 import { Input } from 'components/input';
 import Main from 'components/Main';

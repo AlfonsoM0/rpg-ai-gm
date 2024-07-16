@@ -14,7 +14,7 @@ import { gmAiPromptArray } from 'config/gm-ai-promp';
 
 const API_KEY = process.env.AI_APY_KEY || '';
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 const generationConfigDefault: GenerationConfig = {
   // Strict AI
@@ -63,7 +63,7 @@ export default async function runAIChat(
   const { text, promptFeedback, usageMetadata } = response;
 
   // console.log('AI result/response/promptFeedback => ', promptFeedback);
-  // console.log('AI result/response/usageMetadata => ', usageMetadata);
+  console.log('AI result/response/usageMetadata => ', usageMetadata);
   // console.log('AI result/response/text => ', text);
 
   return text();

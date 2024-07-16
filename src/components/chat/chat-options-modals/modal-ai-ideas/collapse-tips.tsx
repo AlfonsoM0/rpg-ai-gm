@@ -28,9 +28,9 @@ export default function CollapseTips() {
             realiza tiradas por tí, puedes decirle que tú quieres realziar todas las tiradas.
           </li>
           <li className="list-disc ml-2 text-sm my-1">
-            <strong>¿Quiers jugar una campaña de varias historias?</strong> <br /> Pide a GmAi un
-            resumen de la historia y copia su mensaje. En tu próxima partida puedes decirle
-            &quot;Quiero continuar con esta historia: [pega el resumen de la historia aquí]&quot;.
+            <strong>¿Quieres jugar una campaña de varias historias?</strong> <br />
+            Guarda tu historia en la biblioteca. Luego podrás acceder a ella y seguir jugando desde
+            donde lo dejaste.
           </li>
         </ul>
       </div>

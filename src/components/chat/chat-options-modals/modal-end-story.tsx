@@ -39,6 +39,7 @@ export default function ModalEndHistory() {
         title: storyName,
         characters: inGameCharacters,
         content,
+        playersDiceRolls,
       });
 
     // update xp for all characters
@@ -64,8 +65,13 @@ export default function ModalEndHistory() {
     <div>
       <h3 className="font-bold text-lg">Fin de la Historia</h3>
       <p className="py-4">
-        Una vez finalices la historia, no podras volver a ella para seguir jugándola. <br />
-        Si colocas un nombre a tu historia, podrás guardarla para leerla en tu biblioteca. <br />
+        Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar
+        otro capítulo desde donde dejaste la anterior. <br />
+        <br />
+        Si tu historia no finaliza con el cartel de &quot;Fin de la historia&quot;, que muestra los
+        XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas contiuarla.
+        <br />
+        <br />
         <strong>Elige un nombre original.</strong>
       </p>
 

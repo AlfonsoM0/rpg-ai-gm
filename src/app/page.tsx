@@ -65,7 +65,7 @@ export default function Home() {
             text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(
               newCharactersInGame
             )}.
-            Muéstrame los cambios para asegurarme de que todo está bien.
+            Muéstrame los cambios en fromato de tabla comparativa para asegurarme de que todo está bien.
             ${CODE_CHARACTERS_CHANGE})))`,
           },
         ],

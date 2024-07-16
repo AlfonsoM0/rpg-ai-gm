@@ -42,7 +42,7 @@ export const aiModels: { name: AiModels; nameEs: string; desc: string; clsRadio:
   },
   {
     name: 'Progresive_AI',
-    nameEs: 'Progresivo - empieza estricto y termina loco.',
+    nameEs: 'Progresivo - empieza estricto y termina loco. (Recomendado)',
     desc: 'Comienza siendo estricto y termina siendo muy creativo.',
     clsRadio: 'radio checked:bg-primary',
   },

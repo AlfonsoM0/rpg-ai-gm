@@ -25,7 +25,7 @@ export default function ChatInputMsg() {
   return (
     <form className="flex gap-2 p-2" onSubmit={submitChat}>
       <textarea
-        className="textarea textarea-bordered h-10 w-full"
+        className="textarea textarea-bordered w-full min-h-12"
         placeholder="..."
         value={chatMsg}
         onChange={(e) => setChatMsg(e.target.value)}
@@ -42,3 +42,4 @@ export default function ChatInputMsg() {
     </form>
   );
 }
+//min-h-28 sm:min-h-24 md:min-h-20 lg:min-h-16 xl:min-h-12
