@@ -5,7 +5,8 @@ import { useMemo } from 'react';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 
 export default function FormCharacterCharacteristics() {
-  const { xp, characteristics, setCharacteristic } = useCreateNewCharacterStore();
+  const { xp, characteristics, setCharacteristic, isEdit, previousCharacteristics } =
+    useCreateNewCharacterStore();
 
   const CharsXP = useMemo(() => characteristicsXpValue(characteristics), [characteristics]);
 
@@ -22,11 +23,13 @@ export default function FormCharacterCharacteristics() {
 
     if (characteristicsUpdatedXpValue > xp) return;
 
+    if (isEdit && value < previousCharacteristics[characteristic]) return;
+
     setCharacteristic({ key: characteristic, value });
   }
 
   return (
-    <div className="">
+    <div className="w-[22rem]">
       <div className="flex justify-between mb-2s">
         <h2 className="text-lg font-bold">Características</h2>
         <p>
@@ -34,9 +37,12 @@ export default function FormCharacterCharacteristics() {
         </p>
       </div>
 
-      <small>* Mueve los deslizadores para ajustar las características.</small>
+      <small>
+        * Mueve los deslizadores para ajustar las características usando tus Puntos de Experiencia
+        (XP).
+      </small>
       <br />
-      <small>* Usa tus Puntos de Experiencia (XP) para distribuirlos.</small>
+      <small>* Las características guardadas no podrán reducirse cuando edites tu personaje.</small>
 
       <div className="flex flex-wrap justify-between gap-4 my-4">
         <div>
@@ -46,7 +52,7 @@ export default function FormCharacterCharacteristics() {
             </div>
             <input
               type="range"
-              min={1}
+              min="1"
               max="5"
               value={characteristics.strength}
               onChange={(e) => onCharacteristicChange(e, 'strength')}
@@ -61,7 +67,7 @@ export default function FormCharacterCharacteristics() {
             </div>
             <input
               type="range"
-              min={1}
+              min="1"
               max="5"
               value={characteristics.dexterity}
               onChange={(e) => onCharacteristicChange(e, 'dexterity')}
@@ -76,7 +82,7 @@ export default function FormCharacterCharacteristics() {
             </div>
             <input
               type="range"
-              min={1}
+              min="1"
               max="5"
               value={characteristics.constitution}
               onChange={(e) => onCharacteristicChange(e, 'constitution')}
@@ -93,7 +99,7 @@ export default function FormCharacterCharacteristics() {
             </div>
             <input
               type="range"
-              min={1}
+              min="1"
               max="5"
               value={characteristics.intelligence}
               onChange={(e) => onCharacteristicChange(e, 'intelligence')}
@@ -108,7 +114,7 @@ export default function FormCharacterCharacteristics() {
             </div>
             <input
               type="range"
-              min={1}
+              min="1"
               max="5"
               value={characteristics.wisdom}
               onChange={(e) => onCharacteristicChange(e, 'wisdom')}
@@ -123,7 +129,7 @@ export default function FormCharacterCharacteristics() {
             </div>
             <input
               type="range"
-              min={1}
+              min="1"
               max="5"
               value={characteristics.charisma}
               onChange={(e) => onCharacteristicChange(e, 'charisma')}

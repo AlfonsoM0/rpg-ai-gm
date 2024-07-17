@@ -7,6 +7,8 @@ import { useCharacterStore } from 'hooks/use-character-store';
 import { useRouter } from 'next/navigation';
 import NewCharacterNav from './form-character-description-nav';
 import { Character } from 'types/character';
+import H2 from './h2';
+import FormCharacterSteps from './form-character-description-steps';
 
 export default function FormCharacterDescription() {
   const router = useRouter();
@@ -23,113 +25,11 @@ export default function FormCharacterDescription() {
     powers,
     characteristics,
 
-    setDescription,
     step,
     setStep,
   } = useCreateNewCharacterStore();
 
   const { removeAllCharacter, addAllCharacter } = useCharacterStore();
-
-  const steps = [
-    <label className="form-control w-full max-w-xs h-60" key={'step-0'}>
-      <div className="label">
-        <span className="label-text">Nombre de tu personaje *</span>
-      </div>
-      <input
-        type="text"
-        placeholder="Ej: Invictus Lumashay"
-        className="input input-bordered w-full max-w-xs"
-        value={name}
-        onChange={(e) => setDescription({ key: 'name', value: e.target.value })}
-        required
-      />
-
-      <br />
-      <small className="text-info">
-        * Todos los campos marcados con asterísco son requeridos para crear una historia
-        maravillosa.
-      </small>
-    </label>,
-
-    <label className="form-control w-full max-w-xs" key={'step-1'}>
-      <div className="label">
-        <span className="label-text">Apariencia *</span>
-      </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
-        placeholder="Describe su forma de vestir, sus accesorios y cualquier otro detalle distintivo. ¿Es humano? ¿Cuál es su aspecto más llamativo?"
-        value={appearance}
-        onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
-        required
-      />
-    </label>,
-
-    <label className="form-control w-full max-w-xs" key={'step-2'}>
-      <div className="label">
-        <span className="label-text">Trasfondo *</span>
-      </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
-        placeholder="Cuenta una breve historia sobre su pasado, sus origenes y como se relaciona con el mundo."
-        value={background}
-        onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
-        required
-      />
-    </label>,
-
-    <label className="form-control w-full max-w-xs" key={'step-3'}>
-      <div className="label">
-        <span className="label-text">Profesión *</span>
-      </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
-        placeholder="Describe su profesión, sus habilidades y qué hace para ganarse la vida."
-        value={profession}
-        onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
-        required
-      />
-    </label>,
-
-    <label className="form-control w-full max-w-xs" key={'step-4'}>
-      <div className="label">
-        <span className="label-text">Personalidad *</span>
-      </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
-        placeholder="Describe su personalidad, sus valores y cómo interactua con las personas."
-        value={personality}
-        onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
-        required
-      />
-    </label>,
-
-    <label className="form-control w-full max-w-xs" key={'step-5'}>
-      <div className="label">
-        <span className="label-text">Equipamiento *</span>
-      </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
-        placeholder="Describe su equipamiento caracteristico, sus armas y accesorios que le permiten ser un experto en su campo."
-        value={equipment}
-        onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
-        required
-      />
-    </label>,
-
-    <label className="form-control w-full max-w-xs" key={'step-6'}>
-      <div className="label">
-        <span className="label-text">Poderes (opcional)</span>
-      </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
-        placeholder="¿Cuál es el origen de sus poderes? ¿Qué poderes tiene y qué hacen? ¿Cómo utiliza esos poderes? ¿Cuáles son sus fortalezas y debilidades?"
-        value={powers}
-        onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
-      />
-    </label>,
-
-    <FormCharacterCharacteristics key={'step-7'} />,
-  ];
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -153,6 +53,7 @@ export default function FormCharacterDescription() {
       characteristics,
     };
 
+    //update character
     removeAllCharacter(id);
     addAllCharacter(newCharacter);
 
@@ -161,17 +62,15 @@ export default function FormCharacterDescription() {
 
   return (
     <div className="min-h-96 flex flex-col justify-between">
+      <H2>{name}</H2>
+
       <div>
         <NewCharacterNav />
-        <progress
-          className="progress progress-primary w-full"
-          value={step}
-          max={steps.length - 1}
-        ></progress>
+        <progress className="progress progress-primary w-full" value={step} max={7}></progress>
       </div>
 
       <form onSubmit={handleSubmit} className="min-w-80 flex flex-col gap-2">
-        {steps[step]}
+        <FormCharacterSteps />
 
         <div className="flex justify-between mt-4">
           <button
@@ -188,7 +87,7 @@ export default function FormCharacterDescription() {
           <button
             className="btn"
             onClick={() => setStep((s) => s + 1)}
-            disabled={step === steps.length - 1}
+            disabled={step === 7}
             type="button"
           >
             Siguiente
