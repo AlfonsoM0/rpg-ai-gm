@@ -1,6 +1,8 @@
 'use client';
 
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
+import { Icon } from './icons';
+import { useState } from 'react';
 
 const themes = [
   'light',
@@ -38,11 +40,16 @@ const themes = [
 ];
 
 export default function ThemeController() {
-  const { theme, setTheme } = useUserPreferencesStore();
+  const { theme, setTheme, isThemeButtonClicked, setIsThemeButtonClicked } =
+    useUserPreferencesStore();
+
+  const btnStyle = isThemeButtonClicked ? 'btn btn-circle btn-active' : 'btn btn-circle btn-ghost';
 
   return (
-    <details className="dropdown dropdown-end">
-      <summary className="btn btn-ghost">Tema</summary>
+    <details className="dropdown" onClick={() => setIsThemeButtonClicked(!isThemeButtonClicked)}>
+      <summary className={btnStyle}>
+        <Icon.Art className="w-8 h-8 fill-primary" />
+      </summary>
       <div
         tabIndex={0}
         className="dropdown-content menu bg-secondary-content rounded-box z-[1] w-80 p-2 shadow"
@@ -60,7 +67,10 @@ export default function ThemeController() {
               aria-label={themeName.toUpperCase()}
               value={themeName}
               checked={themeName === theme}
-              onChange={() => setTheme(themeName)}
+              onChange={() => {
+                setTheme(themeName);
+                setIsThemeButtonClicked(true);
+              }}
             />
           ))}
         </div>
@@ -68,27 +78,3 @@ export default function ThemeController() {
     </details>
   );
 }
-
-// function ThemeOptions() {
-//   const { setModalIsOpen } = useModalState();
-//   const { theme, setTheme } = useUserPreferencesStore();
-//   return (
-//     <div>
-//       <h3 className="font-bold text-lg mb-4">Elige un tema para ambientar tus historias</h3>
-//       <div className="flex flex-wrap justify-around items-center gap-4">
-//         {themes.map((themeName) => (
-//           <input
-//             key={themeName}
-//             type="radio"
-//             name="theme-buttons"
-//             className="btn theme-controller join-item"
-//             aria-label={themeName.toUpperCase()}
-//             value={themeName}
-//             checked={themeName === theme}
-//             onClick={() => setTheme(themeName)}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }

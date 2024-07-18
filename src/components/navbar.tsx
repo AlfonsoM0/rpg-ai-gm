@@ -3,11 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import srcLogo from 'public/android-chrome-512x512.png';
-import ThemeController from './theme-controller';
-import { Icon } from './icons';
-import { useModalState } from 'hooks/use-modal-state';
-import ModalConfigAI, { aiIconStyle } from './chat/chat-options-modals/modal-ai-config';
-import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
+import UserButton from './user/user-button';
 
 type SubOps = { name: string; url: string }[];
 
@@ -44,13 +40,6 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid circular dependency
   }, []);
-
-  const { setModalContent, setModalIsOpen } = useModalState();
-  const { aiConfig } = useGmAiStore();
-  function onConfigAiClick() {
-    setModalContent(<ModalConfigAI />);
-    setModalIsOpen(true);
-  }
 
   return (
     <nav className="navbar bg-base-100 shadow" id="navbar">
@@ -94,10 +83,7 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
 
       {/* <!-- Navbar End --> */}
       <div className="navbar-end">
-        <button className="btn btn-ghost" onClick={onConfigAiClick}>
-          <Icon.AiBrain className={aiIconStyle[aiConfig]} />
-        </button>
-        <ThemeController />
+        <UserButton />
       </div>
     </nav>
   );

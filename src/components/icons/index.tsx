@@ -1,6 +1,8 @@
 import { AiBrain } from './icon-ai-brain';
+import { Art } from './icon-art';
 import { Copy } from './icon-copy';
 import { CopySuccess } from './icon-copy-success';
+import { Google } from './icon-google';
 import { Idea } from './icon-idea';
 import { Search } from './icon-search';
 import { Stars } from './icon-stars';
@@ -14,4 +16,6 @@ export const Icon = {
   Copy,
   CopySuccess,
   Search,
+  Google,
+  Art,
 };

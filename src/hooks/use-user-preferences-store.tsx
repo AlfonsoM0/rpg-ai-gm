@@ -3,12 +3,14 @@ import { devtools, persist } from 'zustand/middleware';
 
 interface UserPreferencesStore {
   theme: string;
+  isThemeButtonClicked: boolean;
 
   chatShortcuts: string[];
 }
 
 interface UserPreferencesActions {
   setTheme: (theme: string) => void;
+  setIsThemeButtonClicked: (isClicked: boolean) => void;
 
   addChatShortcut: (shortcut: string) => void;
   removeChatShortcut: (shortcut: string) => void;
@@ -17,6 +19,7 @@ interface UserPreferencesActions {
 
 const initialUserPreferencesState: UserPreferencesStore = {
   theme: 'light',
+  isThemeButtonClicked: false,
 
   chatShortcuts: [],
 };
@@ -29,6 +32,8 @@ export const useUserPreferencesStore = create<UserPreferencesStore & UserPrefere
 
         // Actions
         setTheme: (theme: string) => set({ theme }),
+
+        setIsThemeButtonClicked: (isThemeButtonClicked: boolean) => set({ isThemeButtonClicked }),
 
         addChatShortcut: (shortcut: string) => {
           const isShortcutExist = get().chatShortcuts.includes(shortcut);

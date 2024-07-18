@@ -12,6 +12,7 @@ import {
   AI_NAME_TO_SHOW,
 } from 'config/constants';
 import MsgStoryEnd from './chat-message-end';
+import useFirebase from 'hooks/firebase';
 
 interface ChatWindowProps {
   content: Content[];
@@ -20,6 +21,10 @@ interface ChatWindowProps {
 
 export default function ChatWindow({ content, isLoadingContent }: ChatWindowProps) {
   const refLoader = useRef<HTMLDivElement>(null);
+  const { user } = useFirebase();
+  const uName = user?.displayName || 'Player';
+  const uImgURL = user?.photoURL || undefined;
+  const uImgAlt = user ? `${user.displayName} Avatar` : 'Player Avatar';
 
   useEffect(() => {
     // If isLoadingContent is true, scroll to the bottom.
@@ -34,10 +39,9 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
       <div className="overflow-y-scroll">
         {content.map((cont, idx) => {
           const position = cont.role === AI_ROLE.MODEL ? 'start' : 'end';
-          const userName = cont.role === AI_ROLE.MODEL ? AI_NAME_TO_SHOW : 'Player';
-          const avatarSrc = cont.role === AI_ROLE.MODEL ? imgGmAi.src : undefined;
-          const avatarAlt =
-            cont.role === AI_ROLE.MODEL ? `${AI_NAME_TO_SHOW} Avatar` : 'Player Avatar';
+          const userName = cont.role === AI_ROLE.MODEL ? AI_NAME_TO_SHOW : uName;
+          const avatarSrc = cont.role === AI_ROLE.MODEL ? imgGmAi.src : uImgURL;
+          const avatarAlt = cont.role === AI_ROLE.MODEL ? `${AI_NAME_TO_SHOW} Avatar` : uImgAlt;
 
           const message = cont.parts.map((p) => p.text).join('\n');
 
