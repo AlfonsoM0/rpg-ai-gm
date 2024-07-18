@@ -26,7 +26,7 @@ export default function UserButtonConnect() {
         <button className="btn btn-error w-full" onClick={handleSignOut}>
           Cerrar sesión
         </button>
-        {fireErrorMsg ? <p className="text-error text-center">{'fireErrorMsg'}</p> : null}
+        {fireErrorMsg ? <p className="text-error text-center">{fireErrorMsg}</p> : null}
       </div>
     );
 
@@ -35,7 +35,7 @@ export default function UserButtonConnect() {
       <button className="btn btn-success w-full" onClick={handleClick}>
         Conectar
       </button>
-      {fireErrorMsg ? <p className="text-error text-center">{'fireErrorMsg'}</p> : null}
+      {fireErrorMsg ? <p className="text-error text-center">{fireErrorMsg}</p> : null}
     </div>
   );
 }
