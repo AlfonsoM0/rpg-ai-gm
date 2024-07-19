@@ -40,8 +40,9 @@ const themes = [
 ];
 
 export default function ThemeController() {
-  const { theme, setTheme, isThemeButtonClicked, setIsThemeButtonClicked } =
-    useUserPreferencesStore();
+  const { theme, setTheme } = useUserPreferencesStore();
+
+  const [isThemeButtonClicked, setIsThemeButtonClicked] = useState(false);
 
   const btnStyle = isThemeButtonClicked ? 'btn btn-circle btn-active' : 'btn btn-circle btn-ghost';
 

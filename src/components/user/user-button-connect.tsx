@@ -2,6 +2,7 @@
 
 import { Icon } from 'components/icons';
 import useFirebase from 'hooks/firebase';
+import useSyncStorageAndFirebase from 'hooks/firebase/use-sync-storage-firebase';
 import { useModalState } from 'hooks/use-modal-state';
 
 export default function UserButtonConnect() {
@@ -44,6 +45,8 @@ function ModalConnect() {
   const { setModalIsOpen } = useModalState();
   const { handleSignInWithGooglePopup } = useFirebase();
 
+  const sync = useSyncStorageAndFirebase();
+
   return (
     <div>
       <h3 className="font-bold text-lg">Conectar</h3>
@@ -58,7 +61,11 @@ function ModalConnect() {
         <button
           className="btn btn-outline btn-primary p-2"
           onClick={() => {
-            handleSignInWithGooglePopup();
+            handleSignInWithGooglePopup().then(() => {
+              sync?.downloadFireDB.userCharacters();
+              sync?.downloadFireDB.userPreferences();
+              sync?.downloadFireDB.userLibrary();
+            });
             setModalIsOpen(false);
           }}
         >

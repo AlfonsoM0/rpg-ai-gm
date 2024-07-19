@@ -1,10 +1,13 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Character } from 'types/character';
+import { UserCharacters } from 'types/firebase-db';
 
 interface CharacterStore {
   inGameCharacters: Character[];
-  charactersCollection: Character[];
+  charactersCollection: Character[]; //old name => allCharacters
+
+  updatedAt: number;
 }
 
 interface CharacterActions {
@@ -17,7 +20,7 @@ interface CharacterActions {
 
   findCharacterByIdAndIcrementXp: (id: string, amount: number) => void;
 
-  setcharactersCollectionCollection: (characters?: Character[]) => void;
+  setCharactersCollection: (userCharacters?: UserCharacters) => void;
 }
 
 export const useCharacterStore = create<CharacterStore & CharacterActions>()(
@@ -26,6 +29,7 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
       (set, get) => ({
         inGameCharacters: [],
         charactersCollection: [],
+        updatedAt: 0,
 
         // Actions
         addACharacterToInGame: (character) =>
@@ -37,11 +41,15 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
         removeAllInGameCharacters: () => set(() => ({ inGameCharacters: [] })),
 
         addACharacterToCollection: (character) =>
-          set((state) => ({ charactersCollection: [character, ...state.charactersCollection] })),
+          set((state) => ({
+            charactersCollection: [character, ...state.charactersCollection],
+            updatedAt: new Date().getTime(),
+          })),
 
         removeACharacterFromCollection: (id) =>
           set((state) => ({
             charactersCollection: state.charactersCollection.filter((c) => c.id !== id),
+            updatedAt: new Date().getTime(),
           })),
 
         findCharacterByIdAndIcrementXp: (id, amount) => {
@@ -51,6 +59,7 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
               charactersCollection: state.charactersCollection.map((c) =>
                 c.id === id ? { ...c, xp: c.xp + amount } : c
               ),
+              updatedAt: new Date().getTime(),
             }));
 
             // Update inGameCharacters if the character is currently in game
@@ -65,14 +74,13 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
           }
         },
 
-        setcharactersCollectionCollection: (characters = []) =>
-          set(() => ({ charactersCollection: characters })),
+        setCharactersCollection: (userCharacters) =>
+          set(() => ({
+            charactersCollection: userCharacters?.charactersCollection || [],
+            updatedAt: userCharacters?.updatedAt || new Date().getTime(),
+          })),
       }),
       { name: 'character-storage' }
     )
   )
 );
-
-/* //|> Character Storage Example
- {"state":{"inGameCharacters":[],"charactersCollection":[{"id":"d49d6f83-ce46-4caa-ac90-ba87468c5ba5","xp":250,"name":"Invictus Lumashay","appearance":"Un hombre fornido y bien entrenado militarmente en el mortífero mundo de Catachan.\n","background":"Soldado de asalato Catachan. Basado en Warhammer 40000.","profession":"Soldado de la Guardia Imperial.","personality":"Valiente y bromista.","equipment":"Espada-motosierra, rifle laser pesado, cuchillo Catachán.","powers":"Oculta una mutación hereje, una cicatriz en el pecho, que le permite sentir y percibir cosas del warp que otros no pueden notar.","characteristics":{"strength":3,"dexterity":4,"constitution":3,"intelligence":2,"wisdom":2,"charisma":2}},{"id":"54783b88-3179-43d4-80cb-d8a3eb973ad0","xp":250,"name":"Nachdruk Stormlight","appearance":"Un viejo sabio del Adeptus Astra Telepática.","background":"Psíquico nacido en el vacío. Basado en Warhammer 40000.","profession":"Psíquico de la Guardia Imperial.","personality":"Serio, sombrío, calculador.","equipment":"Báculo psíquico, espada psíquica, amuleto de focus psíquico.","powers":"Telepatía, precognición, biomancia (curar, lanzar rayos eléctricos), telequinesis.","characteristics":{"strength":2,"dexterity":2,"constitution":2,"intelligence":3,"wisdom":4,"charisma":3}}]},"version":0}
- */

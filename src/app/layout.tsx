@@ -7,6 +7,9 @@ import { Footer } from 'components/footer';
 import Navbar from 'components/navbar';
 import { navbarLinks } from 'config/navbar-links';
 import TTSLoader from 'components/tts/tts-loader';
+import TestComponent from './(TEST)/testComponent';
+import FixComponent from './(FIX)/FixComponent';
+import UserFirebaseSync from 'components/user/user-fire-sync';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,9 +29,13 @@ export default function RootLayout({
         <header className="h-16">
           <Navbar menuOps={navbarLinks} />
         </header>
+        <TestComponent />
+        <FixComponent />
 
         {children}
+
         <Modal />
+        <UserFirebaseSync />
         <TTSLoader />
 
         <Footer />

@@ -1,0 +1,125 @@
+{
+  "state": {
+    "inGameCharacters": [],
+    "charactersCollection": [
+      {
+        "id": "d49d6f83-ce46-4caa-ac90-ba87468c5ba5",
+        "xp": 269,
+        "name": "Invictus Lumashay",
+        "appearance": "Un hombre fornido y bien entrenado militarmente en el mortífero mundo de Catachan.\n",
+        "background": "Soldado de asalato Catachan. Basado en Warhammer 40000.",
+        "profession": "Soldado de la Guardia Imperial.",
+        "personality": "Valiente y bromista.",
+        "equipment": "Espada-motosierra, rifle laser pesado, cuchillo Catachán.",
+        "powers": "Oculta una mutación hereje, una cicatriz en el pecho, que le permite sentir y percibir cosas del warp que otros no pueden notar.",
+        "characteristics": {
+          "strength": 3,
+          "dexterity": 4,
+          "constitution": 3,
+          "intelligence": 2,
+          "wisdom": 2,
+          "charisma": 2
+        }
+      },
+      {
+        "id": "54783b88-3179-43d4-80cb-d8a3eb973ad0",
+        "xp": 269,
+        "name": "Nachdruk Stormlaight",
+        "appearance": "Un viejo sabio del Adeptus Astra Telepática.",
+        "background": "Psíquico nacido en el vacío. Basado en Warhammer 40000.",
+        "profession": "Psíquico de la Guardia Imperial.",
+        "personality": "Serio, sombrío, calculador.",
+        "equipment": "Báculo psíquico, espada psíquica, amuleto de focus psíquico.",
+        "powers": "Telepatía, precognición, biomancia (curar, lanzar rayos eléctricos), telequinesis.",
+        "characteristics": {
+          "strength": 2,
+          "dexterity": 2,
+          "constitution": 2,
+          "intelligence": 3,
+          "wisdom": 4,
+          "charisma": 3
+        }
+      },
+      {
+        "id": "28ca4eed-cb38-4eb3-a79d-8ccec8c1ceec",
+        "xp": 305,
+        "name": "Zourum Kaz",
+        "appearance": "Es un hombre atlético de contextura mediana.\nSu cabeza está rapada y lleva una barba oscura y abundante, que desciende como un triángulo invertido hasta su pecho.\nSu cuerpo está adorando completamente de tatuajes monásticos.\nViste ropas simples y cómodas.",
+        "background": "De joven fue entrenado por el maestro Kento Yong-son-shai-kay-chao en las artes marciales sin armas.\nAprendió a dominar las técnicas del Teräs Käsi a joven edad, convirtiendo su cuerpo en un arma mortal.\nLuego creo su propia versión de la técnica del Dragón de las Tormentas. Un estilo que combina imactos rápidos a gran velocidad, con descargas eléctricas provenientes del poder de su chi.",
+        "profession": "Maestro en Artes Marciales e Historiador.",
+        "personality": "Sabio, serio y centrado. El Maestro Zourum Kaz es un hombre muy respetado.",
+        "equipment": "Es un nómada que viaja con su mochila de aventurero ropas de explorador. Su vida es simple, pero en su mochila se puede encotrar casi cualquier cosa para estar siempre preparado.",
+        "powers": "Sus poderes se originan de su conexión sobrenatural con la naturaleza y el cosmos. \nDomina las formas de los cuatro elementos: agua, fuego, tierra y aire.\nAdemás puede sentir los ecos del tiempo. Cuando toca algo y se concentra, puede ver visiones de su pasado.",
+        "characteristics": {
+          "strength": 3,
+          "dexterity": 3,
+          "constitution": 3,
+          "intelligence": 3,
+          "wisdom": 3,
+          "charisma": 3
+        }
+      }
+    ],
+    "updatedAt": 1721422106021,
+    "allCharacters": [
+      {
+        "id": "d49d6f83-ce46-4caa-ac90-ba87468c5ba5",
+        "xp": 269,
+        "name": "Invictus Lumashay",
+        "appearance": "Un hombre fornido y bien entrenado militarmente en el mortífero mundo de Catachan.\n",
+        "background": "Soldado de asalato Catachan. Basado en Warhammer 40000.",
+        "profession": "Soldado de la Guardia Imperial.",
+        "personality": "Valiente y bromista.",
+        "equipment": "Espada-motosierra, rifle laser pesado, cuchillo Catachán.",
+        "powers": "Oculta una mutación hereje, una cicatriz en el pecho, que le permite sentir y percibir cosas del warp que otros no pueden notar.",
+        "characteristics": {
+          "strength": 3,
+          "dexterity": 4,
+          "constitution": 3,
+          "intelligence": 2,
+          "wisdom": 2,
+          "charisma": 2
+        }
+      },
+      {
+        "id": "54783b88-3179-43d4-80cb-d8a3eb973ad0",
+        "xp": 269,
+        "name": "Nachdruk Stormlaight",
+        "appearance": "Un viejo sabio del Adeptus Astra Telepática.",
+        "background": "Psíquico nacido en el vacío. Basado en Warhammer 40000.",
+        "profession": "Psíquico de la Guardia Imperial.",
+        "personality": "Serio, sombrío, calculador.",
+        "equipment": "Báculo psíquico, espada psíquica, amuleto de focus psíquico.",
+        "powers": "Telepatía, precognición, biomancia (curar, lanzar rayos eléctricos), telequinesis.",
+        "characteristics": {
+          "strength": 2,
+          "dexterity": 2,
+          "constitution": 2,
+          "intelligence": 3,
+          "wisdom": 4,
+          "charisma": 3
+        }
+      },
+      {
+        "id": "28ca4eed-cb38-4eb3-a79d-8ccec8c1ceec",
+        "xp": 305,
+        "name": "Zourum Kaz",
+        "appearance": "Es un hombre atlético de contextura mediana.\nSu cabeza está rapada y lleva una barba oscura y abundante, que desciende como un triángulo invertido hasta su pecho.\nSu cuerpo está adorando completamente de tatuajes monásticos.\nViste ropas simples y cómodas.",
+        "background": "De joven fue entrenado por el maestro Kento Yong-son-shai-kay-chao en las artes marciales sin armas.\nAprendió a dominar las técnicas del Teräs Käsi a joven edad, convirtiendo su cuerpo en un arma mortal.\nLuego creo su propia versión de la técnica del Dragón de las Tormentas. Un estilo que combina imactos rápidos a gran velocidad, con descargas eléctricas provenientes del poder de su chi.",
+        "profession": "Maestro en Artes Marciales e Historiador.",
+        "personality": "Sabio, serio y centrado. El Maestro Zourum Kaz es un hombre muy respetado.",
+        "equipment": "Es un nómada que viaja con su mochila de aventurero ropas de explorador. Su vida es simple, pero en su mochila se puede encotrar casi cualquier cosa para estar siempre preparado.",
+        "powers": "Sus poderes se originan de su conexión sobrenatural con la naturaleza y el cosmos. \nDomina las formas de los cuatro elementos: agua, fuego, tierra y aire.\nAdemás puede sentir los ecos del tiempo. Cuando toca algo y se concentra, puede ver visiones de su pasado.",
+        "characteristics": {
+          "strength": 3,
+          "dexterity": 3,
+          "constitution": 3,
+          "intelligence": 3,
+          "wisdom": 3,
+          "charisma": 3
+        }
+      }
+    ]
+  },
+  "version": 0
+}

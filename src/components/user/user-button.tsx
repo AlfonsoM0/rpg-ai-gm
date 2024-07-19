@@ -2,7 +2,6 @@
 
 import { Icon } from 'components/icons';
 import useFirebase from 'hooks/firebase';
-import useAuthObserver from 'hooks/firebase/use-auth-observer';
 import UserButtonConnect from './user-button-connect';
 import ThemeController from 'components/theme-controller';
 import ModalConfigAI, { aiIconStyle } from 'components/chat/chat-options-modals/modal-ai-config';
@@ -14,8 +13,6 @@ export default function UserButton() {
   const { user } = useFirebase();
   const { aiConfig } = useGmAiStore();
   const { setModalContent, setModalIsOpen } = useModalState();
-
-  useAuthObserver();
 
   function onConfigAiClick() {
     setModalContent(<ModalConfigAI />);

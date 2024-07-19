@@ -1,51 +1,49 @@
+import { UserPreferences } from 'types/firebase-db';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-export interface UserPreferencesStore {
-  theme: string;
-  isThemeButtonClicked: boolean;
-
-  chatShortcuts: string[];
-}
-
 interface UserPreferencesActions {
   setTheme: (theme: string) => void;
-  setIsThemeButtonClicked: (isClicked: boolean) => void;
 
   addChatShortcut: (shortcut: string) => void;
   removeChatShortcut: (shortcut: string) => void;
   moveChatShortcut: (shortcut: string, newIndex: number) => void;
 
-  clearOrSetUserPreferences: (initialState?: UserPreferencesStore) => void;
+  clearOrSetUserPreferences: (initialState?: UserPreferences) => void;
 }
 
-const initialUserPreferencesState: UserPreferencesStore = {
+const initialUserPreferencesState: UserPreferences = {
   theme: 'light',
-  isThemeButtonClicked: false,
 
   chatShortcuts: [],
+
+  updatedAt: 0,
 };
 
-export const useUserPreferencesStore = create<UserPreferencesStore & UserPreferencesActions>()(
+export const useUserPreferencesStore = create<UserPreferences & UserPreferencesActions>()(
   devtools(
     persist(
       (set, get) => ({
         ...initialUserPreferencesState,
 
         // Actions
-        setTheme: (theme: string) => set({ theme }),
-
-        setIsThemeButtonClicked: (isThemeButtonClicked: boolean) => set({ isThemeButtonClicked }),
+        setTheme: (theme: string) => set({ theme, updatedAt: new Date().getTime() }),
 
         addChatShortcut: (shortcut: string) => {
           const isShortcutExist = get().chatShortcuts.includes(shortcut);
           if (isShortcutExist) return;
 
-          set((state) => ({ chatShortcuts: [...state.chatShortcuts, shortcut] }));
+          set((state) => ({
+            chatShortcuts: [...state.chatShortcuts, shortcut],
+            updatedAt: new Date().getTime(),
+          }));
         },
 
         removeChatShortcut: (shortcut: string) =>
-          set((state) => ({ chatShortcuts: state.chatShortcuts.filter((s) => s !== shortcut) })),
+          set((state) => ({
+            chatShortcuts: state.chatShortcuts.filter((s) => s !== shortcut),
+            updatedAt: new Date().getTime(),
+          })),
 
         moveChatShortcut: (shortcut: string, newIndex: number) =>
           set((state) => {
@@ -63,6 +61,7 @@ export const useUserPreferencesStore = create<UserPreferencesStore & UserPrefere
                 shortcut,
                 ...newChatShortcuts.slice(newIndex),
               ],
+              updatedAt: new Date().getTime(),
             };
           }),
 
