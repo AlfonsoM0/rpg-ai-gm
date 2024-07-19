@@ -47,29 +47,44 @@ function ModalConnect() {
 
   const sync = useSyncStorageAndFirebase();
 
+  function onSinInWithGoogle() {
+    handleSignInWithGooglePopup().then(() => {
+      // sync data from firebase to local storage
+      sync?.downloadFireDB.userCharacters();
+      sync?.downloadFireDB.userPreferences();
+      sync?.downloadFireDB.userLibrary();
+    });
+
+    setModalIsOpen(false);
+  }
+
   return (
     <div>
-      <h3 className="font-bold text-lg">Conectar</h3>
+      <h3 className="font-bold text-lg text-info">Iniciar Sesión</h3>
       <p className="py-4 text-sm">
-        Al iniciar sesión, tus personajes y biblioteca se guardarán para que estén disponibles en
-        cualquier lugar.
+        Al iniciar sesión, cuando modificas tu colección de personajes o libros, estos se guardarán
+        en la nube automáticamente cada pocos segundos.
       </p>
-      <p className="text-sm mb-4 text-info">⚠️ Se abrirá una nueva ventana para autenticación.</p>
+      <p className="pb-4 text-sm">
+        Si ya tenías una cuenta, se cargarán tus datos si son más recientes que la versión local.
+      </p>
+
+      <p className="text-sm mb-1 text-warning">
+        ⚠️ Se abrirá una nueva ventana para autenticación. Asegurate de que tu navegador esté
+        configurado para permitir ventanas emergentes.
+      </p>
+      <p className="text-sm mb-4 text-warning">
+        ⚠️ Asegúrate de estar usando la última versión de tus personajes y libros antes de iniciar
+        sesión.
+      </p>
 
       <div className="flex flex-wrap justify-center gap-4">
         {/* SinIn Options */}
         <button
-          className="btn btn-outline btn-primary p-2"
-          onClick={() => {
-            handleSignInWithGooglePopup().then(() => {
-              sync?.downloadFireDB.userCharacters();
-              sync?.downloadFireDB.userPreferences();
-              sync?.downloadFireDB.userLibrary();
-            });
-            setModalIsOpen(false);
-          }}
+          className="btn btn-lg btn-outline btn-primary text-2xl p-2 m-2"
+          onClick={onSinInWithGoogle}
         >
-          <Icon.Google className="w-8 h-8" /> Google
+          <Icon.Google className="w-10 h-10" /> Google
         </button>
       </div>
     </div>
