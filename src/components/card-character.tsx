@@ -18,7 +18,8 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
   const router = useRouter();
   const { setAllCharacterInfo, setStep, setIsEdit, setPreviousCharacteristics } =
     useCreateNewCharacterStore();
-  const { removeInGameCharacter, inGameCharacters, addInGameCharacter } = useCharacterStore();
+  const { removeACharacterFromInGame, inGameCharacters, addACharacterToInGame } =
+    useCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { isStoryStarted } = useGmAiStore();
 
@@ -69,14 +70,14 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
     }
 
     if (isInGame) {
-      removeInGameCharacter(id);
+      removeACharacterFromInGame(id);
     } else {
       if (inGameCharacters.length >= 2) {
         setModalContent(ModalMaximumCharacters);
         setModalIsOpen(true);
         return;
       }
-      addInGameCharacter(character);
+      addACharacterToInGame(character);
     }
   }
 
@@ -173,7 +174,7 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
 
 function ModalDeleteCharacter({ id }: { id: string }) {
   const { setModalIsOpen } = useModalState();
-  const { removeAllCharacter, removeInGameCharacter } = useCharacterStore();
+  const { removeACharacterFromCollection, removeACharacterFromInGame } = useCharacterStore();
 
   return (
     <div>
@@ -184,8 +185,8 @@ function ModalDeleteCharacter({ id }: { id: string }) {
         <button
           className="btn btn-error"
           onClick={() => {
-            removeAllCharacter(id);
-            removeInGameCharacter(id);
+            removeACharacterFromCollection(id);
+            removeACharacterFromInGame(id);
             setModalIsOpen(false);
           }}
         >

@@ -14,7 +14,8 @@ export default function BookButtonContinue({ book }: { book: Book }) {
   const router = useRouter();
 
   const { setModalContent, setModalIsOpen } = useModalState();
-  const { allCharacters, addAllCharacter, addInGameCharacter } = useCharacterStore();
+  const { charactersCollection, addACharacterToCollection, addACharacterToInGame } =
+    useCharacterStore();
   const { addContent, isStoryStarted, resetChat, aiConfig } = useGmAiStore();
 
   function handleContinueStory() {
@@ -27,12 +28,12 @@ export default function BookButtonContinue({ book }: { book: Book }) {
 
     // Add all updated Characters to the game. And create a new character if it does not exist.
     const updatedCharacters = book.characters.map((oldCharacter) => {
-      const newCharacter = allCharacters.find((c) => c.id === oldCharacter.id);
+      const newCharacter = charactersCollection.find((c) => c.id === oldCharacter.id);
       if (newCharacter) {
-        addInGameCharacter(newCharacter);
+        addACharacterToInGame(newCharacter);
       } else {
-        addAllCharacter(oldCharacter);
-        addInGameCharacter(oldCharacter);
+        addACharacterToCollection(oldCharacter);
+        addACharacterToInGame(oldCharacter);
       }
       return newCharacter || oldCharacter;
     });

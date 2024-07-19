@@ -18,8 +18,12 @@ import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-character
 export default function Home() {
   const router = useRouter();
 
-  const { allCharacters, inGameCharacters, removeInGameCharacter, addInGameCharacter } =
-    useCharacterStore();
+  const {
+    charactersCollection,
+    inGameCharacters,
+    removeACharacterFromInGame,
+    addACharacterToInGame,
+  } = useCharacterStore();
   const { clearAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { content, addContent, isStoryStarted, setIsStoryStarted } = useGmAiStore();
@@ -50,12 +54,12 @@ export default function Home() {
       });
     }
 
-    const areTheSameChars = areTheSameInGameCharacters(allCharacters, inGameCharacters);
+    const areTheSameChars = areTheSameInGameCharacters(charactersCollection, inGameCharacters);
     if (isStoryStarted && !areTheSameChars) {
       const newCharactersInGame = inGameCharacters.map((char) => {
-        const findUpdatedChar = allCharacters.find((c) => c.id === char.id) || char;
-        removeInGameCharacter(char.id);
-        addInGameCharacter(findUpdatedChar);
+        const findUpdatedChar = charactersCollection.find((c) => c.id === char.id) || char;
+        removeACharacterFromInGame(char.id);
+        addACharacterToInGame(findUpdatedChar);
         return findUpdatedChar;
       });
       addContent({
@@ -75,8 +79,8 @@ export default function Home() {
     router.push('/story');
   }
 
-  function searchCharacter(allCharacters: Character[]): Character[] {
-    return allCharacters.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()));
+  function searchCharacter(charactersCollection: Character[]): Character[] {
+    return charactersCollection.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()));
   }
 
   return (
@@ -102,7 +106,7 @@ export default function Home() {
       <section className="my-4">
         <H2>Mis Personajes</H2>
 
-        {allCharacters.length > 3 ? (
+        {charactersCollection.length > 3 ? (
           <Input.Search
             labelclassname="m-auto mb-5"
             className="text-center"
@@ -125,7 +129,7 @@ export default function Home() {
             </button>
           </div>
 
-          {searchCharacter(allCharacters).map((character) => (
+          {searchCharacter(charactersCollection).map((character) => (
             <CardCharacter key={character.id} character={character} />
           ))}
         </div>

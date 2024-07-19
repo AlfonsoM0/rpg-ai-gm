@@ -21,7 +21,7 @@ export default function ModalEndHistory() {
     setIsStoryStarted,
     playersDiceRolls,
   } = useGmAiStore();
-  const { inGameCharacters, findCharacterByIdAndIcrementXp, removeAllInGameCharacter } =
+  const { inGameCharacters, findCharacterByIdAndIcrementXp, removeAllInGameCharacters } =
     useCharacterStore();
 
   const { addBook } = useLibraryStore();
@@ -56,7 +56,7 @@ export default function ModalEndHistory() {
     // reset all states to initial state
     resetChat();
     setIsStoryStarted(false);
-    removeAllInGameCharacter();
+    removeAllInGameCharacters();
 
     router.push('/');
   }

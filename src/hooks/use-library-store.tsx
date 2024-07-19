@@ -12,6 +12,8 @@ interface LibraryActions {
   removeBook: (id: string) => void;
   changeBookName: (id: string, newName: string) => void;
   setBookSelected: (book?: Book) => void;
+
+  setLibrary: (library?: Book[]) => void;
 }
 
 export const useLibraryStore = create<LibraryState & LibraryActions>()(
@@ -35,6 +37,8 @@ export const useLibraryStore = create<LibraryState & LibraryActions>()(
         },
 
         setBookSelected: (book) => set(() => ({ bookSelected: book })),
+
+        setLibrary: (library = []) => set({ library }),
       }),
       { name: 'library-storage' }
     )

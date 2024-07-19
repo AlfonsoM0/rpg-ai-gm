@@ -29,7 +29,7 @@ export default function FormCharacterDescription() {
     setStep,
   } = useCreateNewCharacterStore();
 
-  const { removeAllCharacter, addAllCharacter } = useCharacterStore();
+  const { removeACharacterFromCollection, addACharacterToCollection } = useCharacterStore();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -54,8 +54,8 @@ export default function FormCharacterDescription() {
     };
 
     //update character
-    removeAllCharacter(id);
-    addAllCharacter(newCharacter);
+    removeACharacterFromCollection(id);
+    addACharacterToCollection(newCharacter);
 
     router.push('/');
   }

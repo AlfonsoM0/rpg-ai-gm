@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-interface UserPreferencesStore {
+export interface UserPreferencesStore {
   theme: string;
   isThemeButtonClicked: boolean;
 
@@ -15,6 +15,8 @@ interface UserPreferencesActions {
   addChatShortcut: (shortcut: string) => void;
   removeChatShortcut: (shortcut: string) => void;
   moveChatShortcut: (shortcut: string, newIndex: number) => void;
+
+  clearOrSetUserPreferences: (initialState?: UserPreferencesStore) => void;
 }
 
 const initialUserPreferencesState: UserPreferencesStore = {
@@ -63,6 +65,9 @@ export const useUserPreferencesStore = create<UserPreferencesStore & UserPrefere
               ],
             };
           }),
+
+        clearOrSetUserPreferences: (initialState) =>
+          set(initialState || initialUserPreferencesState),
       }),
       { name: 'user-preferences' }
     )
