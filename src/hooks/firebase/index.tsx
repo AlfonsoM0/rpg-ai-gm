@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import {
   Auth,
@@ -13,6 +12,7 @@ import {
   onAuthStateChanged,
   Unsubscribe,
   browserPopupRedirectResolver,
+  updateProfile,
 } from 'firebase/auth';
 import getFirebaseConfig from 'server/get-firebase-config';
 import { AI_NAME_TO_SHOW } from 'config/constants';
@@ -29,13 +29,19 @@ interface FirebaseStore {
 
 interface FirebaseActions {
   initializeFirebaseApp: () => Promise<void>;
+  consoleLogAllState: () => void;
+
+  // Auth
   handleSignInWithGooglePopup: () => Promise<void>;
   handleSignOut: () => Promise<void>;
   setObserverUser: () => Unsubscribe | undefined;
-  setUser: (user: User | null) => void;
-  clearFirebaseStore: () => void;
-
-  consoleLogAllState: () => void;
+  updateUserProfile: ({
+    displayName,
+    photoURL,
+  }: {
+    displayName?: string;
+    photoURL?: string;
+  }) => Promise<void>;
 }
 
 const initialFirebaseState: FirebaseStore = {
@@ -49,9 +55,6 @@ const initialFirebaseState: FirebaseStore = {
 };
 
 const useFirebase = create<FirebaseStore & FirebaseActions>()(
-  // devtools(
-  //   persist(
-
   (set, get) => ({
     ...initialFirebaseState,
 
@@ -78,6 +81,18 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()(
       }
     },
 
+    consoleLogAllState: () => {
+      const { fireAuth, providerGoogle, isFireLoading, user, fireErrorMsg } = get();
+      console.log('consoleLogAllState => ');
+      console.log({ fireAuth, providerGoogle, isFireLoading, user, fireErrorMsg });
+    },
+
+    /**
+     *
+     * AUTHENTICATION
+     *
+     */
+
     handleSignInWithGooglePopup: async () => {
       set({ isFireLoading: true, fireErrorMsg: '' });
       const { fireAuth, providerGoogle } = get();
@@ -102,7 +117,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()(
         if (fireAuth) {
           await signOut(fireAuth);
 
-          get().setUser(null); // Clear the user state after signing out.
+          set({ user: null });
         }
         set({ isFireLoading: false });
       } catch (error) {
@@ -112,15 +127,15 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()(
     },
 
     setObserverUser: () => {
-      const { fireAuth, setUser } = get();
+      const { fireAuth } = get();
       if (fireAuth) {
         const unsubscribe = onAuthStateChanged(fireAuth, (user) => {
           if (user) {
-            setUser(user);
+            set({ user });
             console.info(user);
             // Additional actions here, such as fetching user data from Firestore?
           } else {
-            setUser(null);
+            set({ user: null });
           }
         });
 
@@ -128,20 +143,26 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()(
       }
     },
 
-    setUser: (user) => set({ user }),
+    updateUserProfile: async ({ displayName, photoURL }) => {
+      const { fireAuth, user } = get();
 
-    clearFirebaseStore: () => set(initialFirebaseState),
+      if (fireAuth && user) {
+        set({ isFireLoading: true, fireErrorMsg: '' });
 
-    consoleLogAllState: () => {
-      const { fireAuth, providerGoogle, isFireLoading, user, fireErrorMsg } = get();
-      console.log('consoleLogAllState => ');
-      console.log({ fireAuth, providerGoogle, isFireLoading, user, fireErrorMsg });
+        await updateProfile(user, {
+          displayName: displayName || user.displayName,
+          photoURL: photoURL || user.photoURL,
+        });
+        set({ isFireLoading: false });
+      }
     },
   })
 
-  //     { name: 'firebase-store' }
-  //   )
-  // )
+  /**
+   *
+   *
+   *
+   */
 );
 
 export default useFirebase;

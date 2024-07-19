@@ -15,7 +15,7 @@ export default function UserButtonConnect() {
 
   if (isFireLoading)
     return (
-      <button className="btn w-full" disabled>
+      <button className="btn btn-warning w-full" disabled>
         <span className="loading loading-dots loading-xs"></span>
       </button>
     );

@@ -8,6 +8,7 @@ import ThemeController from 'components/theme-controller';
 import ModalConfigAI, { aiIconStyle } from 'components/chat/chat-options-modals/modal-ai-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
+import UserAvatar from './user-avatar';
 
 export default function UserButton() {
   const { user } = useFirebase();
@@ -24,16 +25,7 @@ export default function UserButton() {
   return (
     <details className="dropdown dropdown-end">
       <summary className="btn btn-ghost btn-circle">
-        <div className="avatar">
-          <div className="w-8 h-8 rounded-full">
-            {user?.photoURL ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={user.photoURL} alt={user.displayName || ''} />
-            ) : (
-              <Icon.User />
-            )}
-          </div>
-        </div>
+        <UserAvatar />
       </summary>
 
       {/* CONTENT */}
