@@ -10,7 +10,7 @@ import { useTTSStore } from 'hooks/use-tts-store';
 import { useEffect } from 'react';
 
 export default function Page() {
-  const { bookSelected } = useLibraryStore();
+  const { bookSelected, removeBookSelected } = useLibraryStore();
   const { isTTSEnabled, handleStop, setTTS, handlePlay } = useTTSStore();
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function Page() {
     return () => {
       handleStop();
       setTTS('');
+      removeBookSelected();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
