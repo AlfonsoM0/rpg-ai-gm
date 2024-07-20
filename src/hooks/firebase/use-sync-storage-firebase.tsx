@@ -86,7 +86,7 @@ export default function useSyncStorageAndFirebase() {
             if (res && res.updatedAt > uAtUP) clearOrSetUserPreferences(res);
           }
 
-          return observeFireDoc(CN.USER_ACCOUNT, cb);
+          return observeFireDoc(CN.USER_PREFERENCES, cb);
         },
 
         userCharacters: () => {
@@ -104,7 +104,7 @@ export default function useSyncStorageAndFirebase() {
             if (res && res.updatedAt > uAtC) setLibrary(res);
           }
 
-          return observeFireDoc(CN.USER_CHARACTERS, cb);
+          return observeFireDoc(CN.USER_LIBRARY, cb);
         },
       },
     };
