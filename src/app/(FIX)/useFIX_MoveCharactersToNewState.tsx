@@ -14,7 +14,7 @@ export default function useFIX_MoveCharactersToNewState() {
       ? JSON.parse(storedData)['state']['allCharacters']
       : [];
     const isNewStateEmpty = !charactersCollection.length;
-    const isOldStateExist = !!allCharacters.length;
+    const isOldStateExist = allCharacters ? !!allCharacters.length : false;
 
     if (isNewStateEmpty && isOldStateExist)
       setCharactersCollection({
