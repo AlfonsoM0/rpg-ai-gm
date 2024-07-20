@@ -76,5 +76,5 @@ export default function useFirebaseAutoSync() {
       if (unsusbscribe_userPreferences) unsusbscribe_userPreferences();
       if (unsusbscribe_userLibrary) unsusbscribe_userLibrary();
     };
-  }, []);
+  }, [user]);
 }
