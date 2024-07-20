@@ -17,6 +17,7 @@ interface LibraryActions {
   removeBookSelected: () => void;
 
   setLibrary: (userLibrary?: UserLibrary) => void;
+  setUpdatedAtTo0: () => void;
 }
 
 export const useLibraryStore = create<LibraryState & LibraryActions>()(
@@ -53,6 +54,8 @@ export const useLibraryStore = create<LibraryState & LibraryActions>()(
             library: userLibrary?.library || [],
             updatedAt: userLibrary?.updatedAt || new Date().getTime(),
           }),
+
+        setUpdatedAtTo0: () => set({ updatedAt: 0 }),
       }),
       { name: 'library-storage' }
     )

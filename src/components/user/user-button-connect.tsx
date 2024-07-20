@@ -2,7 +2,10 @@
 
 import { Icon } from 'components/icons';
 import useFirebase from 'hooks/firebase';
+import { useCharacterStore } from 'hooks/use-character-store';
+import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
+import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import { useState } from 'react';
 
 export default function UserButtonConnect() {
@@ -45,10 +48,21 @@ function ModalConnect() {
   const { setModalIsOpen } = useModalState();
   const { handleSignInWithGooglePopup } = useFirebase();
 
+  const { setUpdatedAtTo0: suat0Pref } = useUserPreferencesStore();
+  const { setUpdatedAtTo0: suat0Char } = useCharacterStore();
+  const { setUpdatedAtTo0: suat0Libr } = useLibraryStore();
+
   const [isLoading, setIsLoading] = useState(false);
 
   function onSinInWithGoogle() {
     setIsLoading(true);
+
+    // Reset updatedAt to 0 for all stores
+    // => lower priority than the ones in Firebase.
+    suat0Pref();
+    suat0Char();
+    suat0Libr();
+
     handleSignInWithGooglePopup().then(() => {
       setIsLoading(false);
       setModalIsOpen(false);
@@ -59,11 +73,13 @@ function ModalConnect() {
     <div>
       <h3 className="font-bold text-lg text-info">Iniciar Sesión</h3>
       <p className="py-4 text-sm">
-        Al iniciar sesión, cuando modificas tu colección de personajes o libros, estos se guardarán
-        en la nube automáticamente cada pocos segundos.
+        Al iniciar sesión por primera vez, cuando modificas tu colección de personajes o libros,
+        estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se
+        sincronizarán en todos los dispositivos conectados a tu cuenta.
       </p>
       <p className="pb-4 text-sm">
-        Si ya tenías una cuenta, se cargarán tus datos si son más recientes que la versión local.
+        Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescriben con los datos
+        guardados en la nube.
       </p>
 
       <p className="text-sm mb-1 text-warning">
@@ -71,8 +87,8 @@ function ModalConnect() {
         configurado para permitir ventanas emergentes.
       </p>
       <p className="text-sm mb-4 text-warning">
-        ⚠️ Asegúrate de estar usando la última versión de tus personajes y libros antes de iniciar
-        sesión.
+        ⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar
+        sesión por primera vez.
       </p>
 
       <div className="flex flex-wrap justify-center gap-4">

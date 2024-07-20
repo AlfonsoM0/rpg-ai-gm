@@ -10,6 +10,7 @@ interface UserPreferencesActions {
   moveChatShortcut: (shortcut: string, newIndex: number) => void;
 
   clearOrSetUserPreferences: (initialState?: UserPreferences) => void;
+  setUpdatedAtTo0: () => void;
 }
 
 const initialUserPreferencesState: UserPreferences = {
@@ -67,6 +68,8 @@ export const useUserPreferencesStore = create<UserPreferences & UserPreferencesA
 
         clearOrSetUserPreferences: (initialState) =>
           set(initialState || initialUserPreferencesState),
+
+        setUpdatedAtTo0: () => set({ updatedAt: 0 }),
       }),
       { name: 'user-preferences' }
     )

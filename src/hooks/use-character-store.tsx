@@ -21,6 +21,7 @@ interface CharacterActions {
   findCharacterByIdAndIcrementXp: (id: string, amount: number) => void;
 
   setCharactersCollection: (userCharacters?: UserCharacters) => void;
+  setUpdatedAtTo0: () => void;
 }
 
 export const useCharacterStore = create<CharacterStore & CharacterActions>()(
@@ -79,6 +80,8 @@ export const useCharacterStore = create<CharacterStore & CharacterActions>()(
             charactersCollection: userCharacters?.charactersCollection || [],
             updatedAt: userCharacters?.updatedAt || new Date().getTime(),
           })),
+
+        setUpdatedAtTo0: () => set(() => ({ updatedAt: 0 })),
       }),
       { name: 'character-storage' }
     )
