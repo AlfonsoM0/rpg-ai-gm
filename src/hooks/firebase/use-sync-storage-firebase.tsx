@@ -5,7 +5,12 @@ import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import useFirebase from '.';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useLibraryStore } from 'hooks/use-library-store';
-import { CollectionName as CN, CollectionType } from 'types/firebase-db';
+import {
+  CollectionName as CN,
+  UserCharacters,
+  UserLibrary,
+  UserPreferences,
+} from 'types/firebase-db';
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 
 export default function useSyncStorageAndFirebase() {
@@ -15,12 +20,12 @@ export default function useSyncStorageAndFirebase() {
     theme,
     chatShortcuts,
     clearOrSetUserPreferences,
-    updatedAt: uAtUP,
+    updatedAt: uAtUserPref,
   } = useUserPreferencesStore();
 
-  const { charactersCollection, setCharactersCollection, updatedAt: uAtC } = useCharacterStore();
+  const { charactersCollection, setCharactersCollection, updatedAt: uAtChar } = useCharacterStore();
 
-  const { library, setLibrary, updatedAt: uAtL } = useLibraryStore();
+  const { library, setLibrary, updatedAt: uAtLib } = useLibraryStore();
 
   if (user)
     return {
@@ -33,17 +38,17 @@ export default function useSyncStorageAndFirebase() {
         // Firebase to Storage
         userPreferences: async () => {
           const res = await getFireDoc(CN.USER_PREFERENCES);
-          if (res && res.updatedAt > uAtUP) clearOrSetUserPreferences(res);
+          if (res && res.updatedAt > uAtUserPref) clearOrSetUserPreferences(res);
         },
 
         userCharacters: async () => {
           const res = await getFireDoc(CN.USER_CHARACTERS);
-          if (res && res.updatedAt > uAtC) setCharactersCollection(res);
+          if (res && res.updatedAt > uAtChar) setCharactersCollection(res);
         },
 
         userLibrary: async () => {
           const res = await getFireDoc(CN.USER_LIBRARY);
-          if (res && res.updatedAt > uAtL) setLibrary(res);
+          if (res && res.updatedAt > uAtLib) setLibrary(res);
         },
       },
 
@@ -60,30 +65,30 @@ export default function useSyncStorageAndFirebase() {
         userPreferences: async () => {
           const currentFireDoc = await getFireDoc(CN.USER_PREFERENCES);
 
-          if (currentFireDoc && currentFireDoc.updatedAt < uAtUP)
-            setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUP });
+          if (currentFireDoc && currentFireDoc.updatedAt < uAtUserPref)
+            setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUserPref });
         },
 
         userCharacters: async () => {
           const currentFireDoc = await getFireDoc(CN.USER_CHARACTERS);
 
-          if (currentFireDoc && currentFireDoc.updatedAt < uAtC)
-            setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtC });
+          if (currentFireDoc && currentFireDoc.updatedAt < uAtChar)
+            setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtChar });
         },
 
         userLibrary: async () => {
           const currentFireDoc = await getFireDoc(CN.USER_LIBRARY);
 
-          if (currentFireDoc && currentFireDoc.updatedAt < uAtL)
-            setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtL });
+          if (currentFireDoc && currentFireDoc.updatedAt < uAtLib)
+            setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtLib });
         },
       },
 
       observeFireDB: {
         userPreferences: () => {
           function cb(doc: DocumentSnapshot<DocumentData, DocumentData>) {
-            const res = doc.data() as CollectionType<CN.USER_PREFERENCES>;
-            if (res && res.updatedAt > uAtUP) clearOrSetUserPreferences(res);
+            const res = doc.data() as UserPreferences | undefined;
+            if (res && res.updatedAt > uAtUserPref) clearOrSetUserPreferences(res);
           }
 
           return observeFireDoc(CN.USER_PREFERENCES, cb);
@@ -91,8 +96,8 @@ export default function useSyncStorageAndFirebase() {
 
         userCharacters: () => {
           function cb(doc: DocumentSnapshot<DocumentData, DocumentData>) {
-            const res = doc.data() as CollectionType<CN.USER_CHARACTERS>;
-            if (res && res.updatedAt > uAtC) setCharactersCollection(res);
+            const res = doc.data() as UserCharacters | undefined;
+            if (res && res.updatedAt > uAtChar) setCharactersCollection(res);
           }
 
           return observeFireDoc(CN.USER_CHARACTERS, cb);
@@ -100,8 +105,8 @@ export default function useSyncStorageAndFirebase() {
 
         userLibrary: () => {
           function cb(doc: DocumentSnapshot<DocumentData, DocumentData>) {
-            const res = doc.data() as CollectionType<CN.USER_LIBRARY>;
-            if (res && res.updatedAt > uAtC) setLibrary(res);
+            const res = doc.data() as UserLibrary | undefined;
+            if (res && res.updatedAt > uAtLib) setLibrary(res);
           }
 
           return observeFireDoc(CN.USER_LIBRARY, cb);
