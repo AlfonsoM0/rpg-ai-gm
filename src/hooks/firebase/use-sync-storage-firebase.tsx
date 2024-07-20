@@ -57,13 +57,26 @@ export default function useSyncStorageAndFirebase() {
         },
 
         // Storage to Firebase
-        userPreferences: () =>
-          setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUP }),
+        userPreferences: async () => {
+          const currentFireDoc = await getFireDoc(CN.USER_PREFERENCES);
 
-        userCharacters: () =>
-          setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtC }),
+          if (currentFireDoc && currentFireDoc.updatedAt < uAtUP)
+            setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUP });
+        },
 
-        userLibrary: () => setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtL }),
+        userCharacters: async () => {
+          const currentFireDoc = await getFireDoc(CN.USER_CHARACTERS);
+
+          if (currentFireDoc && currentFireDoc.updatedAt < uAtC)
+            setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtC });
+        },
+
+        userLibrary: async () => {
+          const currentFireDoc = await getFireDoc(CN.USER_LIBRARY);
+
+          if (currentFireDoc && currentFireDoc.updatedAt < uAtL)
+            setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtL });
+        },
       },
 
       observeFireDB: {

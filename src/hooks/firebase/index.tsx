@@ -170,14 +170,18 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     const { fireAuth, user } = get();
     set({ isFireLoading: true, fireErrorMsg: '' });
 
-    if (fireAuth && user)
-      await updateProfile(user, {
-        displayName: displayName || user.displayName,
-        photoURL: photoURL || user.photoURL,
-      });
-    else set({ fireErrorMsg: 'Error al conectar con la base de datos.' });
+    try {
+      if (fireAuth && user)
+        await updateProfile(user, {
+          displayName: displayName || user.displayName,
+          photoURL: photoURL || user.photoURL,
+        });
 
-    set({ isFireLoading: false });
+      set({ isFireLoading: false });
+    } catch (error) {
+      console.error(`updateUserProfile/ User => `, error);
+      set({ isFireLoading: false, fireErrorMsg: 'Error al conectar con la base de datos.' });
+    }
   },
 
   /**
@@ -188,27 +192,32 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
 
   setFireDoc: async (collectionName, data) => {
     const { fireDB, user } = get();
+    set({ isFireLoading: true, fireErrorMsg: '' });
 
     try {
       if (fireDB && user?.uid) await setDoc(doc(fireDB, collectionName, user.uid), data);
+      set({ isFireLoading: false });
     } catch (error) {
-      console.error('setFireDoc => ', error);
+      console.error(`setFireDoc/ ${collectionName} => `, error);
+      set({ isFireLoading: false, fireErrorMsg: 'Error al guardar en la base de datos.' });
     }
   },
 
   getFireDoc: async (collectionName) => {
     const { fireDB, user } = get();
+    set({ isFireLoading: true, fireErrorMsg: '' });
 
     try {
       if (fireDB && user?.uid) {
         const documentSnapshot = await getDoc(doc(fireDB, collectionName, user.uid));
-
         const data = documentSnapshot.data();
 
+        set({ isFireLoading: false });
         return data as CollectionType<typeof collectionName> | undefined;
       }
     } catch (error) {
-      console.error('getFireDoc => ', error);
+      console.error(`getFireDoc/ ${collectionName} =>`, error);
+      set({ isFireLoading: false, fireErrorMsg: 'Error al obtener de la base de datos.' });
     }
   },
 
@@ -221,7 +230,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
         return () => unsub();
       }
     } catch (error) {
-      console.error('observeFireDoc => ', error);
+      console.error(`observeFireDoc/ ${collectionName} => `, error);
     }
   },
 }));

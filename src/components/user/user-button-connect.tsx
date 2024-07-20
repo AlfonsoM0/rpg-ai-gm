@@ -2,8 +2,8 @@
 
 import { Icon } from 'components/icons';
 import useFirebase from 'hooks/firebase';
-import useSyncStorageAndFirebase from 'hooks/firebase/use-sync-storage-firebase';
 import { useModalState } from 'hooks/use-modal-state';
+import { useState } from 'react';
 
 export default function UserButtonConnect() {
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -45,17 +45,14 @@ function ModalConnect() {
   const { setModalIsOpen } = useModalState();
   const { handleSignInWithGooglePopup } = useFirebase();
 
-  const sync = useSyncStorageAndFirebase();
+  const [isLoading, setIsLoading] = useState(false);
 
   function onSinInWithGoogle() {
+    setIsLoading(true);
     handleSignInWithGooglePopup().then(() => {
-      // sync data from firebase to local storage
-      sync?.downloadFireDB.userCharacters();
-      sync?.downloadFireDB.userPreferences();
-      sync?.downloadFireDB.userLibrary();
+      setIsLoading(false);
+      setModalIsOpen(false);
     });
-
-    setModalIsOpen(false);
   }
 
   return (
@@ -83,8 +80,17 @@ function ModalConnect() {
         <button
           className="btn btn-lg btn-outline btn-primary text-2xl p-2 m-2"
           onClick={onSinInWithGoogle}
+          disabled={isLoading}
         >
-          <Icon.Google className="w-10 h-10" /> Google
+          {isLoading ? (
+            <>
+              <span className="loading loading-spinner loading-lg"></span> Google
+            </>
+          ) : (
+            <>
+              <Icon.Google className="w-10 h-10" /> Google
+            </>
+          )}
         </button>
       </div>
     </div>

@@ -19,7 +19,13 @@ export default function useFirebaseAutoSync() {
   const { library } = useLibraryStore();
 
   // 1. From Firebase to Storage. User Login activate sync.
-  // See "user-button-connect.tsx"
+  useEffect(() => {
+    if (sync) {
+      sync.downloadFireDB.userCharacters();
+      sync.downloadFireDB.userPreferences();
+      sync.downloadFireDB.userLibrary();
+    }
+  }, [user]);
 
   // 2. From Storage to Firebase: On Changes, sync.
   // Debounce to prevent multiple uploads in a short time frame.
