@@ -41,6 +41,9 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
           </div>
         </div>
 
+        <h3 className="text-center">Pruebas de Característica</h3>
+        <p className="text-xs text-center text-info mt-[-0.5rem]">* Elige una opción</p>
+
         <div className="flex justify-around items-center mt-2 font-bold">
           <div className="flex flex-col justify-center items-center gap-2">
             <button
@@ -48,21 +51,30 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               onClick={() => rollCharacteristic('strength', strength)}
               disabled={isLoadingContent}
             >
-              <h3>FUE +{strength}</h3>
+              <div>
+                <h4>FUE</h4>
+                <p className="text-xs">2d6+{strength}</p>
+              </div>
             </button>
             <button
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('dexterity', dexterity)}
               disabled={isLoadingContent}
             >
-              <h3>DES +{dexterity}</h3>
+              <div>
+                <h4>DES</h4>
+                <p className="text-xs">2d6+{dexterity}</p>
+              </div>
             </button>
             <button
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('constitution', constitution)}
               disabled={isLoadingContent}
             >
-              <h3>CON +{constitution}</h3>
+              <div>
+                <h4>CON</h4>
+                <p className="text-xs">2d6+{constitution}</p>
+              </div>
             </button>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
@@ -71,21 +83,30 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               onClick={() => rollCharacteristic('intelligence', intelligence)}
               disabled={isLoadingContent}
             >
-              <h3>INT +{intelligence}</h3>
+              <div>
+                <h4>INT</h4>
+                <p className="text-xs">2d6+{intelligence}</p>
+              </div>
             </button>
             <button
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('wisdom', wisdom)}
               disabled={isLoadingContent}
             >
-              <h3>SAB +{wisdom}</h3>
+              <div>
+                <h4>SAB</h4>
+                <p className="text-xs">2d6+{wisdom}</p>
+              </div>
             </button>
             <button
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('charisma', charisma)}
               disabled={isLoadingContent}
             >
-              <h3>CAR +{charisma}</h3>
+              <div>
+                <h4>CAR</h4>
+                <p className="text-xs">2d6+{charisma}</p>
+              </div>
             </button>
           </div>
         </div>
