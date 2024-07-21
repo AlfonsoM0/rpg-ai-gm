@@ -20,6 +20,7 @@ interface ChatWindowProps {
 }
 
 export default function ChatWindow({ content, isLoadingContent }: ChatWindowProps) {
+  const refWindow = useRef<HTMLDivElement>(null);
   const refLoader = useRef<HTMLDivElement>(null);
   const { user } = useFirebase();
   const uName = user?.displayName || 'Player';
@@ -28,14 +29,14 @@ export default function ChatWindow({ content, isLoadingContent }: ChatWindowProp
 
   useEffect(() => {
     // If isLoadingContent is true, scroll to the bottom.
-    if (isLoadingContent) {
-      if (refLoader.current) refLoader.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    isLoadingContent && refLoader.current?.scrollIntoView({ behavior: 'smooth' });
+    !isLoadingContent && refWindow.current?.scrollIntoView({ behavior: 'smooth' });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoadingContent]);
 
   return (
-    <div className="h-[70vh] w-[90vw] flex flex-col border rounded-xl p-2">
+    <div className="h-[70vh] w-[90vw] flex flex-col border rounded-xl p-2" ref={refWindow}>
       <div className="overflow-y-scroll">
         {content.map((cont, idx) => {
           const position = cont.role === AI_ROLE.MODEL ? 'start' : 'end';
