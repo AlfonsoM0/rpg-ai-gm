@@ -10,11 +10,12 @@ import {
   GenerationConfig,
   SafetySetting,
 } from '@google/generative-ai';
+import { AI_MODEL } from 'config/constants';
 import { gmAiPromptArray } from 'config/gm-ai-promp';
 
 const API_KEY = process.env.AI_APY_KEY || '';
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+const model = genAI.getGenerativeModel({ model: AI_MODEL.GEMINI_PRO });
 
 const generationConfigDefault: GenerationConfig = {
   // Strict AI
