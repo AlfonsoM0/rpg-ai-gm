@@ -65,21 +65,21 @@ export default function useSyncStorageAndFirebase() {
         userPreferences: async () => {
           const currentFireDoc = await getFireDoc(CN.USER_PREFERENCES);
 
-          if (currentFireDoc && currentFireDoc.updatedAt < uAtUserPref)
+          if ((currentFireDoc && currentFireDoc.updatedAt < uAtUserPref) || !currentFireDoc)
             setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUserPref });
         },
 
         userCharacters: async () => {
           const currentFireDoc = await getFireDoc(CN.USER_CHARACTERS);
 
-          if (currentFireDoc && currentFireDoc.updatedAt < uAtChar)
+          if ((currentFireDoc && currentFireDoc.updatedAt < uAtChar) || !currentFireDoc)
             setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtChar });
         },
 
         userLibrary: async () => {
           const currentFireDoc = await getFireDoc(CN.USER_LIBRARY);
 
-          if (currentFireDoc && currentFireDoc.updatedAt < uAtLib)
+          if ((currentFireDoc && currentFireDoc.updatedAt < uAtLib) || !currentFireDoc)
             setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtLib });
         },
       },
