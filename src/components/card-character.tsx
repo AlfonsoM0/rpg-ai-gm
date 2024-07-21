@@ -88,18 +88,18 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
   return (
     <div className={borderStyle}>
       <div className="card-body p-2">
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex justify-between items-center h-14 gap-4">
           <div>
             <h2 className="card-title">{name}</h2>
           </div>
           <div>
-            <p className="text-sm text-info">
+            <p className="text-xs text-info">
               <strong>XP: </strong> {CharsXP}/{xp}
             </p>
           </div>
         </div>
 
-        <div className="flex justify-around items-center mt-2 font-bold">
+        <div className="flex justify-center items-center font-bold gap-10">
           <div>
             <h3>FUE +{strength}</h3>
             <h3>DES +{dexterity}</h3>

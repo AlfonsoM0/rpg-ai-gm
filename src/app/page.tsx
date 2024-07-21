@@ -117,7 +117,7 @@ export default function Home() {
         ) : null}
 
         <div className="flex flex-wrap justify-center gap-4">
-          <div className="card w-80 h-60 border border-primary-content rounded-lg shadow-md">
+          <div className="card w-80 h-64 border border-primary-content rounded-lg shadow-md">
             <button
               className="flex flex-col justify-center items-center mt-[15%]"
               onClick={onCreateNewCharacterClick}
