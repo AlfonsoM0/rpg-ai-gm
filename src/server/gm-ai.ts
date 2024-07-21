@@ -64,7 +64,10 @@ export default async function runAIChat(
   const { text, promptFeedback, usageMetadata } = response;
 
   // console.log('AI result/response/promptFeedback => ', promptFeedback);
-  console.log('AI result/response/usageMetadata => ', usageMetadata);
+  console.log(
+    'AI result/response/usageMetadata/totalTokenCount => ',
+    usageMetadata?.totalTokenCount
+  );
   // console.log('AI result/response/text => ', text);
 
   return text();

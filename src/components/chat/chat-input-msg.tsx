@@ -5,6 +5,7 @@ import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export default function ChatInputMsg() {
   const { addContent, isLoadingContent } = useGmAiStore();
@@ -24,8 +25,9 @@ export default function ChatInputMsg() {
 
   return (
     <form className="flex gap-2 p-2" onSubmit={submitChat}>
-      <textarea
-        className="textarea textarea-bordered w-full min-h-12"
+      <TextareaAutosize
+        autoFocus // text area should automatically get focus when the page loads
+        className="textarea textarea-bordered w-full"
         placeholder="..."
         value={chatMsg}
         onChange={(e) => setChatMsg(e.target.value)}
