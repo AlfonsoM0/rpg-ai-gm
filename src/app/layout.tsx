@@ -11,10 +11,6 @@ import TestComponent from './(TEST)/testComponent';
 import FixComponent from './(FIX)/FixComponent';
 import UserFirebaseSync from 'components/user/user-fire-sync';
 
-// 'regenerator-runtime' is a polyfill for async/await and generators in JavaScript. It's used to make sure that your code can run on older browsers that don't support these features natively.
-// We use 'regenerator-runtime' module for Button.STT compoment works correctly Client Side.
-import 'regenerator-runtime/runtime';
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

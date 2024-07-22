@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from 'components/icons';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 // We use 'regenerator-runtime' module for Button.STT compoment works correctly Client Side.
@@ -19,7 +19,6 @@ export default function STT() {
 
   useEffect(() => {
     if (!listening) {
-      console.log('resetTranscript()');
       resetTranscript();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
