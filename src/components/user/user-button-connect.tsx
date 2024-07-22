@@ -7,6 +7,7 @@ import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import { useState } from 'react';
+import UserButtonEditProfile from './user-button-edit';
 
 export default function UserButtonConnect() {
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -26,7 +27,8 @@ export default function UserButtonConnect() {
 
   if (user)
     return (
-      <div>
+      <div className="flex flex-col gap-2">
+        <UserButtonEditProfile />
         <button className="btn btn-error w-full" onClick={handleSignOut}>
           Cerrar Sesión
         </button>

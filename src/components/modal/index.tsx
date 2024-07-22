@@ -34,3 +34,5 @@ export function Modal(): JSX.Element {
     </dialog>
   );
 }
+
+export * from './modal-content-container';
