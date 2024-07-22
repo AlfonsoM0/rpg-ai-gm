@@ -10,6 +10,9 @@ import { Unsubscribe } from 'firebase/firestore';
 import useFirebase from '.';
 import { useDebouncedCallback } from 'use-debounce';
 
+/**
+ * Syncs the data between Firebase and local storage using a debounced callback.
+ */
 export default function useFirebaseAutoSync() {
   const sync = useSyncStorageAndFirebase();
 

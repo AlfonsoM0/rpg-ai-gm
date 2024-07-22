@@ -63,9 +63,11 @@ interface FirebaseActions {
     collectionName: T,
     data: CollectionType<T>
   ) => Promise<void>;
+
   getFireDoc: <T extends CollectionName>(
     collectionName: T
-  ) => Promise<CollectionType<T> | undefined>;
+  ) => Promise<CollectionType<T> | undefined | false>;
+
   observeFireDoc: (
     collectionName: CollectionName,
     cb: (doc: DocumentSnapshot<DocumentData, DocumentData>) => void
@@ -203,6 +205,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     }
   },
 
+  // @returns Collection from Firebase, undefined if no data, false if error.
   getFireDoc: async (collectionName) => {
     const { fireDB, user } = get();
     set({ isFireLoading: true, fireErrorMsg: '' });
@@ -218,6 +221,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     } catch (error) {
       console.error(`getFireDoc/ ${collectionName} =>`, error);
       set({ isFireLoading: false, fireErrorMsg: 'Error al obtener de la base de datos.' });
+      return false;
     }
   },
 

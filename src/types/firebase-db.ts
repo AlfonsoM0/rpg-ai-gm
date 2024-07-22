@@ -2,14 +2,29 @@ import { Character } from './character';
 import { Book } from './library';
 
 export type UserAccount = {
+  // Basic user information from the Firebase Authentication system.
   id: string;
   name: string;
+  email: string;
+  photoURL: string;
+
+  // Additional user data
+  age?: number;
+  gender?: string;
+  location?: string;
+  isSubscribed?: boolean;
+  suscriptionBeginsAt?: number; // for premium users only
+  suscriptionExpiresAt?: number; // For premium users only
+
+  // Timestamps for tracking account activity
+  createdAt: number;
   updatedAt: number;
 };
 
 export type UserPreferences = {
   theme: string;
   chatShortcuts: string[];
+  // language?: string;
   updatedAt: number;
 };
 

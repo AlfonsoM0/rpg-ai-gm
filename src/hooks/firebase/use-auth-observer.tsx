@@ -3,6 +3,9 @@
 import { useEffect } from 'react';
 import useFirebase from '.';
 
+/**
+ * Control the authentication state of a user and observe changes in real time.
+ */
 export default function useAuthObserver() {
   const { fireAuth, initializeFirebaseApp, setObserverUser } = useFirebase();
 
