@@ -1,25 +1,27 @@
 import { Character } from './character';
 import { Book } from './library';
 
-export type UserAccount = {
-  // Basic user information from the Firebase Authentication system.
+type UserBasicInfo = {
   id: string;
-  name: string;
   email: string;
+  displayName: string;
   photoURL: string;
 
-  // Additional user data
-  age?: number;
-  gender?: string;
-  location?: string;
-  isSubscribed?: boolean;
-  suscriptionBeginsAt?: number; // for premium users only
-  suscriptionExpiresAt?: number; // For premium users only
-
-  // Timestamps for tracking account activity
   createdAt: number;
   updatedAt: number;
 };
+
+type UserAdditionalInfo = {
+  age: number;
+  gender: string;
+  location: string;
+  isSubscribed: boolean;
+  suscriptionBeginsAt: number; // for premium users only
+  suscriptionExpiresAt: number; // For premium users only
+};
+
+export type UserAccount = UserBasicInfo & UserAdditionalInfo;
+export type UserAccuntPartial = Partial<Omit<UserAccount, 'id' | 'createdAt'>>;
 
 export type UserPreferences = {
   theme: string;

@@ -30,7 +30,7 @@ import {
   // persistentLocalCache,
   // DocumentData,
 } from 'firebase/firestore';
-import { CollectionType, CollectionName } from 'types/firebase-db';
+import { CollectionType, CollectionName, UserAccount, UserAccuntPartial } from 'types/firebase-db';
 
 interface FirebaseStore {
   fireApp: FirebaseApp | null;
@@ -38,6 +38,7 @@ interface FirebaseStore {
   fireDB: Firestore | null;
   providerGoogle: GoogleAuthProvider | null;
   user: User | null;
+  userAccount: UserAccount | null;
 
   isFireLoading: boolean;
   fireErrorMsg: string;
@@ -50,13 +51,7 @@ interface FirebaseActions {
   handleSignInWithGooglePopup: () => Promise<void>;
   handleSignOut: () => Promise<void>;
   setObserverUser: () => Unsubscribe | undefined;
-  updateUserProfile: ({
-    displayName,
-    photoURL,
-  }: {
-    displayName?: string;
-    photoURL?: string;
-  }) => Promise<void>;
+  updateUserProfile: (userAccount: UserAccuntPartial) => Promise<void>;
 
   // Database
   setFireDoc: <T extends CollectionName>(
@@ -80,6 +75,7 @@ const initialFirebaseState: FirebaseStore = {
   fireDB: null,
   providerGoogle: null,
   user: null,
+  userAccount: null,
 
   isFireLoading: false,
   fireErrorMsg: '',
@@ -125,8 +121,6 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
 
     try {
       if (fireAuth && providerGoogle) await signInWithPopup(fireAuth, providerGoogle);
-      else set({ fireErrorMsg: 'Error al conectar con la base de datos.' });
-
       set({ isFireLoading: false });
     } catch (error) {
       console.error('handleSignInWithGoogle => ', error);
@@ -139,13 +133,8 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     const { fireAuth } = get();
 
     try {
-      if (fireAuth) {
-        await signOut(fireAuth);
-
-        set({ user: null });
-      } else set({ fireErrorMsg: 'Error al conectar con la base de datos.' });
-
-      set({ isFireLoading: false });
+      if (fireAuth) await signOut(fireAuth);
+      set({ user: null, isFireLoading: false });
     } catch (error) {
       console.error('handleSignOut => ', error);
       set({ isFireLoading: false, fireErrorMsg: 'Error al cerrar sesión.' });
@@ -153,14 +142,43 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
   },
 
   setObserverUser: () => {
-    const { fireAuth } = get();
+    const { fireAuth, getFireDoc, setFireDoc } = get();
+
     if (fireAuth) {
-      const unsubscribe = onAuthStateChanged(fireAuth, (user) => {
+      const unsubscribe = onAuthStateChanged(fireAuth, async (user) => {
         if (user) {
           set({ user });
-          // Additional actions here, such as fetching user data from Firestore?
+
+          const userAccount = await getFireDoc(CollectionName.USER_ACCOUNT);
+
+          if (userAccount) set({ userAccount });
+          else if (typeof userAccount === 'undefined') {
+            const time = new Date().getTime();
+            const newUserAccount: UserAccount = {
+              id: user.uid,
+              email: user.email || '',
+              displayName: user.displayName || '',
+              photoURL: user.photoURL || '',
+              createdAt: time,
+              updatedAt: time,
+
+              age: 0,
+              gender: '',
+              location: '',
+              isSubscribed: false,
+              suscriptionBeginsAt: 0,
+              suscriptionExpiresAt: 0,
+            };
+            await setFireDoc(CollectionName.USER_ACCOUNT, newUserAccount);
+            set({ userAccount: newUserAccount });
+          } else
+            set({
+              user: null,
+              userAccount: null,
+              fireErrorMsg: 'Error al obtener la cuenta de usuario.',
+            });
         } else {
-          set({ user: null });
+          set({ user: null, userAccount: null });
         }
       });
 
@@ -168,16 +186,22 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     }
   },
 
-  updateUserProfile: async ({ displayName, photoURL }) => {
-    const { fireAuth, user } = get();
+  updateUserProfile: async (newUserInfo) => {
+    const { user, userAccount, setFireDoc } = get();
     set({ isFireLoading: true, fireErrorMsg: '' });
 
     try {
-      if (fireAuth && user)
+      if (user && (newUserInfo.displayName || newUserInfo.photoURL))
         await updateProfile(user, {
-          displayName: displayName || user.displayName,
-          photoURL: photoURL || user.photoURL,
+          displayName: newUserInfo.displayName || user.displayName,
+          photoURL: newUserInfo.photoURL || user.photoURL,
         });
+
+      if (userAccount) {
+        const newUserAcc = { ...userAccount, ...newUserInfo };
+        await setFireDoc(CollectionName.USER_ACCOUNT, newUserAcc);
+        set({ userAccount: newUserAcc });
+      }
 
       set({ isFireLoading: false });
     } catch (error) {

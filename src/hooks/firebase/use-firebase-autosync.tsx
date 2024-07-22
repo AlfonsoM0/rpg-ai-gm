@@ -34,12 +34,7 @@ export default function useFirebaseAutoSync() {
   // Debounce to prevent multiple uploads in a short time frame.
   const dT = 10000; // 10 seconds of debounce time.
 
-  const debounceAccount = useDebouncedCallback(() => {
-    if (sync) sync.uploadFireDB.userAccount();
-  }, dT);
-  useEffect(() => {
-    debounceAccount();
-  }, [user]);
+  // userAccount: made by updateUserProfile
 
   const debounceCharacters = useDebouncedCallback(() => {
     if (sync) sync.uploadFireDB.userCharacters();
