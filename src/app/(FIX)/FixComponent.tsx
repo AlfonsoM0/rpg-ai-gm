@@ -4,10 +4,6 @@ import { useEffect } from 'react';
 import useFIX_MoveCharactersToNewState from './useFIX_MoveCharactersToNewState';
 import { useModalState } from 'hooks/use-modal-state';
 
-// 'regenerator-runtime' is a polyfill for async/await and generators in JavaScript. It's used to make sure that your code can run on older browsers that don't support these features natively.
-// We use 'regenerator-runtime' module for Button.STT compoment works correctly Client Side.
-import 'regenerator-runtime/runtime';
-
 export default function FixComponent() {
   useFIX_MoveCharactersToNewState();
 
