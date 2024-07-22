@@ -1,7 +1,7 @@
 import { Copy } from './button-copy';
-import Stt from './button-stt';
+import STT from './button-stt';
 
 export const Button = {
   Copy,
-  Stt,
+  STT,
 };

@@ -1,25 +1,34 @@
 'use client';
 
 import { Icon } from 'components/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-interface ButtonSttProps {
-  text: string;
-  setText: (text: string) => void;
-}
+// We use 'regenerator-runtime' module for Button.STT compoment works correctly Client Side.
+export default function STT() {
+  const { listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
-export default function Stt({ text, setText }: ButtonSttProps) {
-  const [isSttON, setIsSttON] = useState(false);
+  function startOrEndSpeechRecognition() {
+    if (!listening) {
+      // i18n support is not yet implemented.
+      SpeechRecognition.startListening({ continuous: true, language: undefined });
+    } else {
+      SpeechRecognition.stopListening();
+    }
+  }
 
+  useEffect(() => {
+    if (!listening) {
+      console.log('resetTranscript()');
+      resetTranscript();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listening]);
+
+  if (!browserSupportsSpeechRecognition) return <></>;
   return (
-    <button
-      type="button"
-      className="btn btn-xs p-0"
-      onClick={() => {
-        setIsSttON(!isSttON); // Toggle the state of STT
-      }}
-    >
-      {isSttON ? (
+    <button type="button" className="btn btn-xs p-0" onClick={startOrEndSpeechRecognition}>
+      {listening ? (
         <Icon.MicrophoneOn className="w-4 h-4 stroke-success" />
       ) : (
         <Icon.MicrophoneOff className="w-4 h-4 stroke-error" />
