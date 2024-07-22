@@ -11,6 +11,8 @@ import TestComponent from './(TEST)/testComponent';
 import FixComponent from './(FIX)/FixComponent';
 import UserFirebaseSync from 'components/user/user-fire-sync';
 
+import 'regenerator-runtime/runtime'; // This is necesary for Build STT.
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
