@@ -2,6 +2,7 @@
 
 import ModalEndHistory from 'components/chat/chat-options-modals/modal-end-story';
 import { Icon } from 'components/icons';
+import { ModalContentContainer } from 'components/modal';
 import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_STORY_END } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -87,27 +88,28 @@ function ModalIsAStoryInProgress() {
   const { setModalIsOpen, setModalContent } = useModalState();
 
   return (
-    <div>
-      <h3 className="font-bold text-lg">Hay una historia en progreso</h3>
-      <p className="py-4">Finaliza tu historia para poder empezar otra.</p>
+    <ModalContentContainer title="Historia en Progreso" titleColor="info">
+      <>
+        <p className="py-4">Finaliza tu historia para poder empezar otra.</p>
 
-      <div className="modal-action justify-around">
-        <button
-          className="btn btn-sm btn-error"
-          onClick={() => setModalContent(<ModalEndHistory />)}
-        >
-          Finalizar historia
-        </button>
-        <button
-          className="btn btn-sm btn-success"
-          onClick={() => {
-            router.push('/story');
-            setModalIsOpen(false);
-          }}
-        >
-          Continuar historia
-        </button>
-      </div>
-    </div>
+        <div className="modal-action justify-around">
+          <button
+            className="btn btn-sm btn-error"
+            onClick={() => setModalContent(<ModalEndHistory />)}
+          >
+            Finalizar historia
+          </button>
+          <button
+            className="btn btn-sm btn-success"
+            onClick={() => {
+              router.push('/story');
+              setModalIsOpen(false);
+            }}
+          >
+            Continuar historia
+          </button>
+        </div>
+      </>
+    </ModalContentContainer>
   );
 }

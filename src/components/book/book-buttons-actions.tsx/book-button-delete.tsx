@@ -1,5 +1,6 @@
 'use client';
 
+import { ModalContentContainer } from 'components/modal';
 import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { Book } from 'types/library';
@@ -24,24 +25,25 @@ function ModalDeleteBook({ id }: { id: string }) {
   const { removeBook } = useLibraryStore();
 
   return (
-    <div>
-      <h3 className="font-bold text-lg">¿Estás seguro de borrar este libro?</h3>
-      <p className="py-4">Esta acción no se puede deshacer.</p>
+    <ModalContentContainer title="¿Estás seguro de borrar este libro?" titleColor="error">
+      <>
+        <p className="py-4">Esta acción no se puede deshacer.</p>
 
-      <div className="modal-action">
-        <button
-          className="btn btn-error"
-          onClick={() => {
-            removeBook(id);
-            setModalIsOpen(false);
-          }}
-        >
-          Si, borrar
-        </button>
-        <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-          No, cancelar
-        </button>
-      </div>
-    </div>
+        <div className="modal-action">
+          <button
+            className="btn btn-error"
+            onClick={() => {
+              removeBook(id);
+              setModalIsOpen(false);
+            }}
+          >
+            Si, borrar
+          </button>
+          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+            No, cancelar
+          </button>
+        </div>
+      </>
+    </ModalContentContainer>
   );
 }

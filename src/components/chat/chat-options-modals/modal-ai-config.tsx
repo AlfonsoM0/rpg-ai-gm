@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from 'components/icons';
+import { ModalContentContainer } from 'components/modal';
 import TTSConfig from 'components/tts/tts-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { AiModels } from 'utils/generate-ai-config';
@@ -57,34 +58,35 @@ export const aiModels: { name: AiModels; nameEs: string; desc: string; clsRadio:
 export default function ModalConfigAI() {
   const { aiConfig, setAiConfig } = useGmAiStore();
   return (
-    <div>
-      <h3 className="font-bold text-lg text-info">Game Master AI</h3>
-      <p className="py-4">Configura la personalidad de tu Game Master AI.</p>
+    <ModalContentContainer title="Game Master AI" titleColor="info">
+      <>
+        <p className="py-4">Configura la personalidad de tu Game Master AI.</p>
 
-      <h4 className="text-center my-4">
-        <span>
-          <Icon.AiBrain className={`${aiIconStyle[aiConfig]} w-4 h-4 inline`} />
-        </span>
-        <strong> Estilo</strong>
-      </h4>
+        <h4 className="text-center my-4">
+          <span>
+            <Icon.AiBrain className={`${aiIconStyle[aiConfig]} w-4 h-4 inline`} />
+          </span>
+          <strong> Estilo</strong>
+        </h4>
 
-      {aiModels.map((model) => (
-        <div className="form-control border-2 rounded-lg my-1 p-1" key={model.name}>
-          <label className="label cursor-pointer">
-            <span className="label-text font-bold">{model.nameEs}</span>
-            <input
-              type="radio"
-              name="radio-10"
-              className={model.clsRadio}
-              checked={aiConfig === model.name}
-              onChange={() => setAiConfig(model.name)}
-            />
-          </label>
-          <small className="ml-3">{model.desc}</small>
-        </div>
-      ))}
+        {aiModels.map((model) => (
+          <div className="form-control border-2 rounded-lg my-1 p-1" key={model.name}>
+            <label className="label cursor-pointer">
+              <span className="label-text font-bold">{model.nameEs}</span>
+              <input
+                type="radio"
+                name="radio-10"
+                className={model.clsRadio}
+                checked={aiConfig === model.name}
+                onChange={() => setAiConfig(model.name)}
+              />
+            </label>
+            <small className="ml-3">{model.desc}</small>
+          </div>
+        ))}
 
-      <TTSConfig />
-    </div>
+        <TTSConfig />
+      </>
+    </ModalContentContainer>
   );
 }

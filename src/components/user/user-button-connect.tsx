@@ -8,6 +8,7 @@ import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import { useState } from 'react';
 import UserButtonEditProfile from './user-button-edit';
+import { ModalContentContainer } from 'components/modal';
 
 export default function UserButtonConnect() {
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -72,45 +73,46 @@ function ModalConnect() {
   }
 
   return (
-    <div>
-      <h3 className="font-bold text-lg text-info">Iniciar Sesión</h3>
-      <p className="py-4 text-sm">
-        Al iniciar sesión por primera vez, cuando modificas tu colección de personajes o libros,
-        estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se
-        sincronizarán en todos los dispositivos conectados a tu cuenta.
-      </p>
-      <p className="pb-4 text-sm">
-        Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescriben con los datos
-        guardados en la nube.
-      </p>
+    <ModalContentContainer title="Inicio de Sesión" titleColor="info">
+      <>
+        <p className="py-4 text-sm">
+          Al iniciar sesión por primera vez, cuando modificas tu colección de personajes o libros,
+          estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se
+          sincronizarán en todos los dispositivos conectados a tu cuenta.
+        </p>
+        <p className="pb-4 text-sm">
+          Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescriben con los datos
+          guardados en la nube.
+        </p>
 
-      <p className="text-sm mb-1 text-warning">
-        ⚠️ Se abrirá una nueva ventana para autenticación. Asegurate de que tu navegador esté
-        configurado para permitir ventanas emergentes.
-      </p>
-      <p className="text-sm mb-4 text-warning">
-        ⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar
-        sesión por primera vez.
-      </p>
+        <p className="text-sm mb-1 text-warning">
+          ⚠️ Se abrirá una nueva ventana para autenticación. Asegurate de que tu navegador esté
+          configurado para permitir ventanas emergentes.
+        </p>
+        <p className="text-sm mb-4 text-warning">
+          ⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar
+          sesión por primera vez.
+        </p>
 
-      <div className="flex flex-wrap justify-center gap-4">
-        {/* SinIn Options */}
-        <button
-          className="btn btn-lg btn-outline btn-primary text-2xl p-2 m-2"
-          onClick={onSinInWithGoogle}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <span className="loading loading-spinner loading-lg"></span> Google
-            </>
-          ) : (
-            <>
-              <Icon.Google className="w-10 h-10" /> Google
-            </>
-          )}
-        </button>
-      </div>
-    </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          {/* SinIn Options */}
+          <button
+            className="btn btn-lg btn-outline btn-primary text-2xl p-2 m-2"
+            onClick={onSinInWithGoogle}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <span className="loading loading-spinner loading-lg"></span> Google
+              </>
+            ) : (
+              <>
+                <Icon.Google className="w-10 h-10" /> Google
+              </>
+            )}
+          </button>
+        </div>
+      </>
+    </ModalContentContainer>
   );
 }

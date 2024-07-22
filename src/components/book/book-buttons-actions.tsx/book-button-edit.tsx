@@ -1,5 +1,6 @@
 'use client';
 
+import { ModalContentContainer } from 'components/modal';
 import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useState } from 'react';
@@ -27,32 +28,33 @@ function ModalEditBook({ book }: { book: Book }) {
   const [newTitle, setNewTitle] = useState(book.title);
 
   return (
-    <div>
-      <h3 className="font-bold text-lg">Nombre del Libro</h3>
-      <p className="py-4">Edita el nombre del libro.</p>
+    <ModalContentContainer title="Editar Libro" titleColor="warning">
+      <>
+        <p className="py-4">Edita el nombre del libro.</p>
 
-      <input
-        className="input input-bordered w-full text-center"
-        type="text"
-        placeholder="Nombre de la Historia"
-        value={newTitle}
-        onChange={(e) => setNewTitle(e.target.value)}
-      />
+        <input
+          className="input input-bordered w-full text-center"
+          type="text"
+          placeholder="Nombre de la Historia"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
 
-      <div className="modal-action justify-around">
-        <button className="btn btn-error" onClick={() => setModalIsOpen(false)}>
-          Cancelar
-        </button>
-        <button
-          className="btn btn-success"
-          onClick={() => {
-            changeBookName(book.id, newTitle);
-            setModalIsOpen(false);
-          }}
-        >
-          Guardar
-        </button>
-      </div>
-    </div>
+        <div className="modal-action justify-around">
+          <button className="btn btn-error" onClick={() => setModalIsOpen(false)}>
+            Cancelar
+          </button>
+          <button
+            className="btn btn-success"
+            onClick={() => {
+              changeBookName(book.id, newTitle);
+              setModalIsOpen(false);
+            }}
+          >
+            Guardar
+          </button>
+        </div>
+      </>
+    </ModalContentContainer>
   );
 }

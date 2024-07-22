@@ -1,5 +1,6 @@
 'use client';
 
+import { ModalContentContainer } from 'components/modal';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useLibraryStore } from 'hooks/use-library-store';
@@ -62,44 +63,48 @@ export default function ModalEndHistory() {
   }
 
   return (
-    <div>
-      <h3 className="font-bold text-lg">Fin de la Historia</h3>
-      <p className="py-4">
-        Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar
-        otro capítulo desde donde dejaste la anterior. <br />
-        <br />
-        Si tu historia no finaliza con el cartel de &quot;Fin de la historia&quot;, que muestra los
-        XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas contiuarla.
-        <br />
-        <br />
-        <strong>Elige un nombre original.</strong>
-      </p>
+    <ModalContentContainer title="Fin de la Historia" titleColor="info">
+      <>
+        <p className="py-4">
+          Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para
+          jugar otro capítulo desde donde dejaste la anterior. <br />
+          <br />
+          Si tu historia no finaliza con el cartel de &quot;Fin de la historia&quot;, que muestra
+          los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas
+          contiuarla.
+          <br />
+          <br />
+          <strong>Elige un nombre original.</strong>
+        </p>
 
-      <input
-        className="input input-bordered w-full text-center"
-        type="text"
-        placeholder="Nombre de la Historia"
-        value={storyName}
-        onChange={(e) => setStoryName(e.target.value)}
-      />
+        <input
+          className="input input-bordered w-full text-center"
+          type="text"
+          placeholder="Nombre de la Historia"
+          value={storyName}
+          onChange={(e) => setStoryName(e.target.value)}
+        />
 
-      <div className="modal-action justify-around">
-        <button className="btn btn-error" onClick={onSaveBookClick}>
-          Si, finalizar historia
-        </button>
-        <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-          No, seguir jugando
-        </button>
-      </div>
-    </div>
+        <div className="modal-action justify-around">
+          <button className="btn btn-error" onClick={onSaveBookClick}>
+            Si, finalizar historia
+          </button>
+          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+            No, seguir jugando
+          </button>
+        </div>
+      </>
+    </ModalContentContainer>
   );
 }
 
 const ModalWinXp = ({ xp, PC }: { xp: number; PC: string[] }) => (
-  <div>
-    <h3 className="font-bold text-lg">
-      Has ganado {xp}XP para {PC.join(' y ')}.
-    </h3>
-    <p className="py-4">Edita tu personaje para mejorar tus caracteristicas.</p>
-  </div>
+  <ModalContentContainer title="Ganaste XP" titleColor="success">
+    <>
+      <p className="font-bold text-lg">
+        Has ganado {xp}XP para {PC.join(' y ')}.
+      </p>
+      <p className="py-4">Edita tu personaje para mejorar tus caracteristicas.</p>
+    </>
+  </ModalContentContainer>
 );

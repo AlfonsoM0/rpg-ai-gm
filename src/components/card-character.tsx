@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { Character } from 'types/character';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
+import { ModalContentContainer } from './modal';
 
 interface CardCharacterProps {
   character: Character;
@@ -177,26 +178,27 @@ function ModalDeleteCharacter({ id }: { id: string }) {
   const { removeACharacterFromCollection, removeACharacterFromInGame } = useCharacterStore();
 
   return (
-    <div>
-      <h3 className="font-bold text-lg">¿Estás seguro de borrar este personaje?</h3>
-      <p className="py-4">Esta acción no se puede deshacer.</p>
+    <ModalContentContainer title="¿Estás seguro de borrar este personaje?" titleColor="error">
+      <>
+        <p className="py-4">Esta acción no se puede deshacer.</p>
 
-      <div className="modal-action">
-        <button
-          className="btn btn-error"
-          onClick={() => {
-            removeACharacterFromCollection(id);
-            removeACharacterFromInGame(id);
-            setModalIsOpen(false);
-          }}
-        >
-          Si, borrar
-        </button>
-        <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-          No, cancelar
-        </button>
-      </div>
-    </div>
+        <div className="modal-action">
+          <button
+            className="btn btn-error"
+            onClick={() => {
+              removeACharacterFromCollection(id);
+              removeACharacterFromInGame(id);
+              setModalIsOpen(false);
+            }}
+          >
+            Si, borrar
+          </button>
+          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+            No, cancelar
+          </button>
+        </div>
+      </>
+    </ModalContentContainer>
   );
 }
 
