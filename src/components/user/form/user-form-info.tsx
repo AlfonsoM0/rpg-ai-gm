@@ -25,6 +25,8 @@ export default function UserFormInfo() {
 
     updateUserProfile(userAcc);
 
+    setUserAcc({});
+
     router.push('/');
   }
 
