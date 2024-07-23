@@ -17,15 +17,22 @@ import useFirebase from 'hooks/firebase';
 interface ChatWindowProps {
   content: Content[];
   isLoadingContent: boolean;
+  userName?: string;
+  userURLAvatar?: string;
 }
 
-export default function ChatWindow({ content, isLoadingContent }: ChatWindowProps) {
+export default function ChatWindow({
+  content,
+  isLoadingContent,
+  userName,
+  userURLAvatar,
+}: ChatWindowProps) {
   const refWindow = useRef<HTMLDivElement>(null);
   const refLoader = useRef<HTMLDivElement>(null);
   const { user } = useFirebase();
-  const uName = user?.displayName || 'Player';
-  const uImgURL = user?.photoURL || undefined;
-  const uImgAlt = user ? `${user.displayName} Avatar` : 'Player Avatar';
+  const uName = userName || user?.displayName || 'Player';
+  const uImgURL = userURLAvatar || user?.photoURL || undefined;
+  const uImgAlt = `${userName || user?.displayName || 'Player'} Avatar`;
 
   useEffect(() => {
     // If isLoadingContent is true, scroll to the bottom.

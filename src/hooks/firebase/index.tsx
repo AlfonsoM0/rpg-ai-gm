@@ -56,11 +56,13 @@ interface FirebaseActions {
   // Database
   setFireDoc: <T extends CollectionName>(
     collectionName: T,
-    data: CollectionType<T>
+    data: CollectionType<T>,
+    uid?: string
   ) => Promise<void>;
 
   getFireDoc: <T extends CollectionName>(
-    collectionName: T
+    collectionName: T,
+    uid?: string
   ) => Promise<CollectionType<T> | undefined | false>;
 
   observeFireDoc: (
@@ -216,12 +218,13 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
    *
    */
 
-  setFireDoc: async (collectionName, data) => {
+  setFireDoc: async (collectionName, data, uid) => {
     const { fireDB, user } = get();
+    const userId = uid || user?.uid;
     set({ isFireLoading: true, fireErrorMsg: '' });
 
     try {
-      if (fireDB && user?.uid) await setDoc(doc(fireDB, collectionName, user.uid), data);
+      if (fireDB && userId) await setDoc(doc(fireDB, collectionName, userId), data);
       set({ isFireLoading: false });
     } catch (error) {
       console.error(`setFireDoc/ ${collectionName} => `, error);
@@ -230,13 +233,14 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
   },
 
   // @returns Collection from Firebase, undefined if no data, false if error.
-  getFireDoc: async (collectionName) => {
+  getFireDoc: async (collectionName, uid) => {
     const { fireDB, user } = get();
+    const userId = uid || user?.uid;
     set({ isFireLoading: true, fireErrorMsg: '' });
 
     try {
-      if (fireDB && user?.uid) {
-        const documentSnapshot = await getDoc(doc(fireDB, collectionName, user.uid));
+      if (fireDB && userId) {
+        const documentSnapshot = await getDoc(doc(fireDB, collectionName, userId));
         const data = documentSnapshot.data();
 
         set({ isFireLoading: false });

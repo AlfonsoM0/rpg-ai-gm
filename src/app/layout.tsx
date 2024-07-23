@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime'; // This is necesary for Build STT.
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -10,8 +12,6 @@ import TTSLoader from 'components/tts/tts-loader';
 import TestComponent from './(TEST)/testComponent';
 import FixComponent from './(FIX)/FixComponent';
 import UserFirebaseSync from 'components/user/user-fire-sync';
-
-import 'regenerator-runtime/runtime'; // This is necesary for Build STT.
 
 const inter = Inter({ subsets: ['latin'] });
 
