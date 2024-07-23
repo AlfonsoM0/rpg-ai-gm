@@ -14,9 +14,21 @@ export default function UserButtonConnect() {
   const { setModalContent, setModalIsOpen } = useModalState();
   const { user, isFireLoading, fireErrorMsg, handleSignOut } = useFirebase();
 
+  const { clearOrSetUserPreferences } = useUserPreferencesStore();
+  const { setCharactersCollection } = useCharacterStore();
+  const { setLibrary } = useLibraryStore();
+
   function handleClick() {
     setModalContent(<ModalConnect />);
     setModalIsOpen(true);
+  }
+
+  function signOut() {
+    handleSignOut().then(() => {
+      clearOrSetUserPreferences();
+      setCharactersCollection();
+      setLibrary();
+    });
   }
 
   if (isFireLoading)
@@ -30,7 +42,7 @@ export default function UserButtonConnect() {
     return (
       <div className="flex flex-col gap-2">
         <UserButtonEditProfile />
-        <button className="btn btn-error w-full" onClick={handleSignOut}>
+        <button className="btn btn-error w-full" onClick={signOut}>
           Cerrar Sesión
         </button>
         {fireErrorMsg ? <p className="text-error text-center">{fireErrorMsg}</p> : null}
@@ -49,17 +61,13 @@ export default function UserButtonConnect() {
 
 function ModalConnect() {
   const { setModalIsOpen } = useModalState();
-  const { handleSignInWithGooglePopup } = useFirebase();
+  const { handleSignInWithGooglePopup, isFireLoading } = useFirebase();
 
   const { setUpdatedAtTo0: suat0Pref } = useUserPreferencesStore();
   const { setUpdatedAtTo0: suat0Char } = useCharacterStore();
   const { setUpdatedAtTo0: suat0Libr } = useLibraryStore();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   function onSinInWithGoogle() {
-    setIsLoading(true);
-
     // Reset updatedAt to 0 for all stores
     // => lower priority than the ones in Firebase.
     suat0Pref();
@@ -67,7 +75,6 @@ function ModalConnect() {
     suat0Libr();
 
     handleSignInWithGooglePopup().then(() => {
-      setIsLoading(false);
       setModalIsOpen(false);
     });
   }
@@ -99,9 +106,9 @@ function ModalConnect() {
           <button
             className="btn btn-lg btn-outline btn-primary text-2xl p-2 m-2"
             onClick={onSinInWithGoogle}
-            disabled={isLoading}
+            disabled={isFireLoading}
           >
-            {isLoading ? (
+            {isFireLoading ? (
               <>
                 <span className="loading loading-spinner loading-lg"></span> Google
               </>
