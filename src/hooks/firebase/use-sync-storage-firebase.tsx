@@ -45,28 +45,28 @@ export default function useSyncStorageAndFirebase() {
 
         // Firebase to Storage
         userPreferences: async () => {
-          const currentFireDoc = await getFireDoc(CN.USER_PREFERENCES);
+          const currentFireDoc = await getFireDoc('USER_PREFERENCES');
 
           if (currentFireDoc && currentFireDoc.updatedAt > uAtUserPref)
             clearOrSetUserPreferences(currentFireDoc);
           else if (!currentFireDoc)
-            setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUserPref });
+            setFireDoc('USER_PREFERENCES', { theme, chatShortcuts, updatedAt: uAtUserPref });
         },
 
         userCharacters: async () => {
-          const currentFireDoc = await getFireDoc(CN.USER_CHARACTERS);
+          const currentFireDoc = await getFireDoc('USER_CHARACTERS');
 
           if (currentFireDoc && currentFireDoc.updatedAt > uAtChar)
             setCharactersCollection(currentFireDoc);
           else if (!currentFireDoc)
-            setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtChar });
+            setFireDoc('USER_CHARACTERS', { charactersCollection, updatedAt: uAtChar });
         },
 
         userLibrary: async () => {
-          const currentFireDoc = await getFireDoc(CN.USER_LIBRARY);
+          const currentFireDoc = await getFireDoc('USER_LIBRARY');
 
           if (currentFireDoc && currentFireDoc.updatedAt > uAtLib) setLibrary(currentFireDoc);
-          else if (!currentFireDoc) setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtLib });
+          else if (!currentFireDoc) setFireDoc('USER_LIBRARY', { library, updatedAt: uAtLib });
         },
       },
 
@@ -80,24 +80,24 @@ export default function useSyncStorageAndFirebase() {
         // userAccount: made by useFirebase()/ updateUserProfile
 
         userPreferences: async () => {
-          const currentFireDoc = await getFireDoc(CN.USER_PREFERENCES);
+          const currentFireDoc = await getFireDoc('USER_PREFERENCES');
 
           if ((currentFireDoc && currentFireDoc.updatedAt < uAtUserPref) || !currentFireDoc)
-            setFireDoc(CN.USER_PREFERENCES, { theme, chatShortcuts, updatedAt: uAtUserPref });
+            setFireDoc('USER_PREFERENCES', { theme, chatShortcuts, updatedAt: uAtUserPref });
         },
 
         userCharacters: async () => {
-          const currentFireDoc = await getFireDoc(CN.USER_CHARACTERS);
+          const currentFireDoc = await getFireDoc('USER_CHARACTERS');
 
           if ((currentFireDoc && currentFireDoc.updatedAt < uAtChar) || !currentFireDoc)
-            setFireDoc(CN.USER_CHARACTERS, { charactersCollection, updatedAt: uAtChar });
+            setFireDoc('USER_CHARACTERS', { charactersCollection, updatedAt: uAtChar });
         },
 
         userLibrary: async () => {
-          const currentFireDoc = await getFireDoc(CN.USER_LIBRARY);
+          const currentFireDoc = await getFireDoc('USER_LIBRARY');
 
           if ((currentFireDoc && currentFireDoc.updatedAt < uAtLib) || !currentFireDoc)
-            setFireDoc(CN.USER_LIBRARY, { library, updatedAt: uAtLib });
+            setFireDoc('USER_LIBRARY', { library, updatedAt: uAtLib });
         },
       },
 
@@ -114,7 +114,7 @@ export default function useSyncStorageAndFirebase() {
             if (res && res.updatedAt > uAtUserPref) clearOrSetUserPreferences(res);
           }
 
-          return observeFireDoc(CN.USER_PREFERENCES, cb);
+          return observeFireDoc('USER_PREFERENCES', cb);
         },
 
         userCharacters: () => {
@@ -123,7 +123,7 @@ export default function useSyncStorageAndFirebase() {
             if (res && res.updatedAt > uAtChar) setCharactersCollection(res);
           }
 
-          return observeFireDoc(CN.USER_CHARACTERS, cb);
+          return observeFireDoc('USER_CHARACTERS', cb);
         },
 
         userLibrary: () => {
@@ -132,7 +132,7 @@ export default function useSyncStorageAndFirebase() {
             if (res && res.updatedAt > uAtLib) setLibrary(res);
           }
 
-          return observeFireDoc(CN.USER_LIBRARY, cb);
+          return observeFireDoc('USER_LIBRARY', cb);
         },
       },
     };

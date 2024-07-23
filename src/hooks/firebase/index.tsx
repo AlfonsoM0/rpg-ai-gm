@@ -149,7 +149,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
         if (user) {
           set({ user });
 
-          const userAccount = await getFireDoc(CollectionName.USER_ACCOUNT);
+          const userAccount = await getFireDoc('USER_ACCOUNT');
 
           if (userAccount) set({ userAccount });
           else if (typeof userAccount === 'undefined') {
@@ -169,7 +169,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
               suscriptionBeginsAt: 0,
               suscriptionExpiresAt: 0,
             };
-            await setFireDoc(CollectionName.USER_ACCOUNT, newUserAccount);
+            await setFireDoc('USER_ACCOUNT', newUserAccount);
             set({ userAccount: newUserAccount });
           } else
             set({
@@ -199,7 +199,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
 
       if (userAccount) {
         const newUserAcc = { ...userAccount, ...newUserInfo };
-        await setFireDoc(CollectionName.USER_ACCOUNT, newUserAcc);
+        await setFireDoc('USER_ACCOUNT', newUserAcc);
         set({ userAccount: newUserAcc });
       }
 

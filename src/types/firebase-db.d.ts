@@ -40,18 +40,17 @@ export type UserLibrary = {
   updatedAt: number;
 };
 
-export enum CollectionName {
-  USER_ACCOUNT = 'USER_ACCOUNT',
-  USER_PREFERENCES = 'USER_PREFERENCES',
-  USER_CHARACTERS = 'USER_CHARACTERS',
-  USER_LIBRARY = 'USER_LIBRARY',
-}
+export type CollectionName =
+  | 'USER_ACCOUNT'
+  | 'USER_PREFERENCES'
+  | 'USER_CHARACTERS'
+  | 'USER_LIBRARY';
 
-export type CollectionType<T> = T extends CollectionName.USER_ACCOUNT
+export type CollectionType<T> = T extends 'USER_ACCOUNT'
   ? UserAccount
-  : T extends CollectionName.USER_PREFERENCES
+  : T extends 'USER_PREFERENCES'
   ? UserPreferences
-  : T extends CollectionName.USER_CHARACTERS
+  : T extends 'USER_CHARACTERS'
   ? UserCharacters
   : UserLibrary;
 
