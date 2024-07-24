@@ -11,7 +11,6 @@ import {
   SafetySetting,
 } from '@google/generative-ai';
 import { AI_MODEL } from 'config/constants';
-import { gmAiPromptArray } from 'config/gm-ai-promp';
 
 const API_KEY = process.env.AI_APY_KEY || '';
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -56,7 +55,7 @@ export default async function runAIChat(
   const chat = model.startChat({
     generationConfig: generationConfigCustom || generationConfigDefault,
     safetySettings,
-    history: [...gmAiPromptArray, ...contents],
+    history,
   });
 
   const result = await chat.sendMessage(userInput);
