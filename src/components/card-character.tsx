@@ -9,6 +9,7 @@ import { useMemo, useState } from 'react';
 import { Character } from 'types/character';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 import { ModalContentContainer } from './modal';
+import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 
 interface CardCharacterProps {
   character: Character;
@@ -120,37 +121,37 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
             <h3>
               <strong>Apariencia: </strong>
             </h3>
-            <p>{appearance}</p>
+            <Markdown options={mdOpt}>{appearance}</Markdown>
             <br />
 
             <h3>
               <strong>Trasfondo: </strong>
             </h3>
-            <p>{background}</p>
+            <Markdown options={mdOpt}>{background}</Markdown>
             <br />
 
             <h3>
               <strong>Profesión: </strong>
             </h3>
-            <p>{profession}</p>
+            <Markdown options={mdOpt}>{profession}</Markdown>
             <br />
 
             <h3>
               <strong>Personalidad: </strong>
             </h3>
-            <p>{personality}</p>
+            <Markdown options={mdOpt}>{personality}</Markdown>
             <br />
 
             <h3>
               <strong>Equipamiento: </strong>
             </h3>
-            <p>{equipment}</p>
+            <Markdown options={mdOpt}>{equipment}</Markdown>
             <br />
 
             <h3>
               <strong>Poderes: </strong>
             </h3>
-            <p>{powers ? powers : 'No posee poderes.'}</p>
+            <Markdown options={mdOpt}>{powers ? powers : 'No posee poderes.'}</Markdown>
             <br />
           </div>
         </div>
@@ -172,6 +173,29 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
     </div>
   );
 }
+
+const mdOpt: MarkdownToJSX.Options = {
+  overrides: {
+    strong: {
+      props: { className: 'text-info text-md' },
+    },
+    li: {
+      props: { className: 'list-disc ml-5' },
+    },
+    p: {
+      props: { className: 'my-2' },
+    },
+    a: {
+      props: { className: 'text-info' },
+    },
+    pre: {
+      component: 'div',
+    },
+    code: {
+      component: Markdown,
+    },
+  },
+};
 
 function ModalDeleteCharacter({ id }: { id: string }) {
   const { setModalIsOpen } = useModalState();

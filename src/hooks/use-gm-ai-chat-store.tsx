@@ -1,8 +1,11 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Content } from '@google/generative-ai';
-import { AiModels } from 'utils/generate-ai-config';
+import { AiModels, generateAiConfig } from 'utils/generate-ai-config';
 import { createGmAiResponseContent } from 'utils/gmai-utils';
+import { CharacterCreationDescription } from 'types/character';
+import runAIChat from 'server/gm-ai';
+import { descriptionIdeas } from './../components/form-new-character/form-description-ideas';
 
 interface GmAiStore {
   // Chat history
@@ -32,6 +35,13 @@ interface GmAiActions {
 
   // Player stats
   addPlayersDiceRoll: (diceRoll: number) => void;
+
+  // Character Creation
+  improveDescription: (
+    characterName: string,
+    description: string,
+    descriptionType: CharacterCreationDescription
+  ) => Promise<string>;
 }
 
 const initialGmAiState: GmAiStore = {
@@ -53,13 +63,13 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         // Actions
         setHistoryId: () => {
           const currentId = get().storyId;
-          if (!currentId) set(() => ({ storyId: crypto.randomUUID() }));
+          if (!currentId) set({ storyId: crypto.randomUUID() });
         },
 
         setStoryName: (storyName) => set(() => ({ storyName })),
 
         addContent: async (newContent) => {
-          set(() => ({ isLoadingContent: true }));
+          set({ isLoadingContent: true });
 
           const { content, aiConfig, playersDiceRolls } = get();
 
@@ -78,7 +88,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
 
         resetChat: (newGmAiState) => {
           const { aiConfig } = get();
-          set(() => newGmAiState || { ...initialGmAiState, aiConfig });
+          set(newGmAiState || { ...initialGmAiState, aiConfig });
         },
 
         setIsStoryStarted: (isStoryStarted) => set({ isStoryStarted }),
@@ -87,6 +97,27 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
 
         addPlayersDiceRoll: (playersDiceRoll) =>
           set((state) => ({ playersDiceRolls: [...state.playersDiceRolls, playersDiceRoll] })),
+
+        improveDescription: async (characterName, description, descriptionType) => {
+          set({ isLoadingContent: true });
+          const { aiConfig } = get();
+
+          const prompt = `Crea una descripción de "${descriptionType}" para un personaje de ficción llamado ${characterName}. La descripción debe basarse en la siguiente información "${description}" y debe considerar las siguientes preguntas "${descriptionIdeas[
+            descriptionType
+          ].join(', ')}".`;
+
+          try {
+            const aiRes = await runAIChat(prompt, undefined, generateAiConfig(10, aiConfig));
+            set({ isLoadingContent: false });
+
+            if (!aiRes) return description;
+            return aiRes;
+          } catch (error) {
+            console.error('Error: improveDescription => ', error);
+            set({ isLoadingContent: false });
+            return description;
+          }
+        },
       }),
       { name: 'gm-ai' }
     )

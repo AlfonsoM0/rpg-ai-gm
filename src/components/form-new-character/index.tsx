@@ -9,6 +9,7 @@ import H2 from './../h2';
 import FormCharacterSteps from './form-character-description-steps';
 import { useMemo } from 'react';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
+import AiButtonImproveCaracterDescription from './form-character-description-steps-ai-button';
 
 export default function FormCharacterDescription() {
   const router = useRouter();
@@ -88,11 +89,15 @@ export default function FormCharacterDescription() {
             Anterior
           </button>
 
+          <AiButtonImproveCaracterDescription step={step} />
+
           {step === 7 ? (
             <button className="btn btn-primary" type="submit" disabled={!isMinXpSpent}>
               Guardar
             </button>
-          ) : (
+          ) : null}
+
+          {step !== 7 ? (
             <button
               className="btn btn-success"
               onClick={() => setStep((s) => s + 1)}
@@ -101,7 +106,7 @@ export default function FormCharacterDescription() {
             >
               Siguiente
             </button>
-          )}
+          ) : null}
         </div>
       </form>
     </div>

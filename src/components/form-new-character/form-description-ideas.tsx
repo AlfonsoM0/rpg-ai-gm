@@ -1,4 +1,5 @@
 import { Icon } from 'components/icons';
+import { CharacterCreationDescription } from 'types/character';
 
 export const appearanceIdeas = [
   '¿Es humano?',
@@ -48,19 +49,35 @@ export const powersIdeas = [
   '¿Posee alguna debilidad especial con respecto a su poder sobrenatural?',
 ];
 
+export const descriptionIdeas = {
+  appearance: appearanceIdeas,
+  background: backgroundIdeas,
+  profession: professionIdeas,
+  personality: personalityIdeas,
+  equipment: equipmentIdeas,
+  powers: powersIdeas,
+} as {
+  [K in CharacterCreationDescription]: string[];
+};
+
 export default function DescriptionIdeas({ ideas }: { ideas: string[] }) {
   return (
     <details className="dropdown dropdown-left">
       <summary className="btn btn-xs btn-ghost">
         <Icon.Idea className="w-4 h-4 stroke-info" />
       </summary>
-      <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-        {ideas.map((idea, i) => (
-          <li key={i}>
-            <p>{idea}</p>
-          </li>
-        ))}
-      </ul>
+
+      <div className="dropdown-content bg-base-100 rounded-box z-[1] w-72 p-2 shadow border">
+        <p className="text-center text-info">¡Ideas!</p>
+
+        <ul className="list-disc">
+          {ideas.map((idea, i) => (
+            <li key={i} className="my-2 ml-4">
+              <p>{idea}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </details>
   );
 }

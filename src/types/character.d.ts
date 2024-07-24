@@ -19,3 +19,11 @@ export type Character = {
 };
 
 export type Characteristic = keyof Character['characteristics'];
+
+export type CharacterCreationDescription =
+  | 'appearance'
+  | 'background'
+  | 'profession'
+  | 'personality'
+  | 'equipment'
+  | 'powers';

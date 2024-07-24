@@ -11,6 +11,7 @@ import DescriptionIdeas, {
   powersIdeas,
   professionIdeas,
 } from './form-description-ideas';
+import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 
 /**
  * Steps 0 to 7 = Length 8
@@ -34,6 +35,7 @@ export default function FormCharacterSteps() {
     setStep,
     isEdit,
   } = useCreateNewCharacterStore();
+  const { isLoadingContent } = useGmAiStore();
 
   const steps = [
     <label className="form-control w-full max-w-xs h-96" key={'step-0'}>
@@ -48,7 +50,7 @@ export default function FormCharacterSteps() {
         value={name}
         onChange={(e) => setDescription({ key: 'name', value: e.target.value })}
         required
-        disabled={isEdit}
+        disabled={isEdit || isLoadingContent}
       />
 
       <br />
@@ -72,6 +74,7 @@ export default function FormCharacterSteps() {
         value={appearance}
         onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
         required
+        disabled={isLoadingContent}
       />
     </label>,
 
@@ -86,6 +89,7 @@ export default function FormCharacterSteps() {
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
         required
+        disabled={isLoadingContent}
       />
     </label>,
 
@@ -100,6 +104,7 @@ export default function FormCharacterSteps() {
         value={profession}
         onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
         required
+        disabled={isLoadingContent}
       />
     </label>,
 
@@ -114,6 +119,7 @@ export default function FormCharacterSteps() {
         value={personality}
         onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
         required
+        disabled={isLoadingContent}
       />
     </label>,
 
@@ -128,6 +134,7 @@ export default function FormCharacterSteps() {
         value={equipment}
         onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
         required
+        disabled={isLoadingContent}
       />
     </label>,
 
@@ -141,6 +148,7 @@ export default function FormCharacterSteps() {
         placeholder={powersIdeas.join('\n')}
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
+        disabled={isLoadingContent}
       />
     </label>,
 

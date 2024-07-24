@@ -47,7 +47,7 @@ const safetySettings: SafetySetting[] = [
 
 export default async function runAIChat(
   userInput: string,
-  history: Content[] | undefined,
+  history?: Content[],
   generationConfigCustom?: GenerationConfig
 ) {
   const contents = history ? history : [];
