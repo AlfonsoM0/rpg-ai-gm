@@ -2,7 +2,20 @@
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import FormCharacterCharacteristics from './form-character-characteristics';
+import { Icon } from 'components/icons';
+import DescriptionIdeas, {
+  appearanceIdeas,
+  backgroundIdeas,
+  equipmentIdeas,
+  personalityIdeas,
+  powersIdeas,
+  professionIdeas,
+} from './form-description-ideas';
 
+/**
+ * Steps 0 to 7 = Length 8
+ * @returns JSX Elements for each step of the form
+ */
 export default function FormCharacterSteps() {
   const {
     id,
@@ -26,10 +39,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs h-60" key={'step-0'}>
       <div className="label">
         <span className="label-text">Nombre de tu personaje *</span>
+        <DescriptionIdeas ideas={['Inventa un nombre original.']} />
       </div>
       <input
         type="text"
-        placeholder="Ej: Invictus Lumashay"
+        placeholder="Inventa un nombre original."
         className="input input-bordered w-full max-w-xs"
         value={name}
         onChange={(e) => setDescription({ key: 'name', value: e.target.value })}
@@ -50,10 +64,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs" key={'step-1'}>
       <div className="label">
         <span className="label-text">Apariencia *</span>
+        <DescriptionIdeas ideas={appearanceIdeas} />
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Describe su forma de vestir, sus accesorios y cualquier otro detalle distintivo. ¿Es humano? ¿Cuál es su aspecto más llamativo?"
+        placeholder={appearanceIdeas.join('\n')}
         value={appearance}
         onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
         required
@@ -63,10 +78,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs" key={'step-2'}>
       <div className="label">
         <span className="label-text">Trasfondo *</span>
+        <DescriptionIdeas ideas={backgroundIdeas} />
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Cuenta una breve historia sobre su pasado, sus origenes y como se relaciona con el mundo."
+        placeholder={backgroundIdeas.join('\n')}
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
         required
@@ -76,10 +92,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs" key={'step-3'}>
       <div className="label">
         <span className="label-text">Profesión *</span>
+        <DescriptionIdeas ideas={professionIdeas} />
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Describe su profesión, sus habilidades y qué hace para ganarse la vida."
+        placeholder={professionIdeas.join('\n')}
         value={profession}
         onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
         required
@@ -89,10 +106,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs" key={'step-4'}>
       <div className="label">
         <span className="label-text">Personalidad *</span>
+        <DescriptionIdeas ideas={personalityIdeas} />
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Describe su personalidad, sus valores y cómo interactua con las personas."
+        placeholder={personalityIdeas.join('\n')}
         value={personality}
         onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
         required
@@ -102,10 +120,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs" key={'step-5'}>
       <div className="label">
         <span className="label-text">Equipamiento *</span>
+        <DescriptionIdeas ideas={equipmentIdeas} />
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="Describe su equipamiento caracteristico, sus armas y accesorios que le permiten ser un experto en su campo."
+        placeholder={equipmentIdeas.join('\n')}
         value={equipment}
         onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
         required
@@ -115,10 +134,11 @@ export default function FormCharacterSteps() {
     <label className="form-control w-full max-w-xs" key={'step-6'}>
       <div className="label">
         <span className="label-text">Poderes (opcional)</span>
+        <DescriptionIdeas ideas={powersIdeas} />
       </div>
       <textarea
         className="textarea textarea-bordered h-60"
-        placeholder="¿Cuál es el origen de sus poderes? ¿Qué poderes tiene y qué hacen? ¿Cómo utiliza esos poderes? ¿Cuáles son sus fortalezas y debilidades?"
+        placeholder={powersIdeas.join('\n')}
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
       />

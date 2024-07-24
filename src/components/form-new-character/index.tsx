@@ -1,14 +1,14 @@
 'use client';
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
-import { useState } from 'react';
-import FormCharacterCharacteristics from './form-character-characteristics';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useRouter } from 'next/navigation';
 import NewCharacterNav from './form-character-description-nav';
 import { Character } from 'types/character';
-import H2 from './h2';
+import H2 from './../h2';
 import FormCharacterSteps from './form-character-description-steps';
+import { useMemo } from 'react';
+import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 
 export default function FormCharacterDescription() {
   const router = useRouter();
@@ -31,6 +31,11 @@ export default function FormCharacterDescription() {
 
   const { removeACharacterFromCollection, addACharacterToCollection } = useCharacterStore();
 
+  const isMinXpSpent = useMemo(() => {
+    const xpSpent = characteristicsXpValue(characteristics);
+    return xpSpent > 200;
+  }, [characteristics]);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name) return setStep(0);
@@ -39,6 +44,7 @@ export default function FormCharacterDescription() {
     if (!profession) return setStep(3);
     if (!personality) return setStep(4);
     if (!equipment) return setStep(5);
+    if (!isMinXpSpent) return;
 
     const newCharacter: Character = {
       id,
@@ -81,17 +87,21 @@ export default function FormCharacterDescription() {
           >
             Anterior
           </button>
-          <button className="btn btn-primary" type="submit">
-            Guardar
-          </button>
-          <button
-            className="btn"
-            onClick={() => setStep((s) => s + 1)}
-            disabled={step === 7}
-            type="button"
-          >
-            Siguiente
-          </button>
+
+          {step === 7 ? (
+            <button className="btn btn-primary" type="submit" disabled={!isMinXpSpent}>
+              Guardar
+            </button>
+          ) : (
+            <button
+              className="btn btn-success"
+              onClick={() => setStep((s) => s + 1)}
+              disabled={step === 7}
+              type="button"
+            >
+              Siguiente
+            </button>
+          )}
         </div>
       </form>
     </div>

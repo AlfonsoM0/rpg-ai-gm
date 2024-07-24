@@ -1,4 +1,4 @@
-import FormCharacterDescription from 'components/form-character-description';
+import FormNewCharacter from 'components/form-new-character';
 import H1 from 'components/h1';
 import Main from 'components/Main';
 
@@ -7,7 +7,7 @@ export default function Page() {
     <Main>
       <H1>Creación de Personaje</H1>
 
-      <FormCharacterDescription />
+      <FormNewCharacter />
 
       <div></div>
     </Main>
