@@ -10,8 +10,14 @@ export default function BookButtonShare({ book }: { book: Book }) {
   const { userAccount } = useFirebase();
 
   function hadleShareBook() {
+    if (!userAccount) {
+      setModalContent(<ModalCantShareBook />);
+      setModalIsOpen(true);
+      return;
+    }
+
     const domain = window.location.origin;
-    const urlToShare = `${domain}/library/book/${userAccount?.id}_${book.id}`;
+    const urlToShare = `${domain}/library/book/${userAccount.id}_${book.id}`;
 
     setModalContent(<ModalShareBook urlToShare={urlToShare} />);
     setModalIsOpen(true);
@@ -35,6 +41,16 @@ function ModalShareBook({ urlToShare }: { urlToShare: string }) {
         <a className="link text-primary" href={urlToShare} target="_blank" rel="noreferrer">
           Ver libro en el navegador
         </a>
+      </>
+    </ModalContentContainer>
+  );
+}
+
+function ModalCantShareBook() {
+  return (
+    <ModalContentContainer title="Compartir Libro" titleColor="error">
+      <>
+        <p>Para compartir un libro debes iniciar sesión.</p>
       </>
     </ModalContentContainer>
   );
