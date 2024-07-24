@@ -4,7 +4,7 @@ import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import { Icon } from './icons';
 import { useState } from 'react';
 
-const themes = [
+export const themes = [
   'light',
   'dark',
   'cupcake',

@@ -7,6 +7,7 @@ import ModalEndHistory from './chat-options-modals/modal-end-story';
 import ModalConfigAI, { aiIconStyle } from './chat-options-modals/modal-ai-config';
 import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 import { Icon } from 'components/icons';
+import ModalArtThemeConfig from './chat-options-modals/modal-art-theme-config';
 
 export default function ChatOptionsConfig() {
   const { isLoadingContent } = useGmAiStore();
@@ -32,6 +33,12 @@ export default function ChatOptionsConfig() {
     setModalIsOpen(true);
   }
 
+  function onArtClick() {
+    handlePause();
+    setModalContent(<ModalArtThemeConfig />);
+    setModalIsOpen(true);
+  }
+
   return (
     <div>
       <p className="text-center text-sm mb-1 font-bold">Otras opciones</p>
@@ -47,6 +54,10 @@ export default function ChatOptionsConfig() {
           disabled={isLoadingContent}
         >
           <Icon.Idea className="w-8 h-8 stroke-info" />
+        </button>
+
+        <button className="btn hover:border-info" onClick={onArtClick} disabled={isLoadingContent}>
+          <Icon.Art className="w-8 h-8 fill-info" />
         </button>
 
         <button
