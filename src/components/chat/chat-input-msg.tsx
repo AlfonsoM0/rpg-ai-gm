@@ -35,7 +35,7 @@ export default function ChatInputMsg() {
     <form className="flex gap-2 p-2" onSubmit={submitChat}>
       <TextareaAutosize
         autoFocus // text area should automatically get focus when the page loads
-        className="textarea textarea-bordered w-full min-h-16"
+        className="textarea textarea-bordered w-full min-h-20"
         placeholder="..."
         value={chatMsg + transcript}
         onChange={inWriteTextArea}
@@ -43,7 +43,7 @@ export default function ChatInputMsg() {
       />
 
       <div className="flex flex-col gap-2">
-        <button className="btn btn-sm" type="submit" disabled={isLoadingContent}>
+        <button className="btn btn-sm h-12" type="submit" disabled={isLoadingContent}>
           {isLoadingContent ? (
             <span className="loading loading-spinner loading-xs"></span>
           ) : (

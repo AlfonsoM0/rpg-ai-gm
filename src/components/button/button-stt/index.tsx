@@ -26,7 +26,7 @@ export default function STT() {
 
   if (!browserSupportsSpeechRecognition) return <></>;
   return (
-    <button type="button" className="btn btn-xs p-0" onClick={startOrEndSpeechRecognition}>
+    <button type="button" className="btn btn-sm p-0" onClick={startOrEndSpeechRecognition}>
       {listening ? (
         <Icon.MicrophoneOn className="w-4 h-4 stroke-success" />
       ) : (
