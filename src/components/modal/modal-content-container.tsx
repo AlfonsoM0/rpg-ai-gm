@@ -14,7 +14,7 @@ interface ModalContentProps {
 }
 
 export function ModalContentContainer({ children, title, titleColor }: ModalContentProps) {
-  const titleStyle = `font-bold text-lg text-${titleColor}`;
+  const titleStyle = `font-bold text-lg mt-3 text-${titleColor}`;
 
   return (
     <div>

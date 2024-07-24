@@ -5,6 +5,7 @@ import H1 from 'components/h1';
 import H2 from 'components/h2';
 import { Input } from 'components/input';
 import Main from 'components/Main';
+import { ModalContentContainer } from 'components/modal';
 import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
@@ -139,17 +140,23 @@ export default function Home() {
 }
 
 const ModalNoCharactersToPlay = (
-  <div>
-    <h3 className="font-bold text-lg">No tienes personajes reclutados</h3>
-    <p className="mt-4 text-center">¡Recluta a un personaje!</p>
+  <ModalContentContainer title="No tienes personajes reclutados" titleColor="error">
+    <div>
+      <p className="mt-4 text-center">¡Recluta a un personaje!</p>
 
-    <p className="font-bold text-lg mt-4 mb-2 text-center">¿Es la primera vez que juegas?</p>
-    <ol className="max-w-80 m-auto">
-      <li className="list-decimal">Crea un nuevo personaje... o dos...</li>
-      <li className="list-decimal">Recluta tus personajes para la historia.</li>
-      <li className="list-decimal">Haz click en &quot;Jugar una Historia&quot; para comenzar.</li>
-      <li className="list-decimal">Pregunta a tu Game Master AI si necesitas ayuda.</li>
-      <li className="list-decimal">¡Disfruta de la aventura!</li>
-    </ol>
-  </div>
+      <p className="font-bold text-lg mt-4 mb-2 text-center text-info">
+        ¿Es la primera vez que juegas?
+      </p>
+      <ol className="max-w-80 m-auto ml-4">
+        <li className="list-decimal">Crea un nuevo personaje... o dos...</li>
+        <li className="list-decimal">Recluta tus personajes para la historia.</li>
+        <li className="list-decimal">Haz click en &quot;Jugar una Historia&quot; para comenzar.</li>
+        <li className="list-decimal">
+          Pregunta a tu Game Master AI si necesitas ayuda para entender las reglas o qué es un juego
+          de rol de mesa.
+        </li>
+        <li className="list-decimal">¡Disfruta de la aventura!</li>
+      </ol>
+    </div>
+  </ModalContentContainer>
 );
