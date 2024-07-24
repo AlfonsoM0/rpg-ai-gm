@@ -3,6 +3,7 @@
 import CardCharacter from 'components/card-character';
 import H1 from 'components/h1';
 import H2 from 'components/h2';
+import { Icon } from 'components/icons';
 import { Input } from 'components/input';
 import Main from 'components/Main';
 import { ModalContentContainer } from 'components/modal';
@@ -154,6 +155,14 @@ const ModalNoCharactersToPlay = (
         <li className="list-decimal">
           Pregunta a tu Game Master AI si necesitas ayuda para entender las reglas o qué es un juego
           de rol de mesa.
+        </li>
+        <li className="list-decimal">
+          En tu perfil, puedes activar y configurar la voz de tu GmAi con la opción &nbsp;
+          <Icon.AiBrain className="w-4 h-4 fill-primary inline"></Icon.AiBrain>.
+        </li>
+        <li className="list-decimal">
+          En tu perfil, puedes cambiar los colores de la app con la opción &nbsp;
+          <Icon.Art className="w-4 h-4 fill-primary inline"></Icon.Art>.
         </li>
         <li className="list-decimal">¡Disfruta de la aventura!</li>
       </ol>
