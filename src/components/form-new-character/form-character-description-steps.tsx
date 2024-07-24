@@ -2,7 +2,7 @@
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import FormCharacterCharacteristics from './form-character-characteristics';
-import { Icon } from 'components/icons';
+import TextareaAutosize from 'react-textarea-autosize';
 import DescriptionIdeas, {
   appearanceIdeas,
   backgroundIdeas,
@@ -36,7 +36,7 @@ export default function FormCharacterSteps() {
   } = useCreateNewCharacterStore();
 
   const steps = [
-    <label className="form-control w-full max-w-xs h-60" key={'step-0'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-0'}>
       <div className="label">
         <span className="label-text">Nombre de tu personaje *</span>
         <DescriptionIdeas ideas={['Inventa un nombre original.']} />
@@ -61,13 +61,13 @@ export default function FormCharacterSteps() {
       </small>
     </label>,
 
-    <label className="form-control w-full max-w-xs" key={'step-1'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-1'}>
       <div className="label">
         <span className="label-text">Apariencia *</span>
         <DescriptionIdeas ideas={appearanceIdeas} />
       </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
+      <TextareaAutosize
+        className="textarea textarea-bordered min-h-72"
         placeholder={appearanceIdeas.join('\n')}
         value={appearance}
         onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
@@ -75,13 +75,13 @@ export default function FormCharacterSteps() {
       />
     </label>,
 
-    <label className="form-control w-full max-w-xs" key={'step-2'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-2'}>
       <div className="label">
         <span className="label-text">Trasfondo *</span>
         <DescriptionIdeas ideas={backgroundIdeas} />
       </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
+      <TextareaAutosize
+        className="textarea textarea-bordered min-h-72"
         placeholder={backgroundIdeas.join('\n')}
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
@@ -89,13 +89,13 @@ export default function FormCharacterSteps() {
       />
     </label>,
 
-    <label className="form-control w-full max-w-xs" key={'step-3'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-3'}>
       <div className="label">
         <span className="label-text">Profesión *</span>
         <DescriptionIdeas ideas={professionIdeas} />
       </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
+      <TextareaAutosize
+        className="textarea textarea-bordered min-h-72"
         placeholder={professionIdeas.join('\n')}
         value={profession}
         onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
@@ -103,13 +103,13 @@ export default function FormCharacterSteps() {
       />
     </label>,
 
-    <label className="form-control w-full max-w-xs" key={'step-4'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-4'}>
       <div className="label">
         <span className="label-text">Personalidad *</span>
         <DescriptionIdeas ideas={personalityIdeas} />
       </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
+      <TextareaAutosize
+        className="textarea textarea-bordered min-h-72"
         placeholder={personalityIdeas.join('\n')}
         value={personality}
         onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
@@ -117,13 +117,13 @@ export default function FormCharacterSteps() {
       />
     </label>,
 
-    <label className="form-control w-full max-w-xs" key={'step-5'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-5'}>
       <div className="label">
         <span className="label-text">Equipamiento *</span>
         <DescriptionIdeas ideas={equipmentIdeas} />
       </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
+      <TextareaAutosize
+        className="textarea textarea-bordered min-h-72"
         placeholder={equipmentIdeas.join('\n')}
         value={equipment}
         onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
@@ -131,13 +131,13 @@ export default function FormCharacterSteps() {
       />
     </label>,
 
-    <label className="form-control w-full max-w-xs" key={'step-6'}>
+    <label className="form-control w-full max-w-xs h-96" key={'step-6'}>
       <div className="label">
         <span className="label-text">Poderes (opcional)</span>
         <DescriptionIdeas ideas={powersIdeas} />
       </div>
-      <textarea
-        className="textarea textarea-bordered h-60"
+      <TextareaAutosize
+        className="textarea textarea-bordered min-h-72"
         placeholder={powersIdeas.join('\n')}
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}

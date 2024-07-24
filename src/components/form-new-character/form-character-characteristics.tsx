@@ -29,7 +29,7 @@ export default function FormCharacterCharacteristics() {
   }
 
   return (
-    <div className="w-[22rem]">
+    <div className="w-full max-w-xs h-96">
       <div className="flex justify-between mb-2s">
         <h2 className="text-lg font-bold">Características</h2>
         <p>
