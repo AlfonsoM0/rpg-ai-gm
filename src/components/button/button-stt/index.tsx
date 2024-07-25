@@ -1,12 +1,15 @@
 'use client';
 
 import { Icon } from 'components/icons';
-import { ComponentProps, useEffect } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import SR, { useSpeechRecognition } from 'react-speech-recognition';
 
 // We use 'regenerator-runtime' module for Button.STT compoment works correctly Client Side.
 
 interface TTSProps extends Omit<ComponentProps<'button'>, 'onClick' | 'type' | 'children'> {
+  text: string;
+  setText: (text: string) => void;
+  setIsListening: (listening: boolean) => void;
   iconOn?: JSX.Element;
   iconOff?: JSX.Element;
 }
@@ -14,11 +17,10 @@ interface TTSProps extends Omit<ComponentProps<'button'>, 'onClick' | 'type' | '
 /**
  * Use with
   ```
-  const { transcript, listening, resetTranscript } = useSpeechRecognition();
-  function inWriteTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    resetTranscript();
-    setChatMsg(e.target.value);
-  }
+  const [isListening, setIsListening] = useState(false);
+  const [text, setText] = useState(');
+  ...
+  <Button.STT text={text} setText={setText} setIsListening={setIsListening} />
   ```
   * Default class
   ```
@@ -31,23 +33,42 @@ interface TTSProps extends Omit<ComponentProps<'button'>, 'onClick' | 'type' | '
   ```
  */
 export default function STT({
+  text = '',
+  setText,
+  setIsListening,
   iconOn = <Icon.MicrophoneOn className="w-4 h-4 stroke-success" />,
   iconOff = <Icon.MicrophoneOff className="w-4 h-4 stroke-error" />,
   ...props
 }: TTSProps) {
-  const { listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+  const { listening, resetTranscript, transcript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
 
   function startOrEndSpeechRecognition() {
-    if (!listening)
-      // i18n support is not yet implemented.
-      SR.startListening({ continuous: true, language: undefined });
+    // i18n support is not yet implemented.
+    if (!listening) SR.startListening({ continuous: true, language: undefined });
     else SR.stopListening();
   }
 
+  // Save text when microphone is on.
+  const [initialText, setInitialText] = useState(text);
+
+  // Write over the initial text.
   useEffect(() => {
-    if (!listening) resetTranscript();
+    if (listening) setText(initialText + transcript);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listening]);
+  }, [transcript]);
+
+  // SetInitialText when microphone is off and resetTranscript.
+  useEffect(() => {
+    if (!listening) {
+      setInitialText(text);
+      resetTranscript();
+    }
+
+    // For external "listening" useState.
+    setIsListening(listening);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listening, text]);
 
   if (!browserSupportsSpeechRecognition) return <></>;
   return (

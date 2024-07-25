@@ -6,11 +6,10 @@ export const Button = {
   /**
  * Use with
   ```
-  const { transcript, listening, resetTranscript } = useSpeechRecognition();
-  function inWriteTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    resetTranscript();
-    setChatMsg(e.target.value);
-  }
+  const [isListening, setIsListening] = useState(false);
+  const [text, setText] = useState(');
+  ...
+  <Button.STT text={text} setText={setText} setIsListening={setIsListening} />
   ```
   * Default class
   ```

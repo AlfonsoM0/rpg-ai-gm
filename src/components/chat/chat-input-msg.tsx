@@ -6,15 +6,14 @@ import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
-import { useSpeechRecognition } from 'react-speech-recognition';
 import TextareaAutosize from 'react-textarea-autosize';
 
 export default function ChatInputMsg() {
   const { addContent, isLoadingContent } = useGmAiStore();
   const { handleStop } = useTTSStore();
-  const { transcript, listening, resetTranscript } = useSpeechRecognition();
 
   const [chatMsg, setChatMsg] = useState('');
+  const [isListening, setIsListening] = useState(false);
 
   function submitChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,20 +25,15 @@ export default function ChatInputMsg() {
     setChatMsg('');
   }
 
-  function inWriteTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    resetTranscript();
-    setChatMsg(e.target.value);
-  }
-
   return (
     <form className="flex gap-2 p-2" onSubmit={submitChat}>
       <TextareaAutosize
         autoFocus // text area should automatically get focus when the page loads
         className="textarea textarea-bordered w-full min-h-20"
         placeholder="..."
-        value={chatMsg + transcript}
-        onChange={inWriteTextArea}
-        disabled={isLoadingContent || listening}
+        value={chatMsg}
+        onChange={(e) => setChatMsg(e.target.value)}
+        disabled={isLoadingContent || isListening}
       />
 
       <div className="flex flex-col gap-2">
@@ -51,7 +45,7 @@ export default function ChatInputMsg() {
           )}
         </button>
 
-        <Button.STT />
+        <Button.STT text={chatMsg} setText={setChatMsg} setIsListening={setIsListening} />
       </div>
     </form>
   );
