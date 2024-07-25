@@ -29,16 +29,23 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
     const navbar = document.getElementById('navbar');
     let prevScrollPos = window.scrollY;
 
-    window.addEventListener('scroll', () => {
+    const listen = () => {
       const currentScrollPos = window.scrollY;
+
       if (prevScrollPos > currentScrollPos) {
         navbar?.classList.remove('hidden');
       } else {
         navbar?.classList.add('hidden');
       }
+
       prevScrollPos = currentScrollPos;
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid circular dependency
+    };
+
+    window.addEventListener('scroll', listen);
+
+    return () => {
+      window.removeEventListener('scroll', listen);
+    };
   }, []);
 
   return (
