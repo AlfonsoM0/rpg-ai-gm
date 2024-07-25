@@ -12,6 +12,8 @@ import DescriptionIdeas, {
   professionIdeas,
 } from './form-description-ideas';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
+import { Button } from 'components/button';
+import { useState } from 'react';
 
 /**
  * Steps 0 to 7 = Length 8
@@ -36,6 +38,7 @@ export default function FormCharacterSteps() {
     isEdit,
   } = useCreateNewCharacterStore();
   const { isLoadingContent } = useGmAiStore();
+  const [isListening, setIsListening] = useState(false);
 
   const steps = [
     <label className="form-control w-full max-w-xs h-96" key={'step-0'}>
@@ -50,7 +53,7 @@ export default function FormCharacterSteps() {
         value={name}
         onChange={(e) => setDescription({ key: 'name', value: e.target.value })}
         required
-        disabled={isEdit || isLoadingContent}
+        disabled={isEdit}
       />
 
       <br />
@@ -65,7 +68,7 @@ export default function FormCharacterSteps() {
 
     <label className="form-control w-full max-w-xs h-96" key={'step-1'}>
       <div className="label">
-        <span className="label-text">Apariencia *</span>
+        <span className="label-text">Apariencia *</span>{' '}
         <DescriptionIdeas ideas={appearanceIdeas} />
       </div>
       <TextareaAutosize
@@ -74,7 +77,13 @@ export default function FormCharacterSteps() {
         value={appearance}
         onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
         required
-        disabled={isLoadingContent}
+        disabled={isLoadingContent || isListening}
+      />
+      <Button.STT
+        className="btn btn-xs w-full mt-4"
+        text={appearance}
+        setText={(text) => setDescription({ key: 'appearance', value: text })}
+        setIsListening={setIsListening}
       />
     </label>,
 
@@ -89,7 +98,13 @@ export default function FormCharacterSteps() {
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
         required
-        disabled={isLoadingContent}
+        disabled={isLoadingContent || isListening}
+      />
+      <Button.STT
+        className="btn btn-xs w-full mt-4"
+        text={background}
+        setText={(text) => setDescription({ key: 'background', value: text })}
+        setIsListening={setIsListening}
       />
     </label>,
 
@@ -104,7 +119,13 @@ export default function FormCharacterSteps() {
         value={profession}
         onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
         required
-        disabled={isLoadingContent}
+        disabled={isLoadingContent || isListening}
+      />
+      <Button.STT
+        className="btn btn-xs w-full mt-4"
+        text={profession}
+        setText={(text) => setDescription({ key: 'profession', value: text })}
+        setIsListening={setIsListening}
       />
     </label>,
 
@@ -119,7 +140,13 @@ export default function FormCharacterSteps() {
         value={personality}
         onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
         required
-        disabled={isLoadingContent}
+        disabled={isLoadingContent || isListening}
+      />
+      <Button.STT
+        className="btn btn-xs w-full mt-4"
+        text={personality}
+        setText={(text) => setDescription({ key: 'personality', value: text })}
+        setIsListening={setIsListening}
       />
     </label>,
 
@@ -134,7 +161,13 @@ export default function FormCharacterSteps() {
         value={equipment}
         onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
         required
-        disabled={isLoadingContent}
+        disabled={isLoadingContent || isListening}
+      />
+      <Button.STT
+        className="btn btn-xs w-full mt-4"
+        text={equipment}
+        setText={(text) => setDescription({ key: 'equipment', value: text })}
+        setIsListening={setIsListening}
       />
     </label>,
 
@@ -148,7 +181,13 @@ export default function FormCharacterSteps() {
         placeholder={powersIdeas.join('\n')}
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
-        disabled={isLoadingContent}
+        disabled={isLoadingContent || isListening}
+      />
+      <Button.STT
+        className="btn btn-xs w-full mt-4"
+        text={powers}
+        setText={(text) => setDescription({ key: 'powers', value: text })}
+        setIsListening={setIsListening}
       />
     </label>,
 
