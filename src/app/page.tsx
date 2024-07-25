@@ -1,6 +1,6 @@
 'use client';
 
-import CardCharacter from 'components/card-character';
+import { Skeleton_CardCharacter } from 'components/card-character';
 import H1 from 'components/h1';
 import H2 from 'components/h2';
 import { Icon } from 'components/icons';
@@ -12,10 +12,16 @@ import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
+
+const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
+  ssr: false,
+  loading: Skeleton_CardCharacter,
+});
 
 export default function Home() {
   const router = useRouter();
@@ -132,7 +138,7 @@ export default function Home() {
           </div>
 
           {searchCharacter(charactersCollection).map((character) => (
-            <CardCharacter key={character.id} character={character} />
+            <DynamicCardCharacter key={character.id} character={character} />
           ))}
         </div>
       </section>
