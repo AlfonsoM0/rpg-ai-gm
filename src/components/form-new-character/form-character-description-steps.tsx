@@ -69,7 +69,7 @@ export default function FormCharacterSteps() {
         <DescriptionIdeas ideas={appearanceIdeas} />
       </div>
       <TextareaAutosize
-        className="textarea textarea-bordered min-h-72"
+        className="textarea textarea-bordered min-h-72 text-xs"
         placeholder={appearanceIdeas.join('\n')}
         value={appearance}
         onChange={(e) => setDescription({ key: 'appearance', value: e.target.value })}
@@ -84,7 +84,7 @@ export default function FormCharacterSteps() {
         <DescriptionIdeas ideas={backgroundIdeas} />
       </div>
       <TextareaAutosize
-        className="textarea textarea-bordered min-h-72"
+        className="textarea textarea-bordered min-h-72 text-xs"
         placeholder={backgroundIdeas.join('\n')}
         value={background}
         onChange={(e) => setDescription({ key: 'background', value: e.target.value })}
@@ -99,7 +99,7 @@ export default function FormCharacterSteps() {
         <DescriptionIdeas ideas={professionIdeas} />
       </div>
       <TextareaAutosize
-        className="textarea textarea-bordered min-h-72"
+        className="textarea textarea-bordered min-h-72 text-xs"
         placeholder={professionIdeas.join('\n')}
         value={profession}
         onChange={(e) => setDescription({ key: 'profession', value: e.target.value })}
@@ -114,7 +114,7 @@ export default function FormCharacterSteps() {
         <DescriptionIdeas ideas={personalityIdeas} />
       </div>
       <TextareaAutosize
-        className="textarea textarea-bordered min-h-72"
+        className="textarea textarea-bordered min-h-72 text-xs"
         placeholder={personalityIdeas.join('\n')}
         value={personality}
         onChange={(e) => setDescription({ key: 'personality', value: e.target.value })}
@@ -129,7 +129,7 @@ export default function FormCharacterSteps() {
         <DescriptionIdeas ideas={equipmentIdeas} />
       </div>
       <TextareaAutosize
-        className="textarea textarea-bordered min-h-72"
+        className="textarea textarea-bordered min-h-72 text-xs"
         placeholder={equipmentIdeas.join('\n')}
         value={equipment}
         onChange={(e) => setDescription({ key: 'equipment', value: e.target.value })}
@@ -144,7 +144,7 @@ export default function FormCharacterSteps() {
         <DescriptionIdeas ideas={powersIdeas} />
       </div>
       <TextareaAutosize
-        className="textarea textarea-bordered min-h-72"
+        className="textarea textarea-bordered min-h-72 text-xs"
         placeholder={powersIdeas.join('\n')}
         value={powers}
         onChange={(e) => setDescription({ key: 'powers', value: e.target.value })}
