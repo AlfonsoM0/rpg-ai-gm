@@ -34,8 +34,8 @@ export default function FormCharacterDescription() {
 
   const isMinXpSpent = useMemo(() => {
     const xpSpent = characteristicsXpValue(characteristics);
-    return xpSpent > 200;
-  }, [characteristics]);
+    return xpSpent > 200 && xpSpent <= xp;
+  }, [characteristics, xp]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

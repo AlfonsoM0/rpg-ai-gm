@@ -9,6 +9,7 @@ export default function FormCharacterCharacteristics() {
     useCreateNewCharacterStore();
 
   const CharsXP = useMemo(() => characteristicsXpValue(characteristics), [characteristics]);
+  const isCharXpOk = useMemo(() => CharsXP > 200 && CharsXP <= xp, [xp, CharsXP]);
 
   type Caracteristic = keyof typeof characteristics;
 
@@ -28,11 +29,12 @@ export default function FormCharacterCharacteristics() {
     setCharacteristic({ key: characteristic, value });
   }
 
+  const xpStyle = isCharXpOk ? '' : 'text-error';
   return (
     <div className="w-full max-w-xs h-96">
-      <div className="flex justify-between mb-2s">
+      <div className="flex justify-between mb-2">
         <h2 className="text-lg font-bold">Características</h2>
-        <p>
+        <p className={xpStyle}>
           <strong>XP: </strong> {CharsXP}/{xp}
         </p>
       </div>

@@ -14,9 +14,14 @@ import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 interface CardCharacterProps {
   character: Character;
   isViewOnly?: boolean;
+  isFromAnotherUser?: boolean;
 }
 
-export default function CardCharacter({ character, isViewOnly }: CardCharacterProps) {
+export default function CardCharacter({
+  character,
+  isViewOnly,
+  isFromAnotherUser,
+}: CardCharacterProps) {
   const router = useRouter();
   const { setAllCharacterInfo, setStep, setIsEdit, setPreviousCharacteristics } =
     useCreateNewCharacterStore();
@@ -57,6 +62,16 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
     setPreviousCharacteristics(character.characteristics);
     setIsEdit(true);
     setStep(7);
+    router.push('/new-character');
+  }
+
+  function copyCharacter() {
+    setAllCharacterInfo({
+      ...character,
+      id: crypto.randomUUID(),
+      xp: 250,
+    });
+
     router.push('/new-character');
   }
 
@@ -169,6 +184,14 @@ export default function CardCharacter({ character, isViewOnly }: CardCharacterPr
             </button>
           </div>
         )}
+
+        {isFromAnotherUser ? (
+          <div className="card-actions justify-center">
+            <button className="btn btn-sm btn-info" onClick={copyCharacter}>
+              Copiar personaje
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );
