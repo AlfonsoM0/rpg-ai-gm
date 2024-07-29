@@ -2,9 +2,9 @@ import { ModalContentContainer } from 'components/modal';
 
 export default function ModalCantShareCharacter() {
   return (
-    <ModalContentContainer title="Compartir Libro" titleColor="error">
+    <ModalContentContainer title="Compartir Personaje" titleColor="error">
       <>
-        <p>Para compartir un libro debes iniciar sesión.</p>
+        <p>Para compartir un personaje debes iniciar sesión.</p>
       </>
     </ModalContentContainer>
   );
