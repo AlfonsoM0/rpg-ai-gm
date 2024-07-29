@@ -1,15 +1,15 @@
 'use client';
 
 import { useCharacterStore } from 'hooks/use-character-store';
-import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
-import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
-import { useModalState } from 'hooks/use-modal-state';
-import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { Character } from 'types/character';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
-import { ModalContentContainer } from './modal';
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
+import ButtonShareCharacter from './card-character-buttons/button-share-character';
+import ButtonCopyCharacter from './card-character-buttons/button-copy-character';
+import ButtonDeleteCharacter from './card-character-buttons/button-delete-character';
+import ButtonEditCharacter from './card-character-buttons/button-edit-character';
+import ButtonSelectCharacter from './card-character-buttons/button-select-character';
 
 interface CardCharacterProps {
   character: Character;
@@ -22,13 +22,7 @@ export default function CardCharacter({
   isViewOnly,
   isFromAnotherUser,
 }: CardCharacterProps) {
-  const router = useRouter();
-  const { setAllCharacterInfo, setStep, setIsEdit, setPreviousCharacteristics } =
-    useCreateNewCharacterStore();
-  const { removeACharacterFromInGame, inGameCharacters, addACharacterToInGame } =
-    useCharacterStore();
-  const { setModalContent, setModalIsOpen } = useModalState();
-  const { isStoryStarted } = useGmAiStore();
+  const { inGameCharacters } = useCharacterStore();
 
   const {
     id,
@@ -47,56 +41,10 @@ export default function CardCharacter({
   const CharsXP = useMemo(() => characteristicsXpValue(characteristics), [characteristics]);
   const [check, setCheck] = useState(false);
 
-  function deleteCharacter() {
-    if (isStoryStarted) {
-      setModalContent(ModalCharacterInPlay);
-      setModalIsOpen(true);
-      return;
-    }
-    setModalContent(<ModalDeleteCharacter id={id} />);
-    setModalIsOpen(true);
-  }
-
-  function editCharacter() {
-    setAllCharacterInfo(character);
-    setPreviousCharacteristics(character.characteristics);
-    setIsEdit(true);
-    setStep(7);
-    router.push('/new-character');
-  }
-
-  function copyCharacter() {
-    setAllCharacterInfo({
-      ...character,
-      id: crypto.randomUUID(),
-      xp: 250,
-    });
-
-    router.push('/new-character');
-  }
-
   const isInGame = useMemo(
     () => Boolean(inGameCharacters.find((c) => c.id === id)),
     [inGameCharacters, id]
   );
-  function selectCharacter() {
-    if (isStoryStarted) {
-      setModalContent(ModalCharacterInPlay);
-      setModalIsOpen(true);
-      return;
-    }
-
-    if (isInGame) {
-      removeACharacterFromInGame(id);
-    } else {
-      if (inGameCharacters.length >= 2) {
-        setModalContent(ModalMaximumCharacters);
-        setModalIsOpen(true);
-        return;
-      }
-      addACharacterToInGame(character);
-    }
-  }
 
   const borderStyle = isInGame
     ? 'card w-80 border-2 border-success rounded-lg shadow-xl'
@@ -173,25 +121,21 @@ export default function CardCharacter({
 
         {isViewOnly ? null : (
           <div className="card-actions justify-between">
-            <button className="btn btn-sm btn-error" onClick={deleteCharacter}>
-              Borrar
-            </button>
-            <button className="btn btn-sm btn-info" onClick={editCharacter}>
-              Editar
-            </button>
-            <button className="btn btn-sm btn-success" onClick={selectCharacter}>
-              {isInGame ? 'Despedir' : 'Reclutar'}
-            </button>
+            <ButtonDeleteCharacter character={character} />
+
+            <ButtonEditCharacter character={character} />
+
+            <ButtonSelectCharacter character={character} />
           </div>
         )}
 
-        {isFromAnotherUser ? (
-          <div className="card-actions justify-center">
-            <button className="btn btn-sm btn-info" onClick={copyCharacter}>
-              Copiar personaje
-            </button>
-          </div>
-        ) : null}
+        <div className="card-actions justify-center">
+          {isFromAnotherUser ? (
+            <ButtonCopyCharacter character={character} />
+          ) : (
+            <ButtonShareCharacter character={character} />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -219,53 +163,6 @@ const mdOpt: MarkdownToJSX.Options = {
     },
   },
 };
-
-function ModalDeleteCharacter({ id }: { id: string }) {
-  const { setModalIsOpen } = useModalState();
-  const { removeACharacterFromCollection, removeACharacterFromInGame } = useCharacterStore();
-
-  return (
-    <ModalContentContainer title="¿Estás seguro de borrar este personaje?" titleColor="error">
-      <>
-        <p className="py-4">Esta acción no se puede deshacer.</p>
-
-        <div className="modal-action">
-          <button
-            className="btn btn-error"
-            onClick={() => {
-              removeACharacterFromCollection(id);
-              removeACharacterFromInGame(id);
-              setModalIsOpen(false);
-            }}
-          >
-            Si, borrar
-          </button>
-          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-            No, cancelar
-          </button>
-        </div>
-      </>
-    </ModalContentContainer>
-  );
-}
-
-const ModalCharacterInPlay = (
-  <div>
-    <h3 className="font-bold text-lg">Personaje en Juego</h3>
-    <p className="py-4">
-      No puedes reclutar, despedir o borrar personajes si tu historia actual no ha terminado.
-    </p>
-  </div>
-);
-
-const ModalMaximumCharacters = (
-  <div>
-    <h3 className="font-bold text-lg">Tienes demasiados personajes en juego</h3>
-    <p className="py-4">
-      Solo puedes tener 2 personajes en juego a la vez. Elimina alguno para poder reclutar otro.
-    </p>
-  </div>
-);
 
 export const Skeleton_CardCharacter = () => (
   <div className="flex w-80 flex-col gap-4">
