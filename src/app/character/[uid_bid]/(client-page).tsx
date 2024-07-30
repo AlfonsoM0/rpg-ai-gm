@@ -3,20 +3,15 @@
 import 'regenerator-runtime/runtime';
 
 import CardCharacter from 'components/card-character';
-import ChatWindow from 'components/chat/chat-window';
 import H1 from 'components/h1';
 import H2 from 'components/h2';
 import Main from 'components/Main';
-import TTSControls from 'components/tts/tts-controls';
 import useFirebase from 'hooks/firebase';
-import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
 import { Character } from 'types/character';
 
 // http://localhost:3000/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
 export default function ClientPage({ params }: { params: { uid_bid: string } }) {
-  const { isTTSEnabled } = useTTSStore();
-
   const [uid, bid] = params.uid_bid.split('_');
 
   const { getFireDoc } = useFirebase();
@@ -26,13 +21,11 @@ export default function ClientPage({ params }: { params: { uid_bid: string } }) 
 
   const [character, setCharacter] = useState<Character | null>(null);
   const [userName, setUserName] = useState<string>('');
-  const [userURLAvatar, setUserURLAvatar] = useState<string>('');
 
   async function findAndSetUserName(): Promise<void> {
     const user = await getFireDoc('USER_ACCOUNT', uid);
     if (user) {
       setUserName(user.displayName);
-      setUserURLAvatar(user.photoURL);
     } else setUserName('Autor desconocido');
   }
 

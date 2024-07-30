@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Modal } from 'components/modal';
-import { AI_NAME_TO_SHOW } from 'config/constants';
 import { Footer } from 'components/footer';
 import Navbar from 'components/navbar';
 import { navbarLinks } from 'config/navbar-links';
@@ -12,13 +11,11 @@ import TTSLoader from 'components/tts/tts-loader';
 import TestComponent from './(TEST)/testComponent';
 import FixComponent from './(FIX)/FixComponent';
 import UserFirebaseSync from 'components/user/user-fire-sync';
+import { app_metadata } from 'config/app-metadata';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: AI_NAME_TO_SHOW,
-  description: `Play your story with ${AI_NAME_TO_SHOW}`,
-};
+export const metadata: Metadata = app_metadata;
 
 export default function RootLayout({
   children,
