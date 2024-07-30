@@ -21,15 +21,15 @@ export const metadata: Metadata = app_metadata;
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  locale: never;
+  params: { locale: string };
 }
 
-export default async function RootLayout({ children, locale }: Readonly<RootLayoutProps>) {
+export default async function RootLayout({ children, params }: Readonly<RootLayoutProps>) {
   // Receive messages provided in `i18n.ts`
   const messages = await getMessages();
 
   return (
-    <html lang={locale} data-theme="light">
+    <html lang={params.locale} data-theme="light">
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <header className="fixed top-0 left-0 right-0 z-10">
