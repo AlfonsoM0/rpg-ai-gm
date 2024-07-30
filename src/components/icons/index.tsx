@@ -9,6 +9,7 @@ import { MicrophoneOn } from './icon-microphone-on';
 import { Search } from './icon-search';
 import { Stars } from './icon-stars';
 import { User } from './icon-user';
+import { LanguageIcon } from './LanguageIcon';
 
 export const Icon = {
   User,
@@ -22,4 +23,5 @@ export const Icon = {
   Art,
   MicrophoneOn,
   MicrophoneOff,
+  LanguageIcon,
 };

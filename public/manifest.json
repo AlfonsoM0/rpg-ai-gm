@@ -7,7 +7,7 @@
   "start_url": "/",
   "name": "Game Master AI",
   "short_name": "GmAi",
-  "description": "Juega tu historia RPG con Master Ai",
+  "description": "Play RPG games with Game Master AI!",
   "icons": [
     {
       "src": "/android-chrome-512x512.png",
@@ -30,8 +30,8 @@
   ],
   "shortcuts": [
     {
-      "name": "Nuevo Personaje",
-      "short_name": "Nuevo Personaje",
+      "name": "Create a new Character",
+      "short_name": "New Character",
       "description": "Crea un nuevo personaje.",
       "url": "/new-character",
       "icons": [
@@ -44,8 +44,8 @@
       ]
     },
     {
-      "name": "Biblioteca",
-      "short_name": "Biblioteca",
+      "name": "Library",
+      "short_name": "Library",
       "description": "Ver mi biblioteca",
       "url": "/library",
       "icons": [

@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
+import useI18n from '../../useI18n';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -24,6 +25,7 @@ const DynamicCardCharacter = dynamic(() => import('components/card-character'), 
 });
 
 export default function Home() {
+  const t = useI18n('Page_Home');
   const router = useRouter();
 
   const {
@@ -93,11 +95,11 @@ export default function Home() {
 
   return (
     <Main>
-      <H1>¡Bienvenido!</H1>
+      <H1>{t('H1_Welcome')}</H1>
 
       <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 mx-4 rounded-md shadow-lg bg-primary-content">
         <button className="btn btn-lg" onClick={playStory}>
-          ▶️ {isStoryStarted ? 'CONTINUAR HISTORIA' : 'JUGAR UNA HISTORIA'}
+          ▶️ {isStoryStarted ? t('btn_Continue_Game') : t('btn_Play_Game')}
         </button>
         <div>
           <h2 className="text-center text-primary font-bold text-2xl my-2">

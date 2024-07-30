@@ -1,6 +1,10 @@
 // https://ducanh-next-pwa.vercel.app/docs/next-pwa/configuring
 import withPWAInit from '@ducanh2912/next-pwa';
 
+// https://www.sitepoint.com/next-js-internationalization/
+import i18n from 'next-intl/plugin';
+const withI18n = i18n();
+
 const withPWA = withPWAInit({
   disable: process.env.NODE_ENV === 'development',
   register: true,
@@ -26,10 +30,10 @@ const withPWA = withPWAInit({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  i18n: {
-    locales: ['es'], // TODO: 'en'
-    defaultLocale: 'es',
-  },
+  // i18n: {
+  //   locales: ['es'], // TODO: 'en'
+  //   defaultLocale: 'es',
+  // },
 
   images: {
     remotePatterns: [
@@ -49,4 +53,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+export default withI18n(withPWA(nextConfig));

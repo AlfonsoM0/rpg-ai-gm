@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import srcLogo from 'public/android-chrome-512x512.png';
 import UserButton from './user/user-button';
+import LangSwitcher from './lang-switcher';
 
 type SubOps = { name: string; url: string }[];
 
@@ -90,6 +91,7 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
 
       {/* <!-- Navbar End --> */}
       <div className="navbar-end">
+        <LangSwitcher />
         <UserButton />
       </div>
     </nav>
