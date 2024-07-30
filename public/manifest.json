@@ -13,7 +13,7 @@
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-192x192.png",
@@ -23,7 +23,7 @@
     },
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48",
       "type": "image/x-icon",
       "purpose": "maskable"
     }
@@ -60,9 +60,19 @@
   ],
   "screenshots": [
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "gmai_desk.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "1918x1079",
+      "platform": "wide",
+      "form_factor": "wide",
+      "label": "Captura de pantalla en un dispositivo de escritorio."
+    },
+    {
+      "src": "gmai_phone.png",
+      "type": "image/png",
+      "sizes": "358x792",
+      "platform": "narrow",
+      "label": "Captura de pantalla en un dispositivo móvil."
     }
   ]
 }
