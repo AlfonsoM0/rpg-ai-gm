@@ -1,7 +1,24 @@
 {
   "Page_Home": {
-    "H1_Welcome": "¡Bienvenido!",
+    "h1_Welcome": "¡Bienvenido!",
     "btn_Continue_Game": "CONTINUAR HISTORIA",
-    "btn_Play_Game": "JUGAR UNA HISTORIA"
+    "btn_Play_Game": "JUGAR UNA HISTORIA",
+    "h2_Recruited_Characters": "Personajes Reclutados",
+    "p_No_recruited_characters": "No hay personajes reclutados.",
+    "h2_My_Characters": "Mis Personajes",
+    "input_Search_By_Name": "Buscar por Nombre",
+    "h2_Create_New_Character": "¡Crear un personaje Nuevo!"
+  },
+  "ModalNoCharactersToPlay": {
+    "title": "No tienes personajes reclutados",
+    "p_Recruit_a_character": "¡Recluta a un personaje!",
+    "p_First_time_you_play": "¿Es la primera vez que juegas?",
+    "ol_li_1": "Crea un nuevo personaje... o dos...",
+    "ol_li_2": "Recluta tus personajes para la historia.",
+    "ol_li_3": "Haz click en \"Jugar una Historia\" para comenzar.",
+    "ol_li_4": "Pregunta a tu Game Master AI si necesitas ayuda para entender las reglas o qué es un juego de rol de mesa.",
+    "ol_li_5": "En tu perfil, puedes activar y configurar la voz de tu GmAi con la opción ",
+    "ol_li_6": "En tu perfil, puedes cambiar los colores de la app con la opción ",
+    "ol_li_7": "¡Disfruta de la aventura!"
   }
 }

@@ -12,12 +12,12 @@ import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
+import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
-import useI18n from '../../useI18n';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -25,7 +25,7 @@ const DynamicCardCharacter = dynamic(() => import('components/card-character'), 
 });
 
 export default function Home() {
-  const t = useI18n('Page_Home');
+  const t = useTranslations('Page_Home');
   const router = useRouter();
 
   const {
@@ -48,7 +48,7 @@ export default function Home() {
 
   function playStory() {
     if (!inGameCharacters.length) {
-      setModalContent(ModalNoCharactersToPlay);
+      setModalContent(<ModalNoCharactersToPlay />);
       return setModalIsOpen(true);
     }
 
@@ -95,7 +95,7 @@ export default function Home() {
 
   return (
     <Main>
-      <H1>{t('H1_Welcome')}</H1>
+      <H1>{t('h1_Welcome')}</H1>
 
       <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 mx-4 rounded-md shadow-lg bg-primary-content">
         <button className="btn btn-lg" onClick={playStory}>
@@ -103,24 +103,24 @@ export default function Home() {
         </button>
         <div>
           <h2 className="text-center text-primary font-bold text-2xl my-2">
-            Personajes Reclutados
+            {t('h2_Recruited_Characters')}
           </h2>
           <p className="text-center text-primary">
             {inGameCharacters.length
               ? `${inGameCharacters.map((character) => character.name).join(', ')}.`
-              : 'No hay personajes reclutados.'}
+              : t('p_No_recruited_characters')}
           </p>
         </div>
       </section>
 
       <section className="my-4">
-        <H2>Mis Personajes</H2>
+        <H2>{t('h2_My_Characters')}</H2>
 
         {charactersCollection.length > 3 ? (
           <Input.Search
             labelclassname="m-auto mb-5"
             className="text-center"
-            placeholder="Buscar por Nombre"
+            placeholder={t('input_Search_By_Name')}
             onChange={(e) => setSearch(e.target.value)}
             value={search}
           />
@@ -133,7 +133,7 @@ export default function Home() {
               onClick={onCreateNewCharacterClick}
             >
               <div>
-                <h2 className="card-title">¡Crear un personaje Nuevo!</h2>
+                <h2 className="card-title">{t('h2_Create_New_Character')}</h2>
               </div>
               <div className="text-9xl text-success">+</div>
             </button>
@@ -148,32 +148,32 @@ export default function Home() {
   );
 }
 
-const ModalNoCharactersToPlay = (
-  <ModalContentContainer title="No tienes personajes reclutados" titleColor="error">
-    <div>
-      <p className="mt-4 text-center">¡Recluta a un personaje!</p>
+function ModalNoCharactersToPlay() {
+  const t = useTranslations('ModalNoCharactersToPlay');
+  return (
+    <ModalContentContainer title={t('title')} titleColor="error">
+      <div>
+        <p className="mt-4 text-center">{t('p_Recruit_a_character')}</p>
 
-      <p className="font-bold text-lg mt-4 mb-2 text-center text-info">
-        ¿Es la primera vez que juegas?
-      </p>
-      <ol className="max-w-80 m-auto ml-4">
-        <li className="list-decimal">Crea un nuevo personaje... o dos...</li>
-        <li className="list-decimal">Recluta tus personajes para la historia.</li>
-        <li className="list-decimal">Haz click en &quot;Jugar una Historia&quot; para comenzar.</li>
-        <li className="list-decimal">
-          Pregunta a tu Game Master AI si necesitas ayuda para entender las reglas o qué es un juego
-          de rol de mesa.
-        </li>
-        <li className="list-decimal">
-          En tu perfil, puedes activar y configurar la voz de tu GmAi con la opción &nbsp;
-          <Icon.AiBrain className="w-4 h-4 fill-primary inline"></Icon.AiBrain>.
-        </li>
-        <li className="list-decimal">
-          En tu perfil, puedes cambiar los colores de la app con la opción &nbsp;
-          <Icon.Art className="w-4 h-4 fill-primary inline"></Icon.Art>.
-        </li>
-        <li className="list-decimal">¡Disfruta de la aventura!</li>
-      </ol>
-    </div>
-  </ModalContentContainer>
-);
+        <p className="font-bold text-lg mt-4 mb-2 text-center text-info">
+          {t('p_First_time_you_play')}
+        </p>
+        <ol className="max-w-80 m-auto ml-[10%]">
+          <li className="list-decimal">{t('ol_li_1')}</li>
+          <li className="list-decimal">{t('ol_li_2')}</li>
+          <li className="list-decimal">{t('ol_li_3')}</li>
+          <li className="list-decimal">{t('ol_li_4')}</li>
+          <li className="list-decimal">
+            {t('ol_li_5')}
+            <Icon.AiBrain className="w-4 h-4 fill-primary inline"></Icon.AiBrain>.
+          </li>
+          <li className="list-decimal">
+            {t('ol_li_6')}
+            <Icon.Art className="w-4 h-4 fill-primary inline"></Icon.Art>.
+          </li>
+          <li className="list-decimal">{t('ol_li_7')}</li>
+        </ol>
+      </div>
+    </ModalContentContainer>
+  );
+}
