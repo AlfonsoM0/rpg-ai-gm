@@ -26,7 +26,7 @@ export function Copy({
   return (
     <div
       className={toolTipPosition ? toolTipPositionStyle : 'tooltip'}
-      data-tip={`Copiar: "${text.slice(0, 30)}..."`}
+      data-tip={`"${text.slice(0, 30)}..."`}
     >
       <button
         className="btn btn-xs btn-ghost hover:badge-success h-5 p-1"
