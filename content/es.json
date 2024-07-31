@@ -15,6 +15,12 @@
   "Page_404": {
     "Not_found": "404 | Página no encontrada."
   },
+  "Header": {
+    "Navbar_links": {
+      "/": "Inicio",
+      "/library": "Biblioteca"
+    }
+  },
   "Character": {
     "Name": "Nombre",
     "Description": "Descripción",

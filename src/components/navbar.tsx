@@ -8,17 +8,17 @@ import LangSwitcher from './lang-switcher';
 
 type SubOps = { name: string; url: string }[];
 
-export type MenuOps = {
+export type NavbarLinks = {
   name: string;
   url?: string;
   subOps?: SubOps;
 }[];
 
 interface NavbarProps {
-  menuOps: MenuOps;
+  navbarLinks: NavbarLinks;
 }
 
-export function Navbar({ menuOps }: NavbarProps): JSX.Element {
+export function Navbar({ navbarLinks }: NavbarProps): JSX.Element {
   const ref = useRef<HTMLDetailsElement>(null);
   function toggleDetails(): void {
     if (ref.current) {
@@ -62,7 +62,7 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             // tabIndex={0}
           >
-            {menuOps.map((item) => (
+            {navbarLinks.map((item) => (
               <LiWithDetails
                 isDetailsOpen
                 item={item}
@@ -83,7 +83,7 @@ export function Navbar({ menuOps }: NavbarProps): JSX.Element {
       {/* <!-- Navbar Center --> */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          {menuOps.map((item) => (
+          {navbarLinks.map((item) => (
             <LiWithDetails item={item} key={item.name} />
           ))}
         </ul>
@@ -116,7 +116,7 @@ function LiWithDetails({
   isDetailsOpen,
   onItemClick,
 }: {
-  item: MenuOps[0];
+  item: NavbarLinks[0];
   isDetailsOpen?: boolean;
   onItemClick?: () => void;
 }): JSX.Element {
