@@ -2,7 +2,10 @@
   "GENERIC": {
     "Loading": "Cargando",
     "Accept": "Aceptar",
-    "Cancel": "Cancelar"
+    "Cancel": "Cancelar",
+    "Previous": "Anterior",
+    "Next": "Siguiente",
+    "Save": "Guardar"
   },
   "Page_Home": {
     "h1_Welcome": "¡Bienvenido!",
@@ -23,6 +26,15 @@
   "Page_User": {
     "h1": "Mi Perfil",
     "h2": "Información Personal"
+  },
+  "Page_New_Character": {
+    "h1": "Creación de Personaje",
+
+    "ButtonAiImprove": "Mejorar",
+    "ModalLowContentAlert": {
+      "title": "Poco contenido",
+      "p": "¡Haz un esfuerzo! Escribe una descripción más larga para que pueda ayudarte. 😁"
+    }
   },
   "Header": {
     "Navbar_links": {
@@ -86,6 +98,49 @@
       "Wisdom": "Sabiduría",
       "CHA": "CAR",
       "Charisma": "Carisma"
+    }
+  },
+  "New_Character": {
+    "Name_of_your_character": "Nombre de tu personaje *",
+    "Create_an_original_name": "Inventa un nombre original.",
+    "isEdit": {
+      "true": "* No puedes modificar el nombre de un personaje creado.",
+      "false": "* El nombre de tu personaje no se podrá modificar después."
+    },
+    "Form_Tip": "* Todos los campos marcados con asterísco son requeridos para crear una historia maravillosa.",
+    "Ideas": "¡Ideas!",
+
+    "FormCharacterCharacteristics": {
+      "Characteristics": "Características",
+      "tip1": "* Mueve los deslizadores para ajustar las características usando tus Puntos de Experiencia (XP).",
+      "tip2": "* Las características guardadas no podrán reducirse cuando edites tu personaje."
+    },
+
+    "Description": {
+      "appearance": {
+        "title": "Apariencia *",
+        "ideas": "¿Es humano?,¿Cuál es su aspecto más llamativo?,¿Cómo es su forma de vestir?,¿Qué detalles distintivos posee?,¿Cuáles son sus accesorios?"
+      },
+      "background": {
+        "title": "Trasfondo *",
+        "ideas": "¿Cuál es su historia?,¿Qué le sucedió en su vida?,¿De dónde proviene?,¿Tiene algún secreto?,¿Tiene enemigos?"
+      },
+      "profession": {
+        "title": "Profesión *",
+        "ideas": "¿Qué hace para ganarse la vida?,¿Cuál es o fue su trabajo más importante?,¿Cuáles son sus conocimientos y habilidades?,¿Cómo perciben otras personas su profesión?,¿Es conocido en su rubro?"
+      },
+      "personality": {
+        "title": "Personalidad *",
+        "ideas": "¿Cuáles son su valores?,¿Tiene un carácter fuerte o débil?,¿Cómo se relaciona con los demás?,¿Es amable o desagradable?,¿Tiene un gran sentido del humor?,¿Es independiente o necesita apoyo de otros?"
+      },
+      "equipment": {
+        "title": "Equipamiento *",
+        "ideas": "¿Posee algún objeto que lo identifique?,¿Qué objetos posee que le ayuden en su vida cotidiana?,¿Posee algún objeto que le ayude a resolver problemas?,¿Lleva alguna herramienta o instrumento en particular?,¿Cómo se relaciona con sus objetos personales?"
+      },
+      "powers": {
+        "title": "Poderes ",
+        "ideas": "¿Posee algún poder sobrenatural? ¿Qué tipo de poder es?,¿Cómo se relaciona con su poder sobrenatural?,¿Qué problemas puede solucionar con su poder sobrenatural?,¿Cómo utiliza su poder sobrenatural en su vida cotidiana?,¿Posee alguna debilidad especial con respecto a su poder sobrenatural?"
+      }
     }
   },
   "CardCharacter": {

@@ -10,8 +10,11 @@ import FormCharacterSteps from './form-character-description-steps';
 import { useMemo } from 'react';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 import AiButtonImproveCaracterDescription from './form-character-description-steps-ai-button';
+import { useTranslations } from 'next-intl';
 
 export default function FormCharacterDescription() {
+  const t = useTranslations('GENERIC');
+
   const router = useRouter();
 
   const {
@@ -86,14 +89,14 @@ export default function FormCharacterDescription() {
             disabled={step === 0}
             type="button"
           >
-            Anterior
+            {t('Previous')}
           </button>
 
           <AiButtonImproveCaracterDescription step={step} />
 
           {step === 7 ? (
             <button className="btn btn-primary" type="submit" disabled={!isMinXpSpent}>
-              Guardar
+              {t('Save')}
             </button>
           ) : null}
 
@@ -104,7 +107,7 @@ export default function FormCharacterDescription() {
               disabled={step === 7}
               type="button"
             >
-              Siguiente
+              {t('Next')}
             </button>
           ) : null}
         </div>

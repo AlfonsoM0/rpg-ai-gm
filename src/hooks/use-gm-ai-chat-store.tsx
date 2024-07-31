@@ -5,7 +5,10 @@ import { AiModels, generateAiConfig } from 'utils/generate-ai-config';
 import { createGmAiResponseContent } from 'utils/gmai-utils';
 import { CharacterCreationDescription } from 'types/character';
 import runAIChat from 'server/gm-ai';
-import { descriptionIdeas } from './../components/form-new-character/form-description-ideas';
+
+import i18nEs from '../../content/es.json';
+
+const ideas = i18nEs.New_Character.Description;
 
 interface GmAiStore {
   // Chat history
@@ -102,9 +105,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           set({ isLoadingContent: true });
           const { aiConfig } = get();
 
-          const prompt = `Crea una descripción de "${descriptionType}" para un personaje de ficción llamado ${characterName}. La descripción debe basarse en la siguiente información "${description}" y debe considerar las siguientes preguntas "${descriptionIdeas[
-            descriptionType
-          ].join(', ')}".`;
+          const prompt = `Crea una descripción de "${descriptionType}" para un personaje de ficción llamado ${characterName}. La descripción debe basarse en la siguiente información "${description}" y debe considerar las siguientes preguntas "${ideas[descriptionType]}".`;
 
           try {
             const aiRes = await runAIChat(prompt, undefined, generateAiConfig(10, aiConfig));
