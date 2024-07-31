@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from '@/navigation';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/navigation';
 import { Icon } from './icons';
 
 export default function LangSwitcher() {
