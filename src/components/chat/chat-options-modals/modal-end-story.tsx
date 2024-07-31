@@ -5,11 +5,14 @@ import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/navigation';
 import { useEffect } from 'react';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
 
 export default function ModalEndHistory() {
+  const t = useTranslations('ModalEndHistory');
+
   const router = useRouter();
   const { setModalContent, setModalIsOpen } = useModalState();
   const {
@@ -66,15 +69,12 @@ export default function ModalEndHistory() {
     <ModalContentContainer title="Fin de la Historia" titleColor="info">
       <>
         <p className="py-4">
-          Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para
-          jugar otro capítulo desde donde dejaste la anterior. <br />
+          {t('p1')} <br />
           <br />
-          Si tu historia no finaliza con el cartel de &quot;Fin de la historia&quot;, que muestra
-          los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas
-          contiuarla.
+          {t('p2')}
           <br />
           <br />
-          <strong>Elige un nombre original.</strong>
+          <strong>{t('p3_strong')}</strong> <br />
         </p>
 
         <input
@@ -87,10 +87,10 @@ export default function ModalEndHistory() {
 
         <div className="modal-action justify-around">
           <button className="btn btn-error" onClick={onSaveBookClick}>
-            Si, finalizar historia
+            {t('btn_End_Game')}
           </button>
           <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-            No, seguir jugando
+            {t('btn_Continue_Game')}
           </button>
         </div>
       </>
@@ -98,13 +98,20 @@ export default function ModalEndHistory() {
   );
 }
 
-const ModalWinXp = ({ xp, PC }: { xp: number; PC: string[] }) => (
-  <ModalContentContainer title="Ganaste XP" titleColor="success">
-    <>
-      <p className="font-bold text-lg">
-        Has ganado {xp}XP para {PC.join(' y ')}.
-      </p>
-      <p className="py-4">Edita tu personaje para mejorar tus caracteristicas.</p>
-    </>
-  </ModalContentContainer>
-);
+const ModalWinXp = ({ xp, PC }: { xp: number; PC: string[] }) => {
+  const t = useTranslations('ModalWinXp');
+
+  return (
+    <ModalContentContainer title={t('title')} titleColor="success">
+      <>
+        <p className="font-bold text-lg">
+          {t('You_have_earned_XP')}
+          {xp}
+          {t('for')}
+          {PC.join(' y ')}.
+        </p>
+        <p className="py-4">{t('Edit_your_character')}</p>
+      </>
+    </ModalContentContainer>
+  );
+};

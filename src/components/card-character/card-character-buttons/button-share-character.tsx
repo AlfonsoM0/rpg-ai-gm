@@ -5,12 +5,15 @@ import { useModalState } from 'hooks/use-modal-state';
 import { Character } from 'types/character';
 import ModalShareCharacter from '../card-character-modal/modal-share-character';
 import ModalCantShareCharacter from '../card-character-modal/modal-cant-share-character';
+import { useTranslations } from 'next-intl';
 
 interface ShareCharacterProps {
   character: Character;
 }
 
 export default function ButtonShareCharacter({ character }: ShareCharacterProps) {
+  const t = useTranslations('CardCharacter.btn');
+
   const { userAccount } = useFirebase();
   const { setModalContent, setModalIsOpen } = useModalState();
 
@@ -33,7 +36,7 @@ export default function ButtonShareCharacter({ character }: ShareCharacterProps)
 
   return (
     <button className="btn btn-sm btn-primary" onClick={shareCharacter}>
-      Compartir
+      {t('share')}
     </button>
   );
 }

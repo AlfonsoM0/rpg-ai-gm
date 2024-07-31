@@ -2,7 +2,7 @@
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useCharacterStore } from 'hooks/use-character-store';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/navigation';
 import NewCharacterNav from './form-character-description-nav';
 import { Character } from 'types/character';
 import H2 from './../h2';

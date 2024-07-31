@@ -4,6 +4,7 @@ import { Icon } from 'components/icons';
 import { ModalContentContainer } from 'components/modal';
 import TTSConfig from 'components/tts/tts-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
+import { useTranslations } from 'next-intl';
 import { AiModels } from 'utils/generate-ai-config';
 
 export const aiIconStyle = {
@@ -14,65 +15,59 @@ export const aiIconStyle = {
   Random_AI: 'w-8 h-8 fill-secondary',
 } as { [key in AiModels]: string };
 
-export const aiConfigNamesES = {
-  Strict_AI: 'Estricto',
-  Virtuous_AI: 'Virtuoso',
-  Creative_AI: 'Creativo',
-  Progresive_AI: 'Progresivo',
-  Random_AI: 'Aleatorio',
-} as { [key in AiModels]: string };
-
-export const aiModels: { name: AiModels; nameEs: string; desc: string; clsRadio: string }[] = [
-  {
-    name: 'Strict_AI',
-    nameEs: 'Estricto - jugador estratega.',
-    desc: 'Respeta las reglas, pero necesita de tu creatividad. Debes proponer más ideas para la historia.',
-    clsRadio: 'radio checked:bg-success',
-  },
-  {
-    name: 'Virtuous_AI',
-    nameEs: 'Virtuoso - un poquito de todo.',
-    desc: 'Respeta un poco las reglas y es algo creativo.',
-    clsRadio: 'radio checked:bg-warning',
-  },
-  {
-    name: 'Creative_AI',
-    nameEs: 'Creativo - narrador charlatán.',
-    desc: 'Es creativo, pero no respeta las reglas. Debes pedirle hacer tiradas o que se tranquilice y termine la historia de una vez.',
-    clsRadio: 'radio checked:bg-error',
-  },
-  {
-    name: 'Progresive_AI',
-    nameEs: 'Progresivo - empieza estricto y termina loco. (Recomendado)',
-    desc: 'Comienza siendo estricto y termina siendo muy creativo.',
-    clsRadio: 'radio checked:bg-primary',
-  },
-  {
-    name: 'Random_AI',
-    nameEs: 'Aleatorio - depende de su humor.',
-    desc: 'Estricto, creativo o virtuoso, nunca se sabe, va cambiando en cada respuesta.',
-    clsRadio: 'radio checked:bg-secondary',
-  },
-];
-
 export default function ModalConfigAI() {
+  const t = useTranslations('ModalConfigAI');
+
+  const aiModels: { name: AiModels; title: string; desc: string; clsRadio: string }[] = [
+    {
+      name: 'Strict_AI',
+      title: t('Strict_AI_title'),
+      desc: t('Strict_AI_desc'),
+      clsRadio: 'radio checked:bg-success',
+    },
+    {
+      name: 'Virtuous_AI',
+      title: t('Virtuous_AI_title'),
+      desc: t('Virtuous_AI_desc'),
+      clsRadio: 'radio checked:bg-warning',
+    },
+    {
+      name: 'Creative_AI',
+      title: t('Creative_AI_title'),
+      desc: t('Creative_AI_desc'),
+      clsRadio: 'radio checked:bg-error',
+    },
+    {
+      name: 'Progresive_AI',
+      title: t('Progresive_AI_title'),
+      desc: t('Progresive_AI_desc'),
+      clsRadio: 'radio checked:bg-primary',
+    },
+    {
+      name: 'Random_AI',
+      title: t('Random_AI_title'),
+      desc: t('Random_AI_desc'),
+      clsRadio: 'radio checked:bg-secondary',
+    },
+  ];
+
   const { aiConfig, setAiConfig } = useGmAiStore();
   return (
-    <ModalContentContainer title="Game Master AI" titleColor="info">
+    <ModalContentContainer title={t('title')} titleColor="info">
       <>
-        <p className="py-4">Configura la personalidad de tu Game Master AI.</p>
+        <p className="py-4">{t('p_Config')}</p>
 
         <h4 className="text-center my-4">
           <span>
             <Icon.AiBrain className={`${aiIconStyle[aiConfig]} w-4 h-4 inline`} />
           </span>
-          <strong> Estilo</strong>
+          <strong> {t('p_strong_Style')}</strong>
         </h4>
 
         {aiModels.map((model) => (
           <div className="form-control border-2 rounded-lg my-1 p-1" key={model.name}>
             <label className="label cursor-pointer">
-              <span className="label-text font-bold">{model.nameEs}</span>
+              <span className="label-text font-bold">{model.title}</span>
               <input
                 type="radio"
                 name="radio-10"

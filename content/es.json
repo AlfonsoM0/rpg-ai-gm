@@ -9,8 +9,179 @@
     "input_Search_By_Name": "Buscar por Nombre",
     "h2_Create_New_Character": "¡Crear un personaje Nuevo!"
   },
+  "Page_Story": {
+    "h1_Telling_the_Story": "¡Narrando la Historia!"
+  },
   "Page_404": {
     "Not_found": "404 | Página no encontrada."
+  },
+  "Character": {
+    "Name": "Nombre",
+    "Description": "Descripción",
+    "Appearance": "Apariencia",
+    "Background": "Trasfondo",
+    "Profession": "Profesión",
+    "Personality": "Personalidad",
+    "Equipment": "Equipamiento",
+    "Powers": "Poderes",
+    "Characteristics": "Características",
+    "char": {
+      "STR": "FUE",
+      "Strength": "Fuerza",
+      "DEX": "DES",
+      "Dexterity": "Destreza",
+      "CON": "CON",
+      "Constitution": "Constitución",
+      "INT": "INT",
+      "Intelligence": "Inteligencia",
+      "WIS": "SAB",
+      "Wisdom": "Sabiduría",
+      "CHA": "CAR",
+      "Charisma": "Carisma"
+    }
+  },
+  "CardCharacter": {
+    "btn": {
+      "copy": "Copiar personaje",
+      "delete": "Borrar",
+      "edit": "Editar",
+      "select": {
+        "fire": "Despedir",
+        "Recruit": "Reclutar"
+      },
+      "share": "Compartir"
+    },
+
+    "modal": {
+      "cant_share": {
+        "title": "Compartir personaje",
+        "p": "Para compartir un personaje debes iniciar sesión."
+      },
+      "share": {
+        "title": "Compartir personaje",
+        "p": "Se copió la URL del personaje al portapapeles.",
+        "a": "Clic aquí para ver el personaje compartido."
+      },
+      "character_in_game": {
+        "title": "Personaje en Juego",
+        "p": "No puedes reclutar, despedir o borrar personajes si tu historia actual no ha terminado."
+      },
+      "delete_character": {
+        "title": "¿Estás seguro de borrar este personaje?",
+        "p": "Esta acción no se puede deshacer.",
+        "btn": {
+          "accept": "Si, borrar",
+          "cancel": "No, cancelar"
+        }
+      },
+      "maximum_characters": {
+        "title": "Tienes demasiados personajes en juego",
+        "p": "Solo puedes tener 2 personajes en juego a la vez. Elimina alguno para poder reclutar otro."
+      }
+    }
+  },
+  "CardPlayCharacter": {
+    "h3_Characteristics_Rolls": "Pruebas de Característica",
+    "p1_select_one_option": "* Elige una opción"
+  },
+  "MsgLoadingCharacters": {
+    "Loading_characters": "Actualizando los personajes de la historia..."
+  },
+  "MsgStoryEnd": {
+    "h2_Story_End": "Fin de la historia",
+    "Total_Failures": "Total de fallos:",
+    "Total_Successes": "Total de éxito:",
+    "Story_XP": "Experiencia de la historia:"
+  },
+  "ChatOptionsConfig": {
+    "Other_Options": "Otras opciones",
+    "End": "Fin."
+  },
+  "ChatOptionsABC": {
+    "Story_Options": "Opciones de historia"
+  },
+  "ModalEndHistory": {
+    "title": "Fin de la Historia",
+    "p1": "Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar otro capítulo desde donde dejaste la anterior.",
+    "p2": "Si tu historia no finaliza con el cartel de \"Fin de la historia\", que muestra los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas contiuarla.",
+    "p3_strong": "Elige un nombre original.",
+    "btn_End_Game": "Si, finalizar historia",
+    "btn_Continue_Game": "No, seguir jugando"
+  },
+  "ModalWinXp": {
+    "title": "Ganaste XP",
+    "You_have_earned_XP": "Has ganado ",
+    "for": "XP para ",
+    "Edit_your_character": "Edita tu personaje para mejorar tus caracteristicas."
+  },
+  "ModaArtThemeConfig": {
+    "title": "Elige un tema para ambientar tus historias",
+    "btn_Redy": "¡Listo!"
+  },
+  "ModalConfigAI": {
+    "title": "Game Master AI",
+    "p_Config": "Configura la personalidad de tu Game Master AI.",
+    "p_strong_Style": "Estilo",
+
+    "Strict_AI_title": "Estricto - jugador estratega.",
+    "Strict_AI_desc": "Respeta las reglas, pero necesita de tu creatividad. Debes proponer más ideas para la historia.",
+
+    "Virtuous_AI_title": "Virtuoso - un poquito de todo.",
+    "Virtuous_AI_desc": "Respeta un poco las reglas y es algo creativo.",
+
+    "Creative_AI_title": "Creativo - narrador charlatán.",
+    "Creative_AI_desc": "Es creativo, pero no respeta las reglas. Debes pedirle hacer tiradas o que se tranquilice y termine la historia de una vez.",
+
+    "Progresive_AI_title": "Progresivo - empieza estricto y termina loco. (Recomendado)",
+    "Progresive_AI_desc": "Comienza siendo estricto y termina siendo muy creativo.",
+
+    "Random_AI_title": "Aleatorio - depende de su humor.",
+    "Random_AI_desc": "Estricto, creativo o virtuoso, nunca se sabe, va cambiando en cada respuesta."
+  },
+  "ModaIdeasForAI": {
+    "title": "Tips y Atajos",
+    "p1": "Estos son tips y atajos para ayudarte a mejorar tu experiencia con Game Master AI.",
+
+    "tips": {
+      "title": "Tips",
+      "tip1_p_strong": "La historia termina a los 3 fallos o 5 éxitos",
+      "tip1_p": "Si no quieres que termine rápido, puedes escribir tus resultados de pruebas o pedirle a GmAi que las haga por ti. Así no se guardarán en el sistema y evitarás que se active el final. Aunque GmAi puede concluir por su cuenta, puedes pedirle que continúe hasta donde quieras.",
+
+      "tip2_p_strong": "La XP ganada al final de la historia",
+      "tip2_p": "Se calcula en base al resultado de tus pruebas de característica. Solo las pruebas lanzadas desde las fichas de tus personajes cuentan, ya que se registran en el sistema. GmAI lleva su propio registro, pero no es muy confiable.",
+
+      "tip3_p_strong": "Conseguir una mejor historia",
+      "tip3_p": "Es fácil, aporta ideas a la trama de manera creativa y no solo eligiendo las opciones que te da GmAi.",
+
+      "tip4_p_strong": "Jugar una historia más rápida",
+      "tip4_p": "Es posible, pide a tu GmAi \"realizar pruebas de características\", eso lo motivará a darte más pruebas y detalles para avanzar más rápido en la historia. Si GmAi realiza tiradas por tí, puedes decirle que tú quieres realziar todas las tiradas.",
+
+      "tip5_p_strong": "¿Quieres jugar una campaña de varias historias?",
+      "tip5_p": "Guarda tu historia en la biblioteca. Luego podrás acceder a ella y seguir jugando desde donde lo dejaste."
+    },
+
+    "My_Shortcuts": {
+      "title": "Mis Atajos",
+      "textarea_placeholder": "Escribe un comando para GmAi."
+    },
+
+    "Recomended_Shortcuts": {
+      "title": "Atajos recomendados",
+      "shortcut1": "¿Qué es un juego de rol de mesa?",
+      "shortcut2": "Explícame las reglas de juego.",
+      "shortcut3": "¿Cuál es tu trabajo como Game Master AI?",
+      "shortcut4": "Sugiere distintas opciones de historias y enumérarlas para elegir una.",
+      "shortcut5": "Quiero usar este juego para practicar un idioma.",
+      "shortcut6": "Quiero realizar yo todas las prubas de características de mis personajes.",
+      "shortcut7": "Pideme realizar pruebas de características para todas mis decisiones.",
+      "shortcut8": "Haz un resumen de mis personajes.",
+      "shortcut9": "Haz un resumen de las características de mis personajes.",
+      "shortcut10": "Haz un resumen de mis tiradas y el total de éxitos y fallos.",
+      "shortcut11": "Haz un resumen de la historia.",
+      "shortcut12": "Quiero continuar con esta historia.",
+      "shortcut13": "Quiero jugar una nueva historia.",
+      "shortcut14": "Finaliza la historia."
+    }
   },
   "ModalNoCharactersToPlay": {
     "title": "No tienes personajes reclutados",

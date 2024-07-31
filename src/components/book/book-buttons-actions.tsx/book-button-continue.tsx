@@ -7,7 +7,7 @@ import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_STORY_END } from 'config/constant
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/navigation';
 import { Book } from 'types/library';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
 

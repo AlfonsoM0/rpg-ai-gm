@@ -1,7 +1,8 @@
 'use client';
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/navigation';
 import { Character } from 'types/character';
 
 interface CopyCharacterProps {
@@ -9,6 +10,8 @@ interface CopyCharacterProps {
 }
 
 export default function ButtonCopyCharacter({ character }: CopyCharacterProps) {
+  const t = useTranslations('CardCharacter.btn');
+
   const router = useRouter();
   const { setAllCharacterInfo } = useCreateNewCharacterStore();
 
@@ -24,7 +27,7 @@ export default function ButtonCopyCharacter({ character }: CopyCharacterProps) {
 
   return (
     <button className="btn btn-sm btn-info" onClick={copyCharacter}>
-      Copiar personaje
+      {t('copy')}
     </button>
   );
 }

@@ -1,7 +1,8 @@
 'use client';
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/navigation';
 import { Character } from 'types/character';
 
 interface EditCharacterProps {
@@ -9,6 +10,8 @@ interface EditCharacterProps {
 }
 
 export default function ButtonEditCharacter({ character }: EditCharacterProps) {
+  const t = useTranslations('CardCharacter.btn');
+
   const router = useRouter();
   const { setAllCharacterInfo, setStep, setIsEdit, setPreviousCharacteristics } =
     useCreateNewCharacterStore();
@@ -23,7 +26,7 @@ export default function ButtonEditCharacter({ character }: EditCharacterProps) {
 
   return (
     <button className="btn btn-sm btn-info" onClick={editCharacter}>
-      Editar
+      {t('edit')}
     </button>
   );
 }

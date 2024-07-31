@@ -8,8 +8,11 @@ import ModalConfigAI, { aiIconStyle } from './chat-options-modals/modal-ai-confi
 import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 import { Icon } from 'components/icons';
 import ModalArtThemeConfig from './chat-options-modals/modal-art-theme-config';
+import { useTranslations } from 'next-intl';
 
 export default function ChatOptionsConfig() {
+  const t = useTranslations('ChatOptionsConfig');
+
   const { isLoadingContent } = useGmAiStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { aiConfig } = useGmAiStore();
@@ -41,7 +44,7 @@ export default function ChatOptionsConfig() {
 
   return (
     <div>
-      <p className="text-center text-sm mb-1 font-bold">Otras opciones</p>
+      <p className="text-center text-sm mb-1 font-bold">{t('Other_Options')}</p>
 
       <div className="flex gap-2">
         <button className="btn hover:border-base-content" onClick={onConfigAiClick}>
@@ -65,7 +68,7 @@ export default function ChatOptionsConfig() {
           onClick={onEndHistoryClick}
           disabled={isLoadingContent}
         >
-          Fin.
+          {t('End')}
         </button>
       </div>
     </div>

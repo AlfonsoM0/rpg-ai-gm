@@ -1,7 +1,7 @@
 // https://www.sitepoint.com/next-js-internationalization/#implementinglanguageswitching
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/navigation';
 import { usePathname } from 'next/navigation';
 import { Icon } from './icons';
 

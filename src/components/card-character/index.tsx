@@ -10,6 +10,8 @@ import ButtonCopyCharacter from './card-character-buttons/button-copy-character'
 import ButtonDeleteCharacter from './card-character-buttons/button-delete-character';
 import ButtonEditCharacter from './card-character-buttons/button-edit-character';
 import ButtonSelectCharacter from './card-character-buttons/button-select-character';
+import { useTranslations } from 'next-intl';
+import { MarkdownOptions } from 'config/constants';
 
 interface CardCharacterProps {
   character: Character;
@@ -22,6 +24,9 @@ export default function CardCharacter({
   isViewOnly,
   isFromAnotherUser,
 }: CardCharacterProps) {
+  const d = useTranslations('Character');
+  const c = useTranslations('Character.char');
+
   const { inGameCharacters } = useCharacterStore();
 
   const {
@@ -66,55 +71,67 @@ export default function CardCharacter({
 
         <div className="flex justify-center items-center font-bold gap-10">
           <div>
-            <h3>FUE +{strength}</h3>
-            <h3>DES +{dexterity}</h3>
-            <h3>CON +{constitution}</h3>
+            <h3>
+              {c('STR')} +{strength}
+            </h3>
+            <h3>
+              {c('DEX')} +{dexterity}
+            </h3>
+            <h3>
+              {c('CON')} +{constitution}
+            </h3>
           </div>
           <div>
-            <h3>INT +{intelligence}</h3>
-            <h3>SAB +{wisdom}</h3>
-            <h3>CAR +{charisma}</h3>
+            <h3>
+              {c('INT')} +{intelligence}
+            </h3>
+            <h3>
+              {c('WIS')} +{wisdom}
+            </h3>
+            <h3>
+              {c('CHA')} +{charisma}
+            </h3>
           </div>
         </div>
 
         <div className="collapse collapse-arrow bg-base-200" onClick={() => setCheck(!check)}>
           <input type="radio" name={id} checked={check} readOnly />
-          <div className="collapse-title font-medium">Descripción</div>
+          <div className="collapse-title font-medium">{d('Description')}</div>
           <div className="collapse-content">
             <h3>
-              <strong>Apariencia: </strong>
+              <strong>{d('Appearance')}: </strong>
             </h3>
-            <Markdown options={mdOpt}>{appearance}</Markdown>
+            <Markdown options={MarkdownOptions}>{appearance}</Markdown>
             <br />
 
             <h3>
-              <strong>Trasfondo: </strong>
+              <strong>{d('Background')}: </strong>
             </h3>
-            <Markdown options={mdOpt}>{background}</Markdown>
+            <Markdown options={MarkdownOptions}>{background}</Markdown>
             <br />
 
             <h3>
-              <strong>Profesión: </strong>
+              <strong>{d('Profession')}: </strong>
             </h3>
-            <Markdown options={mdOpt}>{profession}</Markdown>
+            <Markdown options={MarkdownOptions}>{profession}</Markdown>
             <br />
 
             <h3>
-              <strong>Personalidad: </strong>
+              <strong>{d('Personality')}: </strong>
             </h3>
-            <Markdown options={mdOpt}>{personality}</Markdown>
+            <Markdown options={MarkdownOptions}>{personality}</Markdown>
             <br />
 
             <h3>
-              <strong>Equipamiento: </strong>
+              <strong>{d('Equipment')}: </strong>
             </h3>
-            <Markdown options={mdOpt}>{equipment}</Markdown>
+            <Markdown options={MarkdownOptions}>{equipment}</Markdown>
             <br />
 
             <h3>
-              <strong>Poderes: </strong>
+              <strong>{d('Powers')}: </strong>
             </h3>
-            <Markdown options={mdOpt}>{powers ? powers : 'No posee poderes.'}</Markdown>
+            <Markdown options={MarkdownOptions}>{powers ? powers : '-'}</Markdown>
             <br />
           </div>
         </div>
@@ -140,29 +157,6 @@ export default function CardCharacter({
     </div>
   );
 }
-
-const mdOpt: MarkdownToJSX.Options = {
-  overrides: {
-    strong: {
-      props: { className: 'text-info text-md' },
-    },
-    li: {
-      props: { className: 'list-disc ml-5' },
-    },
-    p: {
-      props: { className: 'my-2' },
-    },
-    a: {
-      props: { className: 'text-info' },
-    },
-    pre: {
-      component: 'div',
-    },
-    code: {
-      component: Markdown,
-    },
-  },
-};
 
 export const Skeleton_CardCharacter = () => (
   <div className="flex w-80 flex-col gap-4">

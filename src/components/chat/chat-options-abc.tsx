@@ -3,8 +3,11 @@
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
+import { useTranslations } from 'next-intl';
 
 export default function ChatOptionsABC() {
+  const t = useTranslations('ChatOptionsABC');
+
   const { addContent, isLoadingContent, content } = useGmAiStore();
   const { handleStop } = useTTSStore();
 
@@ -18,7 +21,7 @@ export default function ChatOptionsABC() {
 
   return (
     <div>
-      <p className="text-center text-sm mb-1 font-bold">Opciones de historia</p>
+      <p className="text-center text-sm mb-1 font-bold">{t('Story_Options')}</p>
       <div className={content.length > 2 ? 'flex gap-2' : 'hidden'}>
         <button
           className="btn btn-circle hover:border-info"

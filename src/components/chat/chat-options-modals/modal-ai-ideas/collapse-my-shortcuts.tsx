@@ -4,9 +4,12 @@ import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function CollapseMyShortcuts() {
+  const t = useTranslations('ModaIdeasForAI.My_Shortcuts');
+
   const { addContent } = useGmAiStore();
   const { setModalIsOpen } = useModalState();
   const { chatShortcuts, addChatShortcut, removeChatShortcut, moveChatShortcut } =
@@ -40,7 +43,9 @@ export default function CollapseMyShortcuts() {
   return (
     <div className="collapse collapse-plus">
       <input type="radio" name="tips-y-atajos" defaultChecked />
-      <div className="collapse-title text-xl font-medium">Mis Atajos</div>
+
+      <div className="collapse-title text-xl font-medium">{t('title')}</div>
+
       <div className="collapse-content">
         {/* My shortcuts */}
         {chatShortcuts.map((shortcut, index) => (
@@ -48,16 +53,19 @@ export default function CollapseMyShortcuts() {
             <button className="btn btn-error p-1" onClick={() => removeChatShortcut(shortcut)}>
               X
             </button>
+
             <button
               onClick={() => handleClick(shortcut)}
               className="btn w-[calc(100%-4rem)] mb-2 hover:font-bold h-fit"
             >
               {shortcut}
             </button>
+
             <div className="flex flex-col">
               <button className="btn btn-xs p-1 w-10" onClick={() => onIdeaUp(shortcut)}>
                 ↑
               </button>
+
               <button className="btn btn-xs p-1 w-10" onClick={() => onIdeaDown(shortcut)}>
                 ↓
               </button>
@@ -70,7 +78,7 @@ export default function CollapseMyShortcuts() {
           <label className="form-control w-full" key={'step-1'}>
             <textarea
               className="textarea textarea-bordered h-5 text-center"
-              placeholder="Escribe un comando para GmAi."
+              placeholder={t('textarea_placeholder')}
               value={newIdea}
               onChange={(e) => setNewIdea(e.target.value)}
               required

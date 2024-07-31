@@ -2,9 +2,9 @@
 
 import { Button } from 'components/button';
 import { Icon } from 'components/icons';
+import { MarkdownOptions } from 'config/constants';
 import { useTTSStore } from 'hooks/use-tts-store';
-import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
-import Image from 'next/image';
+import Markdown from 'markdown-to-jsx';
 import { useEffect, useMemo, useState } from 'react';
 
 interface ChatMsgStart {
@@ -56,6 +56,7 @@ export default function ChatMessage({
   }, [isStopped, isPlaying, isPaused, isThisTTS]);
 
   const chatPosition = position === 'start' ? 'chat chat-start my-2' : 'chat chat-end my-2';
+
   return (
     <div className={chatPosition}>
       <div className="chat-image avatar" onClick={onAvatarClick}>
@@ -68,9 +69,11 @@ export default function ChatMessage({
           )}
         </div>
       </div>
+
       <div className="chat-header">{userName}</div>
+
       <div className="chat-bubble bg-secondary-content text-primary text-sm">
-        <Markdown options={mdOpt}>{message}</Markdown>
+        <Markdown options={MarkdownOptions}>{message}</Markdown>
 
         {message.length > 30 ? (
           <div className="flex justify-end mb-[-0.8rem] mt-[-0.5rem] mr-[-1rem]">
@@ -81,26 +84,3 @@ export default function ChatMessage({
     </div>
   );
 }
-
-const mdOpt: MarkdownToJSX.Options = {
-  overrides: {
-    strong: {
-      props: { className: 'text-info text-md' },
-    },
-    li: {
-      props: { className: 'list-disc ml-5' },
-    },
-    p: {
-      props: { className: 'my-2' },
-    },
-    a: {
-      props: { className: 'text-info' },
-    },
-    pre: {
-      component: 'div',
-    },
-    code: {
-      component: Markdown,
-    },
-  },
-};

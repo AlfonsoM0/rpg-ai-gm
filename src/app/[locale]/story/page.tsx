@@ -12,9 +12,12 @@ import { AI_ROLE } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 export default function Page() {
+  const t = useTranslations('Page_Story');
+
   const { inGameCharacters } = useCharacterStore();
   const { content, isLoadingContent } = useGmAiStore();
   const { isTTSEnabled, handlePlay, setTTS, handleStop } = useTTSStore();
@@ -39,7 +42,7 @@ export default function Page() {
 
   return (
     <Main>
-      <H1>¡Narrando la Historia!</H1>
+      <H1>{t('h1_Telling_the_Story')}</H1>
 
       {isTTSEnabled ? (
         <section className="my-[-1rem]">

@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { useEffect, useRef } from 'react';
 import srcLogo from 'public/android-chrome-512x512.png';
 import UserButton from './user/user-button';

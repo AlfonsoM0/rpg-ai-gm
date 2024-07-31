@@ -6,12 +6,16 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { esMsgRoll2d6 } from 'utils/roll-2d6';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
+import { useTranslations } from 'next-intl';
 
 interface CardPlayCharacterProps {
   character: Character;
 }
 
 export default function CardPlayCharacter({ character }: CardPlayCharacterProps) {
+  const t = useTranslations('Character.char');
+  const tPC = useTranslations('CardPlayCharacter');
+
   const { id, xp, name, characteristics } = character;
   const { strength, dexterity, constitution, intelligence, wisdom, charisma } = characteristics;
   const CharsXP = characteristicsXpValue(characteristics);
@@ -41,8 +45,8 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
           </div>
         </div>
 
-        <h3 className="text-center">Pruebas de Característica</h3>
-        <p className="text-xs text-center text-info mt-[-0.5rem]">* Elige una opción</p>
+        <h3 className="text-center">{tPC('h3_Characteristics_Rolls')}</h3>
+        <p className="text-xs text-center text-info mt-[-0.5rem]">{tPC('p1_select_one_option')}</p>
 
         <div className="flex justify-around items-center mt-2 font-bold">
           <div className="flex flex-col justify-center items-center gap-2">
@@ -52,7 +56,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               disabled={isLoadingContent}
             >
               <div>
-                <h4>FUE</h4>
+                <h4>{t('STR')}</h4>
                 <p className="text-xs">2d6+{strength}</p>
               </div>
             </button>
@@ -62,7 +66,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               disabled={isLoadingContent}
             >
               <div>
-                <h4>DES</h4>
+                <h4>{t('DEX')}</h4>
                 <p className="text-xs">2d6+{dexterity}</p>
               </div>
             </button>
@@ -72,7 +76,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               disabled={isLoadingContent}
             >
               <div>
-                <h4>CON</h4>
+                <h4>{t('CON')}</h4>
                 <p className="text-xs">2d6+{constitution}</p>
               </div>
             </button>
@@ -84,7 +88,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               disabled={isLoadingContent}
             >
               <div>
-                <h4>INT</h4>
+                <h4>{t('INT')}</h4>
                 <p className="text-xs">2d6+{intelligence}</p>
               </div>
             </button>
@@ -94,7 +98,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               disabled={isLoadingContent}
             >
               <div>
-                <h4>SAB</h4>
+                <h4>{t('WIS')}</h4>
                 <p className="text-xs">2d6+{wisdom}</p>
               </div>
             </button>
@@ -104,7 +108,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               disabled={isLoadingContent}
             >
               <div>
-                <h4>CAR</h4>
+                <h4>{t('CHA')}</h4>
                 <p className="text-xs">2d6+{charisma}</p>
               </div>
             </button>

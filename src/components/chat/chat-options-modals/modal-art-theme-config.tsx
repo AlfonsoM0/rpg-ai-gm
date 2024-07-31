@@ -4,13 +4,16 @@ import { ModalContentContainer } from 'components/modal';
 import { themes } from 'components/theme-controller';
 import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
+import { useTranslations } from 'next-intl';
 
 export default function ModaArtThemeConfig() {
+  const t = useTranslations('ModaArtThemeConfig');
+
   const { theme, setTheme } = useUserPreferencesStore();
   const { setModalIsOpen } = useModalState();
 
   return (
-    <ModalContentContainer title="Elige un tema para ambientar tus historias" titleColor="info">
+    <ModalContentContainer title={t('title')} titleColor="info">
       <>
         <div className="flex flex-wrap justify-around items-center gap-4">
           {themes.map((themeName) => (
@@ -28,7 +31,7 @@ export default function ModaArtThemeConfig() {
         </div>
 
         <button className="btn btn-sm btn-info w-full mt-4" onClick={() => setModalIsOpen(false)}>
-          ¡Listo!
+          {t('btn_Redy')}
         </button>
       </>
     </ModalContentContainer>

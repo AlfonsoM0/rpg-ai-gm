@@ -5,14 +5,17 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useMemo } from 'react';
 import { Character } from 'types/character';
-import ModalCharacterInPlay from '../card-character-modal/modal-character-in-play';
+import ModalCharacterInGame from '../card-character-modal/modal-character-in-game';
 import ModalMaximumCharacters from '../card-character-modal/modal-maximun-characters';
+import { useTranslations } from 'next-intl';
 
 interface SelectCharacterProps {
   character: Character;
 }
 
 export default function ButtonSelectCharacter({ character }: SelectCharacterProps) {
+  const t = useTranslations('CardCharacter.btn.select');
+
   const { removeACharacterFromInGame, inGameCharacters, addACharacterToInGame } =
     useCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -25,7 +28,7 @@ export default function ButtonSelectCharacter({ character }: SelectCharacterProp
 
   function selectCharacter() {
     if (isStoryStarted) {
-      setModalContent(<ModalCharacterInPlay />);
+      setModalContent(<ModalCharacterInGame />);
       setModalIsOpen(true);
       return;
     }
@@ -44,7 +47,7 @@ export default function ButtonSelectCharacter({ character }: SelectCharacterProp
 
   return (
     <button className="btn btn-sm btn-success" onClick={selectCharacter}>
-      {isInGame ? 'Despedir' : 'Reclutar'}
+      {isInGame ? t('fire') : t('Recruit')}
     </button>
   );
 }

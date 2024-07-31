@@ -1,7 +1,7 @@
 'use client';
 
 import { useLibraryStore } from 'hooks/use-library-store';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/navigation';
 import { Book } from 'types/library';
 
 export default function BookButtonOpen({ book }: { book: Book }) {

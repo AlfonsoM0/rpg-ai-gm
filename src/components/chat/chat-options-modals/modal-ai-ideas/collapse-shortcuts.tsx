@@ -4,25 +4,27 @@ import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
-
-const ideas = [
-  '¿Qué es un juego de rol de mesa?',
-  'Explícame las reglas de juego.',
-  '¿Cuál es tu trabajo como Game Master AI?',
-  'Sugiere distintas opciones de historias y enumérarlas para elegir una.',
-  'Quiero usar este juego para practicar un idioma.',
-  'Quiero realizar yo todas las prubas de características de mis personajes.',
-  'Pideme realizar pruebas de características para todas mis decisiones.',
-  'Haz un resumen de mis personajes.',
-  'Haz un resumen de las características de mis personajes.',
-  'Haz un resumen de mis tiradas y el total de éxitos y fallos.',
-  'Haz un resumen de la historia.',
-  'Quiero continuar con esta historia.',
-  'Quiero jugar una nueva historia.',
-  'Finaliza la historia.',
-];
+import { useTranslations } from 'next-intl';
 
 export default function CollapseShortcuts() {
+  const t = useTranslations('ModaIdeasForAI.Recomended_Shortcuts');
+
+  const ideas = [
+    t('shortcut1'),
+    t('shortcut2'),
+    t('shortcut3'),
+    t('shortcut4'),
+    t('shortcut5'),
+    t('shortcut6'),
+    t('shortcut7'),
+    t('shortcut8'),
+    t('shortcut9'),
+    t('shortcut10'),
+    t('shortcut11'),
+    t('shortcut12'),
+    t('shortcut13'),
+    t('shortcut14'),
+  ];
   const { addContent } = useGmAiStore();
   const { setModalIsOpen } = useModalState();
   const { addChatShortcut, chatShortcuts } = useUserPreferencesStore();
@@ -38,7 +40,9 @@ export default function CollapseShortcuts() {
   return (
     <div className="collapse collapse-plus">
       <input type="radio" name="tips-y-atajos" />
-      <div className="collapse-title text-xl font-medium">Atajos recomendados</div>
+
+      <div className="collapse-title text-xl font-medium">{t('title')}</div>
+
       <div className="collapse-content">
         {ideas.map((idea, index) => {
           const isIdeaInMyShortcuts = chatShortcuts.includes(idea);

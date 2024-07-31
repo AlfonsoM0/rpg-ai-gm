@@ -3,15 +3,18 @@
 import { ModalContentContainer } from 'components/modal';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useModalState } from 'hooks/use-modal-state';
+import { useTranslations } from 'next-intl';
 
 export default function ModalDeleteCharacter({ id }: { id: string }) {
+  const t = useTranslations('CardCharacter.modal.delete_character');
+
   const { setModalIsOpen } = useModalState();
   const { removeACharacterFromCollection, removeACharacterFromInGame } = useCharacterStore();
 
   return (
-    <ModalContentContainer title="¿Estás seguro de borrar este personaje?" titleColor="error">
+    <ModalContentContainer title={t('title')} titleColor="error">
       <>
-        <p className="py-4">Esta acción no se puede deshacer.</p>
+        <p className="py-4">{t('p')}</p>
 
         <div className="modal-action justify-between">
           <button
@@ -22,10 +25,10 @@ export default function ModalDeleteCharacter({ id }: { id: string }) {
               setModalIsOpen(false);
             }}
           >
-            Si, borrar
+            {t('btn.accept')}
           </button>
           <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-            No, cancelar
+            {t('btn.cancel')}
           </button>
         </div>
       </>
