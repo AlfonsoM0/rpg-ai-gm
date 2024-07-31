@@ -1,4 +1,9 @@
 {
+  "GENERIC": {
+    "Loading": "Cargando",
+    "Accept": "Aceptar",
+    "Cancel": "Cancelar"
+  },
   "Page_Home": {
     "h1_Welcome": "¡Bienvenido!",
     "btn_Continue_Game": "CONTINUAR HISTORIA",
@@ -15,10 +20,47 @@
   "Page_404": {
     "Not_found": "404 | Página no encontrada."
   },
+  "Page_User": {
+    "h1": "Mi Perfil",
+    "h2": "Información Personal"
+  },
   "Header": {
     "Navbar_links": {
       "/": "Inicio",
       "/library": "Biblioteca"
+    }
+  },
+  "User": {
+    "Player_No_Connected": "Jugador no conectado",
+    "Options": "Opciones",
+
+    "form": {
+      "input_New_Name": "Nuevo Nombre",
+      "input_Img_profile_URL": "Nueva URL de imagen de perfil",
+      "btn_Save": "GUARDAR",
+      "err_Name": "El nombre debe tener al menos 3 caracteres.",
+      "err_URL": "La URL de la imagen no es válida."
+    },
+
+    "btn": {
+      "UserButtonConnect": {
+        "Logout": "Cerrar Sesión",
+        "Login": "Iniciar Sesión"
+      },
+      "UserButtonEditProfile": "Editar mi Perfil"
+    },
+
+    "modal": {
+      "ModalUserConnect": {
+        "title": "Inicio de Sesión",
+        "p1": "Al iniciar sesión por primera vez, cuando modificas tu colección de personajes o libros, estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se sincronizarán en todos los dispositivos conectados a tu cuenta.",
+        "p2": "Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescriben con los datos guardados en la nube.",
+        "p3_⚠️": "⚠️ Se abrirá una nueva ventana para autenticación. Asegurate de que tu navegador esté configurado para permitir ventanas emergentes.",
+        "p4_⚠️": "⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar sesión por primera vez."
+      },
+      "ModalUserEditProfile": {
+        "title": "Mi Perfil"
+      }
     }
   },
   "Character": {

@@ -7,9 +7,12 @@ import ThemeController from 'components/theme-controller';
 import ModalConfigAI, { aiIconStyle } from 'components/chat/chat-options-modals/modal-ai-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
-import UserAvatar from './user-avatar';
+import UserAvatar from '../user-avatar';
+import { useTranslations } from 'next-intl';
 
 export default function UserButton() {
+  const t = useTranslations('User');
+
   const { user } = useFirebase();
   const { aiConfig } = useGmAiStore();
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -31,7 +34,7 @@ export default function UserButton() {
         className="dropdown-content menu bg-secondary-content rounded-box z-[1] w-80 p-2 shadow"
       >
         <div className="flex justify-between items-center gap-4">
-          <p className="font-bold">Opciones:</p>
+          <p className="font-bold">{t('Options')}:</p>
           <button className="btn btn-ghost btn-circle" onClick={onConfigAiClick}>
             <Icon.AiBrain className={aiIconStyle[aiConfig]} />
           </button>
@@ -41,7 +44,7 @@ export default function UserButton() {
         <hr className="my-2" />
 
         <h3 className="font-bold text-lg mb-4 text-center text-primary">
-          {user?.displayName ? user.displayName : 'Jugador no conectado'}
+          {user?.displayName ? user.displayName : t('Player_No_Connected')}
         </h3>
 
         <UserButtonConnect />

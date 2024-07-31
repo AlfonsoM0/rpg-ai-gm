@@ -4,8 +4,11 @@ import useFirebase from 'hooks/firebase';
 import { useRouter } from '@/navigation';
 import { useEffect, useState } from 'react';
 import { UserAccuntPartial } from 'types/firebase-db';
+import { useTranslations } from 'next-intl';
 
 export default function UserFormInfo() {
+  const t = useTranslations('User.form');
+
   const router = useRouter();
   const { updateUserProfile, isFireLoading } = useFirebase();
 
@@ -16,12 +19,11 @@ export default function UserFormInfo() {
     e.preventDefault();
     setErrorMsg('');
 
-    if (userAcc.displayName && userAcc.displayName.length < 3)
-      return setErrorMsg('El nombre debe tener al menos 3 caracteres.');
+    if (userAcc.displayName && userAcc.displayName.length < 3) return setErrorMsg(t('err_Name'));
 
     // userAcc.photoURL mus be a valid image url.
     if (userAcc.photoURL && /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(userAcc.photoURL) === false)
-      return setErrorMsg('La URL de la imagen no es válida.');
+      return setErrorMsg(t('err_URL'));
 
     updateUserProfile(userAcc);
 
@@ -38,7 +40,7 @@ export default function UserFormInfo() {
     <form className="w-full max-w-md flex flex-col gap-4" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Nuevo Nombre"
+        placeholder={t('input_New_Name')}
         className="input input-bordered w-full text-center"
         value={userAcc.displayName || ''}
         onChange={(e) => setUserAcc({ ...userAcc, displayName: e.target.value })}
@@ -46,7 +48,7 @@ export default function UserFormInfo() {
       />
       <input
         type="url"
-        placeholder="Nueava URL de imagen de perfil"
+        placeholder={t('input_Img_profile_URL')}
         className="input input-bordered w-full text-center text-xs"
         value={userAcc.photoURL || ''}
         onChange={(e) => setUserAcc({ ...userAcc, photoURL: e.target.value })}
@@ -56,7 +58,7 @@ export default function UserFormInfo() {
       <p className="text-xs text-error text-center">{errorMsg ? errorMsg : null}</p>
 
       <button className="btn btn-primary" type="submit" disabled={isFireLoading}>
-        {isFireLoading ? <span className="loading loading-spinner"></span> : 'GUARDAR'}
+        {isFireLoading ? <span className="loading loading-spinner"></span> : t('btn_Save')}
       </button>
     </form>
   );
