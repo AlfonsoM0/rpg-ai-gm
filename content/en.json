@@ -302,6 +302,7 @@
     "p1": "If you name your story, it will be saved in your library and you can use it to play another chapter from where you left off.",
     "p2": "If your story does not end with the \"End of Story\" sign, which shows the XP earned, you will not earn the XP, but your progress will be saved for when you decide to continue it.",
     "p3_strong": "Choose an original name.",
+    "input_placeholder": "Story Name",
     "btn_End_Game": "Yes, end story",
     "btn_Continue_Game": "No, keep playing"
   },

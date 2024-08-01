@@ -302,6 +302,7 @@
     "p1": "Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar otro capítulo desde donde dejaste la anterior.",
     "p2": "Si tu historia no finaliza con el cartel de \"Fin de la historia\", que muestra los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas contiuarla.",
     "p3_strong": "Elige un nombre original.",
+    "input_placeholder": "Nombre de la Historia",
     "btn_End_Game": "Si, finalizar historia",
     "btn_Continue_Game": "No, seguir jugando"
   },

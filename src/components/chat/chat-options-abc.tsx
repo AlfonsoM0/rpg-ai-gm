@@ -22,7 +22,7 @@ export default function ChatOptionsABC() {
   return (
     <div>
       <p className="text-center text-sm mb-1 font-bold">{t('Story_Options')}</p>
-      <div className={content.length > 2 ? 'flex gap-2' : 'hidden'}>
+      <div className="flex gap-2">
         <button
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('A')}

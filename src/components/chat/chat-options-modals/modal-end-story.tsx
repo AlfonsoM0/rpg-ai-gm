@@ -66,7 +66,7 @@ export default function ModalEndHistory() {
   }
 
   return (
-    <ModalContentContainer title="Fin de la Historia" titleColor="info">
+    <ModalContentContainer title={t('title')} titleColor="info">
       <>
         <p className="py-4">
           {t('p1')} <br />
@@ -80,7 +80,7 @@ export default function ModalEndHistory() {
         <input
           className="input input-bordered w-full text-center"
           type="text"
-          placeholder="Nombre de la Historia"
+          placeholder={t('input_placeholder')}
           value={storyName}
           onChange={(e) => setStoryName(e.target.value)}
         />
