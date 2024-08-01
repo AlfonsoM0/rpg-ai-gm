@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 
 // http://localhost:3000/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
-export default function Page({ params }: { params: { uid_bid: string } }) {
+export default function Page({ params }: { params: { uid_cid: string } }) {
   return <ClientPage params={params} />;
 }
