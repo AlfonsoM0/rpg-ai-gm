@@ -3,7 +3,7 @@
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 import { Character, Characteristic } from 'types/character';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
-import { esMsgRoll2d6 } from 'utils/roll-2d6';
+import { roll2d6 } from 'utils/roll-2d6';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 import { useTranslations } from 'next-intl';
@@ -22,12 +22,24 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
   const { handleStop } = useTTSStore();
 
   const { addContent, isLoadingContent, addPlayersDiceRoll } = useGmAiStore();
+
   function rollCharacteristic(characteristic: Characteristic, value: number): void {
-    const rolResult = esMsgRoll2d6(name, characteristic, value, addPlayersDiceRoll);
     handleStop();
+
+    const Char: any = characteristic[0].toUpperCase() + characteristic.slice(1);
+
+    const { total } = roll2d6(value);
+    addPlayersDiceRoll(total);
+
     addContent({
       role: AI_ROLE.USER,
-      parts: [{ text: rolResult }],
+      parts: [
+        {
+          text: `**${name}** ${tPC('roll2d6.take a test')} ${t(Char)} (2d6+${value})... \n\n ${tPC(
+            'roll2d6.and gets a result of'
+          )}: **${total}**`,
+        },
+      ],
     });
   }
 

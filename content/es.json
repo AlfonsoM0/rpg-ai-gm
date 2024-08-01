@@ -225,7 +225,11 @@
 
   "CardPlayCharacter": {
     "h3_Characteristics_Rolls": "Pruebas de Característica",
-    "p1_select_one_option": "* Elige una opción"
+    "p1_select_one_option": "* Elige una opción",
+    "roll2d6": {
+      "take a test": "realiza una prueba de",
+      "and gets a result of": "y obtiene un resultado de"
+    }
   },
 
   "Card_Book": {
