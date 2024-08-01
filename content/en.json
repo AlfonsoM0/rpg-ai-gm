@@ -294,7 +294,8 @@
   },
 
   "ChatOptionsABC": {
-    "Story_Options": "Story Options"
+    "Story_Options": "Story Options",
+    "btn_ABC": "I choose option"
   },
 
   "ModalEndHistory": {

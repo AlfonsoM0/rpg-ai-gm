@@ -15,7 +15,7 @@ export default function ChatOptionsABC() {
     handleStop();
     addContent({
       role: AI_ROLE.USER,
-      parts: [{ text: `Elijo la opción **"${option}"**.` }], //\n\n ¿Qué prueba debo realizar?
+      parts: [{ text: `${t('btn_ABC')} **"${option}"**.` }], //\n\n ¿Qué prueba debo realizar?
     });
   }
 
