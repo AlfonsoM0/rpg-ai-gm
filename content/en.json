@@ -399,6 +399,21 @@
     "ol_li_7": "Enjoy the adventure!"
   },
 
+  "TTS": {
+    "TTSConfig": {
+      "Voice": "Voice",
+      "Voice_not_available": "Not available on your device.",
+      "Broadcaster": "Broadcaster",
+      "Pitch": "Pitch",
+      "Rate": "Rate",
+      "Volume": "Volume",
+      "tips": {
+        "1": "Click on the chat avatars to play the text.",
+        "2": "You may need to configure your device and download voice packages to hear the text. Search for \"text-to-speech output\" (TTS) in the language settings."
+      }
+    }
+  },
+
   "GmAi": {
     "Response": {
       "Empty": "🤔... I can't think of a response... \n\n Give me more information and try again. ✨",

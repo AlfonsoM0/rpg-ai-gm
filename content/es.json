@@ -399,6 +399,21 @@
     "ol_li_7": "¡Disfruta de la aventura!"
   },
 
+  "TTS": {
+    "TTSConfig": {
+      "Voice": "Voz",
+      "Voice_not_available": "No disponible en tu dispositivo.",
+      "Broadcaster": "Locutor",
+      "Pitch": "Tono",
+      "Rate": "Velocidad",
+      "Volume": "Volumen",
+      "tips": {
+        "1": "Haz clic en los avatares del chat para reproducir el texto.",
+        "2": "Es posible que tengas que configurar tu dispositivo y descargar paquetes de voz para escuchar el texto. Busca \"salida de texto a voz\" (TTS) en la configuración de idioma."
+      }
+    }
+  },
+
   "GmAi": {
     "Response": {
       "Empty": "🤔... No se me ocurre una respuesta... \n\n Dame más información e intenta nuevamente. ✨",
