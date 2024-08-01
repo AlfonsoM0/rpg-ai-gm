@@ -1,5 +1,5 @@
 interface ModalContentProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   title: string;
   titleColor:
     | 'info'
