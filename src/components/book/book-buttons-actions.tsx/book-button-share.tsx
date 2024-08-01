@@ -10,6 +10,7 @@ import ModalCantShareBook from '../book-modals/book-modal-cant-share';
 
 export default function BookButtonShare({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.btn');
+  const locale = useTranslations()('[locale]');
 
   const { setModalContent, setModalIsOpen } = useModalState();
   const { userAccount } = useFirebase();
@@ -22,7 +23,7 @@ export default function BookButtonShare({ book }: { book: Book }) {
     }
 
     const domain = window.location.origin;
-    const urlToShare = `${domain}/library/book/${userAccount.id}_${book.id}`;
+    const urlToShare = `${domain}/${locale}/library/book/${userAccount.id}_${book.id}`;
 
     setModalContent(<ModalShareBook urlToShare={urlToShare} />);
     setModalIsOpen(true);

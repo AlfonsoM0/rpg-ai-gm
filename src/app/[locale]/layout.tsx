@@ -1,8 +1,6 @@
 import 'regenerator-runtime/runtime'; // This is necesary for Build STT.
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import '../globals.css';
 import { Modal } from 'components/modal';
 import TTSLoader from 'components/tts/tts-loader';
 import TestComponent from '../(TEST)/testComponent';
@@ -14,8 +12,6 @@ import Header from 'components/header';
 import { Locale } from '../../i18n';
 import { app_metadata } from 'config/app-metadata';
 import { AI_NAME_TO_SHOW } from 'config/constants';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export async function generateMetadata({
   params: { locale },
@@ -46,21 +42,20 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} data-theme="light">
-      <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>
-          <Header />
+    <NextIntlClientProvider messages={messages}>
+      <Header />
 
-          <TestComponent />
-          <FixComponent locale={locale as Locale} />
+      <TestComponent />
 
-          {children}
+      <FixComponent locale={locale as Locale} />
 
-          <Modal />
-          <UserFirebaseSync />
-          <TTSLoader />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+      {children}
+
+      <Modal />
+
+      <UserFirebaseSync />
+
+      <TTSLoader />
+    </NextIntlClientProvider>
   );
 }

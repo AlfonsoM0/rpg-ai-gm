@@ -16,8 +16,6 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: Readonly<RootLayoutProps>) {
-  // Receive messages provided in `i18n.ts`
-
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>

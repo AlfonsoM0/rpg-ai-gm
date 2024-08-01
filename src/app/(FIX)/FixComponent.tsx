@@ -29,10 +29,14 @@ export default function FixComponent({ locale }: FixComponentProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Instal Locale config in GmAi chat
+  // Instal Locale config in GmAi chat and set html lang attribute for a11y support.
   const { setLocale } = useGmAiStore();
   useEffect(() => {
     setLocale(locale);
+    const html = document.querySelector('html');
+    if (html) {
+      html.lang = locale; // Set the lang attribute of the HTML tag to the current locale
+    }
   }, [locale, setLocale]);
 
   return <></>;

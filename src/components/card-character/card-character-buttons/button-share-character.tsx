@@ -13,6 +13,7 @@ interface ShareCharacterProps {
 
 export default function ButtonShareCharacter({ character }: ShareCharacterProps) {
   const t = useTranslations('CardCharacter.btn');
+  const locale = useTranslations()('[locale]');
 
   const { userAccount } = useFirebase();
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -25,7 +26,7 @@ export default function ButtonShareCharacter({ character }: ShareCharacterProps)
     }
 
     const domain = window.location.origin;
-    const urlToShare = `${domain}/character/${userAccount.id}_${character.id}`;
+    const urlToShare = `${domain}/${locale}/character/${userAccount.id}_${character.id}`;
 
     setModalContent(<ModalShareCharacter urlToShare={urlToShare} />);
     setModalIsOpen(true);
