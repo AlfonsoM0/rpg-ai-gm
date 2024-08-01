@@ -51,8 +51,8 @@ export const app_metadata: Metadata = {
     },
   },
 
-  //PWA
-  manifest: '/manifest.json',
+  //PWA => Generate Dynamic Metadata
+  // manifest: '/manifest.json',
 
   appleWebApp: {
     capable: true,
