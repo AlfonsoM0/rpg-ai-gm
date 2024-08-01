@@ -113,7 +113,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
           set({ isLoadingContent: true });
           const { aiConfig } = get();
 
-          const prompt = `Crea una descripción de "${descriptionType}" para un personaje de ficción llamado ${characterName}. La descripción debe basarse en la siguiente información "${description}" y debe considerar las siguientes preguntas "${ideas[descriptionType]}".`;
+          const prompt = `Crea una descripción de "${descriptionType}" para un personaje de ficción llamado ${characterName}. La descripción debe basarse en la siguiente información "${description}", debe ser en el mismo idioma que la información y debe considerar las siguientes preguntas "${ideas[descriptionType]}".`;
 
           try {
             const aiRes = await runAIChat(prompt, undefined, generateAiConfig(10, aiConfig));
