@@ -5,7 +5,11 @@ import { deleteCodesFromText } from './delete-text-from-text';
 import { AiModels, generateAiConfig } from './generate-ai-config';
 import runAIChat from 'server/gm-ai';
 import { generateGmAiPromptArray } from 'config/gm-ai-promp';
+
+// i18n
 import { Locale } from '../i18n';
+import es from '../../content/es.json';
+import en from '../../content/en.json';
 
 function createStoryContentControl(stateContent: Content[], playersDiceRolls: number[]): Content {
   const { isStoryOver, totalFailures, totalSuccesses, storyXp } =
@@ -64,6 +68,9 @@ export async function createGmAiResponseContent(
   playersDiceRolls: number[],
   locale: Locale
 ): Promise<Content[]> {
+  const lang = locale === 'en' ? en : es;
+  const t = lang.GmAi.Response;
+
   let contentToSet: Content[] = [];
 
   const newContentText = newContent.parts.map((part) => part.text).join('');
@@ -86,11 +93,7 @@ export async function createGmAiResponseContent(
         }
       : {
           role: AI_ROLE.MODEL,
-          parts: [
-            {
-              text: '🤔... No se me ocurre una respuesta... \n\n Dame más información e intenta nuevamente. ✨',
-            },
-          ],
+          parts: [{ text: t.Empty }],
         };
 
     contentToSet = [...stateContent, newContent, contentForAI, infoStoryControl];
@@ -103,11 +106,7 @@ export async function createGmAiResponseContent(
       newContent,
       {
         role: AI_ROLE.MODEL,
-        parts: [
-          {
-            text: '⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cando hay un error en el juego o cuando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e intenta nuevamente. ✨',
-          },
-        ],
+        parts: [{ text: t.Error }],
       },
       infoStoryControl,
     ];

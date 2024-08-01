@@ -397,5 +397,12 @@
     "ol_li_5": "In your profile, you can activate and configure the voice of your GmAi with the option ",
     "ol_li_6": "In your profile, you can change the colors of the app with the option ",
     "ol_li_7": "Enjoy the adventure!"
+  },
+
+  "GmAi": {
+    "Response": {
+      "Empty": "🤔... I can't think of a response... \n\n Give me more information and try again. ✨",
+      "Error": "⚠️ I'm sorry, I can't respond to you. \n\n This can happen when there's an error in the game or when our conversation becomes very... inappropriate. \n\n Give me more information and try again. ✨"
+    }
   }
 }
