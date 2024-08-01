@@ -5,6 +5,8 @@ import { getRequestConfig } from 'next-intl/server';
 
 export const locales: string[] = ['en', 'es'];
 
+export type Locale = 'en' | 'es';
+
 export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as any)) notFound();
 

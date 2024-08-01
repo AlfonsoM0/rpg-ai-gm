@@ -7,10 +7,12 @@ import { CharacterCreationDescription } from 'types/character';
 import runAIChat from 'server/gm-ai';
 
 import i18nEs from '../../content/es.json';
+import { Locale } from '../i18n';
 
 const ideas = i18nEs.New_Character.Description;
 
 interface GmAiStore {
+  locale: Locale;
   // Chat history
   storyId: string;
   storyName: string;
@@ -26,6 +28,7 @@ interface GmAiStore {
 }
 
 interface GmAiActions {
+  setLocale: (locale: Locale) => void;
   // Chat history
   setHistoryId: () => void;
   setStoryName: (storyName: string) => void;
@@ -48,6 +51,7 @@ interface GmAiActions {
 }
 
 const initialGmAiState: GmAiStore = {
+  locale: 'en',
   storyId: '',
   storyName: '',
   content: [],
@@ -64,6 +68,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         ...initialGmAiState,
 
         // Actions
+        setLocale: (locale) => set({ locale }),
+
         setHistoryId: () => {
           const currentId = get().storyId;
           if (!currentId) set({ storyId: crypto.randomUUID() });
@@ -72,6 +78,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         setStoryName: (storyName) => set(() => ({ storyName })),
 
         addContent: async (newContent) => {
+          const { locale } = get();
           set({ isLoadingContent: true });
 
           const { content, aiConfig, playersDiceRolls } = get();
@@ -80,7 +87,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
             aiConfig,
             content,
             newContent,
-            playersDiceRolls
+            playersDiceRolls,
+            locale
           );
 
           set(() => ({

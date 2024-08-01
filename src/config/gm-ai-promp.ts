@@ -1,5 +1,6 @@
 import { Content } from '@google/generative-ai';
 import { AI_ROLE } from './constants';
+import { Locale } from '../i18n';
 
 export const gmAiPrompt = `
 # Game Master AI - Juego de rol de mesa
@@ -212,3 +213,17 @@ export const gmAiPromptArray: Content[] = [
     ],
   },
 ];
+
+export function generateGmAiPromptArray(locale: Locale): Content[] {
+  return [
+    ...gmAiPromptArray,
+    {
+      role: AI_ROLE.USER,
+      parts: [
+        {
+          text: `Responde todos mis mensajes en idioma "${locale}" (ISO 639-1). Si mi mensaje es en otro idioma, igual responde todos mis mensajes en idioma "${locale}" (ISO 639-1).`,
+        },
+      ],
+    },
+  ];
+}

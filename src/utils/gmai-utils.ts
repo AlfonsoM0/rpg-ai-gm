@@ -4,7 +4,8 @@ import { AI_ROLE, CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constant
 import { deleteCodesFromText } from './delete-text-from-text';
 import { AiModels, generateAiConfig } from './generate-ai-config';
 import runAIChat from 'server/gm-ai';
-import { gmAiPromptArray } from 'config/gm-ai-promp';
+import { generateGmAiPromptArray } from 'config/gm-ai-promp';
+import { Locale } from '../i18n';
 
 function createStoryContentControl(stateContent: Content[], playersDiceRolls: number[]): Content {
   const { isStoryOver, totalFailures, totalSuccesses, storyXp } =
@@ -60,7 +61,8 @@ export async function createGmAiResponseContent(
   aiConfig: AiModels,
   stateContent: Content[],
   newContent: Content,
-  playersDiceRolls: number[]
+  playersDiceRolls: number[],
+  locale: Locale
 ): Promise<Content[]> {
   let contentToSet: Content[] = [];
 
@@ -71,7 +73,7 @@ export async function createGmAiResponseContent(
   try {
     const gmAiResponse = await runAIChat(
       newContentText,
-      [...gmAiPromptArray, ...stateContent, infoStoryControl],
+      [...generateGmAiPromptArray(locale), ...stateContent, infoStoryControl],
       generateAiConfig(stateContent.length, aiConfig)
     );
 

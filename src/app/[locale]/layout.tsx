@@ -13,6 +13,7 @@ import { app_metadata } from 'config/app-metadata';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import Header from 'components/header';
+import { Locale } from '../../i18n';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -37,7 +38,7 @@ export default async function RootLayout({
           <Header />
 
           <TestComponent />
-          <FixComponent />
+          <FixComponent locale={locale as Locale} />
 
           {children}
 
