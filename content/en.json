@@ -406,6 +406,7 @@
 
   "TTS": {
     "TTSConfig": {
+      "customTTS": "Hello! I'm Game Master AI. Let's play!",
       "Voice": "Voice",
       "Voice_not_available": "Not available on your device.",
       "Broadcaster": "Broadcaster",

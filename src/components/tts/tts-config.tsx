@@ -59,7 +59,7 @@ export default function TTSConfig() {
 
       {isTTSEnabled ? (
         <div className="flex flex-col gap-5 mb-4">
-          <TTSControls customTTS="¡Hola! soy Game Master AI. ¡A jugar!" />
+          <TTSControls customTTS={t('customTTS')} />
 
           <div className="flex items-center gap-2">
             <div className="w-24">
