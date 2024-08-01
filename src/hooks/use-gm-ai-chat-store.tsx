@@ -33,7 +33,7 @@ interface GmAiActions {
   setHistoryId: () => void;
   setStoryName: (storyName: string) => void;
   addContent: (newContent: Content) => void;
-  resetChat: (newGmAiState?: GmAiStore) => void;
+  resetChat: (newGmAiState?: Omit<GmAiStore, 'locale'>) => void;
   setIsStoryStarted: (isStoryStarted: boolean) => void;
 
   // AI config
@@ -98,8 +98,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         },
 
         resetChat: (newGmAiState) => {
-          const { aiConfig } = get();
-          set(newGmAiState || { ...initialGmAiState, aiConfig });
+          const { aiConfig, locale } = get();
+          set(newGmAiState || { ...initialGmAiState, aiConfig, locale });
         },
 
         setIsStoryStarted: (isStoryStarted) => set({ isStoryStarted }),
