@@ -369,7 +369,8 @@
 
     "My_Shortcuts": {
       "title": "My Shortcuts",
-      "textarea_placeholder": "Write a command for GmAi."
+      "textarea_placeholder": "Write a command for GmAi.",
+      "Add_to_My_Shortcuts": "Add to My Shortcuts"
     },
 
     "Recomended_Shortcuts": {

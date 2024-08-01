@@ -369,7 +369,8 @@
 
     "My_Shortcuts": {
       "title": "Mis Atajos",
-      "textarea_placeholder": "Escribe un comando para GmAi."
+      "textarea_placeholder": "Escribe un comando para GmAi.",
+      "Add_to_My_Shortcuts": "Agregar a Mis Atajos"
     },
 
     "Recomended_Shortcuts": {

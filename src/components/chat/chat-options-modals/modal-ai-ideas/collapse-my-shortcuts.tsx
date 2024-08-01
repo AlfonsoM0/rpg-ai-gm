@@ -84,7 +84,7 @@ export default function CollapseMyShortcuts() {
               required
             />
           </label>
-          <input className="btn btn-sm w-full" type="submit" value="Agregar a Mis Atajos" />
+          <input className="btn btn-sm w-full" type="submit" value={t('Add_to_My_Shortcuts')} />
         </form>
       </div>
     </div>
