@@ -1,6 +1,12 @@
 {
   "[locale]": "es",
 
+  "ModalNews": {
+    "Title": "¡Advertencia!",
+    "MarkdownText": "Este juego no está completo y puedes perder información en alguna actualización. \n\n ¡Ya puedes gardar tus datos iniciando sessión con una **cuenta de Google**! \n\n GmAi es gratuito, pero está muy limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no funciona como esperas, prueba jugar en un horario menos concurrido. Esto requerirá de cuentas premium, estamos viendo las mejores opciones. \n\n Para notificar un error o dar una sugerencia puedes escribirme en [**alfonso.ar/contact**](https://alfonso.ar/contact). \n\n #### **PROXIMAMENTE** \n\n Las siguientes son ideas para mejorar esta app en un futuro. \n\n * Multijugador cooperativo con GmAi. \n\n * Generación del avatar del personaje con GmAi. \n\n * Generación de vídeo basado en un libro con GmAi.",
+    "btn_OK": "¡Entendido!"
+  },
+
   "GENERIC": {
     "Loading": "Cargando",
     "Accept": "Aceptar",

@@ -1,6 +1,12 @@
 {
   "[locale]": "en",
 
+  "ModalNews": {
+    "Title": "Warning!",
+    "MarkdownText": "This game is not complete and you may lose information in an update. \n\n You can now save your data by logging in with a **Google account**! \n\n GmAi is free, but it is very limited in the number of players it can handle per minute. If GmAi doesn't work as expected, try playing at a less busy time. This will require premium accounts, we are looking into the best options. \n\n To report an error or give a suggestion, you can write to me at [**alfonso.ar/contact**](https://alfonso.ar/contact). \n\n #### **COMING SOON** \n\n The following are ideas to improve this app in the future. \n\n * Cooperative multiplayer with GmAi. \n\n * Character avatar generation with GmAi. \n\n * Video generation based on a book with GmAi.",
+    "btn_OK": "Got it!"
+  },
+
   "GENERIC": {
     "Loading": "Loading",
     "Accept": "Accept",
