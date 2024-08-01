@@ -57,6 +57,16 @@
     }
   },
 
+  "Page_Character": {
+    "[uid_cid]": {
+      "no_character": {
+        "h1": "Se compartió un personaje de rol contigo...",
+        "btn": "✨ Haz cick aquí para ver el personaje ✨"
+      },
+      "h1_Character_from": "Un personaje de"
+    }
+  },
+
   "Page_404": {
     "Not_found": "404 | Página no encontrada."
   },

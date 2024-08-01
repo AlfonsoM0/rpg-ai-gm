@@ -9,10 +9,14 @@ import Main from 'components/Main';
 import useFirebase from 'hooks/firebase';
 import { useState } from 'react';
 import { Character } from 'types/character';
+import { useTranslations } from 'next-intl';
 
 // http://localhost:3000/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
-export default function ClientPage({ params }: { params: { uid_bid: string } }) {
-  const [uid, bid] = params.uid_bid.split('_');
+export default function ClientPage({ params }: { params: { uid_cid: string } }) {
+  const G = useTranslations('GENERIC');
+  const t = useTranslations('Page_Character.[uid_cid]');
+
+  const [uid, cid] = params.uid_cid.split('_');
 
   const { getFireDoc } = useFirebase();
 
@@ -37,7 +41,7 @@ export default function ClientPage({ params }: { params: { uid_bid: string } }) 
     if (!charCollection) return setErrorMsg('No hay una colección de donde obtener un personaje.');
 
     const character = charCollection.charactersCollection.find(
-      (char: Character) => char.id === bid
+      (char: Character) => char.id === cid
     );
 
     if (!character) return setErrorMsg('No se encontró el personaje en la colección.');
@@ -60,7 +64,7 @@ export default function ClientPage({ params }: { params: { uid_bid: string } }) 
     return (
       <Main>
         <H1>
-          Cargando... <span className="loading loading-spinner loading-xs"></span>
+          {G('Loading')}... <span className="loading loading-spinner loading-xs"></span>
         </H1>
       </Main>
     );
@@ -74,17 +78,17 @@ export default function ClientPage({ params }: { params: { uid_bid: string } }) 
     return (
       <Main>
         <div className="flex flex-col items-center justify-center">
-          <H1>Se compartió un personaje de rol contigo...</H1>
+          <H1>{t('no_character.h1')}</H1>
 
           <button className="btn h-fit btn-ghost text-info" onClick={findAndSetUserAndCharacter}>
-            <H2>✨ Haz cick aquí para ver el personaje ✨</H2>
+            <H2>{t('no_character.btn')}</H2>
           </button>
         </div>
       </Main>
     );
   return (
     <Main>
-      <H1>{`Un personaje de ${userName}`}</H1>
+      <H1>{`${t('h1_Character_from')} ${userName}`}</H1>
 
       <section className="mb-4">
         <div className="flex flex-wrap gap-4 justify-center">
