@@ -12,9 +12,13 @@ import useFirebase from 'hooks/firebase';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
 import { Book } from 'types/library';
+import { useTranslations } from 'next-intl';
 
 // http://localhost:3000/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
 export default function ClientPage({ params }: { params: { uid_bid: string } }) {
+  const G = useTranslations('GENERIC');
+  const t = useTranslations('Page_Book.[uid_bid]');
+
   const { isTTSEnabled } = useTTSStore();
 
   const [uid, bid] = params.uid_bid.split('_');
@@ -65,7 +69,7 @@ export default function ClientPage({ params }: { params: { uid_bid: string } }) 
     return (
       <Main>
         <H1>
-          Cargando... <span className="loading loading-spinner loading-xs"></span>
+          {G('Loading')}... <span className="loading loading-spinner loading-xs"></span>
         </H1>
       </Main>
     );
@@ -79,17 +83,17 @@ export default function ClientPage({ params }: { params: { uid_bid: string } }) 
     return (
       <Main>
         <div className="flex flex-col items-center justify-center">
-          <H1>Se compartió una historia de rol contigo...</H1>
+          <H1>{t('no_book.h1')}</H1>
 
           <button className="btn h-fit btn-ghost text-info" onClick={findAndSetUserAndBook}>
-            <H2>✨ Haz cick aquí para abrir el libro ✨</H2>
+            <H2>{t('no_book.btn')}</H2>
           </button>
         </div>
       </Main>
     );
   return (
     <Main>
-      <H1>{`Una historia de ${userName}`}</H1>
+      <H1>{`${t('h1_Story_from')} ${userName}`}</H1>
       <H2>{book.title}</H2>
 
       {isTTSEnabled ? (

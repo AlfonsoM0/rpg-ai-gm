@@ -5,6 +5,7 @@ import H1 from 'components/h1';
 import { Input } from 'components/input';
 import Main from 'components/Main';
 import { useLibraryStore } from 'hooks/use-library-store';
+import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { Book } from 'types/library';
@@ -15,6 +16,8 @@ const DynamicBookCard = dynamic(() => import('components/book/card-book'), {
 });
 
 export default function Page() {
+  const t = useTranslations('Page_Library');
+
   const { library } = useLibraryStore();
 
   const [search, setSearch] = useState('');
@@ -26,13 +29,13 @@ export default function Page() {
   return (
     <Main>
       <div>
-        <H1>Biblioteca</H1>
+        <H1>{t('h1_My_Library')}</H1>
 
         {library.length > 3 ? (
           <Input.Search
             labelclassname="m-auto mb-5"
             className="text-center"
-            placeholder="Buscar por Nombre"
+            placeholder={t('input_placeholder_search')}
             onChange={(e) => setSearch(e.target.value)}
             value={search}
           />

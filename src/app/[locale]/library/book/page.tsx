@@ -7,9 +7,12 @@ import Main from 'components/Main';
 import TTSControls from 'components/tts/tts-controls';
 import { useLibraryStore } from 'hooks/use-library-store';
 import { useTTSStore } from 'hooks/use-tts-store';
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
 export default function Page() {
+  const t = useTranslations('Page_Book');
+
   const { bookSelected } = useLibraryStore();
   const { isTTSEnabled, handleStop, setTTS, handlePlay } = useTTSStore();
 
@@ -32,7 +35,7 @@ export default function Page() {
   return (
     <Main>
       <H1>
-        Libro <br /> <span className="font-semibold">{title}</span>
+        {t('h1_Book')} <br /> <span className="font-semibold">{title}</span>
       </H1>
 
       {isTTSEnabled ? (

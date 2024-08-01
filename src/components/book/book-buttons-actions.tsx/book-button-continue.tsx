@@ -1,8 +1,6 @@
 'use client';
 
-import ModalEndHistory from 'components/chat/chat-options-modals/modal-end-story';
 import { Icon } from 'components/icons';
-import { ModalContentContainer } from 'components/modal';
 import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_STORY_END } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -10,8 +8,12 @@ import { useModalState } from 'hooks/use-modal-state';
 import { useRouter } from '@/navigation';
 import { Book } from 'types/library';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
+import ModalIsAStoryInProgress from '../book-modals/book-modal-is-story-in-progress';
+import { useTranslations } from 'next-intl';
 
 export default function BookButtonContinue({ book }: { book: Book }) {
+  const t = useTranslations('Card_Book.btn');
+
   const router = useRouter();
 
   const { setModalContent, setModalIsOpen } = useModalState();
@@ -78,38 +80,7 @@ export default function BookButtonContinue({ book }: { book: Book }) {
 
   return (
     <button className="btn btn-sm btn-info" onClick={handleContinueStory}>
-      Continuar <Icon.Stars className="w-4 h-4" />
+      {t('BookButtonContinue')} <Icon.Stars className="w-4 h-4" />
     </button>
-  );
-}
-
-function ModalIsAStoryInProgress() {
-  const router = useRouter();
-  const { setModalIsOpen, setModalContent } = useModalState();
-
-  return (
-    <ModalContentContainer title="Historia en Progreso" titleColor="info">
-      <>
-        <p className="py-4">Finaliza tu historia para poder empezar otra.</p>
-
-        <div className="modal-action justify-around">
-          <button
-            className="btn btn-sm btn-error"
-            onClick={() => setModalContent(<ModalEndHistory />)}
-          >
-            Finalizar historia
-          </button>
-          <button
-            className="btn btn-sm btn-success"
-            onClick={() => {
-              router.push('/story');
-              setModalIsOpen(false);
-            }}
-          >
-            Continuar historia
-          </button>
-        </div>
-      </>
-    </ModalContentContainer>
   );
 }

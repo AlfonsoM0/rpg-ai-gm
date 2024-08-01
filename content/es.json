@@ -1,4 +1,6 @@
 {
+  "[locale]": "es",
+
   "GENERIC": {
     "Loading": "Cargando",
     "Accept": "Aceptar",
@@ -7,6 +9,7 @@
     "Next": "Siguiente",
     "Save": "Guardar"
   },
+
   "Page_Home": {
     "h1_Welcome": "¡Bienvenido!",
     "btn_Continue_Game": "CONTINUAR HISTORIA",
@@ -17,16 +20,12 @@
     "input_Search_By_Name": "Buscar por Nombre",
     "h2_Create_New_Character": "¡Crear un personaje Nuevo!"
   },
-  "Page_Story": {
-    "h1_Telling_the_Story": "¡Narrando la Historia!"
-  },
-  "Page_404": {
-    "Not_found": "404 | Página no encontrada."
-  },
+
   "Page_User": {
     "h1": "Mi Perfil",
     "h2": "Información Personal"
   },
+
   "Page_New_Character": {
     "h1": "Creación de Personaje",
 
@@ -36,12 +35,39 @@
       "p": "¡Haz un esfuerzo! Escribe una descripción más larga para que pueda ayudarte. 😁"
     }
   },
+
+  "Page_Story": {
+    "h1_Telling_the_Story": "¡Narrando la Historia!"
+  },
+
+  "Page_Library": {
+    "h1_My_Library": "Mi Biblioteca",
+    "input_placeholder_search": "Buscar por Nombre"
+  },
+
+  "Page_Book": {
+    "h1_Book": "Libro",
+
+    "[uid_bid]": {
+      "no_book": {
+        "h1": "Se compartió una historia de rol contigo...",
+        "btn": "✨ Haz cick aquí para abrir el libro ✨"
+      },
+      "h1_Story_from": "Una historia de"
+    }
+  },
+
+  "Page_404": {
+    "Not_found": "404 | Página no encontrada."
+  },
+
   "Header": {
     "Navbar_links": {
       "/": "Inicio",
       "/library": "Biblioteca"
     }
   },
+
   "User": {
     "Player_No_Connected": "Jugador no conectado",
     "Options": "Opciones",
@@ -75,6 +101,7 @@
       }
     }
   },
+
   "Character": {
     "Name": "Nombre",
     "Description": "Descripción",
@@ -100,6 +127,7 @@
       "Charisma": "Carisma"
     }
   },
+
   "New_Character": {
     "Name_of_your_character": "Nombre de tu personaje *",
     "Create_an_original_name": "Inventa un nombre original.",
@@ -143,6 +171,7 @@
       }
     }
   },
+
   "CardCharacter": {
     "btn": {
       "copy": "Copiar personaje",
@@ -183,26 +212,81 @@
       }
     }
   },
+
   "CardPlayCharacter": {
     "h3_Characteristics_Rolls": "Pruebas de Característica",
     "p1_select_one_option": "* Elige una opción"
   },
+
+  "Card_Book": {
+    "Characters": "Personajes",
+
+    "btn": {
+      "BookButtonContinue": "Continuar",
+      "BookButtonDelete": "Eliminar",
+      "BookButtonEdit": "Editar",
+      "BookButtonOpen": "Abrir",
+      "BookButtonShare": "Compartir"
+    },
+
+    "modal": {
+      "ModalIsAStoryInProgress": {
+        "title": "Historia en Progreso",
+        "p": "Finaliza tu historia para poder empezar otra.",
+        "btn": {
+          "End_story": "Finalizar historia",
+          "Continue_story": "Continuar historia"
+        }
+      },
+      "ModalDeleteBook": {
+        "title": "¿Estás seguro de borrar este libro?",
+        "p": "Esta acción no se puede deshacer.",
+        "btn": {
+          "accept": "Si, borrar",
+          "cancel": "No, cancelar"
+        }
+      },
+      "ModalEditBook": {
+        "title": "Editar Libro",
+        "p": "Edita el nombre del libro.",
+        "input_placeholder": "Nombre de la Historia",
+        "btn": {
+          "cancel": "Cancelar",
+          "Save": "Guardar"
+        }
+      },
+      "ModalShareBook": {
+        "title": "Compartir Libro",
+        "p": "Se copió la URL del libro al portapapeles.",
+        "a": "Clic aquí para ver el libro compartido."
+      },
+      "ModalCantShareBook": {
+        "title": "No se puede compartir el Libro",
+        "p": "Para compartir un libro debes iniciar sesión."
+      }
+    }
+  },
+
   "MsgLoadingCharacters": {
     "Loading_characters": "Actualizando los personajes de la historia..."
   },
+
   "MsgStoryEnd": {
     "h2_Story_End": "Fin de la historia",
     "Total_Failures": "Total de fallos:",
     "Total_Successes": "Total de éxito:",
     "Story_XP": "Experiencia de la historia:"
   },
+
   "ChatOptionsConfig": {
     "Other_Options": "Otras opciones",
     "End": "Fin."
   },
+
   "ChatOptionsABC": {
     "Story_Options": "Opciones de historia"
   },
+
   "ModalEndHistory": {
     "title": "Fin de la Historia",
     "p1": "Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar otro capítulo desde donde dejaste la anterior.",
@@ -211,16 +295,19 @@
     "btn_End_Game": "Si, finalizar historia",
     "btn_Continue_Game": "No, seguir jugando"
   },
+
   "ModalWinXp": {
     "title": "Ganaste XP",
     "You_have_earned_XP": "Has ganado ",
     "for": "XP para ",
     "Edit_your_character": "Edita tu personaje para mejorar tus caracteristicas."
   },
+
   "ModaArtThemeConfig": {
     "title": "Elige un tema para ambientar tus historias",
     "btn_Redy": "¡Listo!"
   },
+
   "ModalConfigAI": {
     "title": "Game Master AI",
     "p_Config": "Configura la personalidad de tu Game Master AI.",
@@ -241,6 +328,7 @@
     "Random_AI_title": "Aleatorio - depende de su humor.",
     "Random_AI_desc": "Estricto, creativo o virtuoso, nunca se sabe, va cambiando en cada respuesta."
   },
+
   "ModaIdeasForAI": {
     "title": "Tips y Atajos",
     "p1": "Estos son tips y atajos para ayudarte a mejorar tu experiencia con Game Master AI.",
@@ -286,6 +374,7 @@
       "shortcut14": "Finaliza la historia."
     }
   },
+
   "ModalNoCharactersToPlay": {
     "title": "No tienes personajes reclutados",
     "p_Recruit_a_character": "¡Recluta a un personaje!",

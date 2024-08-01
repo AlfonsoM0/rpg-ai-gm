@@ -1,11 +1,13 @@
 'use client';
 
-import { ModalContentContainer } from 'components/modal';
-import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
+import { useTranslations } from 'next-intl';
 import { Book } from 'types/library';
+import ModalDeleteBook from '../book-modals/book-modal-delete';
 
 export default function BookButtonDelete({ book }: { book: Book }) {
+  const t = useTranslations('Card_Book.btn');
+
   const { setModalContent, setModalIsOpen } = useModalState();
 
   function handleDeleteBook() {
@@ -15,35 +17,7 @@ export default function BookButtonDelete({ book }: { book: Book }) {
 
   return (
     <button className="btn btn-sm btn-error" onClick={handleDeleteBook}>
-      Eliminar
+      {t('BookButtonDelete')}
     </button>
-  );
-}
-
-function ModalDeleteBook({ id }: { id: string }) {
-  const { setModalIsOpen } = useModalState();
-  const { removeBook } = useLibraryStore();
-
-  return (
-    <ModalContentContainer title="¿Estás seguro de borrar este libro?" titleColor="error">
-      <>
-        <p className="py-4">Esta acción no se puede deshacer.</p>
-
-        <div className="modal-action">
-          <button
-            className="btn btn-error"
-            onClick={() => {
-              removeBook(id);
-              setModalIsOpen(false);
-            }}
-          >
-            Si, borrar
-          </button>
-          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
-            No, cancelar
-          </button>
-        </div>
-      </>
-    </ModalContentContainer>
   );
 }

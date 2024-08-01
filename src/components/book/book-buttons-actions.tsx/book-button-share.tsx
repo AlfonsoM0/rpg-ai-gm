@@ -3,9 +3,14 @@
 import { ModalContentContainer } from 'components/modal';
 import useFirebase from 'hooks/firebase';
 import { useModalState } from 'hooks/use-modal-state';
+import { useTranslations } from 'next-intl';
 import { Book } from 'types/library';
+import ModalShareBook from '../book-modals/book-modal-share';
+import ModalCantShareBook from '../book-modals/book-modal-cant-share';
 
 export default function BookButtonShare({ book }: { book: Book }) {
+  const t = useTranslations('Card_Book.btn');
+
   const { setModalContent, setModalIsOpen } = useModalState();
   const { userAccount } = useFirebase();
 
@@ -28,30 +33,7 @@ export default function BookButtonShare({ book }: { book: Book }) {
 
   return (
     <button className="btn btn-sm btn-primary" onClick={hadleShareBook}>
-      Compartir
+      {t('BookButtonShare')}
     </button>
-  );
-}
-
-function ModalShareBook({ urlToShare }: { urlToShare: string }) {
-  return (
-    <ModalContentContainer title="Compartir Libro" titleColor="primary">
-      <>
-        <p className="my-4">Se copió la URL del libro al portapapeles.</p>
-        <a className="link text-primary" href={urlToShare} target="_blank" rel="noreferrer">
-          Clic aquí para ver el libro compartido.
-        </a>
-      </>
-    </ModalContentContainer>
-  );
-}
-
-function ModalCantShareBook() {
-  return (
-    <ModalContentContainer title="Compartir Libro" titleColor="error">
-      <>
-        <p>Para compartir un libro debes iniciar sesión.</p>
-      </>
-    </ModalContentContainer>
   );
 }
