@@ -1,7 +1,400 @@
 {
+  "[locale]": "en",
+
+  "GENERIC": {
+    "Loading": "Loading",
+    "Accept": "Accept",
+    "Cancel": "Cancel",
+    "Previous": "Previous",
+    "Next": "Next",
+    "Save": "Save"
+  },
+
   "Page_Home": {
-    "H1_Welcome": "Welcome!",
-    "btn_Continue_Game": "CONTINUE GAME",
-    "btn_Play_Game": "PLAY A GAME"
+    "h1_Welcome": "Welcome!",
+    "btn_Continue_Game": "CONTINUE STORY",
+    "btn_Play_Game": "PLAY A STORY",
+    "h2_Recruited_Characters": "Recruited Characters",
+    "p_No_recruited_characters": "There are no recruited characters.",
+    "h2_My_Characters": "My Characters",
+    "input_Search_By_Name": "Search by Name",
+    "h2_Create_New_Character": "Create a New Character!"
+  },
+
+  "Page_User": {
+    "h1": "My Profile",
+    "h2": "Personal Information"
+  },
+
+  "Page_New_Character": {
+    "h1": "Character Creation",
+
+    "ButtonAiImprove": "Improve",
+    "ModalLowContentAlert": {
+      "title": "Low content",
+      "p": "Make an effort! Write a longer description so I can help you. 😁"
+    }
+  },
+
+  "Page_Story": {
+    "h1_Telling_the_Story": "Telling the Story!"
+  },
+
+  "Page_Library": {
+    "h1_My_Library": "My Library",
+    "input_placeholder_search": "Search by Name"
+  },
+
+  "Page_Book": {
+    "h1_Book": "Book",
+
+    "[uid_bid]": {
+      "no_book": {
+        "h1": "A role-playing story has been shared with you...",
+        "btn": "✨ Click here to open the book ✨"
+      },
+      "h1_Story_from": "A story by"
+    }
+  },
+
+  "Page_Character": {
+    "[uid_cid]": {
+      "no_character": {
+        "h1": "A role-playing character has been shared with you...",
+        "btn": "✨ Click here to view the character ✨"
+      },
+      "h1_Character_from": "A character by"
+    }
+  },
+
+  "Page_404": {
+    "Not_found": "404 | Page not found."
+  },
+
+  "Header": {
+    "Navbar_links": {
+      "/": "Home",
+      "/library": "Library"
+    }
+  },
+
+  "User": {
+    "Player_No_Connected": "Player not connected",
+    "Options": "Options",
+
+    "form": {
+      "input_New_Name": "New Name",
+      "input_Img_profile_URL": "New Profile Image URL",
+      "btn_Save": "SAVE",
+      "err_Name": "Name must be at least 3 characters long.",
+      "err_URL": "Invalid Image URL."
+    },
+
+    "btn": {
+      "UserButtonConnect": {
+        "Logout": "Logout",
+        "Login": "Login"
+      },
+      "UserButtonEditProfile": "Edit my Profile"
+    },
+
+    "modal": {
+      "ModalUserConnect": {
+        "title": "Login",
+        "p1": "When you log in for the first time, whenever you modify your character or book collection, they will be automatically saved to the cloud every few seconds. Changes will be synced across all devices connected to your account.",
+        "p2": "If you already have an account, when you log in, the local data will be overwritten with the data stored in the cloud.",
+        "p3_⚠️": "⚠️ A new window will open for authentication. Make sure your browser is configured to allow pop-ups.",
+        "p4_⚠️": "⚠️ Be sure to be using the latest version of your characters and books before logging in for the first time."
+      },
+      "ModalUserEditProfile": {
+        "title": "My Profile"
+      }
+    }
+  },
+
+  "Character": {
+    "Name": "Name",
+    "Description": "Description",
+    "Appearance": "Appearance",
+    "Background": "Background",
+    "Profession": "Profession",
+    "Personality": "Personality",
+    "Equipment": "Equipment",
+    "Powers": "Powers",
+    "Characteristics": "Characteristics",
+    "char": {
+      "STR": "STR",
+      "Strength": "Strength",
+      "DEX": "DEX",
+      "Dexterity": "Dexterity",
+      "CON": "CON",
+      "Constitution": "Constitution",
+      "INT": "INT",
+      "Intelligence": "Intelligence",
+      "WIS": "WIS",
+      "Wisdom": "Wisdom",
+      "CHA": "CHA",
+      "Charisma": "Charisma"
+    }
+  },
+
+  "New_Character": {
+    "Name_of_your_character": "Name of your character *",
+    "Create_an_original_name": "Create an original name.",
+    "isEdit": {
+      "true": "* You cannot change the name of a created character.",
+      "false": "* The name of your character cannot be modified later."
+    },
+    "Form_Tip": "* All fields marked with an asterisk are required to create a wonderful story.",
+    "Ideas": "Ideas!",
+
+    "FormCharacterCharacteristics": {
+      "Characteristics": "Characteristics",
+      "tip1": "* Move the sliders to adjust the characteristics using your Experience Points (XP).",
+      "tip2": "* Saved characteristics cannot be reduced when editing your character."
+    },
+
+    "Description": {
+      "appearance": {
+        "title": "Appearance *",
+        "ideas": "Is it human?, What is its most striking aspect?, How does it dress?, What distinctive details does it have?, What are its accessories?"
+      },
+      "background": {
+        "title": "Background *",
+        "ideas": "What is its story?, What happened to it in its life?, Where does it come from?, Does it have any secrets?, Does it have enemies?"
+      },
+      "profession": {
+        "title": "Profession *",
+        "ideas": "What does it do for a living?, What is or was its most important job?, What are its knowledge and skills?, How do other people perceive its profession?, Is it known in its field?"
+      },
+      "personality": {
+        "title": "Personality *",
+        "ideas": "What are its values?, Does it have a strong or weak character?, How does it relate to others?, Is it kind or unpleasant?, Does it have a great sense of humor?, Is it independent or does it need support from others?"
+      },
+      "equipment": {
+        "title": "Equipment *",
+        "ideas": "Does it have any object that identifies it?, What objects does it have that help it in its daily life?, Does it have any object that helps it solve problems?, Does it carry any particular tool or instrument?, How does it relate to its personal belongings?"
+      },
+      "powers": {
+        "title": "Powers ",
+        "ideas": "Does it have any supernatural power? What kind of power is it?, How does it relate to its supernatural power?, What problems can it solve with its supernatural power?, How does it use its supernatural power in its daily life?, Does it have any special weakness regarding its supernatural power?"
+      }
+    }
+  },
+
+  "CardCharacter": {
+    "btn": {
+      "copy": "Copy character",
+      "delete": "Delete",
+      "edit": "Edit",
+      "select": {
+        "fire": "Dismiss",
+        "Recruit": "Recruit"
+      },
+      "share": "Share"
+    },
+
+    "modal": {
+      "cant_share": {
+        "title": "Share character",
+        "p": "You must be logged in to share a character."
+      },
+      "share": {
+        "title": "Share character",
+        "p": "Character URL copied to clipboard.",
+        "a": "Click here to view the shared character."
+      },
+      "character_in_game": {
+        "title": "Character in Game",
+        "p": "You cannot recruit, dismiss, or delete characters if your current story is not over."
+      },
+      "delete_character": {
+        "title": "Are you sure you want to delete this character?",
+        "p": "This action cannot be undone.",
+        "btn": {
+          "accept": "Yes, delete",
+          "cancel": "No, cancel"
+        }
+      },
+      "maximum_characters": {
+        "title": "You have too many characters in play",
+        "p": "You can only have 2 characters in play at a time. Remove one to recruit another."
+      }
+    }
+  },
+
+  "CardPlayCharacter": {
+    "h3_Characteristics_Rolls": "Characteristic Rolls",
+    "p1_select_one_option": "* Choose an option"
+  },
+
+  "Card_Book": {
+    "Characters": "Characters",
+
+    "btn": {
+      "BookButtonContinue": "Continue",
+      "BookButtonDelete": "Delete",
+      "BookButtonEdit": "Edit",
+      "BookButtonOpen": "Open",
+      "BookButtonShare": "Share"
+    },
+
+    "modal": {
+      "ModalIsAStoryInProgress": {
+        "title": "Story in Progress",
+        "p": "Finish your story to start another one.",
+        "btn": {
+          "End_story": "End story",
+          "Continue_story": "Continue story"
+        }
+      },
+      "ModalDeleteBook": {
+        "title": "Are you sure you want to delete this book?",
+        "p": "This action cannot be undone.",
+        "btn": {
+          "accept": "Yes, delete",
+          "cancel": "No, cancel"
+        }
+      },
+      "ModalEditBook": {
+        "title": "Edit Book",
+        "p": "Edit the name of the book.",
+        "input_placeholder": "Story Name",
+        "btn": {
+          "cancel": "Cancel",
+          "Save": "Save"
+        }
+      },
+      "ModalShareBook": {
+        "title": "Share Book",
+        "p": "Book URL copied to clipboard.",
+        "a": "Click here to view the shared book."
+      },
+      "ModalCantShareBook": {
+        "title": "Cannot share the Book",
+        "p": "You must be logged in to share a book."
+      }
+    }
+  },
+
+  "MsgLoadingCharacters": {
+    "Loading_characters": "Updating story characters..."
+  },
+
+  "MsgStoryEnd": {
+    "h2_Story_End": "End of the story",
+    "Total_Failures": "Total Failures:",
+    "Total_Successes": "Total Successes:",
+    "Story_XP": "Story XP:"
+  },
+
+  "ChatOptionsConfig": {
+    "Other_Options": "Other options",
+    "End": "End."
+  },
+
+  "ChatOptionsABC": {
+    "Story_Options": "Story Options"
+  },
+
+  "ModalEndHistory": {
+    "title": "End of Story",
+    "p1": "If you name your story, it will be saved in your library and you can use it to play another chapter from where you left off.",
+    "p2": "If your story does not end with the \"End of Story\" sign, which shows the XP earned, you will not earn the XP, but your progress will be saved for when you decide to continue it.",
+    "p3_strong": "Choose an original name.",
+    "btn_End_Game": "Yes, end story",
+    "btn_Continue_Game": "No, keep playing"
+  },
+
+  "ModalWinXp": {
+    "title": "You Earned XP",
+    "You_have_earned_XP": "You have earned ",
+    "for": "XP for ",
+    "Edit_your_character": "Edit your character to improve your characteristics."
+  },
+
+  "ModaArtThemeConfig": {
+    "title": "Choose a theme to set the mood for your stories",
+    "btn_Redy": "Ready!"
+  },
+
+  "ModalConfigAI": {
+    "title": "Game Master AI",
+    "p_Config": "Configure the personality of your Game Master AI.",
+    "p_strong_Style": "Style",
+
+    "Strict_AI_title": "Strict - strategic player.",
+    "Strict_AI_desc": "Respects the rules, but needs your creativity. You must propose more ideas for the story.",
+
+    "Virtuous_AI_title": "Virtuous - a bit of everything.",
+    "Virtuous_AI_desc": "Somewhat respects the rules and is somewhat creative.",
+
+    "Creative_AI_title": "Creative - talkative narrator.",
+    "Creative_AI_desc": "It is creative, but does not respect the rules. You have to ask it to make rolls or to calm down and finish the story already.",
+
+    "Progresive_AI_title": "Progressive - starts strict and ends crazy. (Recommended)",
+    "Progresive_AI_desc": "Starts out being strict and ends up being very creative.",
+
+    "Random_AI_title": "Random - depends on its mood.",
+    "Random_AI_desc": "Strict, creative or virtuous, you never know, it changes with every answer."
+  },
+
+  "ModaIdeasForAI": {
+    "title": "Tips and Shortcuts",
+    "p1": "These are tips and shortcuts to help you improve your experience with Game Master AI.",
+
+    "tips": {
+      "title": "Tips",
+      "tip1_p_strong": "The story ends at 3 failures or 5 successes",
+      "tip1_p": "If you don't want it to end quickly, you can write your test results or ask GmAi to do them for you. This way they won't be saved in the system and you will prevent the end from being triggered. Although GmAi can conclude on its own, you can ask it to continue as far as you want.",
+
+      "tip2_p_strong": "XP earned at the end of the story",
+      "tip2_p": "Is calculated based on the outcome of your characteristic tests. Only tests launched from your character sheets count, as they are recorded in the system. GmAI keeps its own record, but it's not very reliable.",
+
+      "tip3_p_strong": "Getting a better story",
+      "tip3_p": "It's easy, contribute ideas to the plot creatively and not just by choosing the options that GmAi gives you.",
+
+      "tip4_p_strong": "Playing a faster story",
+      "tip4_p": "It's possible, ask your GmAi to \"perform feature tests\", that will motivate it to give you more tests and details to move faster in the story. If GmAi makes rolls for you, you can tell it that you want to make all the rolls.",
+
+      "tip5_p_strong": "Want to play a campaign of several stories?",
+      "tip5_p": "Save your story in the library. You can then access it and continue playing from where you left off."
+    },
+
+    "My_Shortcuts": {
+      "title": "My Shortcuts",
+      "textarea_placeholder": "Write a command for GmAi."
+    },
+
+    "Recomended_Shortcuts": {
+      "title": "Recommended Shortcuts",
+      "shortcut1": "What is a tabletop role-playing game?",
+      "shortcut2": "Explain the rules of the game.",
+      "shortcut3": "What is your job as Game Master AI?",
+      "shortcut4": "Suggest different story options and list them for me to choose from.",
+      "shortcut5": "I want to use this game to practice a language.",
+      "shortcut6": "I want to make all the feature tests of my characters myself.",
+      "shortcut7": "Ask me to perform feature tests for all my decisions.",
+      "shortcut8": "Give me a summary of my characters.",
+      "shortcut9": "Give me a summary of my characters' characteristics.",
+      "shortcut10": "Give me a summary of my rolls and the total successes and failures.",
+      "shortcut11": "Give me a summary of the story.",
+      "shortcut12": "I want to continue with this story.",
+      "shortcut13": "I want to play a new story.",
+      "shortcut14": "End the story."
+    }
+  },
+
+  "ModalNoCharactersToPlay": {
+    "title": "You have no characters recruited",
+    "p_Recruit_a_character": "Recruit a character!",
+    "p_First_time_you_play": "Is this your first time playing?",
+    "ol_li_1": "Create a new character... or two...",
+    "ol_li_2": "Recruit your characters for the story.",
+    "ol_li_3": "Click on \"Play a Story\" to begin.",
+    "ol_li_4": "Ask your Game Master AI if you need help understanding the rules or what a tabletop role-playing game is.",
+    "ol_li_5": "In your profile, you can activate and configure the voice of your GmAi with the option ",
+    "ol_li_6": "In your profile, you can change the colors of the app with the option ",
+    "ol_li_7": "Enjoy the adventure!"
   }
 }

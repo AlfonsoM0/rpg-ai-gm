@@ -1,9 +1,10 @@
 // https://www.sitepoint.com/next-js-internationalization/#implementinglanguageswitching
 
 import React, { useState } from 'react';
-import { useRouter } from '@/navigation';
 import { usePathname } from '@/navigation';
 import { Icon } from './icons';
+// eslint-disable-next-line no-restricted-imports -- necesary for setup lang
+import { useRouter } from 'next/navigation';
 
 export default function LangSwitcher() {
   interface Option {
