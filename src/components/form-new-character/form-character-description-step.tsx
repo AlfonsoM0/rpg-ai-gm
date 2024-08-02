@@ -25,11 +25,12 @@ export default function FromCharacterDescriptionStep({
   const t = useTranslations('New_Character.Description');
 
   const ideas = t(`${descriptionType}.ideas`).split(',');
+  const title = t(`${descriptionType}.title`).split(',');
 
   return (
     <label className="form-control w-full max-w-xs h-96" key={'step-1'}>
       <div className="label">
-        <span className="label-text">Apariencia *</span> <DescriptionIdeas ideas={ideas} />
+        <span className="label-text">{title}</span> <DescriptionIdeas ideas={ideas} />
       </div>
 
       <TextareaAutosize
