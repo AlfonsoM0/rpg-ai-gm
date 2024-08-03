@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import useFIX_MoveCharactersToNewState from './useFIX_MoveCharactersToNewState';
 import { useModalState } from 'hooks/use-modal-state';
 
 // 'regenerator-runtime' is a polyfill for async/await and generators in JavaScript. It's used to make sure that your code can run on older browsers that don't support these features natively.
@@ -16,8 +15,6 @@ interface FixComponentProps {
 }
 
 export default function FixComponent({ locale }: FixComponentProps) {
-  useFIX_MoveCharactersToNewState();
-
   const { setModalContent, setModalIsOpen } = useModalState();
 
   // TODO: delete alert
