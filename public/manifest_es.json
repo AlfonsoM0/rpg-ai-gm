@@ -1,5 +1,5 @@
 {
-  "theme_color": "#ffffff",
+  "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "fullscreen",
   "orientation": "any",
@@ -33,7 +33,7 @@
       "name": "Crear un Nuevo Personaje",
       "short_name": "Nuevo Personaje",
       "description": "Crea un nuevo personaje para el juego.",
-      "url": "/new-character",
+      "url": "/es/new-character",
       "icons": [
         {
           "src": "/android-chrome-192x192.png",
@@ -47,7 +47,7 @@
       "name": "Ir a la Biblioteca",
       "short_name": "Biblioteca",
       "description": "Explora tu bibliaca de partidas.",
-      "url": "/library",
+      "url": "/es/library",
       "icons": [
         {
           "src": "/android-chrome-192x192.png",

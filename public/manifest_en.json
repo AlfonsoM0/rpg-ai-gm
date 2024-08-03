@@ -1,5 +1,5 @@
 {
-  "theme_color": "#ffffff",
+  "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "fullscreen",
   "orientation": "any",
@@ -33,7 +33,7 @@
       "name": "Create a new Character",
       "short_name": "New Character",
       "description": "Create a new character for your game.",
-      "url": "/new-character",
+      "url": "/en/new-character",
       "icons": [
         {
           "src": "/android-chrome-192x192.png",
@@ -47,7 +47,7 @@
       "name": "Library",
       "short_name": "Library",
       "description": "Explore your game library.",
-      "url": "/library",
+      "url": "/en/library",
       "icons": [
         {
           "src": "/android-chrome-192x192.png",
