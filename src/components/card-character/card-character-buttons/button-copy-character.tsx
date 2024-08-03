@@ -13,9 +13,10 @@ export default function ButtonCopyCharacter({ character }: CopyCharacterProps) {
   const t = useTranslations('CardCharacter.btn');
 
   const router = useRouter();
-  const { setAllCharacterInfo } = useCreateNewCharacterStore();
+  const { setAllCharacterInfo, setStep } = useCreateNewCharacterStore();
 
   function copyCharacter() {
+    setStep(0);
     setAllCharacterInfo({
       ...character,
       id: crypto.randomUUID(),
