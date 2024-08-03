@@ -299,7 +299,7 @@
   },
 
   "ChatOptionsConfig": {
-    "Other_Options": "Other options",
+    "Other_Options": "Game Options",
     "End": "End."
   },
 
@@ -354,6 +354,7 @@
   "ModaIdeasForAI": {
     "title": "Tips and Shortcuts",
     "p1": "These are tips and shortcuts to help you improve your experience with Game Master AI.",
+    "p2": "* You can only use them within the game.",
 
     "tips": {
       "title": "Tips",

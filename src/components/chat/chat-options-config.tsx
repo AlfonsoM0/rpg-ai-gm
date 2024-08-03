@@ -15,7 +15,7 @@ export default function ChatOptionsConfig() {
 
   const { isLoadingContent } = useGmAiStore();
   const { setModalContent, setModalIsOpen } = useModalState();
-  const { aiConfig } = useGmAiStore();
+  const { aiConfig, isStoryStarted } = useGmAiStore();
   const { handlePause } = useTTSStore();
 
   function onEndHistoryClick(): void {
@@ -63,13 +63,15 @@ export default function ChatOptionsConfig() {
           <Icon.Art className="w-8 h-8 fill-info" />
         </button>
 
-        <button
-          className="btn btn-error hover:border-base-content"
-          onClick={onEndHistoryClick}
-          disabled={isLoadingContent}
-        >
-          {t('End')}
-        </button>
+        {isStoryStarted ? (
+          <button
+            className="btn btn-error hover:border-base-content"
+            onClick={onEndHistoryClick}
+            disabled={isLoadingContent}
+          >
+            {t('End')}
+          </button>
+        ) : null}
       </div>
     </div>
   );

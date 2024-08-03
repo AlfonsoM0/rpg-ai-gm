@@ -18,6 +18,7 @@ import { useRouter } from '@/navigation';
 import { useState } from 'react';
 import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
+import ChatOptionsConfig from 'components/chat/chat-options-config';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -97,22 +98,32 @@ export default function Home() {
     <Main>
       <H1>{t('h1_Welcome')}</H1>
 
-      <section className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 mx-4 rounded-md shadow-lg bg-primary-content">
-        <button className="btn btn-lg" onClick={playStory}>
-          ▶️ {isStoryStarted ? t('btn_Continue_Game') : t('btn_Play_Game')}
-        </button>
-        <div>
-          <h2 className="text-center text-primary font-bold text-2xl my-2">
-            {t('h2_Recruited_Characters')}
-          </h2>
-          <p className="text-center text-primary">
-            {inGameCharacters.length
-              ? `${inGameCharacters.map((character) => character.name).join(', ')}.`
-              : t('p_No_recruited_characters')}
-          </p>
+      {/* 
+        PLAY GAME
+      */}
+      <section className="mx-4 flex flex-col items-center gap-8">
+        <div className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
+          <button className="btn btn-lg" onClick={playStory}>
+            ▶️ {isStoryStarted ? t('btn_Continue_Game') : t('btn_Play_Game')}
+          </button>
+          <div>
+            <h2 className="text-center text-primary font-bold text-2xl my-2">
+              {t('h2_Recruited_Characters')}
+            </h2>
+            <p className="text-center text-primary">
+              {inGameCharacters.length
+                ? `${inGameCharacters.map((character) => character.name).join(', ')}.`
+                : t('p_No_recruited_characters')}
+            </p>
+          </div>
         </div>
+
+        <ChatOptionsConfig />
       </section>
 
+      {/*
+        CHARACTERS COLLECTION
+      */}
       <section className="my-4">
         <H2>{t('h2_My_Characters')}</H2>
 
