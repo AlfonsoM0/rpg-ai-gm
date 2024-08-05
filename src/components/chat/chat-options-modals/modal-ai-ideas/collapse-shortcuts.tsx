@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from '@/navigation';
 import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
@@ -29,7 +30,10 @@ export default function CollapseShortcuts() {
   const { setModalIsOpen } = useModalState();
   const { addChatShortcut, chatShortcuts } = useUserPreferencesStore();
 
+  const pathname = usePathname();
+  const isOutOfStory = pathname !== '/story';
   function handleClick(idea: string) {
+    if (isOutOfStory) return;
     addContent({
       role: AI_ROLE.USER,
       parts: [{ text: idea }],
@@ -52,6 +56,7 @@ export default function CollapseShortcuts() {
               <button
                 onClick={() => handleClick(idea)}
                 className="btn w-[calc(100%-2rem)] mb-2 hover:font-bold"
+                disabled={isOutOfStory}
               >
                 {idea}
               </button>
