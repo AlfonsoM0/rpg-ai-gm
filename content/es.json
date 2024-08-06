@@ -65,10 +65,7 @@
 
   "Page_Character": {
     "[uid_cid]": {
-      "no_character": {
-        "h1": "Se compartió un personaje de rol contigo...",
-        "btn": "✨ Haz cick aquí para ver el personaje ✨"
-      },
+      "no_character_found": "No se encontró el personaje",
       "h1_Character_from": "Un personaje de"
     }
   },

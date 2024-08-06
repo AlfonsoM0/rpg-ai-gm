@@ -65,10 +65,7 @@
 
   "Page_Character": {
     "[uid_cid]": {
-      "no_character": {
-        "h1": "A role-playing character has been shared with you...",
-        "btn": "✨ Click here to view the character ✨"
-      },
+      "no_character_found": "Character not found",
       "h1_Character_from": "A character by"
     }
   },
