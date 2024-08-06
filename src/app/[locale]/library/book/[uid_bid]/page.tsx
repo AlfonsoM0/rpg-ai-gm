@@ -5,10 +5,9 @@ import H2 from 'src/components/h2';
 import { getFireDocSSR } from 'src/server/firebase-ssr';
 import CardCharacter from 'src/components/card-character';
 import Main from 'src/components/Main';
-import en from 'content/en.json';
-import es from 'content/es.json';
 import { Book } from 'src/types/library';
 import TTSControlsSection from './tts-section';
+import { getContent, Locale } from 'content/get-content';
 
 export async function generateMetadata({
   params: { uid_bid, locale },
@@ -27,14 +26,13 @@ export async function generateMetadata({
   };
 }
 
-// http://localhost:3000/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
+// http://localhost:3000/es/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
 export default async function Page({
   params: { uid_bid, locale },
 }: {
-  params: { uid_bid: string; locale: string };
+  params: { uid_bid: string; locale: Locale };
 }) {
-  const translation = locale === 'en' ? en : es;
-  const t = translation.Page_Book['[uid_bid]'];
+  const t = (await getContent(locale)).Page_Book['[uid_bid]'];
   const [uid, bid] = uid_bid.split('_');
 
   const user = await getFireDocSSR('USER_ACCOUNT', uid);

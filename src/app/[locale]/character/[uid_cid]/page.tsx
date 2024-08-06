@@ -1,4 +1,3 @@
-import { AI_NAME_TO_SHOW } from 'config/constants';
 import { Metadata } from 'next/types';
 import Main from 'components/Main';
 import H1 from 'components/h1';
@@ -6,8 +5,7 @@ import CardCharacter, { Skeleton_CardCharacter } from 'components/card-character
 import { getFireDocSSR } from 'server/firebase-ssr';
 import { Character } from 'types/character';
 import { Suspense } from 'react';
-import en from 'content/en.json';
-import es from 'content/es.json';
+import { getContent, Locale } from 'content/get-content';
 
 export async function generateMetadata({
   params: { uid_cid, locale },
@@ -26,14 +24,13 @@ export async function generateMetadata({
   };
 }
 
-// http://localhost:3000/library/book/nuiZGpNaSmaZLv4fJGvxZS701d23_cf32dc59-367a-4ea7-9cd3-67de33d6f65d
+// http://localhost:3000/es/character/nuiZGpNaSmaZLv4fJGvxZS701d23_c5e32440-265f-40cb-996c-d57e65db6b4c
 export default async function Page({
   params: { uid_cid, locale },
 }: {
-  params: { uid_cid: string; locale: string };
+  params: { uid_cid: string; locale: Locale };
 }) {
-  const translation = locale === 'en' ? en : es;
-  const t = translation.Page_Character['[uid_cid]'];
+  const t = (await getContent(locale)).Page_Character['[uid_cid]'];
   const [uid, cid] = uid_cid.split('_');
 
   const user = await getFireDocSSR('USER_ACCOUNT', uid);
