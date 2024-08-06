@@ -10,20 +10,7 @@ import { useTTSStore } from 'src/hooks/use-tts-store';
 export default function TTSControlsSection() {
   const t = useTranslations('Page_Book');
 
-  const { isTTSEnabled, setTTS, handlePlay, handleStop } = useTTSStore();
-
-  useEffect(() => {
-    if (isTTSEnabled) {
-      setTTS(t('play_audio_tip'));
-      handlePlay();
-    }
-
-    return () => {
-      handleStop();
-      setTTS('');
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { isTTSEnabled } = useTTSStore();
 
   if (!isTTSEnabled) return <></>;
 
