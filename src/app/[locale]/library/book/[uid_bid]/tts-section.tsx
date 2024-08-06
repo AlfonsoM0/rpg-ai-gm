@@ -1,5 +1,7 @@
 'use client';
 
+import 'regenerator-runtime/runtime'; // This is necesary for Build STT.
+
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import TTSControls from 'src/components/tts/tts-controls';
@@ -27,7 +29,7 @@ export default function TTSControlsSection() {
 
   return (
     <section className="my-[-1rem]">
-      <TTSControls />
+      <TTSControls customTTS={t('play_audio_tip')} />
     </section>
   );
 }

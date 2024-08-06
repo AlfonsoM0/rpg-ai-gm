@@ -40,7 +40,7 @@ export default function Page() {
 
       {isTTSEnabled ? (
         <section className="my-[-1rem]">
-          <TTSControls />
+          <TTSControls customTTS={t('play_audio_tip')} />
         </section>
       ) : null}
 
