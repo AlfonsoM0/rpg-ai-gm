@@ -7,6 +7,7 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import SR from 'react-speech-recognition';
 
 export default function ChatInputMsg() {
   const { addContent, isLoadingContent } = useGmAiStore();
@@ -18,6 +19,7 @@ export default function ChatInputMsg() {
   function submitChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     handleStop();
+    SR.stopListening();
     addContent({
       role: AI_ROLE.USER,
       parts: [{ text: chatMsg }],
