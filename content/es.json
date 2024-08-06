@@ -53,12 +53,10 @@
 
   "Page_Book": {
     "h1_Book": "Libro",
+    "play_audio_tip": "Para reproducir los audios del libro, hay clic en los avatares de las respuestas.",
 
     "[uid_bid]": {
-      "no_book": {
-        "h1": "Se compartió una historia de rol contigo...",
-        "btn": "✨ Haz cick aquí para abrir el libro ✨"
-      },
+      "no_book_found": "No se encontró el libro",
       "h1_Story_from": "Una historia de"
     }
   },

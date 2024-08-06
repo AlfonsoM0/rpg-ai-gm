@@ -18,7 +18,7 @@ export default function Page() {
 
   useEffect(() => {
     if (isTTSEnabled && content.length > 0) {
-      setTTS('Para reproducir los audios del libro, hay clic en los avatares de las respuestas.');
+      setTTS(t('play_audio_tip'));
       handlePlay();
     }
 

@@ -8,7 +8,6 @@ import { Character } from 'types/character';
 import { Suspense } from 'react';
 import en from 'content/en.json';
 import es from 'content/es.json';
-import { Locale } from 'src/i18n';
 
 export async function generateMetadata({
   params: { uid_cid, locale },
