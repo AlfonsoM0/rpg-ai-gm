@@ -9,7 +9,7 @@ import UserFirebaseSync from 'components/user/user-fire-sync';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import Header from 'components/header';
-import { Locale } from '../../i18n';
+import { Locale } from 'src/i18n-config';
 import { app_metadata } from 'config/app-metadata';
 import { AI_NAME_TO_SHOW } from 'config/constants';
 
@@ -31,7 +31,7 @@ export async function generateMetadata({
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: Locale };
 }
 
 export default async function RootLayout({
@@ -47,7 +47,7 @@ export default async function RootLayout({
 
       <TestComponent />
 
-      <FixComponent locale={locale as Locale} />
+      <FixComponent locale={locale} />
 
       {children}
 

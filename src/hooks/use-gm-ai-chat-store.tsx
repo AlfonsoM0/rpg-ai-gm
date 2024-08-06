@@ -7,7 +7,7 @@ import { CharacterCreationDescription } from 'types/character';
 import runAIChat from 'server/gm-ai';
 
 import i18nEs from '../../content/es.json';
-import { Locale } from '../i18n';
+import { Locale } from 'src/i18n-config';
 
 const ideas = i18nEs.New_Character.Description;
 

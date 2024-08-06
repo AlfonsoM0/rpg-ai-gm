@@ -31,8 +31,8 @@ const withPWA = withPWAInit({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // i18n: {
-  //   locales: ['es'], // TODO: 'en'
-  //   defaultLocale: 'es',
+  //   locales: ['en', 'es'],
+  //   defaultLocale: 'en',
   // },
 
   images: {

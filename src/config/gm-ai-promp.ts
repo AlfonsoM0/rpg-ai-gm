@@ -1,6 +1,6 @@
 import { Content } from '@google/generative-ai';
 import { AI_ROLE } from './constants';
-import { Locale } from '../i18n';
+import { Locale } from 'src/i18n-config';
 
 export const gmAiPrompt = `
 # Game Master AI - Juego de rol de mesa

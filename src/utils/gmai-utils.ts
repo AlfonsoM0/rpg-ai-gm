@@ -7,7 +7,7 @@ import runAIChat from 'server/gm-ai';
 import { generateGmAiPromptArray } from 'config/gm-ai-promp';
 
 // i18n
-import { Locale } from '../i18n';
+import { Locale } from 'src/i18n-config';
 import es from '../../content/es.json';
 import en from '../../content/en.json';
 
