@@ -1,7 +1,7 @@
 import H1 from 'src/components/h1';
 import Main from 'src/components/Main';
 import { AI_NAME_TO_SHOW } from 'src/config/constants';
-import iconGmAi from 'public/android-chrome-512x512.png';
+import iconGmAi from 'public/gmai.png';
 
 export default function Page() {
   return (

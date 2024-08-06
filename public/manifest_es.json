@@ -22,8 +22,8 @@
       "purpose": "maskable"
     },
     {
-      "src": "favicon.ico",
-      "sizes": "48x48",
+      "src": "/favicon.ico",
+      "sizes": "256x256",
       "type": "image/x-icon",
       "purpose": "maskable"
     }
