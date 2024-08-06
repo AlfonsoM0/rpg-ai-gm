@@ -47,11 +47,11 @@ export default function FormCharacterCharacteristics() {
       <br />
       <small>{t('tip2')}</small>
 
-      <div className="flex flex-wrap justify-between gap-4 my-4">
+      <div className="flex justify-between gap-2 my-4">
         <div>
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-[10rem]">
             <div className="label">
-              <span className="label-text">
+              <span className="label-text text-xs font-semibold">
                 {C('Strength')} ({C('STR')}) +{characteristics.strength}
               </span>
             </div>
@@ -66,9 +66,9 @@ export default function FormCharacterCharacteristics() {
             />
           </label>
 
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-[10rem]">
             <div className="label">
-              <span className="label-text">
+              <span className="label-text text-xs font-semibold">
                 {C('Dexterity')} ({C('DEX')}) +{characteristics.dexterity}
               </span>
             </div>
@@ -83,9 +83,9 @@ export default function FormCharacterCharacteristics() {
             />
           </label>
 
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-[10rem]">
             <div className="label">
-              <span className="label-text">
+              <span className="label-text text-xs font-semibold">
                 {C('Constitution')} ({C('CON')}) +{characteristics.constitution}
               </span>
             </div>
@@ -102,9 +102,9 @@ export default function FormCharacterCharacteristics() {
         </div>
 
         <div>
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-[10rem]">
             <div className="label">
-              <span className="label-text">
+              <span className="label-text text-xs font-semibold">
                 {C('Intelligence')} ({C('INT')}) +{characteristics.intelligence}
               </span>
             </div>
@@ -119,9 +119,9 @@ export default function FormCharacterCharacteristics() {
             />
           </label>
 
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-[10rem]">
             <div className="label">
-              <span className="label-text">
+              <span className="label-text text-xs font-semibold">
                 {C('Wisdom')} ({C('WIS')}) +{characteristics.wisdom}
               </span>
             </div>
@@ -136,9 +136,9 @@ export default function FormCharacterCharacteristics() {
             />
           </label>
 
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-[10rem]">
             <div className="label">
-              <span className="label-text">
+              <span className="label-text text-xs font-semibold">
                 {C('Charisma')} ({C('CHA')}) +{characteristics.charisma}
               </span>
             </div>
