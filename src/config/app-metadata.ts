@@ -6,7 +6,7 @@ const APP_KEYWORDS = 'rpg, roleplay, game, master,ai, dice, roll, 1d6, 2d6';
 
 const APP_NAME = AI_NAME_TO_SHOW;
 const APP_DEFAULT_TITLE = AI_NAME_TO_SHOW;
-const APP_TITLE_TEMPLATE = 'GmAi | %s';
+const APP_TITLE_TEMPLATE = '';
 
 const APP_URL =
   process.env.NODE_ENV === 'development'
