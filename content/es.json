@@ -2,8 +2,8 @@
   "[locale]": "es",
 
   "ModalNews": {
-    "Title": "¡Advertencia!",
-    "MarkdownText": "Este juego no está completo y puedes perder información en alguna actualización. \n\n ¡Ya puedes gardar tus datos iniciando sessión con una **cuenta de Google**! \n\n GmAi es gratuito, pero está muy limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no funciona como esperas, prueba jugar en un horario menos concurrido. Esto requerirá de cuentas premium, estamos viendo las mejores opciones. \n\n Para notificar un error o dar una sugerencia puedes escribirme en [**alfonso.ar**](https://alfonso.ar). \n\n #### **PROXIMAMENTE** \n\n Las siguientes son ideas para mejorar esta app en un futuro. \n\n * Multijugador cooperativo con GmAi. \n\n * Generación del avatar del personaje con GmAi. \n\n * Generación de vídeo basado en un libro con GmAi.",
+    "Title": "¡Atención!",
+    "MarkdownText": "Este juego no está completo y podrías perder información en alguna actualización. \n\n ¡Ya puedes guardar tus datos iniciando sesión con una **cuenta de Google**! \n\n GmAi es gratuito, pero está limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no funciona como esperas, prueba jugar en un horario menos concurrido. Se requerirán cuentas premium para eliminar esta limitación, estamos evaluando las mejores opciones. \n\n Para notificar un error o dar una sugerencia puedes escribirme a [**alfonso.ar**](https://alfonso.ar). \n\n #### **PRÓXIMAMENTE** \n\n Las siguientes son ideas para mejorar esta app en un futuro. \n\n * Multijugador cooperativo con GmAi. \n\n * Generación del avatar del personaje con GmAi. \n\n * Generación de vídeo basado en un libro con GmAi.",
     "btn_OK": "¡Entendido!"
   },
 
@@ -23,17 +23,17 @@
     "h2_Recruited_Characters": "Personajes Reclutados",
     "p_No_recruited_characters": "No hay personajes reclutados.",
     "h2_My_Characters": "Mis Personajes",
-    "input_Search_By_Name": "Buscar por Nombre",
-    "h2_Create_New_Character": "¡Crear un personaje Nuevo!"
+    "input_Search_By_Name": "Buscar por nombre",
+    "h2_Create_New_Character": "¡Crear un personaje nuevo!"
   },
 
   "Page_User": {
-    "h1": "Mi Perfil",
-    "h2": "Información Personal"
+    "h1": "Mi perfil",
+    "h2": "Información personal"
   },
 
   "Page_New_Character": {
-    "h1": "Creación de Personaje",
+    "h1": "Creación de personaje",
 
     "ButtonAiImprove": "Mejorar",
     "ModalLowContentAlert": {
@@ -43,17 +43,17 @@
   },
 
   "Page_Story": {
-    "h1_Telling_the_Story": "¡Narrando la Historia!"
+    "h1_Telling_the_Story": "¡Narrando la historia!"
   },
 
   "Page_Library": {
-    "h1_My_Library": "Mi Biblioteca",
-    "input_placeholder_search": "Buscar por Nombre"
+    "h1_My_Library": "Mi biblioteca",
+    "input_placeholder_search": "Buscar por nombre"
   },
 
   "Page_Book": {
     "h1_Book": "Libro",
-    "play_audio_tip": "Para reproducir los audios del libro, hay clic en los avatares de las respuestas.",
+    "play_audio_tip": "Para reproducir los audios del libro, haz clic en los avatares de las respuestas.",
 
     "[uid_bid]": {
       "no_book_found": "No se encontró el libro",
@@ -82,7 +82,7 @@
 
   "buttons": {
     "Copy_text": "Copiar texto al portapapeles",
-    "Send_message": "Enviar menasaje",
+    "Send_message": "Enviar mensaje",
     "Improve_text": "Mejorar el texto",
     "Close": "Cerrar"
   },
@@ -92,7 +92,7 @@
     "Options": "Opciones",
 
     "form": {
-      "input_New_Name": "Nuevo Nombre",
+      "input_New_Name": "Nuevo nombre",
       "input_Img_profile_URL": "Nueva URL de imagen de perfil",
       "btn_Save": "GUARDAR",
       "err_Name": "El nombre debe tener al menos 3 caracteres.",
@@ -101,23 +101,23 @@
 
     "btn": {
       "UserButtonConnect": {
-        "Logout": "Cerrar Sesión",
-        "Login": "Iniciar Sesión"
+        "Logout": "Cerrar sesión",
+        "Login": "Iniciar sesión"
       },
-      "UserButtonEditProfile": "Editar mi Perfil"
+      "UserButtonEditProfile": "Editar mi perfil"
     },
 
     "modal": {
       "ModalUserConnect": {
-        "title": "Inicio de Sesión",
-        "p1": "Al iniciar sesión por primera vez, cuando modificas tu colección de personajes o libros, estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se sincronizarán en todos los dispositivos conectados a tu cuenta.",
-        "p2": "Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescriben con los datos guardados en la nube.",
-        "p3_⚠️": "⚠️ Se abrirá una nueva ventana para autenticación. Asegurate de que tu navegador esté configurado para permitir ventanas emergentes.",
-        "p4_⚠️": "⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar sesión por primera vez.",
+        "title": "Inicio de sesión",
+        "p1": "Al iniciar sesión por primera vez, cuando modifiques tu colección de personajes o libros, estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se sincronizarán en todos los dispositivos conectados a tu cuenta.",
+        "p2": "Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescribirán con los datos guardados en la nube.",
+        "p3_⚠️": "⚠️ Se abrirá una nueva ventana para autenticación. Asegúrate de que tu navegador esté configurado para permitir ventanas emergentes.",
+        "p4_⚠️": "⚠️ Asegúrate de estar usando la versión más reciente de tus personajes y libros antes de iniciar sesión por primera vez.",
         "Sign_in_with_Google": "Ingresar con Google"
       },
       "ModalUserEditProfile": {
-        "title": "Mi Perfil"
+        "title": "Mi perfil"
       }
     }
   },
@@ -152,42 +152,42 @@
     "Name_of_your_character": "Nombre de tu personaje *",
     "Create_an_original_name": "Inventa un nombre original.",
     "isEdit": {
-      "true": "* No puedes modificar el nombre de un personaje creado.",
+      "true": "* No puedes modificar el nombre de un personaje ya creado.",
       "false": "* El nombre de tu personaje no se podrá modificar después."
     },
-    "Form_Tip": "* Todos los campos marcados con asterísco son requeridos para crear una historia maravillosa.",
+    "Form_Tip": "* Todos los campos marcados con asterisco son obligatorios para crear una historia maravillosa.",
     "Ideas": "¡Ideas!",
 
     "FormCharacterCharacteristics": {
       "Characteristics": "Características",
       "tip1": "* Mueve los deslizadores para ajustar las características usando tus Puntos de Experiencia (XP).",
-      "tip2": "* Las características guardadas no podrán reducirse cuando edites tu personaje."
+      "tip2": "* Las características guardadas no podrán reducirse al editar tu personaje."
     },
 
     "Description": {
       "appearance": {
         "title": "Apariencia *",
-        "ideas": "¿Es humano?,¿Cuál es su aspecto más llamativo?,¿Cómo es su forma de vestir?,¿Qué detalles distintivos posee?,¿Cuáles son sus accesorios?"
+        "ideas": "¿Es humano?, ¿Cuál es su aspecto más llamativo?, ¿Cómo es su forma de vestir?, ¿Qué detalles distintivos posee?, ¿Cuáles son sus accesorios?"
       },
       "background": {
         "title": "Trasfondo *",
-        "ideas": "¿Cuál es su historia?,¿Qué le sucedió en su vida?,¿De dónde proviene?,¿Tiene algún secreto?,¿Tiene enemigos?"
+        "ideas": "¿Cuál es su historia?, ¿Qué le sucedió en su vida?, ¿De dónde proviene?, ¿Tiene algún secreto?, ¿Tiene enemigos?"
       },
       "profession": {
         "title": "Profesión *",
-        "ideas": "¿Qué hace para ganarse la vida?,¿Cuál es o fue su trabajo más importante?,¿Cuáles son sus conocimientos y habilidades?,¿Cómo perciben otras personas su profesión?,¿Es conocido en su rubro?"
+        "ideas": "¿Qué hace para ganarse la vida?, ¿Cuál es o fue su trabajo más importante?, ¿Cuáles son sus conocimientos y habilidades?, ¿Cómo perciben otras personas su profesión?, ¿Es conocido en su rubro?"
       },
       "personality": {
         "title": "Personalidad *",
-        "ideas": "¿Cuáles son su valores?,¿Tiene un carácter fuerte o débil?,¿Cómo se relaciona con los demás?,¿Es amable o desagradable?,¿Tiene un gran sentido del humor?,¿Es independiente o necesita apoyo de otros?"
+        "ideas": "¿Cuáles son sus valores?, ¿Tiene un carácter fuerte o débil?, ¿Cómo se relaciona con los demás?, ¿Es amable o desagradable?, ¿Tiene un gran sentido del humor?, ¿Es independiente o necesita apoyo de otros?"
       },
       "equipment": {
         "title": "Equipamiento *",
-        "ideas": "¿Posee algún objeto que lo identifique?,¿Qué objetos posee que le ayuden en su vida cotidiana?,¿Posee algún objeto que le ayude a resolver problemas?,¿Lleva alguna herramienta o instrumento en particular?,¿Cómo se relaciona con sus objetos personales?"
+        "ideas": "¿Posee algún objeto que lo identifique?, ¿Qué objetos posee que le ayuden en su vida cotidiana?, ¿Posee algún objeto que le ayude a resolver problemas?, ¿Lleva alguna herramienta o instrumento en particular?, ¿Cómo se relaciona con sus objetos personales?"
       },
       "powers": {
-        "title": "Poderes ",
-        "ideas": "¿Posee algún poder sobrenatural? ¿Qué tipo de poder es?,¿Cómo se relaciona con su poder sobrenatural?,¿Qué problemas puede solucionar con su poder sobrenatural?,¿Cómo utiliza su poder sobrenatural en su vida cotidiana?,¿Posee alguna debilidad especial con respecto a su poder sobrenatural?"
+        "title": "Poderes",
+        "ideas": "¿Posee algún poder sobrenatural? ¿Qué tipo de poder es?, ¿Cómo se relaciona con su poder sobrenatural?, ¿Qué problemas puede solucionar con su poder sobrenatural?, ¿Cómo utiliza su poder sobrenatural en su vida cotidiana?, ¿Posee alguna debilidad especial con respecto a su poder sobrenatural?"
       }
     }
   },
@@ -212,17 +212,17 @@
       "share": {
         "title": "Compartir personaje",
         "p": "Se copió la URL del personaje al portapapeles.",
-        "a": "Clic aquí para ver el personaje compartido."
+        "a": "Haz clic aquí para ver el personaje compartido."
       },
       "character_in_game": {
-        "title": "Personaje en Juego",
+        "title": "Personaje en juego",
         "p": "No puedes reclutar, despedir o borrar personajes si tu historia actual no ha terminado."
       },
       "delete_character": {
         "title": "¿Estás seguro de borrar este personaje?",
         "p": "Esta acción no se puede deshacer.",
         "btn": {
-          "accept": "Si, borrar",
+          "accept": "Sí, borrar",
           "cancel": "No, cancelar"
         }
       },
@@ -234,7 +234,7 @@
   },
 
   "CardPlayCharacter": {
-    "h3_Characteristics_Rolls": "Pruebas de Característica",
+    "h3_Characteristics_Rolls": "Pruebas de característica",
     "p1_select_one_option": "* Elige una opción",
     "roll2d6": {
       "take a test": "realiza una prueba de",
@@ -255,7 +255,7 @@
 
     "modal": {
       "ModalIsAStoryInProgress": {
-        "title": "Historia en Progreso",
+        "title": "Historia en progreso",
         "p": "Finaliza tu historia para poder empezar otra.",
         "btn": {
           "End_story": "Finalizar historia",
@@ -266,26 +266,26 @@
         "title": "¿Estás seguro de borrar este libro?",
         "p": "Esta acción no se puede deshacer.",
         "btn": {
-          "accept": "Si, borrar",
+          "accept": "Sí, borrar",
           "cancel": "No, cancelar"
         }
       },
       "ModalEditBook": {
-        "title": "Editar Libro",
+        "title": "Editar libro",
         "p": "Edita el nombre del libro.",
-        "input_placeholder": "Nombre de la Historia",
+        "input_placeholder": "Nombre de la historia",
         "btn": {
           "cancel": "Cancelar",
           "Save": "Guardar"
         }
       },
       "ModalShareBook": {
-        "title": "Compartir Libro",
+        "title": "Compartir libro",
         "p": "Se copió la URL del libro al portapapeles.",
-        "a": "Clic aquí para ver el libro compartido."
+        "a": "Haz clic aquí para ver el libro compartido."
       },
       "ModalCantShareBook": {
-        "title": "No se puede compartir el Libro",
+        "title": "No se puede compartir el libro",
         "p": "Para compartir un libro debes iniciar sesión."
       }
     }
@@ -298,18 +298,18 @@
   "MsgStoryEnd": {
     "h2_Story_End": "Fin de la historia",
     "Total_Failures": "Total de fallos:",
-    "Total_Successes": "Total de éxito:",
+    "Total_Successes": "Total de éxitos:",
     "Story_XP": "Experiencia de la historia:"
   },
 
   "ChatOptionsConfig": {
-    "Other_Options": "Opciones de Juego",
+    "Other_Options": "Opciones de juego",
     "End": "Fin.",
     "Option": {
       "GmAi_Config": "Configuración de Game Master AI",
-      "Tips_and_Shortcuts": "Tips y Atajos",
-      "Story_Theme_Color": "Tema de Color para la Historia",
-      "End_Story": "Finalizar Historia"
+      "Tips_and_Shortcuts": "Consejos y atajos",
+      "Story_Theme_Color": "Tema de color para la historia",
+      "End_Story": "Finalizar historia"
     }
   },
 
@@ -324,20 +324,20 @@
   },
 
   "ModalEndHistory": {
-    "title": "Fin de la Historia",
-    "p1": "Si colocas un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar otro capítulo desde donde dejaste la anterior.",
-    "p2": "Si tu historia no finaliza con el cartel de \"Fin de la historia\", que muestra los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas contiuarla.",
+    "title": "Fin de la historia",
+    "p1": "Si pones un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar otro capítulo desde donde dejaste la anterior.",
+    "p2": "Si tu historia no finaliza con el cartel de \"Fin de la historia\", que muestra los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas continuarla.",
     "p3_strong": "Elige un nombre original.",
-    "input_placeholder": "Nombre de la Historia",
-    "btn_End_Game": "Si, finalizar historia",
+    "input_placeholder": "Nombre de la historia",
+    "btn_End_Game": "Sí, finalizar historia",
     "btn_Continue_Game": "No, seguir jugando"
   },
 
   "ModalWinXp": {
-    "title": "Ganaste XP",
+    "title": "¡Ganaste XP!",
     "You_have_earned_XP": "Has ganado ",
     "for": "XP para ",
-    "Edit_your_character": "Edita tu personaje para mejorar tus caracteristicas."
+    "Edit_your_character": "Edita tu personaje para mejorar tus características."
   },
 
   "ModaArtThemeConfig": {
@@ -350,30 +350,30 @@
     "p_Config": "Configura la personalidad de tu Game Master AI.",
     "p_strong_Style": "Estilo",
 
-    "Strict_AI_title": "Estricto - jugador estratega.",
+    "Strict_AI_title": "Estricto: jugador estratega.",
     "Strict_AI_desc": "Respeta las reglas, pero necesita de tu creatividad. Debes proponer más ideas para la historia.",
 
-    "Virtuous_AI_title": "Virtuoso - un poquito de todo.",
+    "Virtuous_AI_title": "Virtuoso: un poquito de todo.",
     "Virtuous_AI_desc": "Respeta un poco las reglas y es algo creativo.",
 
-    "Creative_AI_title": "Creativo - narrador charlatán.",
+    "Creative_AI_title": "Creativo: narrador charlatán.",
     "Creative_AI_desc": "Es creativo, pero no respeta las reglas. Debes pedirle hacer tiradas o que se tranquilice y termine la historia de una vez.",
 
-    "Progresive_AI_title": "Progresivo - empieza estricto y termina loco. (Recomendado)",
+    "Progresive_AI_title": "Progresivo: empieza estricto y termina loco. (Recomendado)",
     "Progresive_AI_desc": "Comienza siendo estricto y termina siendo muy creativo.",
 
-    "Random_AI_title": "Aleatorio - depende de su humor.",
+    "Random_AI_title": "Aleatorio: depende de su humor.",
     "Random_AI_desc": "Estricto, creativo o virtuoso, nunca se sabe, va cambiando en cada respuesta."
   },
 
   "ModaIdeasForAI": {
-    "title": "Tips y Atajos",
-    "p1": "Estos son tips y atajos para ayudarte a mejorar tu experiencia con Game Master AI.",
+    "title": "Consejos y atajos",
+    "p1": "Estos son consejos y atajos para ayudarte a mejorar tu experiencia con Game Master AI.",
     "p2": "* Solo puedes usarlos dentro del juego.",
 
     "tips": {
-      "title": "Tips",
-      "tip1_p_strong": "La historia termina a los 3 fallos o 5 éxitos",
+      "title": "Consejos",
+      "tip1_p_strong": "La historia termina a los 3 fallos o 5 éxitos.",
       "tip1_p": "Si no quieres que termine rápido, puedes escribir tus resultados de pruebas o pedirle a GmAi que las haga por ti. Así no se guardarán en el sistema y evitarás que se active el final. Aunque GmAi puede concluir por su cuenta, puedes pedirle que continúe hasta donde quieras.",
 
       "tip2_p_strong": "La XP ganada al final de la historia",
@@ -383,16 +383,16 @@
       "tip3_p": "Es fácil, aporta ideas a la trama de manera creativa y no solo eligiendo las opciones que te da GmAi.",
 
       "tip4_p_strong": "Jugar una historia más rápida",
-      "tip4_p": "Es posible, pide a tu GmAi \"realizar pruebas de características\", eso lo motivará a darte más pruebas y detalles para avanzar más rápido en la historia. Si GmAi realiza tiradas por tí, puedes decirle que tú quieres realziar todas las tiradas.",
+      "tip4_p": "Es posible, pide a tu GmAi \"realizar pruebas de características\", eso lo motivará a darte más pruebas y detalles para avanzar más rápido en la historia. Si GmAi realiza tiradas por ti, puedes decirle que tú quieres realizar todas las tiradas.",
 
       "tip5_p_strong": "¿Quieres jugar una campaña de varias historias?",
       "tip5_p": "Guarda tu historia en la biblioteca. Luego podrás acceder a ella y seguir jugando desde donde lo dejaste."
     },
 
     "My_Shortcuts": {
-      "title": "Mis Atajos",
+      "title": "Mis atajos",
       "textarea_placeholder": "Escribe un comando para GmAi.",
-      "Add_to_My_Shortcuts": "Agregar a Mis Atajos",
+      "Add_to_My_Shortcuts": "Agregar a mis atajos",
       "btn": {
         "Remove": "Eliminar atajo",
         "Move_up": "Mover atajo hacia arriba",
@@ -401,15 +401,15 @@
     },
 
     "Recomended_Shortcuts": {
-      "Add_to_My_Shortcuts": "Añadir a Mis Atajos",
+      "Add_to_My_Shortcuts": "Añadir a mis atajos",
       "title": "Atajos recomendados",
       "shortcut1": "¿Qué es un juego de rol de mesa?",
       "shortcut2": "Explícame las reglas de juego.",
       "shortcut3": "¿Cuál es tu trabajo como Game Master AI?",
-      "shortcut4": "Sugiere distintas opciones de historias y enumérarlas para elegir una.",
+      "shortcut4": "Sugiere distintas opciones de historias y enuméralas para elegir una.",
       "shortcut5": "Quiero usar este juego para practicar un idioma.",
-      "shortcut6": "Quiero realizar yo todas las prubas de características de mis personajes.",
-      "shortcut7": "Pideme realizar pruebas de características para todas mis decisiones.",
+      "shortcut6": "Quiero realizar yo todas las pruebas de características de mis personajes.",
+      "shortcut7": "Pídeme realizar pruebas de características para todas mis decisiones.",
       "shortcut8": "Haz un resumen de mis personajes.",
       "shortcut9": "Haz un resumen de las características de mis personajes.",
       "shortcut10": "Haz un resumen de mis tiradas y el total de éxitos y fallos.",
@@ -426,7 +426,7 @@
     "p_First_time_you_play": "¿Es la primera vez que juegas?",
     "ol_li_1": "Crea un nuevo personaje... o dos...",
     "ol_li_2": "Recluta tus personajes para la historia.",
-    "ol_li_3": "Haz click en \"Jugar una Historia\" para comenzar.",
+    "ol_li_3": "Haz clic en \"Jugar una historia\" para comenzar.",
     "ol_li_4": "Pregunta a tu Game Master AI si necesitas ayuda para entender las reglas o qué es un juego de rol de mesa.",
     "ol_li_5": "Puedes activar y configurar la voz de tu GmAi con la opción ",
     "ol_li_6": "Puedes cambiar los colores de la app con la opción ",
@@ -435,7 +435,7 @@
 
   "TTS": {
     "TTSConfig": {
-      "customTTS": "¡Hola! soy Game Master AI. ¡A jugar!",
+      "customTTS": "¡Hola! Soy Game Master AI. ¡A jugar!",
       "Voice": "Voz",
       "Voice_not_available": "No disponible en tu dispositivo.",
       "Broadcaster": "Locutor",
@@ -448,16 +448,16 @@
       }
     },
     "btn": {
-      "Play": "Play",
-      "Pause": "Pause",
-      "Stop": "Stop"
+      "Play": "Reproducir",
+      "Pause": "Pausar",
+      "Stop": "Detener"
     }
   },
 
   "GmAi": {
     "Response": {
-      "Empty": "🤔... No se me ocurre una respuesta... \n\n Dame más información e intenta nuevamente. ✨",
-      "Error": "⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cando hay un error en el juego o cuando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e intenta nuevamente. ✨"
+      "Empty": "🤔... No se me ocurre una respuesta... \n\n Dame más información e inténtalo nuevamente. ✨",
+      "Error": "⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cuando hay un error en el juego o cuando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e inténtalo nuevamente. ✨"
     }
   }
 }

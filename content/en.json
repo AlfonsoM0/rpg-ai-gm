@@ -3,7 +3,7 @@
 
   "ModalNews": {
     "Title": "Warning!",
-    "MarkdownText": "This game is not complete and you may lose information in an update. \n\n You can now save your data by logging in with a **Google account**! \n\n GmAi is free, but it is very limited in the number of players it can handle per minute. If GmAi doesn't work as expected, try playing at a less busy time. This will require premium accounts, we are looking into the best options. \n\n To report an error or give a suggestion, you can write to me at [**alfonso.ar**](https://alfonso.ar). \n\n #### **COMING SOON** \n\n The following are ideas to improve this app in the future. \n\n * Cooperative multiplayer with GmAi. \n\n * Character avatar generation with GmAi. \n\n * Video generation based on a book with GmAi.",
+    "MarkdownText": "This game is not complete and you could lose information in some update. \n\n You can now save your data by logging in with a **Google account**! \n\n GmAi is free, but it is limited in the number of players it can serve per minute. If GmAi is not working as expected, try playing at a less busy time. Premium accounts will be required to remove this limitation, we are evaluating the best options. \n\n To report a bug or make a suggestion you can write to me at [**alfonso.ar**](https://alfonso.ar). \n\n #### **COMING SOON** \n\n The following are ideas to improve this app in the future. \n\n * Cooperative multiplayer with GmAi. \n\n * Generation of the character's avatar with GmAi. \n\n * Generation of video based on a book with GmAi.",
     "btn_OK": "Got it!"
   },
 
@@ -23,13 +23,13 @@
     "h2_Recruited_Characters": "Recruited Characters",
     "p_No_recruited_characters": "There are no recruited characters.",
     "h2_My_Characters": "My Characters",
-    "input_Search_By_Name": "Search by Name",
-    "h2_Create_New_Character": "Create a New Character!"
+    "input_Search_By_Name": "Search by name",
+    "h2_Create_New_Character": "Create a new character!"
   },
 
   "Page_User": {
-    "h1": "My Profile",
-    "h2": "Personal Information"
+    "h1": "My profile",
+    "h2": "Personal information"
   },
 
   "Page_New_Character": {
@@ -48,23 +48,23 @@
 
   "Page_Library": {
     "h1_My_Library": "My Library",
-    "input_placeholder_search": "Search by Name"
+    "input_placeholder_search": "Search by name"
   },
 
   "Page_Book": {
     "h1_Book": "Book",
-    "play_audio_tip": "To play the audios of the book, click on the avatars of the answers.",
+    "play_audio_tip": "To play the book's audios, click on the avatars of the answers.",
 
     "[uid_bid]": {
       "no_book_found": "Book not found",
-      "h1_Story_from": "A story by"
+      "h1_Story_from": "A story from"
     }
   },
 
   "Page_Character": {
     "[uid_cid]": {
       "no_character_found": "Character not found",
-      "h1_Character_from": "A character by"
+      "h1_Character_from": "A character from"
     }
   },
 
@@ -75,13 +75,13 @@
   "Header": {
     "Navbar_links": {
       "/": "Home",
-      "/library": "Library",
-      "LangSwitcher": "Change language"
-    }
+      "/library": "Library"
+    },
+    "LangSwitcher": "Change language"
   },
 
   "buttons": {
-    "Copy_text": "Copy to clickboard",
+    "Copy_text": "Copy text to clipboard",
     "Send_message": "Send message",
     "Improve_text": "Improve text",
     "Close": "Close"
@@ -92,32 +92,32 @@
     "Options": "Options",
 
     "form": {
-      "input_New_Name": "New Name",
-      "input_Img_profile_URL": "New Profile Image URL",
+      "input_New_Name": "New name",
+      "input_Img_profile_URL": "New profile picture URL",
       "btn_Save": "SAVE",
       "err_Name": "Name must be at least 3 characters long.",
-      "err_URL": "Invalid Image URL."
+      "err_URL": "Image URL is invalid."
     },
 
     "btn": {
       "UserButtonConnect": {
-        "Logout": "Logout",
-        "Login": "Login"
+        "Logout": "Log out",
+        "Login": "Log in"
       },
-      "UserButtonEditProfile": "Edit my Profile"
+      "UserButtonEditProfile": "Edit my profile"
     },
 
     "modal": {
       "ModalUserConnect": {
-        "title": "Login",
-        "p1": "When you log in for the first time, whenever you modify your character or book collection, they will be automatically saved to the cloud every few seconds. Changes will be synced across all devices connected to your account.",
+        "title": "Log in",
+        "p1": "When you log in for the first time, when you modify your collection of characters or books, they will be automatically saved to the cloud every few seconds. The changes will be synced across all devices connected to your account.",
         "p2": "If you already have an account, when you log in, the local data will be overwritten with the data stored in the cloud.",
         "p3_⚠️": "⚠️ A new window will open for authentication. Make sure your browser is configured to allow pop-ups.",
-        "p4_⚠️": "⚠️ Be sure to be using the latest version of your characters and books before logging in for the first time.",
+        "p4_⚠️": "⚠️ Make sure you are using the latest version of your characters and books before logging in for the first time.",
         "Sign_in_with_Google": "Sign in with Google"
       },
       "ModalUserEditProfile": {
-        "title": "My Profile"
+        "title": "My profile"
       }
     }
   },
@@ -152,8 +152,8 @@
     "Name_of_your_character": "Name of your character *",
     "Create_an_original_name": "Create an original name.",
     "isEdit": {
-      "true": "* You cannot change the name of a created character.",
-      "false": "* The name of your character cannot be modified later."
+      "true": "* You cannot change the name of an already created character.",
+      "false": "* The name of your character cannot be modified afterwards."
     },
     "Form_Tip": "* All fields marked with an asterisk are required to create a wonderful story.",
     "Ideas": "Ideas!",
@@ -167,27 +167,27 @@
     "Description": {
       "appearance": {
         "title": "Appearance *",
-        "ideas": "Is it human?, What is its most striking aspect?, How does it dress?, What distinctive details does it have?, What are its accessories?"
+        "ideas": "Is he human?, What is his most striking feature?, How does he dress?, What distinctive details does he have?, What are his accessories?"
       },
       "background": {
         "title": "Background *",
-        "ideas": "What is its story?, What happened to it in its life?, Where does it come from?, Does it have any secrets?, Does it have enemies?"
+        "ideas": "What is his story?, What happened in his life?, Where does he come from?, Does he have any secrets?, Does he have enemies?"
       },
       "profession": {
         "title": "Profession *",
-        "ideas": "What does it do for a living?, What is or was its most important job?, What are its knowledge and skills?, How do other people perceive its profession?, Is it known in its field?"
+        "ideas": "What does he do for a living?, What is or was his most important job?, What are his knowledge and skills?, How do other people perceive his profession?, Is he known in his field?"
       },
       "personality": {
         "title": "Personality *",
-        "ideas": "What are its values?, Does it have a strong or weak character?, How does it relate to others?, Is it kind or unpleasant?, Does it have a great sense of humor?, Is it independent or does it need support from others?"
+        "ideas": "What are his values?, Does he have a strong or weak character?, How does he relate to others?, Is he kind or unpleasant?, Does he have a great sense of humor?, Is he independent or does he need support from others?"
       },
       "equipment": {
         "title": "Equipment *",
-        "ideas": "Does it have any object that identifies it?, What objects does it have that help it in its daily life?, Does it have any object that helps it solve problems?, Does it carry any particular tool or instrument?, How does it relate to its personal belongings?"
+        "ideas": "Does he have any object that identifies him?, What objects does he possess that help him in his daily life?, Does he possess any object that helps him solve problems?, Does he carry any particular tool or instrument?, How does he relate to his personal objects? "
       },
       "powers": {
-        "title": "Powers ",
-        "ideas": "Does it have any supernatural power? What kind of power is it?, How does it relate to its supernatural power?, What problems can it solve with its supernatural power?, How does it use its supernatural power in its daily life?, Does it have any special weakness regarding its supernatural power?"
+        "title": "Powers",
+        "ideas": "Does he possess any supernatural power? What kind of power is it?, How does he relate to his supernatural power?, What problems can he solve with his supernatural power?, How does he use his supernatural power in his daily life?, Does he possess any special weakness with respect to his supernatural power? "
       }
     }
   },
@@ -206,17 +206,17 @@
 
     "modal": {
       "cant_share": {
-        "title": "Share character",
+        "title": "Share Character",
         "p": "You must be logged in to share a character."
       },
       "share": {
         "title": "Share character",
-        "p": "Character URL copied to clipboard.",
+        "p": "The character URL has been copied to the clipboard.",
         "a": "Click here to view the shared character."
       },
       "character_in_game": {
         "title": "Character in Game",
-        "p": "You cannot recruit, dismiss, or delete characters if your current story is not over."
+        "p": "You cannot recruit, fire, or delete characters if your current story is not over."
       },
       "delete_character": {
         "title": "Are you sure you want to delete this character?",
@@ -228,16 +228,16 @@
       },
       "maximum_characters": {
         "title": "You have too many characters in play",
-        "p": "You can only have 2 characters in play at a time. Remove one to recruit another."
+        "p": "You can only have 2 characters in play at a time. Eliminate one to be able to recruit another."
       }
     }
   },
 
   "CardPlayCharacter": {
-    "h3_Characteristics_Rolls": "Characteristic Rolls",
-    "p1_select_one_option": "* Choose an option",
+    "h3_Characteristics_Rolls": "Characteristic Tests",
+    "p1_select_one_option": "* Choose one option",
     "roll2d6": {
-      "take a test": "take a test of",
+      "take a test": "takes a test of",
       "and gets a result of": "and gets a result of"
     }
   },
@@ -256,7 +256,7 @@
     "modal": {
       "ModalIsAStoryInProgress": {
         "title": "Story in Progress",
-        "p": "Finish your story to start another one.",
+        "p": "Finish your story before you can start another.",
         "btn": {
           "End_story": "End story",
           "Continue_story": "Continue story"
@@ -273,7 +273,7 @@
       "ModalEditBook": {
         "title": "Edit Book",
         "p": "Edit the name of the book.",
-        "input_placeholder": "Story Name",
+        "input_placeholder": "Name of the story",
         "btn": {
           "cancel": "Cancel",
           "Save": "Save"
@@ -281,11 +281,11 @@
       },
       "ModalShareBook": {
         "title": "Share Book",
-        "p": "Book URL copied to clipboard.",
+        "p": "The book URL has been copied to the clipboard.",
         "a": "Click here to view the shared book."
       },
       "ModalCantShareBook": {
-        "title": "Cannot share the Book",
+        "title": "Cannot Share Book",
         "p": "You must be logged in to share a book."
       }
     }
@@ -296,18 +296,18 @@
   },
 
   "MsgStoryEnd": {
-    "h2_Story_End": "End of the story",
-    "Total_Failures": "Total Failures:",
-    "Total_Successes": "Total Successes:",
-    "Story_XP": "Story XP:"
+    "h2_Story_End": "End of story",
+    "Total_Failures": "Total failures:",
+    "Total_Successes": "Total successes:",
+    "Story_XP": "Story experience:"
   },
 
   "ChatOptionsConfig": {
     "Other_Options": "Game Options",
     "End": "End.",
     "Option": {
-      "GmAi_Config": "Game Master AI Configuration",
-      "Tips_and_Shortcuts": "Tips and Shortcuts",
+      "GmAi_Config": "Game Master AI settings",
+      "Tips_and_Shortcuts": "Tips and shortcuts",
       "Story_Theme_Color": "Story Theme Color",
       "End_Story": "End Story"
     }
@@ -326,15 +326,15 @@
   "ModalEndHistory": {
     "title": "End of Story",
     "p1": "If you name your story, it will be saved in your library and you can use it to play another chapter from where you left off.",
-    "p2": "If your story does not end with the \"End of Story\" sign, which shows the XP earned, you will not earn the XP, but your progress will be saved for when you decide to continue it.",
+    "p2": "If your story does not end with the \"End of story\" sign, which shows the XP earned, you will not earn XP, but your progress will be saved for when you decide to continue.",
     "p3_strong": "Choose an original name.",
-    "input_placeholder": "Story Name",
+    "input_placeholder": "Story name",
     "btn_End_Game": "Yes, end story",
     "btn_Continue_Game": "No, keep playing"
   },
 
   "ModalWinXp": {
-    "title": "You Earned XP",
+    "title": "You Won XP!",
     "You_have_earned_XP": "You have earned ",
     "for": "XP for ",
     "Edit_your_character": "Edit your character to improve your characteristics."
@@ -350,49 +350,49 @@
     "p_Config": "Configure the personality of your Game Master AI.",
     "p_strong_Style": "Style",
 
-    "Strict_AI_title": "Strict - strategic player.",
-    "Strict_AI_desc": "Respects the rules, but needs your creativity. You must propose more ideas for the story.",
+    "Strict_AI_title": "Strict: strategic player.",
+    "Strict_AI_desc": "Respects the rules, but needs your creativity. You must come up with more ideas for the story.",
 
-    "Virtuous_AI_title": "Virtuous - a bit of everything.",
-    "Virtuous_AI_desc": "Somewhat respects the rules and is somewhat creative.",
+    "Virtuous_AI_title": "Virtuoso: a bit of everything.",
+    "Virtuous_AI_desc": "He respects the rules a little and is somewhat creative.",
 
-    "Creative_AI_title": "Creative - talkative narrator.",
-    "Creative_AI_desc": "It is creative, but does not respect the rules. You have to ask it to make rolls or to calm down and finish the story already.",
+    "Creative_AI_title": "Creative: talkative narrator.",
+    "Creative_AI_desc": "He is creative, but he doesn't follow the rules. You have to ask him to roll the dice or calm down and finish the story at once.",
 
-    "Progresive_AI_title": "Progressive - starts strict and ends crazy. (Recommended)",
-    "Progresive_AI_desc": "Starts out being strict and ends up being very creative.",
+    "Progresive_AI_title": "Progressive: starts strict and ends crazy. (Recommended)",
+    "Progresive_AI_desc": "Starts out strict and ends up being very creative.",
 
-    "Random_AI_title": "Random - depends on its mood.",
-    "Random_AI_desc": "Strict, creative or virtuous, you never know, it changes with every answer."
+    "Random_AI_title": "Random: depends on his mood.",
+    "Random_AI_desc": "Strict, creative or virtuoso, you never know, it changes with every answer."
   },
 
   "ModaIdeasForAI": {
-    "title": "Tips and Shortcuts",
+    "title": "Tips and shortcuts",
     "p1": "These are tips and shortcuts to help you improve your experience with Game Master AI.",
     "p2": "* You can only use them within the game.",
 
     "tips": {
       "title": "Tips",
-      "tip1_p_strong": "The story ends at 3 failures or 5 successes",
-      "tip1_p": "If you don't want it to end quickly, you can write your test results or ask GmAi to do them for you. This way they won't be saved in the system and you will prevent the end from being triggered. Although GmAi can conclude on its own, you can ask it to continue as far as you want.",
+      "tip1_p_strong": "The story ends after 3 failures or 5 successes.",
+      "tip1_p": "If you don't want it to end quickly, you can write down your test results or ask GmAi to do them for you. That way they won't be saved in the system and you'll prevent the ending from being triggered. Although GmAi can conclude on its own, you can ask it to continue as long as you like.",
 
       "tip2_p_strong": "XP earned at the end of the story",
-      "tip2_p": "Is calculated based on the outcome of your characteristic tests. Only tests launched from your character sheets count, as they are recorded in the system. GmAI keeps its own record, but it's not very reliable.",
+      "tip2_p": "It is calculated based on the outcome of your characteristic tests. Only the tests launched from your character sheets count, since they are registered in the system. GmAI keeps its own record, but it's not very reliable.",
 
       "tip3_p_strong": "Getting a better story",
-      "tip3_p": "It's easy, contribute ideas to the plot creatively and not just by choosing the options that GmAi gives you.",
+      "tip3_p": "It's easy, bring ideas to the plot creatively and not just by choosing the options that GmAi gives you.",
 
       "tip4_p_strong": "Playing a faster story",
-      "tip4_p": "It's possible, ask your GmAi to \"perform feature tests\", that will motivate it to give you more tests and details to move faster in the story. If GmAi makes rolls for you, you can tell it that you want to make all the rolls.",
+      "tip4_p": "It is possible, ask your GmAi to \"perform characteristic tests\", that will motivate him to give you more tests and details to advance faster in the story. If GmAi rolls for you, you can tell it that you want to do all the rolls.",
 
-      "tip5_p_strong": "Want to play a campaign of several stories?",
-      "tip5_p": "Save your story in the library. You can then access it and continue playing from where you left off."
+      "tip5_p_strong": "Want to play a campaign of multiple stories?",
+      "tip5_p": "Save your story to the library. Then you can access it and continue playing from where you left off."
     },
 
     "My_Shortcuts": {
       "title": "My Shortcuts",
       "textarea_placeholder": "Write a command for GmAi.",
-      "Add_to_My_Shortcuts": "Add to My Shortcuts",
+      "Add_to_My_Shortcuts": "Add to my shortcuts",
       "btn": {
         "Remove": "Remove shortcut",
         "Move_up": "Move shortcut up",
@@ -401,14 +401,14 @@
     },
 
     "Recomended_Shortcuts": {
-      "Add_to_My_Shortcuts": "Add to My Shortcuts",
-      "title": "Recommended Shortcuts",
+      "Add_to_My_Shortcuts": "Add to my shortcuts",
+      "title": "Recommended shortcuts",
       "shortcut1": "What is a tabletop role-playing game?",
-      "shortcut2": "Explain the rules of the game.",
+      "shortcut2": "Explain the rules of the game to me.",
       "shortcut3": "What is your job as Game Master AI?",
-      "shortcut4": "Suggest different story options and list them for me to choose from.",
+      "shortcut4": "Suggest different story options and list them to choose one.",
       "shortcut5": "I want to use this game to practice a language.",
-      "shortcut6": "I want to make all the feature tests of my characters myself.",
+      "shortcut6": "I want to do all the characteristic tests for my characters myself.",
       "shortcut7": "Ask me to perform feature tests for all my decisions.",
       "shortcut8": "Give me a summary of my characters.",
       "shortcut9": "Give me a summary of my characters' characteristics.",
@@ -428,14 +428,14 @@
     "ol_li_2": "Recruit your characters for the story.",
     "ol_li_3": "Click on \"Play a Story\" to begin.",
     "ol_li_4": "Ask your Game Master AI if you need help understanding the rules or what a tabletop role-playing game is.",
-    "ol_li_5": "You can activate and configure the voice of your GmAi with the option ",
+    "ol_li_5": "You can activate and configure your GmAi voice with the option ",
     "ol_li_6": "You can change the colors of the app with the option ",
     "ol_li_7": "Enjoy the adventure!"
   },
 
   "TTS": {
     "TTSConfig": {
-      "customTTS": "Hello! I'm Game Master AI. Let's play!",
+      "customTTS": "Hi! I'm Game Master AI. Let's play!",
       "Voice": "Voice",
       "Voice_not_available": "Not available on your device.",
       "Broadcaster": "Broadcaster",
@@ -444,7 +444,7 @@
       "Volume": "Volume",
       "tips": {
         "1": "Click on the chat avatars to play the text.",
-        "2": "You may need to configure your device and download voice packages to hear the text. Search for \"text-to-speech output\" (TTS) in the language settings."
+        "2": "You may need to set up your device and download voice packages to hear the text. Search for \"text-to-speech output\" (TTS) in the language settings."
       }
     },
     "btn": {
@@ -456,8 +456,8 @@
 
   "GmAi": {
     "Response": {
-      "Empty": "🤔... I can't think of a response... \n\n Give me more information and try again. ✨",
-      "Error": "⚠️ I'm sorry, I can't respond to you. \n\n This can happen when there's an error in the game or when our conversation becomes very... inappropriate. \n\n Give me more information and try again. ✨"
+      "Empty": "🤔... I can't think of an answer... \n\n Give me more information and try again. ✨",
+      "Error": "⚠️ I'm sorry, I can't answer you. \n\n This can happen when there is a bug in the game or when our conversation gets too... inappropriate. \n\n Give me more information and try again. ✨"
     }
   }
 }
