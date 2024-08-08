@@ -2,11 +2,11 @@ import 'regenerator-runtime/runtime'; // This is necesary for Build STT.
 
 import './globals.css';
 import type { Metadata } from 'next';
-import { Merriweather } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import { app_metadata } from 'config/app-metadata';
 import { Footer } from 'components/footer';
 
-const font = Merriweather({ subsets: ['latin'], weight: '300' });
+const font = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = app_metadata;
 
