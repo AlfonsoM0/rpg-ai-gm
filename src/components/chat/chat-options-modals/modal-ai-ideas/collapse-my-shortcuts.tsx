@@ -55,7 +55,11 @@ export default function CollapseMyShortcuts() {
         {/* My shortcuts */}
         {chatShortcuts.map((shortcut, index) => (
           <div key={index} className="flex gap-2 justify-between">
-            <button className="btn btn-error p-1" onClick={() => removeChatShortcut(shortcut)}>
+            <button
+              className="btn btn-error p-1"
+              onClick={() => removeChatShortcut(shortcut)}
+              aria-label={t('btn.Remove')}
+            >
               X
             </button>
 
@@ -63,16 +67,25 @@ export default function CollapseMyShortcuts() {
               onClick={() => handleClick(shortcut)}
               className="btn w-[calc(100%-4rem)] mb-2 hover:font-bold h-fit"
               disabled={isOutOfStory}
+              aria-label={`Shortcut: ${shortcut}`}
             >
               {shortcut}
             </button>
 
             <div className="flex flex-col">
-              <button className="btn btn-xs p-1 w-10" onClick={() => onIdeaUp(shortcut)}>
+              <button
+                className="btn btn-xs p-1 w-10"
+                onClick={() => onIdeaUp(shortcut)}
+                aria-label={t('btn.Move_up')}
+              >
                 ↑
               </button>
 
-              <button className="btn btn-xs p-1 w-10" onClick={() => onIdeaDown(shortcut)}>
+              <button
+                className="btn btn-xs p-1 w-10"
+                onClick={() => onIdeaDown(shortcut)}
+                aria-label={t('btn.Move_down')}
+              >
                 ↓
               </button>
             </div>

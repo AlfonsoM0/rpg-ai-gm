@@ -86,10 +86,18 @@ export default function ModalEndHistory() {
         />
 
         <div className="modal-action justify-around">
-          <button className="btn btn-error" onClick={onSaveBookClick}>
+          <button
+            className="btn btn-error"
+            onClick={onSaveBookClick}
+            aria-label={t('btn_End_Game')}
+          >
             {t('btn_End_Game')}
           </button>
-          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+          <button
+            className="btn btn-success"
+            onClick={() => setModalIsOpen(false)}
+            aria-label={t('btn_Continue_Game')}
+          >
             {t('btn_Continue_Game')}
           </button>
         </div>

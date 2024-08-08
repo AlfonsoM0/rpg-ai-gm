@@ -75,8 +75,16 @@
   "Header": {
     "Navbar_links": {
       "/": "Home",
-      "/library": "Library"
+      "/library": "Library",
+      "LangSwitcher": "Change language"
     }
+  },
+
+  "buttons": {
+    "Copy_text": "Copy to clickboard",
+    "Send_message": "Send message",
+    "Improve_text": "Improve text",
+    "Close": "Close"
   },
 
   "User": {
@@ -105,7 +113,8 @@
         "p1": "When you log in for the first time, whenever you modify your character or book collection, they will be automatically saved to the cloud every few seconds. Changes will be synced across all devices connected to your account.",
         "p2": "If you already have an account, when you log in, the local data will be overwritten with the data stored in the cloud.",
         "p3_⚠️": "⚠️ A new window will open for authentication. Make sure your browser is configured to allow pop-ups.",
-        "p4_⚠️": "⚠️ Be sure to be using the latest version of your characters and books before logging in for the first time."
+        "p4_⚠️": "⚠️ Be sure to be using the latest version of your characters and books before logging in for the first time.",
+        "Sign_in_with_Google": "Sign in with Google"
       },
       "ModalUserEditProfile": {
         "title": "My Profile"
@@ -295,12 +304,23 @@
 
   "ChatOptionsConfig": {
     "Other_Options": "Game Options",
-    "End": "End."
+    "End": "End.",
+    "Option": {
+      "GmAi_Config": "Game Master AI Configuration",
+      "Tips_and_Shortcuts": "Tips and Shortcuts",
+      "Story_Theme_Color": "Story Theme Color",
+      "End_Story": "End Story"
+    }
   },
 
   "ChatOptionsABC": {
     "Story_Options": "Story Options",
-    "btn_ABC": "I choose option"
+    "btn_ABC": "I choose option",
+    "Option": {
+      "Option_A": "Option A",
+      "Option_B": "Option B",
+      "Option_C": "Option C"
+    }
   },
 
   "ModalEndHistory": {
@@ -372,10 +392,16 @@
     "My_Shortcuts": {
       "title": "My Shortcuts",
       "textarea_placeholder": "Write a command for GmAi.",
-      "Add_to_My_Shortcuts": "Add to My Shortcuts"
+      "Add_to_My_Shortcuts": "Add to My Shortcuts",
+      "btn": {
+        "Remove": "Remove shortcut",
+        "Move_up": "Move shortcut up",
+        "Move_down": "Move shortcut down"
+      }
     },
 
     "Recomended_Shortcuts": {
+      "Add_to_My_Shortcuts": "Add to My Shortcuts",
       "title": "Recommended Shortcuts",
       "shortcut1": "What is a tabletop role-playing game?",
       "shortcut2": "Explain the rules of the game.",
@@ -420,6 +446,11 @@
         "1": "Click on the chat avatars to play the text.",
         "2": "You may need to configure your device and download voice packages to hear the text. Search for \"text-to-speech output\" (TTS) in the language settings."
       }
+    },
+    "btn": {
+      "Play": "Play",
+      "Pause": "Pause",
+      "Stop": "Stop"
     }
   },
 

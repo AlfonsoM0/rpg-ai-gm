@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 import { useModalState } from 'hooks/use-modal-state';
+import { useTranslations } from 'next-intl';
 
 export function Modal(): JSX.Element {
+  const t = useTranslations('buttons');
+
   const { isOpen, content, setModalIsOpen, setModalContent } = useModalState();
 
   const refDialog = useRef<HTMLDivElement>(null);
@@ -25,6 +28,7 @@ export function Modal(): JSX.Element {
           className="btn btn-sm btn-circle absolute right-3 top-3"
           onClick={() => setModalIsOpen(false)}
           type="button"
+          aria-label={t('Close')}
         >
           <span className="text-xl">x</span>
         </button>

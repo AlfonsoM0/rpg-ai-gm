@@ -21,6 +21,7 @@ export default function ModalIsAStoryInProgress() {
           <button
             className="btn btn-sm btn-error"
             onClick={() => setModalContent(<ModalEndHistory />)}
+            aria-label={t('btn.End_story')}
           >
             {t('btn.End_story')}
           </button>
@@ -30,6 +31,7 @@ export default function ModalIsAStoryInProgress() {
               router.push('/story');
               setModalIsOpen(false);
             }}
+            aria-label={t('btn.Continue_story')}
           >
             {t('btn.Continue_story')}
           </button>

@@ -43,7 +43,7 @@ export default function UserButtonConnect() {
     return (
       <div className="flex flex-col gap-2">
         <UserButtonEditProfile />
-        <button className="btn btn-error w-full" onClick={signOut}>
+        <button className="btn btn-error w-full" onClick={signOut} aria-label={t('Logout')}>
           {t('Logout')}
         </button>
         {fireErrorMsg ? <p className="text-error text-center">{fireErrorMsg}</p> : null}
@@ -52,7 +52,7 @@ export default function UserButtonConnect() {
 
   return (
     <div>
-      <button className="btn btn-success w-full" onClick={handleClick}>
+      <button className="btn btn-success w-full" onClick={handleClick} aria-label={t('Login')}>
         {t('Login')}
       </button>
       {fireErrorMsg ? <p className="text-error text-center">{fireErrorMsg}</p> : null}

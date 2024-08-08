@@ -16,7 +16,11 @@ export default function BookButtonEdit({ book }: { book: Book }) {
   }
 
   return (
-    <button className="btn btn-sm btn-warning" onClick={handleEditBook}>
+    <button
+      className="btn btn-sm btn-warning"
+      onClick={handleEditBook}
+      aria-label={t('BookButtonEdit')}
+    >
       {t('BookButtonEdit')}
     </button>
   );

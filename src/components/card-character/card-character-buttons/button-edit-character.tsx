@@ -25,7 +25,7 @@ export default function ButtonEditCharacter({ character }: EditCharacterProps) {
   }
 
   return (
-    <button className="btn btn-sm btn-info" onClick={editCharacter}>
+    <button className="btn btn-sm btn-info" onClick={editCharacter} aria-label={t('edit')}>
       {t('edit')}
     </button>
   );

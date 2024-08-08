@@ -8,8 +8,11 @@ import { useTTSStore } from 'hooks/use-tts-store';
 import { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import SR from 'react-speech-recognition';
+import { useTranslations } from 'next-intl';
 
 export default function ChatInputMsg() {
+  const t = useTranslations('buttons');
+
   const { addContent, isLoadingContent } = useGmAiStore();
   const { handleStop } = useTTSStore();
 
@@ -39,7 +42,12 @@ export default function ChatInputMsg() {
       />
 
       <div className="flex flex-col gap-2">
-        <button className="btn btn-sm h-12" type="submit" disabled={isLoadingContent}>
+        <button
+          className="btn btn-sm h-12"
+          type="submit"
+          disabled={isLoadingContent}
+          aria-label={t('Send_message')}
+        >
           {isLoadingContent ? (
             <span className="loading loading-spinner loading-xs"></span>
           ) : (

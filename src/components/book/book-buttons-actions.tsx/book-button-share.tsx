@@ -33,7 +33,11 @@ export default function BookButtonShare({ book }: { book: Book }) {
   }
 
   return (
-    <button className="btn btn-sm btn-primary" onClick={hadleShareBook}>
+    <button
+      className="btn btn-sm btn-primary"
+      onClick={hadleShareBook}
+      aria-label={t('BookButtonShare')}
+    >
       {t('BookButtonShare')}
     </button>
   );

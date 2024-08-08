@@ -30,7 +30,11 @@ export default function ModaArtThemeConfig() {
           ))}
         </div>
 
-        <button className="btn btn-sm btn-info w-full mt-4" onClick={() => setModalIsOpen(false)}>
+        <button
+          className="btn btn-sm btn-info w-full mt-4"
+          onClick={() => setModalIsOpen(false)}
+          aria-label={t('btn_Redy')}
+        >
           {t('btn_Redy')}
         </button>
       </>

@@ -18,7 +18,11 @@ export default function BookButtonOpen({ book }: { book: Book }) {
   }
 
   return (
-    <button className="btn btn-sm btn-success" onClick={hadleOpenBook}>
+    <button
+      className="btn btn-sm btn-success"
+      onClick={hadleOpenBook}
+      aria-label={t('BookButtonOpen')}
+    >
       {t('BookButtonOpen')}
     </button>
   );

@@ -46,7 +46,11 @@ export default function ButtonSelectCharacter({ character }: SelectCharacterProp
   }
 
   return (
-    <button className="btn btn-sm btn-success" onClick={selectCharacter}>
+    <button
+      className="btn btn-sm btn-success"
+      onClick={selectCharacter}
+      aria-label={isInGame ? t('fire') : t('Recruit')}
+    >
       {isInGame ? t('fire') : t('Recruit')}
     </button>
   );

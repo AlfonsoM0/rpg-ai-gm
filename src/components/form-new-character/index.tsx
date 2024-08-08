@@ -88,6 +88,7 @@ export default function FormCharacterDescription() {
             onClick={() => setStep((s) => s - 1)}
             disabled={step === 0}
             type="button"
+            aria-label={t('Previous')}
           >
             {t('Previous')}
           </button>
@@ -95,7 +96,12 @@ export default function FormCharacterDescription() {
           <AiButtonImproveCaracterDescription step={step} />
 
           {step === 7 ? (
-            <button className="btn btn-primary" type="submit" disabled={!isMinXpSpent}>
+            <button
+              className="btn btn-primary"
+              type="submit"
+              disabled={!isMinXpSpent}
+              aria-label={t('Save')}
+            >
               {t('Save')}
             </button>
           ) : null}
@@ -106,6 +112,7 @@ export default function FormCharacterDescription() {
               onClick={() => setStep((s) => s + 1)}
               disabled={step === 7}
               type="button"
+              aria-label={t('Next')}
             >
               {t('Next')}
             </button>

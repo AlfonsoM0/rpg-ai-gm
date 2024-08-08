@@ -103,7 +103,11 @@ export default function Home() {
       */}
       <section className="mx-4 flex flex-col items-center gap-8">
         <div className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
-          <button className="btn btn-lg" onClick={playStory}>
+          <button
+            className="btn btn-lg"
+            onClick={playStory}
+            aria-label={isStoryStarted ? t('btn_Continue_Game') : t('btn_Play_Game')}
+          >
             ▶️ {isStoryStarted ? t('btn_Continue_Game') : t('btn_Play_Game')}
           </button>
           <div>
@@ -142,6 +146,7 @@ export default function Home() {
             <button
               className="flex flex-col justify-center items-center mt-[25%]"
               onClick={onCreateNewCharacterClick}
+              aria-label={t('h2_Create_New_Character')}
             >
               <div>
                 <h2 className="card-title">{t('h2_Create_New_Character')}</h2>

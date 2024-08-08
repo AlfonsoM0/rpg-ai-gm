@@ -47,7 +47,11 @@ export default function ChatOptionsConfig() {
       <p className="text-center text-sm mb-1 font-bold">{t('Other_Options')}</p>
 
       <div className="flex gap-2">
-        <button className="btn hover:border-base-content" onClick={onConfigAiClick}>
+        <button
+          className="btn hover:border-base-content"
+          onClick={onConfigAiClick}
+          aria-label={t('Option.GmAi_Config')}
+        >
           <Icon.AiBrain className={aiIconStyle[aiConfig]} />
         </button>
 
@@ -55,11 +59,17 @@ export default function ChatOptionsConfig() {
           className="btn hover:border-info"
           onClick={onIdeasClick}
           disabled={isLoadingContent}
+          aria-label={t('Option.Tips_and_Shortcuts')}
         >
           <Icon.Idea className="w-8 h-8 stroke-info" />
         </button>
 
-        <button className="btn hover:border-info" onClick={onArtClick} disabled={isLoadingContent}>
+        <button
+          className="btn hover:border-info"
+          onClick={onArtClick}
+          disabled={isLoadingContent}
+          aria-label={t('Option.Story_Theme_Color')}
+        >
           <Icon.Art className="w-8 h-8 fill-info" />
         </button>
 
@@ -68,6 +78,7 @@ export default function ChatOptionsConfig() {
             className="btn btn-error hover:border-base-content"
             onClick={onEndHistoryClick}
             disabled={isLoadingContent}
+            aria-label={t('Option.End_Story')}
           >
             {t('End')}
           </button>

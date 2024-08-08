@@ -77,6 +77,7 @@ export default function STT({
       {...props}
       type="button"
       onClick={startOrEndSpeechRecognition}
+      aria-label={`${listening ? 'Stop' : 'Start'} Speech Recognition`}
     >
       {listening ? iconOn : iconOff}
     </button>

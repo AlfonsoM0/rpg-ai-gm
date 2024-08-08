@@ -27,6 +27,7 @@ export default function ChatOptionsABC() {
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('A')}
           disabled={isLoadingContent}
+          aria-label={t('Option.Option_A')}
         >
           A
         </button>
@@ -34,6 +35,7 @@ export default function ChatOptionsABC() {
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('B')}
           disabled={isLoadingContent}
+          aria-label={t('Option.Option_B')}
         >
           B
         </button>
@@ -41,6 +43,7 @@ export default function ChatOptionsABC() {
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('C')}
           disabled={isLoadingContent}
+          aria-label={t('Option.Option_C')}
         >
           C
         </button>

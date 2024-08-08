@@ -23,10 +23,15 @@ export default function ModalDeleteBook({ id }: { id: string }) {
               removeBook(id);
               setModalIsOpen(false);
             }}
+            aria-label={t('btn.accept')}
           >
             {t('btn.accept')}
           </button>
-          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+          <button
+            className="btn btn-success"
+            onClick={() => setModalIsOpen(false)}
+            aria-label={t('btn.cancel')}
+          >
             {t('btn.cancel')}
           </button>
         </div>

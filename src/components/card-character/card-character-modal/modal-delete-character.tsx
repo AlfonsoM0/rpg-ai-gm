@@ -24,10 +24,15 @@ export default function ModalDeleteCharacter({ id }: { id: string }) {
               removeACharacterFromInGame(id);
               setModalIsOpen(false);
             }}
+            aria-label={t('btn.accept')}
           >
             {t('btn.accept')}
           </button>
-          <button className="btn btn-success" onClick={() => setModalIsOpen(false)}>
+          <button
+            className="btn btn-success"
+            onClick={() => setModalIsOpen(false)}
+            aria-label={t('btn.cancel')}
+          >
             {t('btn.cancel')}
           </button>
         </div>

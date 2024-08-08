@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from 'components/icons';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 export function Copy({
@@ -10,6 +11,8 @@ export function Copy({
   text: string;
   toolTipPosition?: 'left' | 'right';
 }): JSX.Element {
+  const t = useTranslations('buttons');
+
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -35,6 +38,7 @@ export function Copy({
           setIsCopied(true);
         }}
         type="button"
+        aria-label={t('Copy_text')}
       >
         {isCopied ? (
           <Icon.CopySuccess className="w-5 fill-success" />

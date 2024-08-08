@@ -12,6 +12,7 @@ import { useTranslations } from 'next-intl';
 
 export default function UserButton() {
   const t = useTranslations('User');
+  const tc = useTranslations('ChatOptionsConfig');
 
   const { user } = useFirebase();
   const { aiConfig } = useGmAiStore();
@@ -35,7 +36,11 @@ export default function UserButton() {
       >
         <div className="flex justify-between items-center gap-4">
           <p className="font-bold">{t('Options')}:</p>
-          <button className="btn btn-ghost btn-circle" onClick={onConfigAiClick}>
+          <button
+            className="btn btn-ghost btn-circle"
+            onClick={onConfigAiClick}
+            aria-label={tc('Option.GmAi_Config')}
+          >
             <Icon.AiBrain className={aiIconStyle[aiConfig]} />
           </button>
           <ThemeController />

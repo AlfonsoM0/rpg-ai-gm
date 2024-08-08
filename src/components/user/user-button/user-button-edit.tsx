@@ -15,7 +15,11 @@ export default function UserButtonEditProfile() {
   }
 
   return (
-    <button className="btn btn-primary w-full" onClick={handleEditProfile}>
+    <button
+      className="btn btn-primary w-full"
+      onClick={handleEditProfile}
+      aria-label={t('UserButtonEditProfile')}
+    >
       {t('UserButtonEditProfile')}
     </button>
   );

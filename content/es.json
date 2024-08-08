@@ -76,7 +76,15 @@
     "Navbar_links": {
       "/": "Inicio",
       "/library": "Biblioteca"
-    }
+    },
+    "LangSwitcher": "Cambiar idioma"
+  },
+
+  "buttons": {
+    "Copy_text": "Copiar texto al portapapeles",
+    "Send_message": "Enviar menasaje",
+    "Improve_text": "Mejorar el texto",
+    "Close": "Cerrar"
   },
 
   "User": {
@@ -105,7 +113,8 @@
         "p1": "Al iniciar sesión por primera vez, cuando modificas tu colección de personajes o libros, estos se guardarán en la nube automáticamente cada pocos segundos. Los cambios se sincronizarán en todos los dispositivos conectados a tu cuenta.",
         "p2": "Si ya tienes una cuenta, al iniciar sesión los datos locales se sobrescriben con los datos guardados en la nube.",
         "p3_⚠️": "⚠️ Se abrirá una nueva ventana para autenticación. Asegurate de que tu navegador esté configurado para permitir ventanas emergentes.",
-        "p4_⚠️": "⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar sesión por primera vez."
+        "p4_⚠️": "⚠️ Asegúrate de estar usando la mejor versión de tus personajes y libros antes de iniciar sesión por primera vez.",
+        "Sign_in_with_Google": "Ingresar con Google"
       },
       "ModalUserEditProfile": {
         "title": "Mi Perfil"
@@ -295,12 +304,23 @@
 
   "ChatOptionsConfig": {
     "Other_Options": "Opciones de Juego",
-    "End": "Fin."
+    "End": "Fin.",
+    "Option": {
+      "GmAi_Config": "Configuración de Game Master AI",
+      "Tips_and_Shortcuts": "Tips y Atajos",
+      "Story_Theme_Color": "Tema de Color para la Historia",
+      "End_Story": "Finalizar Historia"
+    }
   },
 
   "ChatOptionsABC": {
     "Story_Options": "Opciones de historia",
-    "btn_ABC": "Elijo la opción"
+    "btn_ABC": "Elijo la opción",
+    "Option": {
+      "Option_A": "Opción A",
+      "Option_B": "Opción B",
+      "Option_C": "Opción C"
+    }
   },
 
   "ModalEndHistory": {
@@ -372,10 +392,16 @@
     "My_Shortcuts": {
       "title": "Mis Atajos",
       "textarea_placeholder": "Escribe un comando para GmAi.",
-      "Add_to_My_Shortcuts": "Agregar a Mis Atajos"
+      "Add_to_My_Shortcuts": "Agregar a Mis Atajos",
+      "btn": {
+        "Remove": "Eliminar atajo",
+        "Move_up": "Mover atajo hacia arriba",
+        "Move_down": "Mover atajo hacia abajo"
+      }
     },
 
     "Recomended_Shortcuts": {
+      "Add_to_My_Shortcuts": "Añadir a Mis Atajos",
       "title": "Atajos recomendados",
       "shortcut1": "¿Qué es un juego de rol de mesa?",
       "shortcut2": "Explícame las reglas de juego.",
@@ -420,6 +446,11 @@
         "1": "Haz clic en los avatares del chat para reproducir el texto.",
         "2": "Es posible que tengas que configurar tu dispositivo y descargar paquetes de voz para escuchar el texto. Busca \"salida de texto a voz\" (TTS) en la configuración de idioma."
       }
+    },
+    "btn": {
+      "Play": "Play",
+      "Pause": "Pause",
+      "Stop": "Stop"
     }
   },
 

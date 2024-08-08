@@ -1,14 +1,27 @@
 'use client';
 
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
+import { useTranslations } from 'next-intl';
 
 export default function NewCharacterNav() {
+  const t = useTranslations('Character');
+
   const { step, setStep } = useCreateNewCharacterStore();
 
   function onLiClick(step: number) {
     setStep(step);
   }
 
+  /*
+    name,
+    appearance,
+    background,
+    profession,
+    personality,
+    equipment,
+    powers,
+    characteristics,
+   */
   return (
     <div className="breadcrumbs w-full text-md">
       <ul className="flex justify-between">
@@ -22,6 +35,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(0)}
             type="button"
             disabled={step === 0}
+            aria-label={t('Name')}
           >
             1
           </button>
@@ -36,6 +50,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(1)}
             type="button"
             disabled={step === 1}
+            aria-label={t('Appearance')}
           >
             2
           </button>
@@ -50,6 +65,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(2)}
             type="button"
             disabled={step === 2}
+            aria-label={t('Background')}
           >
             3
           </button>
@@ -64,6 +80,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(3)}
             type="button"
             disabled={step === 3}
+            aria-label={t('Profession')}
           >
             4
           </button>
@@ -78,6 +95,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(4)}
             type="button"
             disabled={step === 4}
+            aria-label={t('Personality')}
           >
             5
           </button>
@@ -92,6 +110,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(5)}
             type="button"
             disabled={step === 5}
+            aria-label={t('Equipment')}
           >
             6
           </button>
@@ -106,6 +125,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(6)}
             type="button"
             disabled={step === 6}
+            aria-label={t('Powers')}
           >
             7
           </button>
@@ -120,6 +140,7 @@ export default function NewCharacterNav() {
             onClick={() => onLiClick(7)}
             type="button"
             disabled={step === 7}
+            aria-label={t('Characteristics')}
           >
             8
           </button>

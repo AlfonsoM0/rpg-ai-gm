@@ -5,8 +5,11 @@ import { usePathname } from '@/navigation';
 import { Icon } from './icons';
 // eslint-disable-next-line no-restricted-imports -- necesary for setup lang
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function LangSwitcher() {
+  const t = useTranslations('Header');
+
   interface Option {
     country: string;
     code: string;
@@ -34,6 +37,7 @@ export default function LangSwitcher() {
           className="btn btn-ghost btn-circle"
           onClick={() => setIsOptionsExpanded(!isOptionsExpanded)}
           onBlur={() => setIsOptionsExpanded(false)}
+          aria-label={t('LangSwitcher')}
         >
           <Icon.LanguageIcon className="w-6 h-6" />
         </button>

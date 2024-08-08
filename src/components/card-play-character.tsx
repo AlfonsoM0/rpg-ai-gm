@@ -66,6 +66,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('strength', strength)}
               disabled={isLoadingContent}
+              aria-label={`Roll ${t('Strength')}: 2d6+${strength}`}
             >
               <div>
                 <h4>{t('STR')}</h4>
@@ -76,6 +77,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('dexterity', dexterity)}
               disabled={isLoadingContent}
+              aria-label={`Roll ${t('Dexterity')}: 2d6+${dexterity}`}
             >
               <div>
                 <h4>{t('DEX')}</h4>
@@ -86,6 +88,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('constitution', constitution)}
               disabled={isLoadingContent}
+              aria-label={`Roll ${t('Constitution')}: 2d6+${constitution}`}
             >
               <div>
                 <h4>{t('CON')}</h4>
@@ -98,6 +101,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('intelligence', intelligence)}
               disabled={isLoadingContent}
+              aria-label={`Roll ${t('Intelligence')}: 2d6+${intelligence}`}
             >
               <div>
                 <h4>{t('INT')}</h4>
@@ -108,6 +112,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('wisdom', wisdom)}
               disabled={isLoadingContent}
+              aria-label={`Roll ${t('Wisdom')}: 2d6+${wisdom}`}
             >
               <div>
                 <h4>{t('WIS')}</h4>
@@ -118,6 +123,7 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
               className="btn hover:border-info"
               onClick={() => rollCharacteristic('charisma', charisma)}
               disabled={isLoadingContent}
+              aria-label={`Roll ${t('Charisma')}: 2d6+${charisma}`}
             >
               <div>
                 <h4>{t('CHA')}</h4>

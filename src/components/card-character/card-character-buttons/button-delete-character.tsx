@@ -28,7 +28,7 @@ export default function ButtonDeleteCharacter({ character }: DeleteCharacterProp
   }
 
   return (
-    <button className="btn btn-sm btn-error" onClick={deleteCharacter}>
+    <button className="btn btn-sm btn-error" onClick={deleteCharacter} aria-label={t('delete')}>
       {t('delete')}
     </button>
   );

@@ -29,7 +29,11 @@ export default function ModalEditBook({ book }: { book: Book }) {
         />
 
         <div className="modal-action justify-around">
-          <button className="btn btn-error" onClick={() => setModalIsOpen(false)}>
+          <button
+            className="btn btn-error"
+            onClick={() => setModalIsOpen(false)}
+            aria-label={t('btn.cancel')}
+          >
             {t('btn.cancel')}
           </button>
           <button
@@ -38,6 +42,7 @@ export default function ModalEditBook({ book }: { book: Book }) {
               changeBookName(book.id, newTitle);
               setModalIsOpen(false);
             }}
+            aria-label={t('btn.Save')}
           >
             {t('btn.Save')}
           </button>

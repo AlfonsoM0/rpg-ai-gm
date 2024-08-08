@@ -18,6 +18,7 @@ export default function ModalNews() {
       <button
         onClick={() => setModalIsOpen(false)}
         className="btn btn-primary mt-4 w-full text-xl font-bold"
+        aria-label={t('btn_OK')}
       >
         {t('btn_OK')}
       </button>

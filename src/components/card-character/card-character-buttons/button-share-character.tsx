@@ -36,7 +36,7 @@ export default function ButtonShareCharacter({ character }: ShareCharacterProps)
   }
 
   return (
-    <button className="btn btn-sm btn-primary" onClick={shareCharacter}>
+    <button className="btn btn-sm btn-primary" onClick={shareCharacter} aria-label={t('share')}>
       {t('share')}
     </button>
   );

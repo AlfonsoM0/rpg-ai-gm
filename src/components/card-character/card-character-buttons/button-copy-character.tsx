@@ -27,7 +27,7 @@ export default function ButtonCopyCharacter({ character }: CopyCharacterProps) {
   }
 
   return (
-    <button className="btn btn-sm btn-info" onClick={copyCharacter}>
+    <button className="btn btn-sm btn-info" onClick={copyCharacter} aria-label={t('copy')}>
       {t('copy')}
     </button>
   );

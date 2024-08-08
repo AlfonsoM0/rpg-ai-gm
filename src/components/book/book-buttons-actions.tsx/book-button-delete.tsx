@@ -16,7 +16,11 @@ export default function BookButtonDelete({ book }: { book: Book }) {
   }
 
   return (
-    <button className="btn btn-sm btn-error" onClick={handleDeleteBook}>
+    <button
+      className="btn btn-sm btn-error"
+      onClick={handleDeleteBook}
+      aria-label={t('BookButtonDelete')}
+    >
       {t('BookButtonDelete')}
     </button>
   );

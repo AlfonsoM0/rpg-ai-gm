@@ -57,10 +57,15 @@ export default function CollapseShortcuts() {
                 onClick={() => handleClick(idea)}
                 className="btn w-[calc(100%-2rem)] mb-2 hover:font-bold"
                 disabled={isOutOfStory}
+                aria-label={`Shortcut: ${idea}`}
               >
                 {idea}
               </button>
-              <button className={buttonStyle} onClick={() => addChatShortcut(idea)}>
+              <button
+                className={buttonStyle}
+                onClick={() => addChatShortcut(idea)}
+                aria-label={t('Add_to_My_Shortcuts')}
+              >
                 +
               </button>
             </div>

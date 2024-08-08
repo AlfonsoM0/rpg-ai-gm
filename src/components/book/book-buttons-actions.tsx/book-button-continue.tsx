@@ -80,7 +80,8 @@ export default function BookButtonContinue({ book }: { book: Book }) {
 
   return (
     <button className="btn btn-sm btn-info" onClick={handleContinueStory}>
-      {t('BookButtonContinue')} <Icon.Stars className="w-4 h-4" />
+      {t('BookButtonContinue')}{' '}
+      <Icon.Stars className="w-4 h-4" aria-label={t('BookButtonContinue')} />
     </button>
   );
 }

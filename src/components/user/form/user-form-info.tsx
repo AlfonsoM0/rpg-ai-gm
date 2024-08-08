@@ -57,7 +57,12 @@ export default function UserFormInfo() {
 
       <p className="text-xs text-error text-center">{errorMsg ? errorMsg : null}</p>
 
-      <button className="btn btn-primary" type="submit" disabled={isFireLoading}>
+      <button
+        className="btn btn-primary"
+        type="submit"
+        disabled={isFireLoading}
+        aria-label={t('btn_Save')}
+      >
         {isFireLoading ? <span className="loading loading-spinner"></span> : t('btn_Save')}
       </button>
     </form>

@@ -6,12 +6,15 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useModalState } from 'hooks/use-modal-state';
 import ModalLowContentAlert from './modal-low-content-alert';
+import { useTranslations } from 'next-intl';
 
 export default function FormStep({
   descriptionType,
 }: {
   descriptionType: CharacterCreationDescription;
 }) {
+  const t = useTranslations('buttons');
+
   const { improveDescription, isLoadingContent } = useGmAiStore();
   const charState = useCreateNewCharacterStore();
   const { setDescription } = charState;
@@ -39,6 +42,7 @@ export default function FormStep({
       className="btn"
       onClick={onAiDescriptionClick}
       disabled={isLoadingContent}
+      aria-label={t('Improve_text')}
     >
       <ButtonAiImprove
         isLoadingContent={isLoadingContent}

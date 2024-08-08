@@ -46,6 +46,7 @@ export default function ModalUserConnect() {
             className="btn btn-lg btn-outline btn-primary text-2xl p-2 m-2"
             onClick={onSinInWithGoogle}
             disabled={isFireLoading}
+            aria-label={t('Sign_in_with_Google')}
           >
             {isFireLoading ? (
               <>
