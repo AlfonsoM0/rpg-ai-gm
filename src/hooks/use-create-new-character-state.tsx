@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 import { Character } from 'types/character';
 
 type CharacterKey = keyof Character;
@@ -61,24 +62,34 @@ interface CreateNewCharacterStoreActions {
 
 export const useCreateNewCharacterStore = create<
   CreateNewCharacterStore & CreateNewCharacterStoreActions
->((set) => ({
-  ...initialCharacterState,
+>()(
+  devtools(
+    persist(
+      (set) => ({
+        ...initialCharacterState,
 
-  // Actions
-  setAllCharacterInfo: (character) => set(character),
+        // Actions
+        setAllCharacterInfo: (character) => set(character),
 
-  clearAllCharacterInfo: () => set(initialCharacterState),
+        clearAllCharacterInfo: () => set(initialCharacterState),
 
-  setDescription: ({ key, value }) => set((state) => ({ ...state, [key]: value })),
+        setDescription: ({ key, value }) => set((state) => ({ ...state, [key]: value })),
 
-  setCharacteristic: ({ key, value }) =>
-    set((state) => ({ ...state, characteristics: { ...state.characteristics, [key]: value } })),
+        setCharacteristic: ({ key, value }) =>
+          set((state) => ({
+            ...state,
+            characteristics: { ...state.characteristics, [key]: value },
+          })),
 
-  setPreviousCharacteristics: (previousCharacteristics) => set({ previousCharacteristics }),
+        setPreviousCharacteristics: (previousCharacteristics) => set({ previousCharacteristics }),
 
-  setStep: (step: number | ((state: number) => number)) => {
-    set((state) => ({ step: typeof step === 'function' ? step(state.step) : step }));
-  },
+        setStep: (step: number | ((state: number) => number)) => {
+          set((state) => ({ step: typeof step === 'function' ? step(state.step) : step }));
+        },
 
-  setIsEdit: (isEdit) => set({ isEdit }),
-}));
+        setIsEdit: (isEdit) => set({ isEdit }),
+      }),
+      { name: 'new-character-storage' }
+    )
+  )
+);
