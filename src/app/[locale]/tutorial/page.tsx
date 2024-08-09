@@ -5,7 +5,14 @@ import dynamic from 'next/dynamic';
 import H1 from 'src/components/h1';
 import Main from 'src/components/Main';
 
-const DynamicReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+const DynamicReactPlayer = dynamic(() => import('react-player'), {
+  ssr: false,
+  loading: () => (
+    <VideoContainer>
+      <span className="loading loading-spinner loading-lg"></span>
+    </VideoContainer>
+  ),
+});
 
 export default function Page() {
   const locale = useTranslations()('[locale]');
@@ -16,17 +23,15 @@ export default function Page() {
       <H1>{t('h1_Tutorial')}</H1>
 
       <DynamicReactPlayer
-        className="rounded-xl"
         url={'/video/tutorial/gmai-tutorial.mp4'}
         width={'100%'}
         height={'100%'}
-        playing
-        light={Thumbnail}
-        controls
         wrapper={VideoContainer}
+        light={Thumbnail}
+        playing
+        controls
         config={{
           file: {
-            forceVideo: true,
             tracks: [
               {
                 kind: 'subtitles',
