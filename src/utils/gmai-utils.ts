@@ -1,6 +1,11 @@
 import { Content } from '@google/generative-ai';
 import { calculateStoryXp } from './calculate-story-xp';
-import { AI_ROLE, CODE_DONT_SHOW_IN_CHAT, CODE_STORY_END } from 'config/constants';
+import {
+  AI_ROLE,
+  CODE_DONT_SHOW_IN_CHAT,
+  CODE_STORY_END,
+  CODE_CHARACTERS_CHANGE,
+} from 'config/constants';
 import { deleteCodesFromText } from './delete-text-from-text';
 import { AiModels, generateAiConfig } from './generate-ai-config';
 import runAIChat from 'server/gm-ai';
@@ -12,8 +17,8 @@ import es from '../../content/es.json';
 import en from '../../content/en.json';
 
 function createStoryContentControl(stateContent: Content[], playersDiceRolls: number[]): Content {
-  const { isStoryOver, totalFailures, totalSuccesses, storyXp } =
-    calculateStoryXp(playersDiceRolls);
+  const gameInfo = calculateStoryXp(playersDiceRolls);
+  const gameInfoJson = JSON.stringify(gameInfo);
 
   const isStoryEndedBefore = JSON.stringify(stateContent).includes(CODE_STORY_END);
 
@@ -21,12 +26,10 @@ function createStoryContentControl(stateContent: Content[], playersDiceRolls: nu
     role: AI_ROLE.USER,
     parts: [
       {
-        text: `(((
-              Crea el final de la historia considerando lo siguiente:
-              Total de fallos ${totalFailures},
-              Total de éxito ${totalSuccesses},
-              XP de la historia ${storyXp}.
-              ${CODE_STORY_END}
+        text: `(((${CODE_STORY_END}
+              ## Información del sistema de juego (no mostrar en chat):
+              ${gameInfoJson}}
+              Crea el final de la historia.
               )))`,
       },
     ],
@@ -36,19 +39,17 @@ function createStoryContentControl(stateContent: Content[], playersDiceRolls: nu
     role: AI_ROLE.USER,
     parts: [
       {
-        text: `(((
-              Información sobre el progreso de la historia:
-              Total de fallos ${totalFailures},
-              Total de éxito ${totalSuccesses},
-              XP de la historia ${storyXp}.
-              ${CODE_DONT_SHOW_IN_CHAT}
+        text: `(((${CODE_DONT_SHOW_IN_CHAT}
+              ## Información del sistema de juego (no mostrar en chat):
+              ${gameInfoJson}}
+              La historia no ha finalizado, continua con el juego.
               )))`,
       },
     ],
   };
 
   const infoStoryControl: Content =
-    isStoryOver && !isStoryEndedBefore ? contentStoryEnded : contentStoryProgress;
+    gameInfo.isStoryOver && !isStoryEndedBefore ? contentStoryEnded : contentStoryProgress;
 
   return infoStoryControl;
 }
@@ -96,7 +97,9 @@ export async function createGmAiResponseContent(
           parts: [{ text: t.Empty }],
         };
 
-    contentToSet = [...stateContent, newContent, contentForAI, infoStoryControl];
+    const clearStateContent = clearGmAiErrorsMsg(stateContent);
+
+    contentToSet = [...clearStateContent, newContent, contentForAI, infoStoryControl];
 
     return contentToSet;
   } catch (error) {
@@ -112,4 +115,39 @@ export async function createGmAiResponseContent(
     ];
     return contentToSet;
   }
+}
+
+export function clearGmAiErrorsMsg(content: Content[]): Content[] {
+  return content.filter((c) => {
+    const isAiModel = c.role === AI_ROLE.MODEL;
+    const msg = c.parts[0].text;
+
+    if (
+      isAiModel &&
+      (msg === en.GmAi.Response.Empty ||
+        msg === es.GmAi.Response.Empty ||
+        msg === en.GmAi.Response.Error ||
+        msg === es.GmAi.Response.Error)
+    )
+      return false;
+
+    return true;
+  });
+}
+
+export function clearGameSystemMsg(content: Content[]): Content[] {
+  return content.filter((c) => {
+    const isUser = c.role === AI_ROLE.USER;
+    const msg = c.parts[0].text;
+
+    if (
+      isUser &&
+      (msg?.includes(CODE_DONT_SHOW_IN_CHAT) ||
+        msg?.includes(CODE_STORY_END) ||
+        msg?.includes(CODE_CHARACTERS_CHANGE))
+    )
+      return false;
+
+    return true;
+  });
 }

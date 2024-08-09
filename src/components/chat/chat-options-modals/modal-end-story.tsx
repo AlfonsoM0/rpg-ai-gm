@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/navigation';
 import { useEffect } from 'react';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
+import { clearGameSystemMsg } from 'src/utils/gmai-utils';
 
 export default function ModalEndHistory() {
   const t = useTranslations('ModalEndHistory');
@@ -36,18 +37,19 @@ export default function ModalEndHistory() {
   }, []);
 
   function onSaveBookClick() {
+    const { isStoryOver, storyXp } = calculateStoryXp(playersDiceRolls);
+
     // save book to library
     if (storyName)
       addBook({
         id: storyId,
         title: storyName,
         characters: inGameCharacters,
-        content,
+        content: isStoryOver ? clearGameSystemMsg(content) : content,
         playersDiceRolls,
       });
 
     // update xp for all characters
-    const { isStoryOver, storyXp } = calculateStoryXp(playersDiceRolls);
     if (isStoryOver) {
       const xp = Math.ceil(storyXp / inGameCharacters.length);
       inGameCharacters.forEach((character) => {
