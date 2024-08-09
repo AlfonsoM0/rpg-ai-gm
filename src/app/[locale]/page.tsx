@@ -166,6 +166,14 @@ export default function Home() {
 
 function ModalNoCharactersToPlay() {
   const t = useTranslations('ModalNoCharactersToPlay');
+  const router = useRouter();
+  const { setModalIsOpen } = useModalState();
+
+  function onWatchTutorialClick() {
+    setModalIsOpen(false);
+    router.push('/tutorial');
+  }
+
   return (
     <ModalContentContainer title={t('title')} titleColor="error">
       <div>
@@ -189,6 +197,14 @@ function ModalNoCharactersToPlay() {
           </li>
           <li className="list-decimal">{t('ol_li_7')}</li>
         </ol>
+
+        <button
+          className="btn btn-info w-full mt-4"
+          onClick={onWatchTutorialClick}
+          aria-label={t('btn_Tutorial')}
+        >
+          {t('btn_Tutorial')}
+        </button>
       </div>
     </ModalContentContainer>
   );
