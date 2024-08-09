@@ -20,7 +20,7 @@ export default function Page() {
         url={'/video/tutorial/gmai-tutorial.mp4'}
         width={'100%'}
         height={'100%'}
-        // playing
+        playing
         light={Thumbnail}
         controls
         wrapper={VideoContainer}
@@ -56,9 +56,11 @@ export default function Page() {
 function VideoContainer({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="w-[90vw] md:w-[80vw] lg:max-w-[50rem] 
-    border-2 border-info rounded-xl p-2 
-    flex justify-center items-center"
+      className="w-[90vw] h-[calc(90vw*0.58)] 
+      md:w-[80vw] md:h-[calc(80vw*0.58)] 
+      lg:max-w-[50rem] lg:max-h-[calc(50rem*0.58)]
+      border-2 border-info rounded-xl p-2 
+      flex justify-center items-center"
     >
       {children}
     </div>
