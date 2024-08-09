@@ -55,7 +55,11 @@ export default function Page() {
 
 function VideoContainer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-[80vw] min-h-[40vw] border-2 border-info rounded-xl p-2 flex justify-center items-center">
+    <div
+      className="w-[90vw] md:w-[80vw] lg:max-w-[50rem] 
+    border-2 border-info rounded-xl p-2 
+    flex justify-center items-center"
+    >
       {children}
     </div>
   );
