@@ -68,6 +68,10 @@
     }
   },
 
+  "Page_Tutorial": {
+    "h1_Tutorial": "Tutorial"
+  },
+
   "Page_404": {
     "Not_found": "404 | Página no encontrada."
   },
@@ -75,7 +79,8 @@
   "Header": {
     "Navbar_links": {
       "/": "Inicio",
-      "/library": "Biblioteca"
+      "/library": "Biblioteca",
+      "/tutorial": "Tutorial"
     },
     "LangSwitcher": "Cambiar idioma"
   },

@@ -1,0 +1,319 @@
+1
+00:00:00,160 --> 00:00:02,400
+Welcome, adventurers. I am
+
+2
+00:00:02,400 --> 00:00:05,200
+GmAi, your personal game master, and I
+
+3
+00:00:05,200 --> 00:00:06,880
+welcome you to this exciting world of
+
+4
+00:00:06,880 --> 00:00:09,000
+interactive storytelling. Get ready to
+
+5
+00:00:09,040 --> 00:00:11,280
+create memorable characters, explore
+
+6
+00:00:11,280 --> 00:00:13,520
+fantastic worlds, and experience
+
+7
+00:00:13,520 --> 00:00:16,240
+thrilling adventures. First, imagine that
+
+8
+00:00:16,240 --> 00:00:18,160
+story you're passionate about, the one
+
+9
+00:00:18,160 --> 00:00:20,240
+you'd love to star in. Ready to create
+
+10
+00:00:20,240 --> 00:00:22,560
+your hero?Find a name that's as unique as
+
+11
+00:00:22,560 --> 00:00:25,520
+they are, something powerful, elegant, or
+
+12
+00:00:25,520 --> 00:00:28,240
+mysterious. Then, bring them to life by
+
+13
+00:00:28,240 --> 00:00:30,320
+describing their appearance,Their past,
+
+14
+00:00:30,560 --> 00:00:32,680
+their profession, personality and
+
+15
+00:00:32,680 --> 00:00:34,880
+equipment. Will they have special powers?
+
+16
+00:00:35,200 --> 00:00:37,680
+Don't hold back. Remember, you can use
+
+17
+00:00:37,680 --> 00:00:39,680
+voice dictation to make creation easier,
+
+18
+00:00:40,040 --> 00:00:41,360
+and I can help you enhance your
+
+19
+00:00:41,360 --> 00:00:42,960
+description to make it truly
+
+20
+00:00:42,960 --> 00:00:45,200
+unforgettable. To begin, you have
+
+21
+00:00:45,200 --> 00:00:47,760
+experience points. Use them wisely to
+
+22
+00:00:47,760 --> 00:00:49,360
+improve your character's attributes:
+
+23
+00:00:49,680 --> 00:00:52,560
+strength, intelligence, charisma. Each
+
+24
+00:00:52,560 --> 00:00:54,280
+point counts. Before we begin our
+
+25
+00:00:54,280 --> 00:00:56,520
+adventure, I recommend personalizing your
+
+26
+00:00:56,520 --> 00:00:59,200
+experience. Adjust my play style and my
+
+27
+00:00:59,200 --> 00:01:01,040
+voice in the settings. You can choose
+
+28
+00:01:01,040 --> 00:01:03,200
+between a rules-based style or one where
+
+29
+00:01:03,200 --> 00:01:05,680
+imagination runs wild. Create shortcuts
+
+30
+00:01:05,680 --> 00:01:07,840
+to quickly access common actions like
+
+31
+00:01:08,000 --> 00:01:10,680
+suggest adventure ideas or I want to
+
+32
+00:01:10,680 --> 00:01:13,040
+perform more attribute tests. Personalize
+
+33
+00:01:13,040 --> 00:01:15,440
+your experience. Choose a visual theme
+
+34
+00:01:15,440 --> 00:01:18,160
+that transports youworld of adventure, an
+
+35
+00:01:18,160 --> 00:01:21,040
+enchanted forest, a futuristic city, or a
+
+36
+00:01:21,040 --> 00:01:23,680
+dark dungeon. With everything ready, it's
+
+37
+00:01:23,680 --> 00:01:26,160
+time to play. Recruit your characters and
+
+38
+00:01:26,160 --> 00:01:28,480
+click on Play a Story. Tell me what kind
+
+39
+00:01:28,480 --> 00:01:30,480
+of story you would like to experience or
+
+40
+00:01:30,480 --> 00:01:32,720
+ask me for suggestions. During the game,
+
+41
+00:01:32,960 --> 00:01:34,840
+I will offer you options, but don't
+
+42
+00:01:34,840 --> 00:01:37,120
+hesitate to propose your own ideas. The
+
+43
+00:01:37,120 --> 00:01:40,000
+story is ours. Use the A, B,
+
+44
+00:01:40,240 --> 00:01:42,400
+or C buttons to quickly select options.
+
+45
+00:01:42,920 --> 00:01:44,800
+And when the time comes, use the buttons
+
+46
+00:01:44,800 --> 00:01:46,480
+on your character sheet so I can see your
+
+47
+00:01:46,480 --> 00:01:48,760
+dice rolls and attribute tests. The story
+
+48
+00:01:48,760 --> 00:01:50,560
+ends when your character accumulates 3
+
+49
+00:01:50,560 --> 00:01:52,560
+failures or five successes in these
+
+50
+00:01:52,560 --> 00:01:54,800
+tests. I will narrate the ending based on
+
+51
+00:01:54,800 --> 00:01:56,960
+the successes you have achieved. Be sure
+
+52
+00:01:56,960 --> 00:01:58,640
+to see the end of story announcement to
+
+53
+00:01:58,640 --> 00:02:00,400
+receive your well-deserved experience
+
+54
+00:02:00,400 --> 00:02:02,240
+point reward. If you give your story a
+
+55
+00:02:02,240 --> 00:02:04,120
+name, it will be saved in your personal
+
+56
+00:02:04,120 --> 00:02:06,160
+library and you can use it to create new
+
+57
+00:02:06,160 --> 00:02:08,160
+adventures. Create an account with your
+
+58
+00:02:08,160 --> 00:02:10,160
+Google profile to save your progress,
+
+59
+00:02:10,320 --> 00:02:12,400
+characters,and access them from any
+
+60
+00:02:12,400 --> 00:02:14,600
+device. And don't forget to install the
+
+61
+00:02:14,640 --> 00:02:16,440
+app in your language to enjoy this world
+
+62
+00:02:16,440 --> 00:02:18,400
+of stories wherever and whenever you
+
+63
+00:02:18,400 --> 00:02:21,360
+want. Have epic adventures. I'm excited
+
+64
+00:02:21,360 --> 00:02:22,880
+to see what stories you create.
+
+65
+00:02:24,160 --> 00:02:25,920
+Thunder cracks, echoing the beat of war
+
+66
+00:02:25,920 --> 00:02:27,880
+drums as a torrent of rain falls upon the
+
+67
+00:02:27,880 --> 00:02:30,240
+assembled army. Lightning illuminates
+
+68
+00:02:30,240 --> 00:02:32,280
+Maximo standing before them, his silver
+
+69
+00:02:32,280 --> 00:02:33,720
+armor gleaming, eyes burning with
+
+70
+00:02:33,720 --> 00:02:36,520
+righteous fury. He raises his sword, the
+
+71
+00:02:36,520 --> 00:02:38,640
+Holy Perger, now crackling with celestial
+
+72
+00:02:38,640 --> 00:02:41,360
+energy. Brothers and sisters in arms, his
+
+73
+00:02:41,360 --> 00:02:42,960
+voice booms across the battlefield,
+
+74
+00:02:43,120 --> 00:02:45,040
+amplified by the storm raging above.
+
+75
+00:02:45,800 --> 00:02:47,640
+Today we stand upon the precipice of
+
+76
+00:02:47,640 --> 00:02:50,320
+oblivion. The necromancer Aggregon
+
+77
+00:02:50,400 --> 00:02:52,320
+returns to shroud our world in eternal
+
+78
+00:02:52,320 --> 00:02:54,960
+darkness. He sends for his legions of the
+
+79
+00:02:54,960 --> 00:02:57,200
+damned, thinking to break us to enslave
+
+80
+00:02:57,200 --> 00:02:57,920
+our souls...

@@ -15,6 +15,10 @@ export default function Header() {
       name: t('/library'),
       url: '/library',
     },
+    {
+      name: t('/tutorial'),
+      url: '/tutorial',
+    },
   ];
 
   return (

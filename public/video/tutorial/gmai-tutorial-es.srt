@@ -1,0 +1,319 @@
+1
+00:00:00,160 --> 00:00:02,400
+Bienvenidos, aventureros. Yo soy
+
+2
+00:00:02,400 --> 00:00:05,200
+GmAi, tu maestro de juego personal, y te
+
+3
+00:00:05,200 --> 00:00:06,880
+doy la bienvenida a este emocionante mundo de
+
+4
+00:00:06,880 --> 00:00:09,000
+narración interactiva. Prepárate para
+
+5
+00:00:09,040 --> 00:00:11,280
+crear personajes memorables, explorar
+
+6
+00:00:11,280 --> 00:00:13,520
+mundos fantásticos y vivir
+
+7
+00:00:13,520 --> 00:00:16,240
+emocionantes aventuras. Primero, imagina esa
+
+8
+00:00:16,240 --> 00:00:18,160
+historia que te apasiona, esa en la que
+
+9
+00:00:18,160 --> 00:00:20,240
+te encantaría protagonizar. ¿Listo para crear
+
+10
+00:00:20,240 --> 00:00:22,560
+tu héroe? Encuentra un nombre tan único como
+
+11
+00:00:22,560 --> 00:00:25,520
+él, algo poderoso, elegante o
+
+12
+00:00:25,520 --> 00:00:28,240
+misterioso. Luego, dale vida describiendo su apariencia,
+
+13
+00:00:28,240 --> 00:00:30,320
+su pasado,
+
+14
+00:00:30,560 --> 00:00:32,680
+su profesión, personalidad y
+
+15
+00:00:32,680 --> 00:00:34,880
+equipo. ¿Tendrá poderes especiales?
+
+16
+00:00:35,200 --> 00:00:37,680
+No te contengas. Recuerda que puedes usar el
+
+17
+00:00:37,680 --> 00:00:39,680
+dictado por voz para facilitar la creación,
+
+18
+00:00:40,040 --> 00:00:41,360
+y yo puedo ayudarte a mejorar tu
+
+19
+00:00:41,360 --> 00:00:42,960
+descripción para hacerla realmente
+
+20
+00:00:42,960 --> 00:00:45,200
+inolvidable. Para empezar, tienes
+
+21
+00:00:45,200 --> 00:00:47,760
+puntos de experiencia. Úsalos con sabiduría para
+
+22
+00:00:47,760 --> 00:00:49,360
+mejorar los atributos de tu personaje:
+
+23
+00:00:49,680 --> 00:00:52,560
+fuerza, inteligencia, carisma. Cada
+
+24
+00:00:52,560 --> 00:00:54,280
+punto cuenta. Antes de comenzar nuestra
+
+25
+00:00:54,280 --> 00:00:56,520
+aventura, te recomiendo personalizar tu
+
+26
+00:00:56,520 --> 00:00:59,200
+experiencia. Ajusta mi estilo de juego y mi
+
+27
+00:00:59,200 --> 00:01:01,040
+voz en la configuración. Puedes elegir
+
+28
+00:01:01,040 --> 00:01:03,200
+entre un estilo basado en reglas u otro donde
+
+29
+00:01:03,200 --> 00:01:05,680
+la imaginación se desata. Crea atajos
+
+30
+00:01:05,680 --> 00:01:07,840
+para acceder rápidamente a acciones comunes como
+
+31
+00:01:08,000 --> 00:01:10,680
+"sugerir ideas para la aventura" o "quiero
+
+32
+00:01:10,680 --> 00:01:13,040
+realizar más pruebas de atributos". Personaliza
+
+33
+00:01:13,040 --> 00:01:15,440
+tu experiencia. Elige un tema visual
+
+34
+00:01:15,440 --> 00:01:18,160
+que te transporte al mundo de la aventura: un
+
+35
+00:01:18,160 --> 00:01:21,040
+bosque encantado, una ciudad futurista o una
+
+36
+00:01:21,040 --> 00:01:23,680
+mazmorra oscura. Con todo listo, es
+
+37
+00:01:23,680 --> 00:01:26,160
+hora de jugar. Selecciona tus personajes y
+
+38
+00:01:26,160 --> 00:01:28,480
+haz clic en "Jugar una historia". Dime qué tipo
+
+39
+00:01:28,480 --> 00:01:30,480
+de historia te gustaría experimentar o
+
+40
+00:01:30,480 --> 00:01:32,720
+pídeme sugerencias. Durante el juego,
+
+41
+00:01:32,960 --> 00:01:34,840
+te ofreceré opciones, pero no
+
+42
+00:01:34,840 --> 00:01:37,120
+dudes en proponer tus propias ideas. La
+
+43
+00:01:37,120 --> 00:01:40,000
+historia es nuestra. Usa los botones A,
+
+44
+00:01:40,240 --> 00:01:42,400
+B o C para seleccionar opciones rápidamente.
+
+45
+00:01:42,920 --> 00:01:44,800
+Y cuando llegue el momento, usa los botones
+
+46
+00:01:44,800 --> 00:01:46,480
+en tu hoja de personaje para que pueda ver tus
+
+47
+00:01:46,480 --> 00:01:48,760
+tiradas de dados y pruebas de atributos. La historia
+
+48
+00:01:48,760 --> 00:01:50,560
+termina cuando tu personaje acumula 3
+
+49
+00:01:50,560 --> 00:01:52,560
+fallos o cinco éxitos en estas
+
+50
+00:01:52,560 --> 00:01:54,800
+pruebas. Narraré el final en función de
+
+51
+00:01:54,800 --> 00:01:56,960
+los éxitos que hayas conseguido. Asegúrate
+
+52
+00:01:56,960 --> 00:01:58,640
+de ver el anuncio del final de la historia para
+
+53
+00:01:58,640 --> 00:02:00,400
+recibir tu merecida recompensa de puntos de
+
+54
+00:02:00,400 --> 00:02:02,240
+experiencia. Si le das a tu historia un
+
+55
+00:02:02,240 --> 00:02:04,120
+nombre, se guardará en tu biblioteca personal
+
+56
+00:02:04,120 --> 00:02:06,160
+y podrás usarla para crear nuevas
+
+57
+00:02:06,160 --> 00:02:08,160
+aventuras. Crea una cuenta con tu
+
+58
+00:02:08,160 --> 00:02:10,160
+perfil de Google para guardar tu progreso,
+
+59
+00:02:10,320 --> 00:02:12,400
+tus personajes y acceder a ellos desde cualquier
+
+60
+00:02:12,400 --> 00:02:14,600
+dispositivo. Y no olvides instalar la
+
+61
+00:02:14,640 --> 00:02:16,440
+aplicación en tu idioma para disfrutar de este mundo
+
+62
+00:02:16,440 --> 00:02:18,400
+de historias donde y cuando
+
+63
+00:02:18,400 --> 00:02:21,360
+quieras. Vive aventuras épicas. Estoy deseando
+
+64
+00:02:21,360 --> 00:02:22,880
+ver qué historias creas.
+
+65
+00:02:24,160 --> 00:02:25,920
+Un trueno resuena, haciéndose eco del ritmo de los tambores de guerra
+
+66
+00:02:25,920 --> 00:02:27,880
+mientras un torrente de lluvia cae sobre el
+
+67
+00:02:27,880 --> 00:02:30,240
+ejército reunido. Un relámpago ilumina
+
+68
+00:02:30,240 --> 00:02:32,280
+a Máximo de pie ante ellos, su armadura plateada
+
+69
+00:02:32,280 --> 00:02:33,720
+brilla, sus ojos arden con
+
+70
+00:02:33,720 --> 00:02:36,520
+furia justiciera. Levanta su espada, la
+
+71
+00:02:36,520 --> 00:02:38,640
+Sagrada Perger, ahora cargada de energía celestial.
+
+72
+00:02:38,640 --> 00:02:41,360
+"Hermanos y hermanas de armas", su
+
+73
+00:02:41,360 --> 00:02:42,960
+voz resuena por todo el campo de batalla,
+
+74
+00:02:43,120 --> 00:02:45,040
+amplificada por la tormenta que ruge en lo alto.
+
+75
+00:02:45,800 --> 00:02:47,640
+"Hoy nos encontramos al borde del
+
+76
+00:02:47,640 --> 00:02:50,320
+abismo. El nigromante Aggregon
+
+77
+00:02:50,400 --> 00:02:52,320
+regresa para envolver nuestro mundo en una eterna
+
+78
+00:02:52,320 --> 00:02:54,960
+oscuridad. Envía a sus legiones de condenados,
+
+79
+00:02:54,960 --> 00:02:57,200
+creyendo que puede doblegarnos, esclavizar
+
+80
+00:02:57,200 --> 00:02:57,920
+nuestras almas...
