@@ -50,7 +50,6 @@ export default function Page() {
             ],
           },
         }}
-        style={{ border: '5px solid red' }}
       />
 
       <div></div>
@@ -61,10 +60,10 @@ export default function Page() {
 function VideoContainer({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="w-[90vw] h-[calc(90vw*0.58)] 
-      md:w-[80vw] md:h-[calc(80vw*0.58)] 
-      lg:max-w-[50rem] lg:max-h-[calc(50rem*0.58)]
-      border-2 border-info rounded-xl p-2 
+      className="w-[90vw] h-[calc(90vw*0.5625+0.5rem)] 
+      md:w-[80vw] md:h-[calc(80vw*0.5625+0.5rem)] 
+      lg:max-w-[50rem] lg:max-h-[calc(50rem*0.5625+0.5rem)]
+      border-2 border-info rounded-xl p-2
       flex justify-center items-center"
     >
       {children}
@@ -72,5 +71,7 @@ function VideoContainer({ children }: { children: React.ReactNode }) {
   );
 }
 
-// eslint-disable-next-line @next/next/no-img-element
-const Thumbnail = <img src="/video/tutorial/thumbnail.png" alt="Thumbnail" />;
+const Thumbnail = (
+  // eslint-disable-next-line @next/next/no-img-element
+  <img className="rounded-xl" src="/video/tutorial/thumbnail.png" alt="Thumbnail" />
+);
