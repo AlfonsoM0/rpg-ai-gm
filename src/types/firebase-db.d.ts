@@ -1,5 +1,6 @@
 import { Character } from './character';
 import { Book } from './library';
+import { MultiplayerStory, Player } from './multiplayer';
 
 type UserBasicInfo = {
   id: string;
@@ -18,6 +19,12 @@ type UserAdditionalInfo = {
   isSubscribed: boolean;
   suscriptionBeginsAt: number; // for premium users only
   suscriptionExpiresAt: number; // For premium users only
+
+  currentMultiplayerGame?: {
+    storyId: string;
+    storyName: string;
+    player: Player;
+  };
 };
 
 export type UserAccount = UserBasicInfo & UserAdditionalInfo;
@@ -44,7 +51,8 @@ export type CollectionName =
   | 'USER_ACCOUNT'
   | 'USER_PREFERENCES'
   | 'USER_CHARACTERS'
-  | 'USER_LIBRARY';
+  | 'USER_LIBRARY'
+  | 'MULTIPLAYER_STORY';
 
 export type CollectionType<T> = T extends 'USER_ACCOUNT'
   ? UserAccount
@@ -52,6 +60,8 @@ export type CollectionType<T> = T extends 'USER_ACCOUNT'
   ? UserPreferences
   : T extends 'USER_CHARACTERS'
   ? UserCharacters
-  : UserLibrary;
+  : T extends 'USER_LIBRARY'
+  ? UserLibrary
+  : MultiplayerStory;
 
 export type Collections = UserAccount | UserPreferences | UserCharacters | UserLibrary;
