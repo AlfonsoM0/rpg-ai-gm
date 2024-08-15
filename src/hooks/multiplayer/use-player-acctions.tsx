@@ -7,12 +7,19 @@ import { ChatMessage, Player } from 'src/types/multiplayer';
 import { AI_ROLE } from 'src/config/constants';
 
 export default function usePlayerAcctions() {
-  const { userCurrentMpGame, multiplayerStory, setMultiplayerStory, setUserCurrentMpGame } =
-    useMultiplayer();
+  const {
+    userCurrentMpGame,
+    multiplayerStory,
+    setMultiplayerStory,
+    setUserCurrentMpGame,
+    setIsMultiplayerLoading,
+  } = useMultiplayer();
   const { user, getFireDoc, setFireDoc } = useFirebase();
 
   return {
     joinGame: async (storyId: string, character: Character) => {
+      setIsMultiplayerLoading(true);
+
       const player = {
         userId: user?.uid || '',
         userName: user?.displayName || '',
@@ -59,16 +66,24 @@ export default function usePlayerAcctions() {
           setUserCurrentMpGame(currentMultiplayerGame);
         }
       }
+
+      setIsMultiplayerLoading(false);
     },
 
     sendMessage: async (msg: string, isInGameMsg: boolean) => {
+      setIsMultiplayerLoading(true);
+
       if (!multiplayerStory || !userCurrentMpGame) return;
 
       const { player, storyId } = userCurrentMpGame;
 
+      const msgAndData = isInGameMsg
+        ? `(((Personaje ${player.character.name} dice:)))\n\n${msg}`
+        : `(((Jugador ${player.userName} dice:)))\n\n${msg}`;
+
       const newContent: ChatMessage = {
         role: AI_ROLE.USER,
-        parts: [{ text: msg }],
+        parts: [{ text: msgAndData }],
         userName: player.userName,
         charName: player.character.name,
 
@@ -88,9 +103,13 @@ export default function usePlayerAcctions() {
         },
         storyId
       );
+
+      setIsMultiplayerLoading(false);
     },
 
-    setIsReadyForAiResponse: (isRedyForAiResponse: boolean) => {
+    setIsReadyForAiResponse: async (isRedyForAiResponse: boolean) => {
+      setIsMultiplayerLoading(true);
+
       if (!multiplayerStory || !userCurrentMpGame) return;
 
       const {
@@ -109,7 +128,7 @@ export default function usePlayerAcctions() {
         return player;
       });
 
-      setFireDoc(
+      await setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
@@ -117,12 +136,16 @@ export default function usePlayerAcctions() {
         },
         storyId
       );
+
+      setIsMultiplayerLoading(false);
     },
 
-    startGame: () => {
+    startGame: async () => {
+      setIsMultiplayerLoading(true);
+
       if (!multiplayerStory || !userCurrentMpGame) return;
 
-      setFireDoc(
+      await setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
@@ -130,6 +153,8 @@ export default function usePlayerAcctions() {
         },
         multiplayerStory.storyId
       );
+
+      setIsMultiplayerLoading(false);
     },
   };
 }

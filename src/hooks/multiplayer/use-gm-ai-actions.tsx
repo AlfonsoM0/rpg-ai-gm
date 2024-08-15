@@ -7,10 +7,9 @@ import { generateAiConfig } from 'src/utils/generate-ai-config';
 import { useTranslations } from 'next-intl';
 import { Locale } from 'src/i18n-config';
 import { generateGmAiPromptArray } from 'src/config/gm-ai-promp';
-import { ChatMessage } from 'src/types/multiplayer';
-import { AI_MODEL, AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
+import { ChatMessage, Player } from 'src/types/multiplayer';
+import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
-import { clearGameSystemMsg, clearGmAiErrorsMsg } from 'src/utils/gmai-utils';
 
 const basicGmAiChatFormat: Omit<ChatMessage, 'parts'> = {
   role: AI_ROLE.MODEL,
@@ -24,20 +23,25 @@ const basicGmAiChatFormat: Omit<ChatMessage, 'parts'> = {
 };
 
 export default function useGmAiAcctions() {
-  const { multiplayerStory } = useMultiplayer();
-  const { getFireDoc, setFireDoc } = useFirebase();
+  const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
+  const { setFireDoc } = useFirebase();
   const locale = useTranslations()('[locale]') as Locale;
   const t = useTranslations('GmAi.Response');
 
   return {
     gmAiGenerateMsg: async () => {
-      if (!multiplayerStory) return;
+      if (!multiplayerStory || !userCurrentMpGame) return;
       const { players, content, aiConfig, storyId } = multiplayerStory;
 
+      // Only Player1 can execute this acction.
+      if (userCurrentMpGame.player.userId !== players[0].userId) return;
+
+      // All player must be redy for the response.
       for (let i = 0; i < players.length; i++) {
         if (!players[i].isRedyForAiResponse) return;
       }
 
+      // use only inGame content to generate AI response. But Not for contentToSet.
       const inGameContent = content.filter((c) => c.isInGameMsg === true);
 
       const aiConfigObj = generateAiConfig(inGameContent.length, aiConfig);
@@ -47,7 +51,7 @@ export default function useGmAiAcctions() {
       try {
         const gmAiResponse = await runAIChat(
           '',
-          [...generateGmAiPromptArray(locale), ...inGameContent],
+          [...generateGmAiPromptArray(locale), ...inGameContent], // TODO: reemplace for Multiplayer Prompt
           aiConfigObj
         );
 
@@ -55,10 +59,12 @@ export default function useGmAiAcctions() {
 
         const contentFromAi: ChatMessage = gmAiResponse
           ? {
+              // Normal response
               ...basicGmAiChatFormat,
               parts: [{ text: deleteCodesFromText(gmAiResponse) }],
             }
           : {
+              // Empty response
               ...basicGmAiChatFormat,
               parts: [{ text: t('Empty') }],
             };
@@ -70,21 +76,38 @@ export default function useGmAiAcctions() {
         contentToSet = [
           ...content,
           {
+            // Error response
             ...basicGmAiChatFormat,
             parts: [{ text: t('Error') }],
           },
         ];
       }
 
-      // const clearContent = clearGmAiErrorsMsg(
-      //   clearGameSystemMsg(contentToSet)
-      // );
+      // Clean content for "Empty" and "Error" responses.
+      function clearGmAiErrorsMsg(content: ChatMessage[]): ChatMessage[] {
+        return content.filter((c) => {
+          const isAiModel = c.role === AI_ROLE.MODEL;
+          const msg = c.parts[0].text;
 
+          if (isAiModel && (msg === t('Empty') || msg === t('Error'))) return false;
+
+          return true;
+        });
+      }
+
+      // Reset all player state to Not Redy for AI Response.
+      const newPlayersConfig: Player[] = players.map((player) => ({
+        ...player,
+        isRedyForAiResponse: false,
+      }));
+
+      // Update Multiplayer Game in Firebase.
       setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
-          content: contentToSet,
+          players: newPlayersConfig,
+          content: clearGmAiErrorsMsg(contentToSet), // clear content
         },
         storyId
       );

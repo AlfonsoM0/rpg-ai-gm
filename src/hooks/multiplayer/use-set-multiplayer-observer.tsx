@@ -9,24 +9,31 @@ import { UserAccount } from 'src/types/firebase-db';
 export default function useSetMultiplayerOberver() {
   const { observeFireDoc } = useFirebase();
 
-  const { setMultiplayerStory, setUserCurrentMpGame, multiplayerStory } = useMultiplayer();
+  const { setMultiplayerStory, setUserCurrentMpGame, multiplayerStory, setIsMultiplayerLoading } =
+    useMultiplayer();
 
   // observe changes on game
   useEffect(() => {
-    const unsuscribe1 = observeFireDoc(
-      'MULTIPLAYER_STORY',
-      (doc) => {
-        const data = doc.data() as MultiplayerStory | undefined;
-        setMultiplayerStory(data);
-      },
-      multiplayerStory?.storyId || 'no id'
-    );
+    const unsuscribe1 =
+      multiplayerStory &&
+      observeFireDoc(
+        'MULTIPLAYER_STORY',
+        (doc) => {
+          setIsMultiplayerLoading(true);
+          const data = doc.data() as MultiplayerStory | undefined;
+          setMultiplayerStory(data);
+          setIsMultiplayerLoading(false);
+        },
+        multiplayerStory.storyId
+      );
 
     const unsuscribe2 = observeFireDoc('USER_ACCOUNT', (doc) => {
+      setIsMultiplayerLoading(true);
       const data = doc.data() as UserAccount | undefined;
       if (data) {
         setUserCurrentMpGame(data.currentMultiplayerGame);
       }
+      setIsMultiplayerLoading(false);
     });
 
     return () => {

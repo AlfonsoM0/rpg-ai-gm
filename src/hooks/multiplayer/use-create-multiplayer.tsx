@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Locale } from 'src/i18n-config';
 import { AiModels } from 'src/utils/generate-ai-config';
@@ -8,17 +7,18 @@ import useFirebase from '../firebase';
 import { MultiplayerStory } from 'src/types/multiplayer';
 import { Character } from 'src/types/character';
 import useMultiplayer from '.';
+import { useGmAiStore } from '../use-gm-ai-chat-store';
 
 export default function useCreateMultiplayer() {
   const { setFireDoc, user, getFireDoc } = useFirebase();
-  const { setMultiplayerStory, setUserCurrentMpGame } = useMultiplayer();
-  const L = useTranslations()('[locale]') as Locale;
+  const { setMultiplayerStory, setUserCurrentMpGame, setIsMultiplayerLoading } = useMultiplayer();
+  const { aiConfig: spAiCOnfig, locale: L } = useGmAiStore();
 
   const [storyId] = useState(crypto.randomUUID());
   const [storyName, setStoryName] = useState('');
   const [storyDescription, setStoryDescription] = useState('');
   const [locale, setLocale] = useState<Locale>(L);
-  const [aiConfig, setAiConfig] = useState<AiModels>('Progresive_AI');
+  const [aiConfig, setAiConfig] = useState<AiModels>(spAiCOnfig);
 
   return {
     storyId,
@@ -32,6 +32,7 @@ export default function useCreateMultiplayer() {
     setAiConfig,
 
     createMultiplayerGame: async (character: Character) => {
+      setIsMultiplayerLoading(true);
       /**
        * Set New Multiplayer Game in Firebase and State
        */
@@ -88,6 +89,8 @@ export default function useCreateMultiplayer() {
 
         setUserCurrentMpGame(currentMultiplayerGame);
       }
+
+      setIsMultiplayerLoading(false);
     },
   };
 }
