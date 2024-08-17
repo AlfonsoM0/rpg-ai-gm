@@ -3,7 +3,7 @@ import { Locale } from 'src/i18n-config';
 import { AiModels } from 'utils/generate-ai-config';
 import { Character } from './character';
 
-export type ChatMessage = Content & {
+export type ContentExtraInfo = {
   isInGameMsg: boolean;
 
   userName: string;
@@ -14,6 +14,8 @@ export type ChatMessage = Content & {
   charAvatarSrc?: string;
   charAvatarAlt?: string;
 };
+
+export type ChatMessage = Content & ContentExtraInfo;
 
 export type Player = {
   userId: string;
