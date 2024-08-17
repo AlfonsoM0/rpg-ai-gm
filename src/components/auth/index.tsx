@@ -1,7 +1,7 @@
-import IsSignIn from './is-signin';
+import IsSignInForPlay from './is-signin-for-play';
 
 const Auth = {
-  IsSignIn,
+  IsSignInForPlay,
 };
 
 export default Auth;

@@ -49,7 +49,7 @@ export default function usePlayerAcctions() {
         /**
          * Set User Current Game Info in Firebase and State
          */
-        const account = await getFireDoc('USER_ACCOUNT');
+        const userGame = await getFireDoc('USER_GAME');
 
         const currentMultiplayerGame = {
           storyId,
@@ -57,9 +57,9 @@ export default function usePlayerAcctions() {
           player,
         };
 
-        if (account) {
-          await setFireDoc('USER_ACCOUNT', {
-            ...account,
+        if (userGame) {
+          await setFireDoc('USER_GAME', {
+            ...userGame,
             currentMultiplayerGame,
           });
 

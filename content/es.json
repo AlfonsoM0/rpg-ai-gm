@@ -204,7 +204,8 @@
       "edit": "Editar",
       "select": {
         "fire": "Despedir",
-        "Recruit": "Reclutar"
+        "Recruit": "Reclutar",
+        "Selected": "Seleccionado"
       },
       "share": "Compartir"
     },

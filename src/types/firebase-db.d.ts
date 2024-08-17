@@ -19,12 +19,6 @@ type UserAdditionalInfo = {
   isSubscribed: boolean;
   suscriptionBeginsAt: number; // for premium users only
   suscriptionExpiresAt: number; // For premium users only
-
-  currentMultiplayerGame?: {
-    storyId: string;
-    storyName: string;
-    player: Player;
-  };
 };
 
 export type UserAccount = UserBasicInfo & UserAdditionalInfo;
@@ -47,11 +41,20 @@ export type UserLibrary = {
   updatedAt: number;
 };
 
+export type UserGame = {
+  currentMultiplayerGame?: {
+    storyId: string;
+    storyName: string;
+    player: Player;
+  };
+};
+
 export type CollectionName =
   | 'USER_ACCOUNT'
   | 'USER_PREFERENCES'
   | 'USER_CHARACTERS'
   | 'USER_LIBRARY'
+  | 'USER_GAME'
   | 'MULTIPLAYER_STORY';
 
 export type CollectionType<T> = T extends 'USER_ACCOUNT'
@@ -62,6 +65,8 @@ export type CollectionType<T> = T extends 'USER_ACCOUNT'
   ? UserCharacters
   : T extends 'USER_LIBRARY'
   ? UserLibrary
+  : T extends 'USER_GAME'
+  ? UserGame
   : MultiplayerStory;
 
 export type Collections = UserAccount | UserPreferences | UserCharacters | UserLibrary;

@@ -24,13 +24,18 @@ export type Player = {
   isRedyForAiResponse: boolean;
 };
 
+export type AiRole = 'Game Master' | 'Game Assistant';
+
 export type MultiplayerStory = {
   // Configs
+  userHostId: string;
+  userHostName: string;
   storyId: string;
   storyName: string;
   storyDescription: string;
   locale: Locale;
   aiConfig: AiModels;
+  aiRole: AiRole;
   isStoryStarted: boolean;
   isStoryEnded: boolean;
 

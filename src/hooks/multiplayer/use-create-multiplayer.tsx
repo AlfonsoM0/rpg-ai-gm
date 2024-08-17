@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Locale } from 'src/i18n-config';
 import { AiModels } from 'src/utils/generate-ai-config';
 import useFirebase from '../firebase';
-import { MultiplayerStory } from 'src/types/multiplayer';
+import { AiRole, MultiplayerStory } from 'src/types/multiplayer';
 import { Character } from 'src/types/character';
 import useMultiplayer from '.';
 import { useGmAiStore } from '../use-gm-ai-chat-store';
@@ -19,6 +19,7 @@ export default function useCreateMultiplayer() {
   const [storyDescription, setStoryDescription] = useState('');
   const [locale, setLocale] = useState<Locale>(L);
   const [aiConfig, setAiConfig] = useState<AiModels>(spAiCOnfig);
+  const [aiRole, setAiRole] = useState<AiRole>('Game Master');
 
   return {
     storyId,
@@ -30,28 +31,35 @@ export default function useCreateMultiplayer() {
     setLocale,
     aiConfig,
     setAiConfig,
+    aiRole,
+    setAiRole,
 
     createMultiplayerGame: async (character: Character) => {
+      if (!user) return;
+
       setIsMultiplayerLoading(true);
       /**
        * Set New Multiplayer Game in Firebase and State
        */
       const player = {
-        userId: user?.uid || '',
-        userName: user?.displayName || '',
-        avatarSrc: user?.photoURL || undefined,
-        avatarAlt: user?.displayName ? `${user.displayName} avatar` : 'Player avatar',
+        userId: user.uid,
+        userName: user.displayName || 'Player 1',
+        avatarSrc: user.photoURL || undefined,
+        avatarAlt: `${user.displayName || 'Player 1'} avatar`,
         character,
         isRedyForAiResponse: false,
       };
 
       const newMultiplayerGame: MultiplayerStory = {
         // Configs
+        userHostId: user.uid,
+        userHostName: user.displayName || 'Player 1',
         storyId,
         storyName,
         storyDescription,
         locale,
         aiConfig,
+        aiRole,
         isStoryStarted: false,
         isStoryEnded: false,
 
@@ -73,22 +81,18 @@ export default function useCreateMultiplayer() {
       /**
        * Set User Current Game Info in Firebase and State
        */
-      const account = await getFireDoc('USER_ACCOUNT');
-
       const currentMultiplayerGame = {
         storyId,
         storyName,
         player,
       };
 
-      if (account) {
-        await setFireDoc('USER_ACCOUNT', {
-          ...account,
-          currentMultiplayerGame,
-        });
-
-        setUserCurrentMpGame(currentMultiplayerGame);
-      }
+      const userGame = await getFireDoc('USER_GAME');
+      await setFireDoc('USER_GAME', {
+        ...userGame,
+        currentMultiplayerGame,
+      });
+      setUserCurrentMpGame(currentMultiplayerGame);
 
       setIsMultiplayerLoading(false);
     },
