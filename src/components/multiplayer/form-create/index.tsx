@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import useMultiplayer, { useCreateMultiplayer } from 'src/hooks/multiplayer';
-import { Character } from 'src/types/character';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Locale } from 'src/i18n-config';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { AiModels } from 'src/utils/generate-ai-config';
 import { AiRole } from 'src/types/multiplayer';
+import { useRouter } from 'src/navigation';
 
 export default function FormCreateNewMultiplayerGame() {
+  const router = useRouter();
   const {
     storyId,
     storyName,
@@ -42,7 +43,7 @@ export default function FormCreateNewMultiplayerGame() {
     e.preventDefault();
     if (!isFormRedyForSubmit || !characterSelected) return;
 
-    createMultiplayerGame(characterSelected);
+    createMultiplayerGame(characterSelected).then(() => router.push('/multiplayer/lobby'));
   }
 
   const btnSubmitStyle = isFormRedyForSubmit ? 'btn w-full btn-success' : 'btn w-full';
@@ -71,10 +72,10 @@ export default function FormCreateNewMultiplayerGame() {
             className="select select-bordered"
             onChange={(e) => setAiRole(e.target.value as AiRole)}
           >
-            <option selected={aiRole === 'Game Master'} defaultValue="Game Master">
+            <option selected={aiRole === 'Game Master'} value="Game Master">
               Game Master
             </option>
-            <option selected={aiRole === 'Game Assistant'} defaultValue="Game Assistant">
+            <option selected={aiRole === 'Game Assistant'} value="Game Assistant">
               Game Assistant (Tu eres el GM)
             </option>
           </select>
@@ -89,11 +90,7 @@ export default function FormCreateNewMultiplayerGame() {
             onChange={(e) => setAiConfig(e.target.value as AiModels)}
           >
             {aiConfigObj.map((aiModel) => (
-              <option
-                key={aiModel.name}
-                selected={aiModel.name === aiConfig}
-                defaultValue={aiModel.name}
-              >
+              <option key={aiModel.name} selected={aiModel.name === aiConfig} value={aiModel.name}>
                 {aiModel.title}
               </option>
             ))}
@@ -108,10 +105,10 @@ export default function FormCreateNewMultiplayerGame() {
             className="select select-bordered"
             onChange={(e) => setLocale(e.target.value as Locale)}
           >
-            <option selected={locale === 'en'} defaultValue="en">
+            <option selected={locale === 'en'} value="en">
               English
             </option>
-            <option selected={locale === 'es'} defaultValue="es">
+            <option selected={locale === 'es'} value="es">
               Español
             </option>
           </select>

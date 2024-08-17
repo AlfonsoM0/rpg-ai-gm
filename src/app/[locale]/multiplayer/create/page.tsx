@@ -1,5 +1,3 @@
-'use client';
-
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import Main from 'src/components/Main';

@@ -1,45 +1,73 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MultiplayerStory } from 'src/types/multiplayer';
 import useFirebase from '../firebase';
 import useMultiplayer from '.';
-import { UserAccount } from 'src/types/firebase-db';
+import { UserGame } from 'src/types/firebase-db';
+import { Unsubscribe } from 'firebase/auth';
 
 export default function useSetMultiplayerOberver() {
-  const { observeFireDoc } = useFirebase();
+  const { getFireDoc, observeFireDoc } = useFirebase();
 
   const { setMultiplayerStory, setUserCurrentMpGame, multiplayerStory, setIsMultiplayerLoading } =
     useMultiplayer();
 
+  // Get Story ID and User Current Mp Game
+  const [storyId, setStoryId] = useState<string>('');
+  useEffect(() => {
+    getFireDoc('USER_GAME').then((doc: false | UserGame | undefined) => {
+      if (doc && doc.currentMultiplayerGame?.storyId) {
+        setStoryId(doc.currentMultiplayerGame.storyId);
+        setUserCurrentMpGame(doc.currentMultiplayerGame);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Set Multiplayer Story
+  useEffect(() => {
+    getFireDoc('MULTIPLAYER_STORY', storyId).then((doc: false | MultiplayerStory | undefined) => {
+      if (doc) {
+        setMultiplayerStory(doc);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storyId]);
+
   // observe changes on game
   useEffect(() => {
-    const unsuscribe1 =
-      multiplayerStory &&
-      observeFireDoc(
-        'MULTIPLAYER_STORY',
-        (doc) => {
-          setIsMultiplayerLoading(true);
-          const data = doc.data() as MultiplayerStory | undefined;
-          setMultiplayerStory(data);
-          setIsMultiplayerLoading(false);
-        },
-        multiplayerStory.storyId
-      );
+    let unsuscribe1: Unsubscribe | undefined = undefined;
+    let unsuscribe2: Unsubscribe | undefined = undefined;
 
-    const unsuscribe2 = observeFireDoc('USER_ACCOUNT', (doc) => {
-      setIsMultiplayerLoading(true);
-      const data = doc.data() as UserAccount | undefined;
-      if (data) {
-        setUserCurrentMpGame(data.currentMultiplayerGame);
-      }
-      setIsMultiplayerLoading(false);
-    });
+    if (!!storyId) {
+      unsuscribe1 =
+        multiplayerStory &&
+        observeFireDoc(
+          'MULTIPLAYER_STORY',
+          (doc) => {
+            setIsMultiplayerLoading(true);
+            const data = doc.data() as MultiplayerStory | undefined;
+            setMultiplayerStory(data);
+            setIsMultiplayerLoading(false);
+          },
+          storyId
+        );
+
+      unsuscribe2 = observeFireDoc('USER_GAME', (doc) => {
+        setIsMultiplayerLoading(true);
+        const data = doc.data() as UserGame | undefined;
+        if (data) {
+          setUserCurrentMpGame(data.currentMultiplayerGame);
+        }
+        setIsMultiplayerLoading(false);
+      });
+    }
 
     return () => {
       unsuscribe1 && unsuscribe1();
       unsuscribe2 && unsuscribe2();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [storyId]);
 }

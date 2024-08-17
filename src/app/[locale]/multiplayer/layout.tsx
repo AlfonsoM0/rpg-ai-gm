@@ -3,6 +3,7 @@ import IsSignInForPlay from 'src/components/auth/is-signin-for-play';
 import { app_metadata } from 'src/config/app-metadata';
 import { AI_NAME_TO_SHOW } from 'src/config/constants';
 import { Locale } from 'content/get-content';
+import MultiplayerLoader from 'src/components/multiplayer/multiplayer-loader';
 
 export async function generateMetadata({
   params: { locale },
@@ -22,5 +23,10 @@ export async function generateMetadata({
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <IsSignInForPlay>{children}</IsSignInForPlay>;
+  return (
+    <IsSignInForPlay>
+      <MultiplayerLoader />
+      {children}
+    </IsSignInForPlay>
+  );
 }
