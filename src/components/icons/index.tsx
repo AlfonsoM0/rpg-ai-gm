@@ -6,6 +6,7 @@ import { Google } from './icon-google';
 import { Idea } from './icon-idea';
 import { MicrophoneOff } from './icon-microphone-off';
 import { MicrophoneOn } from './icon-microphone-on';
+import { MsgCirgleUp } from './icon-msg-cirgle-up';
 import { Search } from './icon-search';
 import { Stars } from './icon-stars';
 import { User } from './icon-user';
@@ -24,4 +25,5 @@ export const Icon = {
   MicrophoneOn,
   MicrophoneOff,
   LanguageIcon,
+  MsgCirgleUp,
 };
