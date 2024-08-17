@@ -13,6 +13,7 @@ interface ChatMsgStart {
   position: 'start' | 'end';
   avatarSrc?: string;
   avatarAlt?: string;
+  isInGameMsg?: boolean;
 }
 
 export default function ChatMessage({
@@ -21,6 +22,7 @@ export default function ChatMessage({
   position,
   avatarSrc,
   avatarAlt,
+  isInGameMsg = true,
 }: ChatMsgStart) {
   const { handleStop, handlePause, setTTS, handlePlay, isPlaying, isPaused, isStopped, tts } =
     useTTSStore();
@@ -58,28 +60,30 @@ export default function ChatMessage({
   const chatPosition = position === 'start' ? 'chat chat-start my-2' : 'chat chat-end my-2';
 
   return (
-    <div className={chatPosition}>
-      <div className="chat-image avatar" onClick={onAvatarClick}>
-        <div className={avatarStyle}>
-          {avatarSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
-          ) : (
-            <Icon.User />
-          )}
-        </div>
-      </div>
-
-      <div className="chat-header">{userName}</div>
-
-      <div className="chat-bubble bg-secondary-content text-primary text-sm">
-        <Markdown options={MarkdownOptions}>{message}</Markdown>
-
-        {message.length > 30 ? (
-          <div className="flex justify-end mb-[-0.8rem] mt-[-0.5rem] mr-[-1rem]">
-            <Button.Copy text={message} toolTipPosition="left" />
+    <div className={isInGameMsg ? '' : 'opacity-50'}>
+      <div className={chatPosition}>
+        <div className="chat-image avatar" onClick={onAvatarClick}>
+          <div className={avatarStyle}>
+            {avatarSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={avatarSrc} alt={avatarAlt || ''} width="10" height="10" />
+            ) : (
+              <Icon.User />
+            )}
           </div>
-        ) : null}
+        </div>
+
+        <div className="chat-header">{userName}</div>
+
+        <div className="chat-bubble bg-secondary-content text-primary text-sm">
+          <Markdown options={MarkdownOptions}>{message}</Markdown>
+
+          {message.length > 30 ? (
+            <div className="flex justify-end mb-[-0.8rem] mt-[-0.5rem] mr-[-1rem]">
+              <Button.Copy text={message} toolTipPosition="left" />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
