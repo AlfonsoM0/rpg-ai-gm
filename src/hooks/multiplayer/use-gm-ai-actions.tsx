@@ -32,7 +32,7 @@ export default function useGmAiAcctions() {
   const t = useTranslations('GmAi.Response');
 
   return {
-    gmAiGenerateMsg: async () => {
+    gmAiGenerateMsg: async (promptMsg: string = '') => {
       if (!multiplayerStory || !userCurrentMpGame) return;
       const { players, content, aiConfig, storyId } = multiplayerStory;
 
@@ -66,7 +66,7 @@ export default function useGmAiAcctions() {
 
       try {
         const gmAiResponse = await runAIChat(
-          '',
+          promptMsg,
           [...generateGmAiPromptArray(locale), ...inGameContent], // TODO: reemplace for Multiplayer Prompt
           aiConfigObj
         );
@@ -112,6 +112,25 @@ export default function useGmAiAcctions() {
           ...multiplayerStory,
           players: newPlayersConfig,
           content: contentToSet,
+        },
+        storyId
+      );
+    },
+
+    sendAiMsg: async (msg: string) => {
+      if (!multiplayerStory || !userCurrentMpGame) return;
+
+      const newContent: ChatMessage = {
+        ...basicGmAiChatFormat,
+        parts: [{ text: msg }],
+      };
+
+      const { content, storyId } = multiplayerStory;
+      await setFireDoc(
+        'MULTIPLAYER_STORY',
+        {
+          ...multiplayerStory,
+          content: [...content, newContent],
         },
         storyId
       );
