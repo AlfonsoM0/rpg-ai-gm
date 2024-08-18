@@ -36,7 +36,7 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   /**
    * Multiplayer Settings
    */
-  const { isMultiplayerLoading } = useMultiplayer();
+  const { isMultiplayerLoading, userCurrentMpGame } = useMultiplayer();
   const { sendMessage } = usePlayerAcctions();
   const [isInGameMsg, setIsInGameMsg] = useState(true);
   function submitMpChat(e: React.FormEvent<HTMLFormElement>) {
@@ -61,32 +61,54 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
     <Icon.Stars className="w-6 h-6 fill-info" />
   );
 
+  const sendAs = isInGameMsg ? 'Enviar como Personaje: ' : 'Enviar como Jugador: ';
+  const sendMsgAs =
+    (isInGameMsg ? userCurrentMpGame?.player.character.name : userCurrentMpGame?.player.userName) ||
+    '';
+
   return (
-    <form className="flex gap-2 p-2" onSubmit={submitFunction}>
-      <TextareaAutosize
-        autoFocus // text area should automatically get focus when the page loads
-        className="textarea textarea-bordered w-full min-h-20"
-        placeholder="..."
-        value={chatMsg}
-        onChange={(e) => setChatMsg(e.target.value)}
-        disabled={isTextAreaDisable}
-      />
+    <form className="p-2 max-w-[90vw]" onSubmit={submitFunction}>
+      {isMultiplayer ? (
+        <div className="flex justify-between my-2">
+          <p className="text-xs">
+            {sendAs}
+            {sendMsgAs}
+          </p>
+          <input
+            type="checkbox"
+            className="toggle"
+            onChange={() => setIsInGameMsg(!isInGameMsg)}
+            checked={isInGameMsg}
+          />
+        </div>
+      ) : null}
 
-      <div className="flex flex-col gap-2">
-        <button
-          className="btn btn-sm h-12"
-          type="submit"
-          disabled={isBtnDisable}
-          aria-label={t('Send_message')}
-        >
-          {isLoadingContent ? (
-            <span className="loading loading-spinner loading-xs"></span>
-          ) : (
-            btnIcon
-          )}
-        </button>
+      <div className="flex gap-2">
+        <TextareaAutosize
+          autoFocus // text area should automatically get focus when the page loads
+          className="textarea textarea-bordered w-full min-h-20"
+          placeholder="..."
+          value={chatMsg}
+          onChange={(e) => setChatMsg(e.target.value)}
+          disabled={isTextAreaDisable}
+        />
 
-        <Button.STT text={chatMsg} setText={setChatMsg} setIsListening={setIsListening} />
+        <div className="flex flex-col gap-2">
+          <button
+            className="btn btn-sm h-12"
+            type="submit"
+            disabled={isBtnDisable}
+            aria-label={t('Send_message')}
+          >
+            {isLoadingContent ? (
+              <span className="loading loading-spinner loading-xs"></span>
+            ) : (
+              btnIcon
+            )}
+          </button>
+
+          <Button.STT text={chatMsg} setText={setChatMsg} setIsListening={setIsListening} />
+        </div>
       </div>
     </form>
   );
