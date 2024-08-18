@@ -22,6 +22,8 @@ import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
+  collection,
   onSnapshot,
   DocumentSnapshot,
   DocumentData,
@@ -64,6 +66,10 @@ interface FirebaseActions {
     collectionName: T,
     docId?: string
   ) => Promise<CollectionType<T> | undefined | false>;
+
+  getAllFireDocs: <T extends CollectionName>(
+    collectionName: T
+  ) => Promise<CollectionType<T>[] | undefined | false>;
 
   observeFireDoc: (
     collectionName: CollectionName,
@@ -249,6 +255,25 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
       }
     } catch (error) {
       console.error(`getFireDoc/ ${collectionName} =>`, error);
+      set({ isFireLoading: false, fireErrorMsg: 'Error al obtener de la base de datos.' });
+      return false;
+    }
+  },
+
+  getAllFireDocs: async (collectionName) => {
+    const { fireDB } = get();
+    set({ isFireLoading: true, fireErrorMsg: '' });
+
+    try {
+      if (fireDB) {
+        const res = await getDocs(collection(fireDB, collectionName));
+        const data = res.docs.map((doc) => doc.data());
+
+        set({ isFireLoading: false });
+        return data as CollectionType<typeof collectionName>[] | undefined;
+      }
+    } catch (error) {
+      console.error(`getAllFireDocs/ ${collectionName} =>`, error);
       set({ isFireLoading: false, fireErrorMsg: 'Error al obtener de la base de datos.' });
       return false;
     }

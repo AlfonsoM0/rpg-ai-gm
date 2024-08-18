@@ -84,7 +84,7 @@ export default function Page() {
       <section>
         <H2>Personajes</H2>
 
-        <div>
+        <div className="flex flex-wrap gap-4 justify-center">
           {players.map((player) => (
             <CardCharacterLobby key={player.userId} player={player} />
           ))}

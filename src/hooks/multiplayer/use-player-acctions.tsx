@@ -35,16 +35,12 @@ export default function usePlayerAcctions() {
       const multiplayerGame = await getFireDoc('MULTIPLAYER_STORY', storyId);
 
       if (multiplayerGame) {
-        setFireDoc(
-          'MULTIPLAYER_STORY',
-          {
-            ...multiplayerGame,
-            players: [...multiplayerGame.players, player],
-          },
-          storyId
-        );
-
-        setMultiplayerStory(multiplayerGame);
+        const newMultiplayerInfo = {
+          ...multiplayerGame,
+          players: [...multiplayerGame.players, player],
+        };
+        setFireDoc('MULTIPLAYER_STORY', newMultiplayerInfo, storyId);
+        setMultiplayerStory(newMultiplayerInfo);
 
         /**
          * Set User Current Game Info in Firebase and State
@@ -57,14 +53,12 @@ export default function usePlayerAcctions() {
           player,
         };
 
-        if (userGame) {
-          await setFireDoc('USER_GAME', {
-            ...userGame,
-            currentMultiplayerGame,
-          });
+        await setFireDoc('USER_GAME', {
+          ...userGame,
+          currentMultiplayerGame,
+        });
 
-          setUserCurrentMpGame(currentMultiplayerGame);
-        }
+        setUserCurrentMpGame(currentMultiplayerGame);
       }
 
       setIsMultiplayerLoading(false);
