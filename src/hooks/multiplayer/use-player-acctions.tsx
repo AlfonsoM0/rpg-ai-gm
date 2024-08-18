@@ -99,10 +99,8 @@ export default function usePlayerAcctions() {
           ...multiplayerStory,
           content: [...content, newContent],
           totalDiceRolls: roll2d6Result ? totalDiceRolls + 1 : totalDiceRolls,
-          totalSuccesses: roll2d6Result
-            ? totalSuccesses + calcSuccess(roll2d6Result)
-            : totalSuccesses,
-          totalFailures: roll2d6Result ? totalFailures + calcFailure(roll2d6Result) : totalFailures,
+          totalSuccesses: calcSuccess(totalSuccesses, roll2d6Result),
+          totalFailures: calcFailure(totalFailures, roll2d6Result),
         },
         storyId
       );
@@ -163,14 +161,16 @@ export default function usePlayerAcctions() {
   };
 }
 
-function calcSuccess(roll: number) {
-  if (roll >= 14) return 2;
-  if (roll >= 10) return 1;
-  return 0;
+function calcSuccess(currentValue: number, roll?: number) {
+  if (!roll) return currentValue;
+  if (roll >= 14) return currentValue + 2;
+  if (roll >= 10) return currentValue + 1;
+  return currentValue;
 }
 
-function calcFailure(roll: number) {
-  if (roll <= 6) return 2;
-  if (roll <= 9) return 1;
-  return 0;
+function calcFailure(currentValue: number, roll?: number) {
+  if (!roll) return currentValue;
+  if (roll <= 6) return currentValue + 2;
+  if (roll <= 9) return currentValue + 1;
+  return currentValue;
 }
