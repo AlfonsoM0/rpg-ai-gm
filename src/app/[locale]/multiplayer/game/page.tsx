@@ -5,6 +5,7 @@ import CardCharacterBody from 'src/components/card-character/card-character-body
 import CardCharacterContainer from 'src/components/card-character/card-character-container';
 import CardPlayCharacter from 'src/components/card-play-character';
 import ChatInputMsg from 'src/components/chat/chat-input-msg';
+import ChatOptionsABC from 'src/components/chat/chat-options-abc';
 import H1 from 'src/components/h1';
 import Main from 'src/components/Main';
 import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
@@ -84,6 +85,10 @@ export default function Page() {
       <section>
         <MultiplayerChatWindow />
         <ChatInputMsg isMultiplayer />
+      </section>
+
+      <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
+        <ChatOptionsABC isMultiplayer />
       </section>
 
       <section>

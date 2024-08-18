@@ -4,19 +4,31 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 import { useTranslations } from 'next-intl';
-
-export default function ChatOptionsABC() {
+import { usePlayerAcctions } from 'src/hooks/multiplayer';
+export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ChatOptionsABC');
 
+  /**
+   * Single Player
+   */
   const { addContent, isLoadingContent, content } = useGmAiStore();
   const { handleStop } = useTTSStore();
 
+  /**
+   * Multiplayer
+   */
+  const { sendMessage } = usePlayerAcctions();
+
   function onHistoryOptionClick(option: 'A' | 'B' | 'C'): void {
     handleStop();
-    addContent({
-      role: AI_ROLE.USER,
-      parts: [{ text: `${t('btn_ABC')} **"${option}"**.` }], //\n\n ¿Qué prueba debo realizar?
-    });
+    const msg = `${t('btn_ABC')} **"${option}"**.`;
+
+    if (isMultiplayer) sendMessage(msg, true);
+    else
+      addContent({
+        role: AI_ROLE.USER,
+        parts: [{ text: msg }],
+      });
   }
 
   return (
