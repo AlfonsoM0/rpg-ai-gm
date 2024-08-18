@@ -10,52 +10,62 @@ import { Unsubscribe } from 'firebase/auth';
 export default function useSetMultiplayerOberver() {
   const { getFireDoc, observeFireDoc } = useFirebase();
 
-  const { setMultiplayerStory, setUserCurrentMpGame, multiplayerStory, setIsMultiplayerLoading } =
-    useMultiplayer();
+  const {
+    setMultiplayerStory,
+    setUserCurrentMpGame,
+    multiplayerStory,
+    userCurrentMpGame,
+    setIsMultiplayerLoading,
+  } = useMultiplayer();
 
-  // Get Story ID and User Current Mp Game
-  const [storyId, setStoryId] = useState<string>('');
+  /**
+   * Get Story ID and User Current Mp Game
+   */
+  const [storyId, setStoryId] = useState<string | undefined>(undefined);
   useEffect(() => {
     getFireDoc('USER_GAME').then((doc: false | UserGame | undefined) => {
-      if (doc && doc.currentMultiplayerGame?.storyId) {
-        setStoryId(doc.currentMultiplayerGame.storyId);
+      if (doc) {
+        setStoryId(doc.currentMultiplayerGame?.storyId);
         setUserCurrentMpGame(doc.currentMultiplayerGame);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Set Multiplayer Story
+  /**
+   * Set Multiplayer Story
+   */
   useEffect(() => {
-    getFireDoc('MULTIPLAYER_STORY', storyId).then((doc: false | MultiplayerStory | undefined) => {
-      if (doc) {
-        setMultiplayerStory(doc);
-      }
-    });
+    if (storyId)
+      getFireDoc('MULTIPLAYER_STORY', storyId).then((doc: false | MultiplayerStory | undefined) => {
+        if (doc) {
+          setMultiplayerStory(doc);
+        }
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storyId]);
 
-  // observe changes on game
+  /**
+   * Observe changes on game
+   */
   useEffect(() => {
     let unsuscribe1: Unsubscribe | undefined = undefined;
     let unsuscribe2: Unsubscribe | undefined = undefined;
 
-    if (Boolean(storyId)) {
-      unsuscribe1 =
-        multiplayerStory &&
-        observeFireDoc(
-          'MULTIPLAYER_STORY',
-          (doc) => {
-            setIsMultiplayerLoading(true);
-            const data = doc.data() as MultiplayerStory | undefined;
+    if (storyId) {
+      unsuscribe1 = observeFireDoc(
+        'MULTIPLAYER_STORY',
+        (doc) => {
+          setIsMultiplayerLoading(true);
+          const data = doc.data() as MultiplayerStory | undefined;
 
-            console.log('Observe MULTIPLAYER_STORY =>', data);
+          console.log('Observe MULTIPLAYER_STORY =>', data);
 
-            setMultiplayerStory(data);
-            setIsMultiplayerLoading(false);
-          },
-          storyId
-        );
+          setMultiplayerStory(data);
+          setIsMultiplayerLoading(false);
+        },
+        storyId
+      );
 
       unsuscribe2 = observeFireDoc('USER_GAME', (doc) => {
         setIsMultiplayerLoading(true);
