@@ -36,9 +36,8 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   /**
    * Multiplayer Settings
    */
-  const { isMultiplayerLoading, userCurrentMpGame } = useMultiplayer();
+  const { isMultiplayerLoading, userCurrentMpGame, isInGameMsg, setIsInGameMsg } = useMultiplayer();
   const { sendMessage } = usePlayerAcctions();
-  const [isInGameMsg, setIsInGameMsg] = useState(true);
   function submitMpChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     handleStop();

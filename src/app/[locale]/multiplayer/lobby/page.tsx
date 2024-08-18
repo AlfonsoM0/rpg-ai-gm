@@ -78,7 +78,11 @@ export default function Page() {
 
       {isUserHost ? (
         <section>
-          <button className="btn btn-primary" onClick={onStartClick}>
+          <button
+            className="btn btn-primary"
+            onClick={onStartClick}
+            disabled={isMultiplayerLoading}
+          >
             COMENZAR PARTIDA
           </button>
         </section>

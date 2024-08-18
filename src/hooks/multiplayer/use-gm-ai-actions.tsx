@@ -36,6 +36,19 @@ export default function useGmAiAcctions() {
       if (!multiplayerStory || !userCurrentMpGame) return;
       const { players, content, aiConfig, storyId } = multiplayerStory;
 
+      // Clean content for "Empty" and "Error" responses.
+      function clearGmAiErrorsMsg(content: ChatMessage[]): ChatMessage[] {
+        return content.filter((c) => {
+          const isAiModel = c.role === AI_ROLE.MODEL;
+          const msg = c.parts[0].text;
+
+          if (isAiModel && (msg === t('Empty') || msg === t('Error'))) return false;
+
+          return true;
+        });
+      }
+      const cleanContent = clearGmAiErrorsMsg(content);
+
       // Only Player1 can execute this acction.
       if (userCurrentMpGame.player.userId !== players[0].userId) return;
 
@@ -45,7 +58,7 @@ export default function useGmAiAcctions() {
       }
 
       // use only inGame content to generate AI response. But Not for contentToSet.
-      const inGameContent = content.filter((c) => c.isInGameMsg === true);
+      const inGameContent = cleanContent.filter((c) => c.isInGameMsg === true);
 
       const aiConfigObj = generateAiConfig(inGameContent.length, aiConfig);
 
@@ -72,30 +85,18 @@ export default function useGmAiAcctions() {
               parts: [{ text: t('Empty') }],
             };
 
-        contentToSet = [...content, contentFromAi];
+        contentToSet = [...cleanContent, contentFromAi];
       } catch (error) {
         console.error('❌ GmAi error', error);
 
         contentToSet = [
-          ...content,
+          ...cleanContent,
           {
             // Error response
             ...basicGmAiChatFormat,
             parts: [{ text: t('Error') }],
           },
         ];
-      }
-
-      // Clean content for "Empty" and "Error" responses.
-      function clearGmAiErrorsMsg(content: ChatMessage[]): ChatMessage[] {
-        return content.filter((c) => {
-          const isAiModel = c.role === AI_ROLE.MODEL;
-          const msg = c.parts[0].text;
-
-          if (isAiModel && (msg === t('Empty') || msg === t('Error'))) return false;
-
-          return true;
-        });
       }
 
       // Reset all player state to Not Redy for AI Response.
@@ -110,7 +111,7 @@ export default function useGmAiAcctions() {
         {
           ...multiplayerStory,
           players: newPlayersConfig,
-          content: clearGmAiErrorsMsg(contentToSet), // clear content
+          content: contentToSet,
         },
         storyId
       );

@@ -11,6 +11,7 @@ interface MultiplayerState {
   userCurrentMpGame?: UserGame['currentMultiplayerGame'];
   multiplayerStory?: MultiplayerStory;
   isMultiplayerLoading: boolean;
+  isInGameMsg: boolean;
 }
 
 interface MultiplayerActions {
@@ -18,6 +19,7 @@ interface MultiplayerActions {
   setUserCurrentMpGame: (userCurrentMpGame?: UserGame['currentMultiplayerGame']) => void;
   setMultiplayerStory: (multiplayerStory?: MultiplayerStory) => void;
   setIsMultiplayerLoading: (isMultiplayerLoading: boolean) => void;
+  setIsInGameMsg: (isInGameMsg: boolean) => void;
   clearMultiplayerState: () => void;
 }
 
@@ -26,6 +28,7 @@ const initialMultiplayerState: MultiplayerState = {
   userCurrentMpGame: undefined,
   multiplayerStory: undefined,
   isMultiplayerLoading: false,
+  isInGameMsg: true,
 };
 
 const useMultiplayer = create<MultiplayerState & MultiplayerActions>((set, get) => ({
@@ -39,6 +42,8 @@ const useMultiplayer = create<MultiplayerState & MultiplayerActions>((set, get) 
   setUserCurrentMpGame: (userCurrentMpGame) => set({ userCurrentMpGame }),
 
   setIsMultiplayerLoading: (isMultiplayerLoading) => set({ isMultiplayerLoading }),
+
+  setIsInGameMsg: (isInGameMsg) => set({ isInGameMsg }),
 
   clearMultiplayerState: () => set(initialMultiplayerState),
 }));

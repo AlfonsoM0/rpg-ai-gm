@@ -7,12 +7,14 @@ import { roll2d6 } from 'utils/roll-2d6';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 import { useTranslations } from 'next-intl';
+import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 
 interface CardPlayCharacterProps {
   character: Character;
+  isMultiplayer?: boolean;
 }
 
-export default function CardPlayCharacter({ character }: CardPlayCharacterProps) {
+export default function CardPlayCharacter({ character, isMultiplayer }: CardPlayCharacterProps) {
   const t = useTranslations('Character.char');
   const tPC = useTranslations('CardPlayCharacter');
 
@@ -21,9 +23,11 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
   const CharsXP = characteristicsXpValue(characteristics);
   const { handleStop } = useTTSStore();
 
+  /**
+   * Single Player
+   */
   const { addContent, isLoadingContent, addPlayersDiceRoll } = useGmAiStore();
-
-  function rollCharacteristic(characteristic: Characteristic, value: number): void {
+  function rollCharacteristicSp(characteristic: Characteristic, value: number): void {
     handleStop();
 
     const Char: any = characteristic[0].toUpperCase() + characteristic.slice(1);
@@ -42,6 +46,30 @@ export default function CardPlayCharacter({ character }: CardPlayCharacterProps)
       ],
     });
   }
+
+  /**
+   * Multiplayer
+   */
+  const { isInGameMsg } = useMultiplayer();
+  const { sendMessage } = usePlayerAcctions();
+  function rollCharacteristicMp(characteristic: Characteristic, value: number): void {
+    handleStop();
+
+    const Char: any = characteristic[0].toUpperCase() + characteristic.slice(1);
+
+    const { total } = roll2d6(value);
+
+    const msg = `**${name}** ${tPC('roll2d6.take a test')} ${t(Char)} (2d6+${value})... \n\n ${tPC(
+      'roll2d6.and gets a result of'
+    )}: **${total}**`;
+
+    sendMessage(msg, isInGameMsg);
+  }
+
+  /**
+   * Render
+   */
+  const rollCharacteristic = isMultiplayer ? rollCharacteristicMp : rollCharacteristicSp;
 
   return (
     <div className="card max-w-sm shadow-xl">
