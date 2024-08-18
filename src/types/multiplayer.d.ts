@@ -4,13 +4,16 @@ import { AiModels } from 'utils/generate-ai-config';
 import { Character } from './character';
 
 export type ContentExtraInfo = {
+  id: string;
   isInGameMsg: boolean;
 
   userName: string;
+  userId: string;
   userAvatarSrc?: string;
   userAvatarAlt?: string;
 
   charName: string;
+  charId: string;
   charAvatarSrc?: string;
   charAvatarAlt?: string;
 };

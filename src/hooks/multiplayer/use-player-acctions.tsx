@@ -82,15 +82,18 @@ export default function usePlayerAcctions() {
         : `(((Jugador ${player.userName} dice:)))\n\n${msg}`;
 
       const newContent: ChatMessage = {
+        id: crypto.randomUUID(),
         role: AI_ROLE.USER,
         parts: [{ text: msgAndData }],
         userName: player.userName,
+        userId: player.userId,
         charName: player.character.name,
+        charId: player.character.id,
 
         userAvatarSrc: player.avatarSrc,
         userAvatarAlt: player.avatarAlt,
-        charAvatarSrc: undefined,
-        charAvatarAlt: undefined,
+        charAvatarSrc: player.avatarSrc, //TODO: change
+        charAvatarAlt: `${player.character.name} Avatar`, //TODO: change
 
         isInGameMsg,
       };

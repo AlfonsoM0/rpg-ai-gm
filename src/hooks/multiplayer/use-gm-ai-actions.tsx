@@ -12,8 +12,11 @@ import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
 
 const basicGmAiChatFormat: Omit<ChatMessage, 'parts'> = {
+  id: crypto.randomUUID(),
   role: AI_ROLE.MODEL,
   isInGameMsg: true,
+  charId: AI_NAME_TO_SHOW,
+  userId: AI_NAME_TO_SHOW,
   charName: AI_NAME_TO_SHOW,
   userName: AI_NAME_TO_SHOW,
   userAvatarSrc: '/android-chrome-512x512.png',

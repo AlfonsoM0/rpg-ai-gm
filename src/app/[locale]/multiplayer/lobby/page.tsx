@@ -1,10 +1,12 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import ChatInputMsg from 'src/components/chat/chat-input-msg';
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import Main from 'src/components/Main';
 import CardCharacterLobby from 'src/components/multiplayer/lobby/card-character-loby';
+import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { useRouter } from 'src/navigation';
@@ -16,6 +18,8 @@ export default function Page() {
   const { startGame } = usePlayerAcctions();
 
   const aiConfigObj = useGenerateAiConfigObj();
+
+  const [isShowChat, setIsShowChat] = useState(false);
 
   const isUserHost = useMemo(() => {
     if (!userCurrentMpGame || !multiplayerStory) return false;
@@ -42,6 +46,18 @@ export default function Page() {
   return (
     <Main>
       <H1>Lobby</H1>
+
+      <section>
+        <button className="btn btn-xs btn-ghost w-full" onClick={() => setIsShowChat(!isShowChat)}>
+          {isShowChat ? 'Ocultar chat' : 'Abrir chat'}
+        </button>
+        {isShowChat ? (
+          <div>
+            <MultiplayerChatWindow />
+            <ChatInputMsg isMultiplayer />
+          </div>
+        ) : null}
+      </section>
 
       <section className="p-4">
         <H2>Información de la partida</H2>

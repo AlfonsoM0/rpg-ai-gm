@@ -40,7 +40,7 @@ export default function useSetMultiplayerOberver() {
     let unsuscribe1: Unsubscribe | undefined = undefined;
     let unsuscribe2: Unsubscribe | undefined = undefined;
 
-    if (!!storyId) {
+    if (Boolean(storyId)) {
       unsuscribe1 =
         multiplayerStory &&
         observeFireDoc(
@@ -48,6 +48,9 @@ export default function useSetMultiplayerOberver() {
           (doc) => {
             setIsMultiplayerLoading(true);
             const data = doc.data() as MultiplayerStory | undefined;
+
+            console.log('Observe MULTIPLAYER_STORY =>', data);
+
             setMultiplayerStory(data);
             setIsMultiplayerLoading(false);
           },
