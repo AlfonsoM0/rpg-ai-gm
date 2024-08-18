@@ -66,17 +66,19 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
     (isInGameMsg ? userCurrentMpGame?.player.character.name : userCurrentMpGame?.player.userName) ||
     '';
 
+  const sendAsStyle = isInGameMsg ? 'text-xs text-info' : 'text-xs text-error';
+
   return (
     <form className="p-2 max-w-[90vw]" onSubmit={submitFunction}>
       {isMultiplayer ? (
         <div className="flex justify-between my-2">
-          <p className="text-xs">
+          <p className={sendAsStyle}>
             {sendAs}
             {sendMsgAs}
           </p>
           <input
             type="checkbox"
-            className="toggle"
+            className="toggle toggle-info"
             onChange={() => setIsInGameMsg(!isInGameMsg)}
             checked={isInGameMsg}
           />
