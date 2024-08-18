@@ -64,7 +64,7 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    sendMessage: async (msg: string, isInGameMsg: boolean) => {
+    sendMessage: async (msg: string, isInGameMsg: boolean, roll2d6Result?: number) => {
       setIsMultiplayerLoading(true);
 
       if (!multiplayerStory || !userCurrentMpGame) return;
@@ -92,11 +92,17 @@ export default function usePlayerAcctions() {
         isInGameMsg,
       };
 
+      const { content, totalDiceRolls, totalSuccesses, totalFailures } = multiplayerStory;
       await setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
-          content: [...multiplayerStory.content, newContent],
+          content: [...content, newContent],
+          totalDiceRolls: roll2d6Result ? totalDiceRolls + 1 : totalDiceRolls,
+          totalSuccesses: roll2d6Result
+            ? totalSuccesses + calcSuccess(roll2d6Result)
+            : totalSuccesses,
+          totalFailures: roll2d6Result ? totalFailures + calcFailure(roll2d6Result) : totalFailures,
         },
         storyId
       );
@@ -155,4 +161,16 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
   };
+}
+
+function calcSuccess(roll: number) {
+  if (roll >= 14) return 2;
+  if (roll >= 10) return 1;
+  return 0;
+}
+
+function calcFailure(roll: number) {
+  if (roll <= 6) return 2;
+  if (roll <= 9) return 1;
+  return 0;
 }

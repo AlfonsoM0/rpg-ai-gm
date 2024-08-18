@@ -63,7 +63,7 @@ export default function CardPlayCharacter({ character, isMultiplayer }: CardPlay
       'roll2d6.and gets a result of'
     )}: **${total}**`;
 
-    sendMessage(msg, isInGameMsg);
+    sendMessage(msg, isInGameMsg, total);
   }
 
   /**
