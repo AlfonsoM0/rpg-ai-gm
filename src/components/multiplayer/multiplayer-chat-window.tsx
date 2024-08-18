@@ -10,6 +10,7 @@ import {
 } from 'src/config/constants';
 import MsgLoadingCharacters from '../chat/chat-message-loading-characterts';
 import MsgStoryEnd from '../chat/chat-message-end';
+import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
 
 export default function MultiplayerChatWindow() {
   const { userCurrentMpGame, multiplayerStory, isMultiplayerLoading } = useMultiplayer();
@@ -44,7 +45,7 @@ export default function MultiplayerChatWindow() {
           return (
             <ChatMessage
               key={msg.id}
-              message={message}
+              message={deleteCodesFromText(message)}
               position={position}
               userName={userName}
               avatarSrc={avatarSrc}
