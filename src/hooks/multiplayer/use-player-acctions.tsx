@@ -4,7 +4,12 @@ import { Character } from 'src/types/character';
 import useMultiplayer from '.';
 import useFirebase from '../firebase';
 import { ChatMessage, Player } from 'src/types/multiplayer';
-import { AI_ROLE } from 'src/config/constants';
+import { CODE_DONT_SHOW_IN_CHAT } from 'src/config/constants';
+import {
+  calcFailure,
+  calcSuccess,
+  generateDefultUserChatMessageInfo,
+} from 'src/utils/gmai-utils-mp';
 
 export default function usePlayerAcctions() {
   const {
@@ -17,7 +22,7 @@ export default function usePlayerAcctions() {
   const { user, getFireDoc, setFireDoc } = useFirebase();
 
   return {
-    joinGame: async (storyId: string, character: Character) => {
+    joinGame: async function (storyId: string, character: Character) {
       setIsMultiplayerLoading(true);
 
       const player = {
@@ -64,7 +69,7 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    sendMessage: async (msg: string, isInGameMsg: boolean, roll2d6Result?: number) => {
+    sendMessage: async function (msg: string, isInGameMsg: boolean, roll2d6Result?: number) {
       setIsMultiplayerLoading(true);
 
       if (!multiplayerStory || !userCurrentMpGame) return;
@@ -76,19 +81,8 @@ export default function usePlayerAcctions() {
         : `(((Jugador ${player.userName} dice:)))\n\n${msg}`;
 
       const newContent: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: AI_ROLE.USER,
+        ...generateDefultUserChatMessageInfo(userCurrentMpGame),
         parts: [{ text: msgAndData }],
-        userName: player.userName,
-        userId: player.userId,
-        charName: player.character.name,
-        charId: player.character.id,
-
-        userAvatarSrc: player.avatarSrc,
-        userAvatarAlt: player.avatarAlt,
-        charAvatarSrc: player.avatarSrc, //TODO: change
-        charAvatarAlt: `${player.character.name} Avatar`, //TODO: change
-
         isInGameMsg,
       };
 
@@ -108,7 +102,7 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    setIsReadyForAiResponse: async (isRedyForAiResponse: boolean) => {
+    setIsReadyForAiResponse: async function (isRedyForAiResponse: boolean) {
       setIsMultiplayerLoading(true);
 
       if (!multiplayerStory || !userCurrentMpGame) return;
@@ -141,16 +135,34 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    startGame: async () => {
+    startGame: async function () {
       setIsMultiplayerLoading(true);
 
       if (!multiplayerStory || !userCurrentMpGame) return;
+      const { aiRole, players, storyDescription } = multiplayerStory;
+
+      const allPlayersAreRedy = multiplayerStory.players.map((p) => ({
+        ...p,
+        isRedyForAiResponse: true,
+      }));
+
+      const characters = multiplayerStory.players.map((p) => p.character);
+      const charactersInfo = `(((Información de los personajes: ${JSON.stringify(characters)}
+            ${CODE_DONT_SHOW_IN_CHAT})))`;
+      const storyInfo = `(((Crea la introducción a esta historia: ${storyDescription} ${CODE_DONT_SHOW_IN_CHAT})))`;
 
       await setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
-          content: [],
+          players: aiRole === 'Game Master' ? allPlayersAreRedy : players,
+          content: [
+            {
+              ...generateDefultUserChatMessageInfo(userCurrentMpGame),
+              parts: [{ text: charactersInfo }, { text: storyInfo }],
+              isInGameMsg: true,
+            },
+          ],
           isStoryStarted: true,
         },
         multiplayerStory.storyId
@@ -159,18 +171,4 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
   };
-}
-
-function calcSuccess(currentValue: number, roll?: number) {
-  if (!roll) return currentValue;
-  if (roll >= 14) return currentValue + 2;
-  if (roll >= 10) return currentValue + 1;
-  return currentValue;
-}
-
-function calcFailure(currentValue: number, roll?: number) {
-  if (!roll) return currentValue;
-  if (roll <= 6) return currentValue + 2;
-  if (roll <= 9) return currentValue + 1;
-  return currentValue;
 }

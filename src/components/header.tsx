@@ -12,12 +12,16 @@ export default function Header() {
       url: '/',
     },
     {
+      name: t('/tutorial'),
+      url: '/tutorial',
+    },
+    {
       name: t('/library'),
       url: '/library',
     },
     {
-      name: t('/tutorial'),
-      url: '/tutorial',
+      name: t('/multiplayer'),
+      url: '/multiplayer',
     },
   ];
 

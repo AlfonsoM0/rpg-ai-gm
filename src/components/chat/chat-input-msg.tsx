@@ -5,7 +5,7 @@ import { Icon } from 'components/icons';
 import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import SR from 'react-speech-recognition';
 import { useTranslations } from 'next-intl';
@@ -24,6 +24,7 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   const { addContent, isLoadingContent } = useGmAiStore();
   function submitChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!chatMsg) return;
     handleStop();
     SR.stopListening();
     addContent({
@@ -40,6 +41,7 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   const { sendMessage } = usePlayerAcctions();
   function submitMpChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!chatMsg) return;
     handleStop();
     SR.stopListening();
     sendMessage(chatMsg, isInGameMsg);
@@ -51,8 +53,8 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
    */
   const submitFunction = isMultiplayer ? submitMpChat : submitChat;
 
-  const isTextAreaDisable = isLoadingContent || isMultiplayerLoading || isListening;
-  const isBtnDisable = isLoadingContent || isMultiplayerLoading;
+  const isBtnDisable =
+    isLoadingContent || isMultiplayerLoading || userCurrentMpGame?.player.isRedyForAiResponse;
 
   const btnIcon = isMultiplayer ? (
     <Icon.MsgCirgleUp className="w-6 h-6 stroke-info" />
@@ -91,7 +93,7 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
           placeholder="..."
           value={chatMsg}
           onChange={(e) => setChatMsg(e.target.value)}
-          disabled={isTextAreaDisable}
+          disabled={isListening}
         />
 
         <div className="flex flex-col gap-2">

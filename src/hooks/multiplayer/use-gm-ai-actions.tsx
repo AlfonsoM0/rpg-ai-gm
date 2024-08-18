@@ -8,22 +8,9 @@ import { useTranslations } from 'next-intl';
 import { Locale } from 'src/i18n-config';
 import { generateGmAiPromptArray } from 'src/config/gm-ai-promp';
 import { ChatMessage, Player } from 'src/types/multiplayer';
-import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
+import { AI_ROLE } from 'src/config/constants';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
-
-const basicGmAiChatFormat: Omit<ChatMessage, 'parts'> = {
-  id: crypto.randomUUID(),
-  role: AI_ROLE.MODEL,
-  isInGameMsg: true,
-  charId: AI_NAME_TO_SHOW,
-  userId: AI_NAME_TO_SHOW,
-  charName: AI_NAME_TO_SHOW,
-  userName: AI_NAME_TO_SHOW,
-  userAvatarSrc: '/android-chrome-512x512.png',
-  userAvatarAlt: `${AI_NAME_TO_SHOW} avatar`,
-  charAvatarSrc: '/android-chrome-512x512.png',
-  charAvatarAlt: `${AI_NAME_TO_SHOW} avatar`,
-};
+import { generateDefultAiChatMessageInfo, getInGameContent } from 'src/utils/gmai-utils-mp';
 
 export default function useGmAiAcctions() {
   const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
@@ -32,7 +19,7 @@ export default function useGmAiAcctions() {
   const t = useTranslations('GmAi.Response');
 
   return {
-    gmAiGenerateMsg: async (promptMsg: string = '') => {
+    gmAiGenerateMsg: async (promptMsg: string = '', isGenerateOnlyTxt?: boolean) => {
       if (!multiplayerStory || !userCurrentMpGame) return;
       const { players, content, aiConfig, storyId } = multiplayerStory;
 
@@ -58,7 +45,7 @@ export default function useGmAiAcctions() {
       }
 
       // use only inGame content to generate AI response. But Not for contentToSet.
-      const inGameContent = cleanContent.filter((c) => c.isInGameMsg === true);
+      const inGameContent = getInGameContent(cleanContent);
 
       const aiConfigObj = generateAiConfig(inGameContent.length, aiConfig);
 
@@ -72,28 +59,32 @@ export default function useGmAiAcctions() {
         );
 
         if (!gmAiResponse) console.warn('⚠️ GmAi Empty Response => ', gmAiResponse);
+        // return only txt and no generate ChatMessage
+        if (isGenerateOnlyTxt) return deleteCodesFromText(gmAiResponse);
 
         const contentFromAi: ChatMessage = gmAiResponse
           ? {
               // Normal response
-              ...basicGmAiChatFormat,
+              ...generateDefultAiChatMessageInfo(),
               parts: [{ text: deleteCodesFromText(gmAiResponse) }],
             }
           : {
               // Empty response
-              ...basicGmAiChatFormat,
+              ...generateDefultAiChatMessageInfo(),
               parts: [{ text: t('Empty') }],
             };
 
         contentToSet = [...cleanContent, contentFromAi];
       } catch (error) {
         console.error('❌ GmAi error', error);
+        // return only txt and no generate ChatMessage
+        if (isGenerateOnlyTxt) return '';
 
         contentToSet = [
           ...cleanContent,
           {
             // Error response
-            ...basicGmAiChatFormat,
+            ...generateDefultAiChatMessageInfo(),
             parts: [{ text: t('Error') }],
           },
         ];
@@ -121,7 +112,7 @@ export default function useGmAiAcctions() {
       if (!multiplayerStory || !userCurrentMpGame) return;
 
       const newContent: ChatMessage = {
-        ...basicGmAiChatFormat,
+        ...generateDefultAiChatMessageInfo(),
         parts: [{ text: msg }],
       };
 

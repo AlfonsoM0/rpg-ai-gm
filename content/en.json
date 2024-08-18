@@ -79,8 +79,9 @@
   "Header": {
     "Navbar_links": {
       "/": "Home",
+      "/tutorial": "Tutorial",
       "/library": "Library",
-      "/tutorial": "Tutorial"
+      "/multiplayer": "Multiplayer"
     },
     "LangSwitcher": "Change language"
   },

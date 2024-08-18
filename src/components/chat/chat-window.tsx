@@ -15,6 +15,7 @@ import MsgStoryEnd from './chat-message-end';
 import useFirebase from 'hooks/firebase';
 import { useTranslations } from 'next-intl';
 import ChatWindowFrame from './chat-window-frame';
+import MsgLoadingCharacters from './chat-message-loading-characterts';
 
 interface ChatWindowProps {
   content: Content[];
@@ -76,15 +77,6 @@ export default function ChatWindow({
           </div>
         ) : null}
       </ChatWindowFrame>
-    </div>
-  );
-}
-
-function MsgLoadingCharacters() {
-  const t = useTranslations('MsgLoadingCharacters');
-  return (
-    <div>
-      <p className="text-center">{t('Loading_characters')}</p>
     </div>
   );
 }
