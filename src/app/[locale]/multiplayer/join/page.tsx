@@ -16,7 +16,10 @@ export default function Page() {
 
   function onSearchGames() {
     getAllFireDocs('MULTIPLAYER_STORY').then((docs) => {
-      if (docs) setGames(docs);
+      if (docs) {
+        const notStartedGames = docs.filter((d) => !d.isStoryStarted);
+        setGames(notStartedGames);
+      }
     });
   }
 
