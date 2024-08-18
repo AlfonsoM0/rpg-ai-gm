@@ -14,6 +14,7 @@ import {
 import MsgStoryEnd from './chat-message-end';
 import useFirebase from 'hooks/firebase';
 import { useTranslations } from 'next-intl';
+import ChatWindowFrame from './chat-window-frame';
 
 interface ChatWindowProps {
   content: Content[];
@@ -44,8 +45,8 @@ export default function ChatWindow({
   }, [isLoadingContent]);
 
   return (
-    <div className="h-[70vh] w-[90vw] flex flex-col border rounded-xl p-2" ref={refWindow}>
-      <div className="overflow-y-scroll">
+    <div className="pt-2" ref={refWindow}>
+      <ChatWindowFrame>
         {content.map((cont, idx) => {
           const position = cont.role === AI_ROLE.MODEL ? 'start' : 'end';
           const userName = cont.role === AI_ROLE.MODEL ? AI_NAME_TO_SHOW : uName;
@@ -74,7 +75,7 @@ export default function ChatWindow({
             <span className="loading loading-dots loading-lg"></span>
           </div>
         ) : null}
-      </div>
+      </ChatWindowFrame>
     </div>
   );
 }
