@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ChatInputMsg from 'src/components/chat/chat-input-msg';
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
@@ -28,10 +28,15 @@ export default function Page() {
     return userId === hostId;
   }, [userCurrentMpGame, multiplayerStory]);
 
+  useEffect(() => {
+    // If started, go to Game!
+    if (multiplayerStory?.isStoryStarted) router.push('/multiplayer/game');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [multiplayerStory?.isStoryStarted]);
+
   if (!multiplayerStory) return NoGameLoad;
 
-  const { players, storyName, storyDescription, userHostName, userHostId, aiRole, aiConfig } =
-    multiplayerStory;
+  const { players, storyName, storyDescription, userHostName, aiRole, aiConfig } = multiplayerStory;
 
   const aiConfigTitle = aiConfigObj.find((obj) => obj.name === aiConfig)!.title;
 
@@ -39,8 +44,6 @@ export default function Page() {
     if (!isUserHost) return;
 
     startGame();
-
-    router.push('/multiplayer/game');
   }
 
   return (
