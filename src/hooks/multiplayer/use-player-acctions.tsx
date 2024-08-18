@@ -149,7 +149,7 @@ export default function usePlayerAcctions() {
       const characters = multiplayerStory.players.map((p) => p.character);
       const charactersInfo = `(((Información de los personajes: ${JSON.stringify(characters)}
             ${CODE_DONT_SHOW_IN_CHAT})))`;
-      const storyInfo = `(((Crea la introducción a esta historia: ${storyDescription} ${CODE_DONT_SHOW_IN_CHAT})))`;
+      const storyInfo = `(((Crea la introducción a esta historia (Paso 4): ${storyDescription}. Y crea una situación y opciones (Paso 5). ${CODE_DONT_SHOW_IN_CHAT})))`;
 
       await setFireDoc(
         'MULTIPLAYER_STORY',

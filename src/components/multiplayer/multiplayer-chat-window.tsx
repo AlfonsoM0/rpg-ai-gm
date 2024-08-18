@@ -3,7 +3,6 @@
 import useMultiplayer from 'src/hooks/multiplayer';
 import ChatWindowFrame from '../chat/chat-window-frame';
 import ChatMessage from '../chat/chat-message';
-import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
 import {
   CODE_CHARACTERS_CHANGE,
   CODE_DONT_SHOW_IN_CHAT,
@@ -17,12 +16,10 @@ export default function MultiplayerChatWindow() {
 
   if (!userCurrentMpGame || !multiplayerStory) return ChatNotAvailable;
 
-  const messagesToShow = multiplayerStory.content.slice(1);
-
   return (
     <div>
       <ChatWindowFrame>
-        {messagesToShow.map((msg) => {
+        {multiplayerStory.content.map((msg) => {
           const {
             isInGameMsg,
             parts,
@@ -34,7 +31,7 @@ export default function MultiplayerChatWindow() {
             userAvatarSrc,
             userAvatarAlt,
           } = msg;
-          const message = deleteCodesFromText(parts[0].text || '');
+          const message = parts.map((p) => p.text).join('\n');
           const position = userCurrentMpGame.player.userId === userId ? 'end' : 'start';
           const userName = isInGameMsg ? charName : uName;
           const avatarSrc = isInGameMsg ? charAvatarSrc : userAvatarSrc;
