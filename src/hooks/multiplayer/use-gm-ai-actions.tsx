@@ -6,7 +6,7 @@ import useFirebase from '../firebase';
 import { generateAiConfig } from 'src/utils/generate-ai-config';
 import { useTranslations } from 'next-intl';
 import { Locale } from 'src/i18n-config';
-import { generateGmAiPromptArray } from 'src/config/gm-ai-promp';
+import { generateGmAiMpPromptArray } from 'src/config/gm-ai-promp-mp';
 import { ChatMessage, Player } from 'src/types/multiplayer';
 import { AI_ROLE } from 'src/config/constants';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
@@ -54,7 +54,7 @@ export default function useGmAiAcctions() {
       try {
         const gmAiResponse = await runAIChat(
           promptMsg,
-          [...generateGmAiPromptArray(locale), ...inGameContent], // TODO: reemplace for Multiplayer Prompt
+          [...generateGmAiMpPromptArray(locale), ...inGameContent], // TODO: reemplace for Multiplayer Prompt
           aiConfigObj
         );
 

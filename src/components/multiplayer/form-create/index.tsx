@@ -75,7 +75,7 @@ export default function FormCreateNewMultiplayerGame() {
             <option selected={aiRole === 'Game Master'} value="Game Master">
               Game Master
             </option>
-            <option selected={aiRole === 'Game Assistant'} value="Game Assistant">
+            <option selected={aiRole === 'Game Assistant'} value="Game Assistant" disabled>
               Game Assistant (Tu eres el GM)
             </option>
           </select>
