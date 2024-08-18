@@ -59,8 +59,6 @@ export default function useSetMultiplayerOberver() {
           setIsMultiplayerLoading(true);
           const data = doc.data() as MultiplayerStory | undefined;
 
-          console.log('Observe MULTIPLAYER_STORY =>', data);
-
           setMultiplayerStory(data);
           setIsMultiplayerLoading(false);
         },
