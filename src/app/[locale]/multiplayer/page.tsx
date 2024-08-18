@@ -2,12 +2,15 @@
 
 import H1 from 'src/components/h1';
 import Main from 'src/components/Main';
+import useFirebase from 'src/hooks/firebase';
 import useMultiplayer from 'src/hooks/multiplayer';
 import { Link } from 'src/navigation';
 
 export default function Page() {
   const { multiplayerStory } = useMultiplayer();
+  const { isFireLoading } = useFirebase();
 
+  if (isFireLoading) return Loading;
   if (!multiplayerStory) return NoGame;
 
   const isInLobby = !multiplayerStory.isStoryStarted;
@@ -33,6 +36,14 @@ export default function Page() {
     </Main>
   );
 }
+
+const Loading = (
+  <Main>
+    <H1>
+      <span className="loading loading-spinner loading-lg" aria-label="Loading..."></span>
+    </H1>
+  </Main>
+);
 
 const NoGame = (
   <Main>
