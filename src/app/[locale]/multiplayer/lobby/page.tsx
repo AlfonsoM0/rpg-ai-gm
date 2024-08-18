@@ -76,7 +76,7 @@ export default function Page() {
       {isUserHost ? (
         <section>
           <button className="btn btn-primary" onClick={onStartClick}>
-            COMENZAR
+            COMENZAR PARTIDA
           </button>
         </section>
       ) : null}

@@ -2,17 +2,11 @@
 
 import useMultiplayer from 'src/hooks/multiplayer';
 import ChatWindowFrame from '../chat/chat-window-frame';
-import { useEffect } from 'react';
 import ChatMessage from '../chat/chat-message';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
 
 export default function MultiplayerChatWindow() {
   const { userCurrentMpGame, multiplayerStory, isMultiplayerLoading } = useMultiplayer();
-
-  useEffect(() => {
-    console.log('userCurrentMpGame => ', userCurrentMpGame);
-    console.log('multiplayerStory => ', multiplayerStory);
-  }, [userCurrentMpGame, multiplayerStory]);
 
   if (!userCurrentMpGame || !multiplayerStory) return ChatNotAvailable;
 

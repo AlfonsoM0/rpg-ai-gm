@@ -146,6 +146,7 @@ export default function usePlayerAcctions() {
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
+          content: [],
           isStoryStarted: true,
         },
         multiplayerStory.storyId
