@@ -28,7 +28,12 @@ export default function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiplayerStory?.isStoryStarted]);
 
-  if (!multiplayerStory) return NoGameLoad;
+  if (!multiplayerStory)
+    return (
+      <Main>
+        <H1>Juego no disponible</H1>
+      </Main>
+    );
 
   const { players, storyName, storyDescription, userCratorName, aiRole, aiConfig } =
     multiplayerStory;
@@ -95,9 +100,3 @@ export default function Page() {
     </Main>
   );
 }
-
-const NoGameLoad = (
-  <Main>
-    <H1>Juego no disponible</H1>
-  </Main>
-);
