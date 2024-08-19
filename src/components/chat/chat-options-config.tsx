@@ -33,7 +33,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
 
   function onIdeasClick() {
     handlePause();
-    setModalContent(<ModaIdeasForAI />);
+    setModalContent(<ModaIdeasForAI isMultiplayer={isMultiplayer} />);
     setModalIsOpen(true);
   }
 

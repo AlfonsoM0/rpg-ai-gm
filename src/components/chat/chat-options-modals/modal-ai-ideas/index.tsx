@@ -21,9 +21,9 @@ export default function ModaIdeasForAI({ isMultiplayer }: { isMultiplayer?: bool
 
         <CollapseTips isMultiplayer={isMultiplayer} />
 
-        <CollapseMyShortcuts />
+        <CollapseMyShortcuts isMultiplayer={isMultiplayer} />
 
-        <CollapseShortcuts />
+        <CollapseShortcuts isMultiplayer={isMultiplayer} />
       </>
     </ModalContentContainer>
   );

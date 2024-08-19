@@ -6,8 +6,9 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import { useTranslations } from 'next-intl';
+import { usePlayerAcctions } from 'src/hooks/multiplayer';
 
-export default function CollapseShortcuts() {
+export default function CollapseShortcuts({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ModaIdeasForAI.Recomended_Shortcuts');
 
   const ideas = [
@@ -31,13 +32,21 @@ export default function CollapseShortcuts() {
   const { addChatShortcut, chatShortcuts } = useUserPreferencesStore();
 
   const pathname = usePathname();
-  const isOutOfStory = pathname !== '/story';
+  const isOutOfStory = !(pathname === '/story' || pathname === '/multiplayer/game');
+
+  // Multiplayer
+  const { sendMessage } = usePlayerAcctions();
+
   function handleClick(idea: string) {
     if (isOutOfStory) return;
-    addContent({
-      role: AI_ROLE.USER,
-      parts: [{ text: idea }],
-    });
+
+    if (isMultiplayer) sendMessage(idea, true);
+    else
+      addContent({
+        role: AI_ROLE.USER,
+        parts: [{ text: idea }],
+      });
+
     setModalIsOpen(false);
   }
 
