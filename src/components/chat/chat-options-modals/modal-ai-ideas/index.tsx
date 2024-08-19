@@ -7,7 +7,7 @@ import { ModalContentContainer } from 'components/modal';
 import { useTranslations } from 'next-intl';
 import { usePathname } from '@/navigation';
 
-export default function ModaIdeasForAI() {
+export default function ModaIdeasForAI({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ModaIdeasForAI');
 
   const pathname = usePathname();
@@ -19,7 +19,7 @@ export default function ModaIdeasForAI() {
         <p className="my-4 text-sm">{t('p1')}</p>
         {isOutOfStory ? <p className="pb-4 text-sm text-error">{t('p2')}</p> : null}
 
-        <CollapseTips />
+        <CollapseTips isMultiplayer={isMultiplayer} />
 
         <CollapseMyShortcuts />
 

@@ -396,6 +396,22 @@
       "tip5_p_strong": "Want to play a campaign of multiple stories?",
       "tip5_p": "Save your story to the library. Then you can access it and continue playing from where you left off."
     },
+    "tips_Multiplayer": {
+      "tip1_p_strong": "In-game / Out-of-game",
+      "tip1_p": "GmAi only interprets messages sent in-game, in character. Out-of-game messages are sent in the player's name and are less visible. Use out-of-game messages to coordinate the story with your teammates.",
+
+      "tip2_p_strong": "XP earned at the end of the story",
+      "tip2_p": "Is calculated based on the result of all tests performed from the character sheets. All participants earn the same amount of XP. The number of tests and their quality determines the final amount of XP earned.",
+
+      "tip3_p_strong": "Get a better story",
+      "tip3_p": "It's easy, contribute ideas to the plot creatively and not just by choosing the options given by GmAi.",
+
+      "tip4_p_strong": "Ending the story",
+      "tip4_p": "Any player can ask in-game to end the story. But only the host can formally end the story.",
+
+      "tip5_p_strong": "Want to play a campaign of multiple stories?",
+      "tip5_p": "Save your story in the library. Then you can access it and continue playing from where you left off. GmAi will create a summary of the story. Use that summary to create a new story."
+    },
 
     "My_Shortcuts": {
       "title": "My Shortcuts",
