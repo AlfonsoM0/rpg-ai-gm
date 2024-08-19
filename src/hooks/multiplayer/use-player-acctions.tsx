@@ -1,13 +1,18 @@
 'use client';
 
 import { Character } from 'src/types/character';
-import useMultiplayer from '.';
+import useMultiplayer, { useGmAiAcctions } from '.';
 import useFirebase from '../firebase';
 import { ChatMessage, Player } from 'src/types/multiplayer';
-import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'src/config/constants';
+import {
+  CODE_CHARACTERS_CHANGE,
+  CODE_DONT_SHOW_IN_CHAT,
+  CODE_STORY_END,
+} from 'src/config/constants';
 import {
   calcFailure,
   calcSuccess,
+  generateDefultAiChatMessageInfo,
   generateDefultUserChatMessageInfo,
 } from 'src/utils/gmai-utils-mp';
 import { AiModels } from 'src/utils/generate-ai-config';
@@ -21,6 +26,7 @@ export default function usePlayerAcctions() {
     setIsMultiplayerLoading,
   } = useMultiplayer();
   const { user, getFireDoc, setFireDoc, deleteFireDoc } = useFirebase();
+  const { gmAiGenerateMsg } = useGmAiAcctions();
 
   return {
     joinGame: async (storyId: string, character: Character) => {
@@ -174,11 +180,29 @@ export default function usePlayerAcctions() {
       if (!multiplayerStory || !userCurrentMpGame) return;
       setIsMultiplayerLoading(true);
 
+      const { totalDiceRolls, totalFailures, totalSuccesses, content } = multiplayerStory;
+      const gameInfoJson = JSON.stringify({ totalDiceRolls, totalFailures, totalSuccesses });
+
+      const storyEndPrompt = `(((${CODE_STORY_END}
+        ## Información del sistema de juego (no mostrar en chat):
+        ${gameInfoJson}}
+        Crea el final de la historia.
+        )))`;
+      const storyEndAiMsg =
+        (multiplayerStory.aiRole === 'Game Master' &&
+          (await gmAiGenerateMsg(storyEndPrompt, true))) ||
+        '';
+      const newContent: ChatMessage = {
+        ...generateDefultAiChatMessageInfo(),
+        parts: [{ text: storyEndAiMsg }],
+      };
+
       await setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
           isStoryEnded: true,
+          content: storyEndAiMsg ? [...content, newContent] : content,
         },
         multiplayerStory.storyId
       );

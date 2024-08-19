@@ -341,6 +341,14 @@
     "btn_Continue_Game": "No, keep playing"
   },
 
+  "ModalEndHistory_Multiplayer": {
+    "title": "End of the story",
+    "p1": "You must end the story to earn XP. This action cannot be undone.",
+
+    "btn_End_Game": "Yes, end story",
+    "btn_Continue_Game": "No, keep playing"
+  },
+
   "ModalWinXp": {
     "title": "You Won XP!",
     "You_have_earned_XP": "You have earned ",

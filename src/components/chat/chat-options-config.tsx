@@ -10,6 +10,7 @@ import { Icon } from 'components/icons';
 import ModalArtThemeConfig from './chat-options-modals/modal-art-theme-config';
 import { useTranslations } from 'next-intl';
 import useMultiplayer from 'src/hooks/multiplayer';
+import ModalEndMultiplayer from './chat-options-modals/modal-end-multiplayer';
 
 export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ChatOptionsConfig');
@@ -46,12 +47,22 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
   /**
    * Muiltiplaer config
    */
-  const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
+  const { multiplayerStory, userCurrentMpGame, isMultiplayerLoading } = useMultiplayer();
+
+  function onEndMultiplayerClick() {
+    handlePause();
+    setModalContent(<ModalEndMultiplayer />);
+    setModalIsOpen(true);
+  }
+
   const hostId = multiplayerStory?.userHostId || 'hostId';
   const userId = userCurrentMpGame?.player.userId || 'userId';
   const isHost = hostId === userId;
 
   const isCanRenderAiConfig = (isMultiplayer && isHost) || !isMultiplayer;
+  const isCanRenderMpEnd = isMultiplayer && isHost;
+
+  const isLoading = isLoadingContent || isMultiplayerLoading;
 
   return (
     <div>
@@ -71,7 +82,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
         <button
           className="btn hover:border-info"
           onClick={onIdeasClick}
-          disabled={isLoadingContent}
+          disabled={isLoading}
           aria-label={t('Option.Tips_and_Shortcuts')}
         >
           <Icon.Idea className="w-8 h-8 stroke-info" />
@@ -80,7 +91,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
         <button
           className="btn hover:border-info"
           onClick={onArtClick}
-          disabled={isLoadingContent}
+          disabled={isLoading}
           aria-label={t('Option.Story_Theme_Color')}
         >
           <Icon.Art className="w-8 h-8 fill-info" />
@@ -90,10 +101,21 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
           <button
             className="btn btn-error hover:border-base-content"
             onClick={onEndHistoryClick}
-            disabled={isLoadingContent}
+            disabled={isLoading}
             aria-label={t('Option.End_Story')}
           >
             {isMultiplayer ? t('Exit') : t('End')}
+          </button>
+        ) : null}
+
+        {isCanRenderMpEnd ? (
+          <button
+            className="btn btn-error hover:border-base-content"
+            onClick={onEndMultiplayerClick}
+            disabled={isLoading || multiplayerStory?.isStoryEnded}
+            aria-label={t('Option.End_Story')}
+          >
+            {t('End')}
           </button>
         ) : null}
       </div>

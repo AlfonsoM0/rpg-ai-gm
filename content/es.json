@@ -341,6 +341,14 @@
     "btn_Continue_Game": "No, seguir jugando"
   },
 
+  "ModalEndHistory_Multiplayer": {
+    "title": "Fin de la historia",
+    "p1": "Debes finalizar la historia para ganar XP. Esta acción no se puede deshacer.",
+
+    "btn_End_Game": "Sí, finalizar historia",
+    "btn_Continue_Game": "No, seguir jugando"
+  },
+
   "ModalWinXp": {
     "title": "¡Ganaste XP!",
     "You_have_earned_XP": "Has ganado ",
