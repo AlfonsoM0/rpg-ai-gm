@@ -4,7 +4,7 @@ import { Character } from 'src/types/character';
 import useMultiplayer from '.';
 import useFirebase from '../firebase';
 import { ChatMessage, Player } from 'src/types/multiplayer';
-import { CODE_DONT_SHOW_IN_CHAT } from 'src/config/constants';
+import { CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'src/config/constants';
 import {
   calcFailure,
   calcSuccess,
@@ -19,10 +19,10 @@ export default function usePlayerAcctions() {
     setUserCurrentMpGame,
     setIsMultiplayerLoading,
   } = useMultiplayer();
-  const { user, getFireDoc, setFireDoc } = useFirebase();
+  const { user, getFireDoc, setFireDoc, deleteFireDoc } = useFirebase();
 
   return {
-    joinGame: async function (storyId: string, character: Character) {
+    joinGame: async (storyId: string, character: Character) => {
       setIsMultiplayerLoading(true);
 
       const player = {
@@ -69,10 +69,9 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    sendMessage: async function (msg: string, isInGameMsg: boolean, roll2d6Result?: number) {
-      setIsMultiplayerLoading(true);
-
+    sendMessage: async (msg: string, isInGameMsg: boolean, roll2d6Result?: number) => {
       if (!multiplayerStory || !userCurrentMpGame) return;
+      setIsMultiplayerLoading(true);
 
       const { player, storyId } = userCurrentMpGame;
 
@@ -102,10 +101,9 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    setIsReadyForAiResponse: async function (isRedyForAiResponse: boolean) {
-      setIsMultiplayerLoading(true);
-
+    setIsReadyForAiResponse: async (isRedyForAiResponse: boolean) => {
       if (!multiplayerStory || !userCurrentMpGame) return;
+      setIsMultiplayerLoading(true);
 
       const {
         player: { userId },
@@ -135,10 +133,10 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    startGame: async function () {
+    startGame: async () => {
+      if (!multiplayerStory || !userCurrentMpGame) return;
       setIsMultiplayerLoading(true);
 
-      if (!multiplayerStory || !userCurrentMpGame) return;
       const { aiRole, players, storyDescription } = multiplayerStory;
 
       const allPlayersAreRedy = multiplayerStory.players.map((p) => ({
@@ -171,15 +169,65 @@ export default function usePlayerAcctions() {
       setIsMultiplayerLoading(false);
     },
 
-    endGame: async function () {
-      //TODO: save in MP Library (modal)
-      //TODO: guive XP (modal), redirect to "/multiplayer"
+    endGame: async () => {
+      if (!multiplayerStory || !userCurrentMpGame) return;
+      setIsMultiplayerLoading(true);
+
+      await setFireDoc(
+        'MULTIPLAYER_STORY',
+        {
+          ...multiplayerStory,
+          isStoryEnded: true,
+        },
+        multiplayerStory.storyId
+      );
+
+      setIsMultiplayerLoading(false);
     },
 
-    leaveGame: async function () {
-      //TODO: Remove from story
-      //TODO: prompt msg of character leave.
-      //TODO: Delete USER_GAME and MULTIPLAYER_STORY documents
+    leaveGame: async () => {
+      if (!multiplayerStory || !userCurrentMpGame) return;
+      setIsMultiplayerLoading(true);
+
+      const { players, content } = multiplayerStory;
+      const { player } = userCurrentMpGame;
+
+      const newPlayers = players.filter((p) => p.userId !== player.userId);
+
+      if (newPlayers.length === 0) {
+        // delete multiplayer game if no players
+        await deleteFireDoc('MULTIPLAYER_STORY', multiplayerStory.storyId);
+      } else {
+        // Edit game players and set newContent Prompt
+        const newCharacters = newPlayers.map((p) => p.character);
+        const newContent: ChatMessage = {
+          ...generateDefultUserChatMessageInfo(userCurrentMpGame),
+          isInGameMsg: true,
+          parts: [
+            {
+              text: `(((Un jugador ha abandonado el juego. El personaje "${
+                player.character.name
+              }" ahora es un personaje no jugador. Los personajes jugadores que siguen en juego son : ${JSON.stringify(
+                newCharacters
+              )}. ${CODE_CHARACTERS_CHANGE})))`,
+            },
+          ],
+        };
+
+        await setFireDoc(
+          'MULTIPLAYER_STORY',
+          {
+            ...multiplayerStory,
+            players: newPlayers,
+            content: [...content, newContent],
+          },
+          multiplayerStory.storyId
+        );
+      }
+
+      await deleteFireDoc('USER_GAME');
+
+      setIsMultiplayerLoading(false);
     },
   };
 }
