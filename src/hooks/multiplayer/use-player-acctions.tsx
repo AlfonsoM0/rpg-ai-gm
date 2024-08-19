@@ -10,6 +10,7 @@ import {
   calcSuccess,
   generateDefultUserChatMessageInfo,
 } from 'src/utils/gmai-utils-mp';
+import { AiModels } from 'src/utils/generate-ai-config';
 
 export default function usePlayerAcctions() {
   const {
@@ -226,6 +227,22 @@ export default function usePlayerAcctions() {
       }
 
       await deleteFireDoc('USER_GAME');
+
+      setIsMultiplayerLoading(false);
+    },
+
+    setAiConfigMp: async (aiConfig: AiModels) => {
+      if (!multiplayerStory || !userCurrentMpGame) return;
+      setIsMultiplayerLoading(true);
+
+      await setFireDoc(
+        'MULTIPLAYER_STORY',
+        {
+          ...multiplayerStory,
+          aiConfig,
+        },
+        multiplayerStory.storyId
+      );
 
       setIsMultiplayerLoading(false);
     },

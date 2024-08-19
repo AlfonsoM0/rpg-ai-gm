@@ -27,7 +27,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
 
   function onConfigAiClick() {
     handlePause();
-    setModalContent(<ModalConfigAI />);
+    setModalContent(<ModalConfigAI isMultiplayer={isMultiplayer} />);
     setModalIsOpen(true);
   }
 
