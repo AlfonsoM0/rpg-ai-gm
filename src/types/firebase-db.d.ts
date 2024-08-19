@@ -38,6 +38,7 @@ export type UserCharacters = {
 
 export type UserLibrary = {
   library: Book[];
+  multiplayerLibrary: MultiplayerStory[];
   updatedAt: number;
 };
 

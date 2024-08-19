@@ -170,5 +170,16 @@ export default function usePlayerAcctions() {
 
       setIsMultiplayerLoading(false);
     },
+
+    endGame: async function () {
+      //TODO: save in MP Library (modal)
+      //TODO: guive XP (modal), redirect to "/multiplayer"
+    },
+
+    leaveGame: async function () {
+      //TODO: Remove from story
+      //TODO: prompt msg of character leave.
+      //TODO: Delete USER_GAME and MULTIPLAYER_STORY documents
+    },
   };
 }

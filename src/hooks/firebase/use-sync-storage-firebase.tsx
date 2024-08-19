@@ -30,7 +30,7 @@ export default function useSyncStorageAndFirebase() {
 
   const { charactersCollection, setCharactersCollection, updatedAt: uAtChar } = useCharacterStore();
 
-  const { library, setLibrary, updatedAt: uAtLib } = useLibraryStore();
+  const { library, multiplayerLibrary, setLibrary, updatedAt: uAtLib } = useLibraryStore();
 
   if (user)
     return {
@@ -66,7 +66,8 @@ export default function useSyncStorageAndFirebase() {
           const currentFireDoc = await getFireDoc('USER_LIBRARY');
 
           if (currentFireDoc && currentFireDoc.updatedAt > uAtLib) setLibrary(currentFireDoc);
-          else if (!currentFireDoc) setFireDoc('USER_LIBRARY', { library, updatedAt: uAtLib });
+          else if (!currentFireDoc)
+            setFireDoc('USER_LIBRARY', { library, multiplayerLibrary, updatedAt: uAtLib });
         },
       },
 
@@ -97,7 +98,7 @@ export default function useSyncStorageAndFirebase() {
           const currentFireDoc = await getFireDoc('USER_LIBRARY');
 
           if ((currentFireDoc && currentFireDoc.updatedAt < uAtLib) || !currentFireDoc)
-            setFireDoc('USER_LIBRARY', { library, updatedAt: uAtLib });
+            setFireDoc('USER_LIBRARY', { library, multiplayerLibrary, updatedAt: uAtLib });
         },
       },
 
