@@ -86,20 +86,19 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
     if (storyNameMp) addBookMp(multiplayerStory);
 
     // update Characters XP if story ended
-    if (multiplayerStory.isStoryEnded) {
-      const xp = calculateStoryXpMp({
-        totalDiceRolls: multiplayerStory.totalDiceRolls,
-        totalSuccesses: multiplayerStory.totalSuccesses,
-        totalFailures: multiplayerStory.totalFailures,
-      });
-
+    const xp = calculateStoryXpMp({
+      totalDiceRolls: multiplayerStory.totalDiceRolls,
+      totalSuccesses: multiplayerStory.totalSuccesses,
+      totalFailures: multiplayerStory.totalFailures,
+    });
+    if (multiplayerStory.isStoryEnded && xp) {
       findCharacterByIdAndIcrementXp(userCurrentMpGame.player.character.id, xp);
       setModalContent(<ModalWinXp xp={xp} PC={[userCurrentMpGame.player.character.name]} />);
-    }
+    } else setModalIsOpen(false);
 
     // Leave Game
-    await leaveGame();
     router.push('/');
+    await leaveGame();
 
     setIsMultiplayerLoading(false);
   }

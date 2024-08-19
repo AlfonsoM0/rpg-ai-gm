@@ -7,7 +7,7 @@ import { useModalState } from 'hooks/use-modal-state';
 import { useUserPreferencesStore } from 'hooks/use-user-preferences-store';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { usePlayerAcctions } from 'src/hooks/multiplayer';
+import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 
 export default function CollapseMyShortcuts({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ModaIdeasForAI.My_Shortcuts');
@@ -35,11 +35,13 @@ export default function CollapseMyShortcuts({ isMultiplayer }: { isMultiplayer?:
   }
 
   const pathname = usePathname();
-  const isOutOfStory = !(pathname === '/story' || pathname === '/multiplayer/game');
 
   // Multiplayer
-  const { sendMessage } = usePlayerAcctions();
+  const { multiplayerStory } = useMultiplayer();
+  const isMpEnded = isMultiplayer ? multiplayerStory!.isStoryEnded : false;
+  const isOutOfStory = !(pathname === '/story' || pathname === '/multiplayer/game') || isMpEnded;
 
+  const { sendMessage } = usePlayerAcctions();
   function handleClick(idea: string) {
     if (isOutOfStory) return;
 
