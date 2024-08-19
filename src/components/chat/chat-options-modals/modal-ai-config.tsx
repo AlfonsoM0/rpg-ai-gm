@@ -5,6 +5,7 @@ import { ModalContentContainer } from 'components/modal';
 import TTSConfig from 'components/tts/tts-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTranslations } from 'next-intl';
+import useFirebase from 'src/hooks/firebase';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { useDebouncedCallback } from 'use-debounce';
@@ -28,7 +29,8 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
   /**
    * Multiplayer
    */
-  const { multiplayerStory } = useMultiplayer();
+  const { multiplayerStory, isMultiplayerLoading } = useMultiplayer();
+  const { isFireLoading } = useFirebase();
   const { setAiConfigMp } = usePlayerAcctions();
   const dSetAiConfigMp = useDebouncedCallback(setAiConfigMp, 3000);
 
@@ -37,6 +39,7 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
    */
   const R_AiConfig = isMultiplayer ? multiplayerStory?.aiConfig || 'Progresive_AI' : aiConfig;
   const R_setAiConfig = isMultiplayer ? dSetAiConfigMp : setAiConfig;
+  const isLoading = isFireLoading || isMultiplayerLoading;
 
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
@@ -54,13 +57,20 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
           <div className="form-control border-2 rounded-lg my-1 p-1" key={model.name}>
             <label className="label cursor-pointer">
               <span className="label-text font-bold">{model.title}</span>
-              <input
-                type="radio"
-                name="radio-10"
-                className={model.clsRadio}
-                checked={R_AiConfig === model.name}
-                onChange={() => R_setAiConfig(model.name)}
-              />
+              {isLoading ? (
+                <div className={model.clsRadio}>
+                  <span className="loading loading-spinner loading-xs"></span>
+                </div>
+              ) : (
+                <input
+                  type="radio"
+                  name="radio-10"
+                  className={model.clsRadio}
+                  checked={R_AiConfig === model.name}
+                  onChange={() => R_setAiConfig(model.name)}
+                  disabled={isLoading}
+                />
+              )}
             </label>
             <small className="ml-3">{model.desc}</small>
           </div>

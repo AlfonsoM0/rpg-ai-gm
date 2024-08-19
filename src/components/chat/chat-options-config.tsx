@@ -9,8 +9,10 @@ import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 import { Icon } from 'components/icons';
 import ModalArtThemeConfig from './chat-options-modals/modal-art-theme-config';
 import { useTranslations } from 'next-intl';
-import useMultiplayer from 'src/hooks/multiplayer';
+import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import ModalEndMultiplayer from './chat-options-modals/modal-end-multiplayer';
+import { usePathname, useRouter } from 'src/navigation';
+import ModalExitLobby from './chat-options-modals/modal-exit-lobby';
 
 export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ChatOptionsConfig');
@@ -20,9 +22,18 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
   const { aiConfig, isStoryStarted } = useGmAiStore();
   const { handlePause } = useTTSStore();
 
+  const pathname = usePathname();
   function onEndHistoryClick(): void {
     handlePause();
-    setModalContent(<ModalEndHistory isMultiplayer={isMultiplayer} />);
+
+    const modalToShow =
+      pathname === '/multiplayer/lobby' ? (
+        <ModalExitLobby />
+      ) : (
+        <ModalEndHistory isMultiplayer={isMultiplayer} />
+      );
+
+    setModalContent(modalToShow);
     setModalIsOpen(true);
   }
 
@@ -95,7 +106,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
           <Icon.Art className="w-8 h-8 fill-info" />
         </button>
 
-        {isStoryStarted ? (
+        {isStoryStarted || isMultiplayer ? (
           <button
             className="btn btn-error hover:border-base-content"
             onClick={onEndHistoryClick}

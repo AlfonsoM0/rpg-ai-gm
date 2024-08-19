@@ -1,7 +1,7 @@
 'use client';
 
 import { Character } from 'src/types/character';
-import useMultiplayer, { useGmAiAcctions } from '.';
+import useMultiplayer from '.';
 import useFirebase from '../firebase';
 import { ChatMessage, Player } from 'src/types/multiplayer';
 import {
@@ -12,6 +12,7 @@ import {
 import {
   calcFailure,
   calcSuccess,
+  calculateStoryXpMp,
   generateDefultAiChatMessageInfo,
   generateDefultUserChatMessageInfo,
 } from 'src/utils/gmai-utils-mp';
@@ -24,9 +25,9 @@ export default function usePlayerAcctions() {
     setMultiplayerStory,
     setUserCurrentMpGame,
     setIsMultiplayerLoading,
+    clearMultiplayerState,
   } = useMultiplayer();
   const { user, getFireDoc, setFireDoc, deleteFireDoc } = useFirebase();
-  const { gmAiGenerateMsg } = useGmAiAcctions();
 
   return {
     joinGame: async (storyId: string, character: Character) => {
@@ -180,29 +181,36 @@ export default function usePlayerAcctions() {
       if (!multiplayerStory || !userCurrentMpGame) return;
       setIsMultiplayerLoading(true);
 
-      const { totalDiceRolls, totalFailures, totalSuccesses, content } = multiplayerStory;
-      const gameInfoJson = JSON.stringify({ totalDiceRolls, totalFailures, totalSuccesses });
+      const { totalFailures, totalSuccesses, content, players } = multiplayerStory;
+      const totalXp = calculateStoryXpMp(multiplayerStory);
+      const gameInfoJson = JSON.stringify({ totalSuccesses, totalFailures, totalXp });
 
+      // create End Story Prompt
       const storyEndPrompt = `(((${CODE_STORY_END}
         ## Información del sistema de juego (no mostrar en chat):
         ${gameInfoJson}}
         Crea el final de la historia.
         )))`;
-      const storyEndAiMsg =
-        (multiplayerStory.aiRole === 'Game Master' &&
-          (await gmAiGenerateMsg(storyEndPrompt, true))) ||
-        '';
-      const newContent: ChatMessage = {
-        ...generateDefultAiChatMessageInfo(),
-        parts: [{ text: storyEndAiMsg }],
+
+      const newMessage: ChatMessage = {
+        ...generateDefultUserChatMessageInfo(userCurrentMpGame),
+        isInGameMsg: true,
+        parts: [{ text: storyEndPrompt }],
       };
+
+      // Reset all player state to Redy for AI Response.
+      const newPlayersConfig: Player[] = players.map((player) => ({
+        ...player,
+        isRedyForAiResponse: true,
+      }));
 
       await setFireDoc(
         'MULTIPLAYER_STORY',
         {
           ...multiplayerStory,
+          players: newPlayersConfig,
           isStoryEnded: true,
-          content: storyEndAiMsg ? [...content, newContent] : content,
+          content: [...content, newMessage],
         },
         multiplayerStory.storyId
       );
@@ -251,6 +259,8 @@ export default function usePlayerAcctions() {
       }
 
       await deleteFireDoc('USER_GAME');
+
+      clearMultiplayerState();
 
       setIsMultiplayerLoading(false);
     },

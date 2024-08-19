@@ -349,6 +349,14 @@
     "btn_Continue_Game": "No, seguir jugando"
   },
 
+  "Modal_Exit_lobby": {
+    "title": "Salir del Lobby",
+    "p1": "¿Estás seguro de querer abandonar el Lobby?",
+
+    "btn_End_Game": "Sí, salir",
+    "btn_Continue_Game": "No, quedarme"
+  },
+
   "ModalWinXp": {
     "title": "¡Ganaste XP!",
     "You_have_earned_XP": "Has ganado ",
@@ -409,13 +417,13 @@
       "tip1_p": "GmAi interpreta solamente los mensajes que se envían dentro del juego, en nombre del personaje. Los mensajes fuera de juego se envían en nombre del jugador y son menos visibles. Usa los mensajes fuera de juego para coordinar la historia con tus compañeros.",
 
       "tip2_p_strong": "La XP ganada al final de la historia",
-      "tip2_p": "Se calcula en base al resultado de todas las prubas realizadas desde las fichas de los personajes. Todos los participantes ganan la misma cantidad de XP. La cantidad de pruebas y calidad de las mismas determina el resultado final de XP ganada.",
+      "tip2_p": "Cuando sales del juego tu personaje recibirá los XP que correspondan. los XP se calculan en base al resultado de todas las prubas realizadas desde las fichas de todos los personajes. Todos los participantes ganan la misma cantidad de XP. La cantidad de pruebas y calidad de las mismas determina el resultado final de XP ganada. No ganarás XP si la historia no es finalizada formalmente por el anfitrión de la partida (ver más adelante).",
 
       "tip3_p_strong": "Conseguir una mejor historia",
       "tip3_p": "Es fácil, aporta ideas a la trama de manera creativa y no solo eligiendo las opciones que te da GmAi.",
 
       "tip4_p_strong": "Finalizar la historia",
-      "tip4_p": "Cualquier jugador puede pedir dentro del juego que finalice la historia. Pero solo el anfitrión puede finalizar formalmente la historia.",
+      "tip4_p": "Cualquier jugador puede pedir dentro del juego que finalice la historia. Pero solo el anfitrión puede finalizar formalmente la historia. Si la historia no finaliza formalmente, no ganarás XP cuando salgas del juego.",
 
       "tip5_p_strong": "¿Quieres jugar una campaña de varias historias?",
       "tip5_p": "Guarda tu historia en la biblioteca. Luego podrás acceder a ella y seguir jugando desde donde lo dejaste. GmAi creará un resumen de la historia. Usa ese resumen para crear una nueva historia."

@@ -349,6 +349,14 @@
     "btn_Continue_Game": "No, keep playing"
   },
 
+  "Modal_Exit_lobby": {
+    "title": "Exit Lobby",
+    "p1": "Are you sure you want to leave the Lobby?",
+
+    "btn_End_Game": "Yes, exit",
+    "btn_Continue_Game": "No, stay"
+  },
+
   "ModalWinXp": {
     "title": "You Won XP!",
     "You_have_earned_XP": "You have earned ",
@@ -409,13 +417,13 @@
       "tip1_p": "GmAi only interprets messages sent in-game, in character. Out-of-game messages are sent in the player's name and are less visible. Use out-of-game messages to coordinate the story with your teammates.",
 
       "tip2_p_strong": "XP earned at the end of the story",
-      "tip2_p": "Is calculated based on the result of all tests performed from the character sheets. All participants earn the same amount of XP. The number of tests and their quality determines the final amount of XP earned.",
+      "tip2_p": "When you exit the game, your character will receive the appropriate XP. XP is calculated based on the results of all tests performed from all character tokens. All participants earn the same amount of XP. The number of tests and the quality of the tests determines the final result of XP earned. You will not earn XP if the story is not formally finished by the host of the game (see below).",
 
       "tip3_p_strong": "Get a better story",
       "tip3_p": "It's easy, contribute ideas to the plot creatively and not just by choosing the options given by GmAi.",
 
       "tip4_p_strong": "Ending the story",
-      "tip4_p": "Any player can ask in-game to end the story. But only the host can formally end the story.",
+      "tip4_p": "Any player can ask in-game to end the story. But only the host can formally end the story. If the story does not formally end, you will not gain XP when you exit the game.",
 
       "tip5_p_strong": "Want to play a campaign of multiple stories?",
       "tip5_p": "Save your story in the library. Then you can access it and continue playing from where you left off. GmAi will create a summary of the story. Use that summary to create a new story."

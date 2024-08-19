@@ -14,6 +14,7 @@ import TTSControls from 'src/components/tts/tts-controls';
 import { AI_ROLE } from 'src/config/constants';
 import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/multiplayer';
 import { useTTSStore } from 'src/hooks/use-tts-store';
+import { isGmAiAutomaticResponse } from 'src/utils/gmai-utils-mp';
 
 export default function Page() {
   const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
@@ -50,7 +51,7 @@ export default function Page() {
    * GMAI automatic response
    */
   useEffect(() => {
-    if (multiplayerStory?.aiRole === 'Game Master') gmAiGenerateMsg();
+    if (isGmAiAutomaticResponse(multiplayerStory)) gmAiGenerateMsg();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiplayerStory?.players]);
 

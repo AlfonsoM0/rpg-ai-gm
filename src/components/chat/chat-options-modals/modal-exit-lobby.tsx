@@ -4,17 +4,21 @@ import { useTranslations } from 'next-intl';
 import { ModalContentContainer } from 'src/components/modal';
 import { usePlayerAcctions } from 'src/hooks/multiplayer';
 import { useModalState } from 'src/hooks/use-modal-state';
+import { useRouter } from 'src/navigation';
 
-export default function ModalEndMultiplayer() {
-  const t = useTranslations('ModalEndHistory_Multiplayer');
+export default function ModalExitLobby() {
+  const t = useTranslations('Modal_Exit_lobby');
+
+  const router = useRouter();
 
   const { setModalIsOpen } = useModalState();
 
-  const { endGame } = usePlayerAcctions();
+  const { leaveGame } = usePlayerAcctions();
 
-  function onEndGameClick() {
-    endGame();
+  function onExitLobby() {
+    leaveGame();
     setModalIsOpen(false);
+    router.push('/multiplayer');
   }
 
   return (
@@ -22,7 +26,7 @@ export default function ModalEndMultiplayer() {
       <p className="py-4">{t('p1')}</p>
 
       <div className="modal-action justify-around">
-        <button className="btn btn-error" onClick={onEndGameClick} aria-label={t('btn_End_Game')}>
+        <button className="btn btn-error" onClick={onExitLobby} aria-label={t('btn_End_Game')}>
           {t('btn_End_Game')}
         </button>
         <button

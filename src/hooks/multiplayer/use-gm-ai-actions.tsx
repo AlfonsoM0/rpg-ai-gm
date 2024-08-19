@@ -26,11 +26,6 @@ export default function useGmAiAcctions() {
       // Only Host (players[0]) can execute this acction.
       if (userCurrentMpGame.player.userId !== players[0].userId) return;
 
-      // All player must be redy for the response.
-      for (let i = 0; i < players.length; i++) {
-        if (!players[i].isRedyForAiResponse) return;
-      }
-
       // Clean content for "Empty" and "Error" responses.
       const cleanContent = clearGmAiErrorsMsg(content);
 

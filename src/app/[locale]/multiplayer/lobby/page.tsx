@@ -46,6 +46,8 @@ export default function Page() {
     startGame();
   }
 
+  const isAiGM = multiplayerStory.aiRole === 'Game Master';
+
   return (
     <Main>
       <H1>Lobby</H1>
@@ -62,18 +64,18 @@ export default function Page() {
       <section className="p-4">
         <H2>Información de la partida</H2>
 
-        <p className="mb-4">
+        <h3 className="font-bold text-lg">{storyName}</h3>
+        <p>{storyDescription}</p>
+
+        <p className="my-4">
           <strong>Creada por:</strong> {userCratorName}
         </p>
         <p className="mb-4">
-          <strong>Anfitrión:</strong> {players[0].userName}
+          <strong>{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong> {players[0].userName}
         </p>
         <p className="mb-4">
           <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}
         </p>
-
-        <h3 className="font-bold text-lg">{storyName}</h3>
-        <p>{storyDescription}</p>
       </section>
 
       {isHost ? (

@@ -88,7 +88,7 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
     // update Characters XP if story ended
     if (multiplayerStory.isStoryEnded) {
       const xp = calculateStoryXpMp({
-        totalRolls: multiplayerStory.totalDiceRolls,
+        totalDiceRolls: multiplayerStory.totalDiceRolls,
         totalSuccesses: multiplayerStory.totalSuccesses,
         totalFailures: multiplayerStory.totalFailures,
       });

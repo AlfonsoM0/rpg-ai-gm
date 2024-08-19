@@ -40,7 +40,8 @@ export default function MultiplayerChatWindow() {
 
           if (message.includes(CODE_CHARACTERS_CHANGE))
             return <MsgLoadingCharacters key={msg.id} />;
-          else if (message.includes(CODE_STORY_END)) return <MsgStoryEnd key={msg.id} />;
+          else if (message.includes(CODE_STORY_END))
+            return <MsgStoryEnd key={msg.id} isMultiplayer />;
           else if (message.includes(CODE_DONT_SHOW_IN_CHAT)) return <div key={msg.id} />;
           return (
             <ChatMessage

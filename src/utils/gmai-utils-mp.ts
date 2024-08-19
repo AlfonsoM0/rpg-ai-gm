@@ -1,6 +1,6 @@
 import { Content } from '@google/generative-ai';
 import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
-import { ChatMessage, Player } from 'src/types/multiplayer';
+import { ChatMessage, MultiplayerStory, Player } from 'src/types/multiplayer';
 
 export function generateDefultAiChatMessageInfo(): Omit<ChatMessage, 'parts'> {
   return {
@@ -62,19 +62,33 @@ export function calcFailure(currentValue: number, roll?: number) {
 }
 
 export function calculateStoryXpMp({
-  totalRolls,
+  totalDiceRolls,
   totalSuccesses,
   totalFailures,
 }: {
-  totalRolls: number;
+  totalDiceRolls: number;
   totalSuccesses: number;
   totalFailures: number;
 }): number {
-  const minR = Math.max(1, totalRolls);
+  const minR = Math.max(1, totalDiceRolls);
   const minS = Math.max(1, totalSuccesses);
   const minF = Math.max(1, totalFailures);
   const baseXP = Math.floor(minR / 10);
   const multp = Math.min(2, Math.max(1, minS / minF));
 
   return Math.round(baseXP * multp);
+}
+
+export function isGmAiAutomaticResponse(multiplayerStory?: MultiplayerStory): boolean {
+  if (!multiplayerStory) return false;
+  const { players, aiRole } = multiplayerStory;
+
+  if (aiRole !== 'Game Master') return false;
+
+  // All player must be redy for the response.
+  for (let i = 0; i < players.length; i++) {
+    if (!players[i].isRedyForAiResponse) return false;
+  }
+
+  return true;
 }
