@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import ChatInputMsg from 'src/components/chat/chat-input-msg';
+import ChatOptionsConfig from 'src/components/chat/chat-options-config';
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import Main from 'src/components/Main';
@@ -18,8 +19,6 @@ export default function Page() {
   const { startGame } = usePlayerAcctions();
 
   const aiConfigObj = useGenerateAiConfigObj();
-
-  const [isShowChat, setIsShowChat] = useState(false);
 
   const isHost = multiplayerStory?.players[0].userId === userCurrentMpGame?.player.userId;
 
@@ -47,15 +46,12 @@ export default function Page() {
       <H1>Lobby</H1>
 
       <section>
-        <button className="btn btn-xs btn-ghost w-full" onClick={() => setIsShowChat(!isShowChat)}>
-          {isShowChat ? 'Ocultar chat' : 'Abrir chat'}
-        </button>
-        {isShowChat ? (
-          <div>
-            <MultiplayerChatWindow />
-            <ChatInputMsg isMultiplayer />
-          </div>
-        ) : null}
+        <MultiplayerChatWindow />
+        <ChatInputMsg isMultiplayer />
+      </section>
+
+      <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
+        <ChatOptionsConfig isMultiplayer />
       </section>
 
       <section className="p-4">
