@@ -37,7 +37,8 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   /**
    * Multiplayer Settings
    */
-  const { isMultiplayerLoading, userCurrentMpGame, isInGameMsg, setIsInGameMsg } = useMultiplayer();
+  const { isMultiplayerLoading, userCurrentMpGame, isInGameMsg, setIsInGameMsg, multiplayerStory } =
+    useMultiplayer();
   const { sendMessage } = usePlayerAcctions();
   function submitMpChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -47,6 +48,11 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
     sendMessage(chatMsg, isInGameMsg);
     setChatMsg('');
   }
+  // Disable Characters Msg when Story is Ended
+  useEffect(() => {
+    if (multiplayerStory?.isStoryEnded) setIsInGameMsg(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [multiplayerStory?.isStoryEnded]);
 
   /**
    *  Rendering
@@ -82,6 +88,7 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
             className="toggle toggle-info"
             onChange={() => setIsInGameMsg(!isInGameMsg)}
             checked={isInGameMsg}
+            disabled={multiplayerStory?.isStoryEnded}
           />
         </div>
       ) : null}

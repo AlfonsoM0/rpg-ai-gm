@@ -98,7 +98,11 @@ export default function Page() {
           <CardCharacterContainer isSelected={player.isRedyForAiResponse}>
             <CardPlayCharacter character={player.character} isMultiplayer />
 
-            <button className="btn btn-ghost" onClick={onSetRedyForGMClick}>
+            <button
+              className="btn btn-ghost"
+              onClick={onSetRedyForGMClick}
+              disabled={multiplayerStory.isStoryEnded}
+            >
               {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse}
             </button>
           </CardCharacterContainer>

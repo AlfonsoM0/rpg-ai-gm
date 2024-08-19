@@ -4,7 +4,7 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 import { useTranslations } from 'next-intl';
-import { usePlayerAcctions } from 'src/hooks/multiplayer';
+import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ChatOptionsABC');
 
@@ -17,6 +17,7 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
   /**
    * Multiplayer
    */
+  const { multiplayerStory, isMultiplayerLoading } = useMultiplayer();
   const { sendMessage } = usePlayerAcctions();
 
   function onHistoryOptionClick(option: 'A' | 'B' | 'C'): void {
@@ -31,6 +32,11 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
       });
   }
 
+  /**
+   * Render
+   */
+  const isBtnDisable = isMultiplayerLoading || isLoadingContent || multiplayerStory?.isStoryEnded;
+
   return (
     <div>
       <p className="text-center text-sm mb-1 font-bold">{t('Story_Options')}</p>
@@ -38,7 +44,7 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
         <button
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('A')}
-          disabled={isLoadingContent}
+          disabled={isBtnDisable}
           aria-label={t('Option.Option_A')}
         >
           A
@@ -46,7 +52,7 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
         <button
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('B')}
-          disabled={isLoadingContent}
+          disabled={isBtnDisable}
           aria-label={t('Option.Option_B')}
         >
           B
@@ -54,7 +60,7 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
         <button
           className="btn btn-circle hover:border-info"
           onClick={() => onHistoryOptionClick('C')}
-          disabled={isLoadingContent}
+          disabled={isBtnDisable}
           aria-label={t('Option.Option_C')}
         >
           C

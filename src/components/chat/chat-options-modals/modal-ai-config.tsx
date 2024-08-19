@@ -7,6 +7,7 @@ import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTranslations } from 'next-intl';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
+import { useDebouncedCallback } from 'use-debounce';
 import { AiModels } from 'utils/generate-ai-config';
 
 export const aiIconStyle = {
@@ -29,12 +30,13 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
    */
   const { multiplayerStory } = useMultiplayer();
   const { setAiConfigMp } = usePlayerAcctions();
+  const dSetAiConfigMp = useDebouncedCallback(setAiConfigMp, 3000);
 
   /**
    * Render
    */
   const R_AiConfig = isMultiplayer ? multiplayerStory?.aiConfig || 'Progresive_AI' : aiConfig;
-  const R_setAiConfig = isMultiplayer ? setAiConfigMp : setAiConfig;
+  const R_setAiConfig = isMultiplayer ? dSetAiConfigMp : setAiConfig;
 
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
