@@ -18,7 +18,7 @@ export default function MultiplayerJoinCollapse({ game }: { game: MultiplayerSto
 
   function onJoinClick() {
     if (!characterSelected) return;
-    joinGame(storyId, characterSelected).then(() => {
+    joinGame(game, characterSelected).then(() => {
       router.push('/multiplayer/lobby');
     });
   }

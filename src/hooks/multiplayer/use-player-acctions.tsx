@@ -3,7 +3,7 @@
 import { Character } from 'src/types/character';
 import useMultiplayer from '.';
 import useFirebase from '../firebase';
-import { ChatMessage, Player } from 'src/types/multiplayer';
+import { ChatMessage, MultiplayerStory, Player } from 'src/types/multiplayer';
 import {
   CODE_CHARACTERS_CHANGE,
   CODE_DONT_SHOW_IN_CHAT,
@@ -30,8 +30,10 @@ export default function usePlayerAcctions() {
   const { user, getFireDoc, setFireDoc, deleteFireDoc } = useFirebase();
 
   return {
-    joinGame: async (storyId: string, character: Character) => {
+    joinGame: async (multiplayerStory: MultiplayerStory, character: Character) => {
       setIsMultiplayerLoading(true);
+
+      const { storyId, storyName } = multiplayerStory;
 
       const player = {
         userId: user?.uid || '',
@@ -45,12 +47,10 @@ export default function usePlayerAcctions() {
       /**
        * Set New Multiplayer Game in Firebase and State
        */
-      const multiplayerGame = await getFireDoc('MULTIPLAYER_STORY', storyId);
-
-      if (multiplayerGame) {
+      if (multiplayerStory) {
         const newMultiplayerInfo = {
-          ...multiplayerGame,
-          players: [...multiplayerGame.players, player],
+          ...multiplayerStory,
+          players: [...multiplayerStory.players, player],
         };
         setFireDoc('MULTIPLAYER_STORY', newMultiplayerInfo, storyId);
         setMultiplayerStory(newMultiplayerInfo);
@@ -62,7 +62,7 @@ export default function usePlayerAcctions() {
 
         const currentMultiplayerGame = {
           storyId,
-          storyName: multiplayerGame.storyName,
+          storyName,
           player,
         };
 
@@ -198,7 +198,7 @@ export default function usePlayerAcctions() {
         parts: [{ text: storyEndPrompt }],
       };
 
-      // Reset all player state to Redy for AI Response.
+      // Reset all player state to Redy for AI Response, so GM can describe the end.
       const newPlayersConfig: Player[] = players.map((player) => ({
         ...player,
         isRedyForAiResponse: true,
@@ -209,6 +209,7 @@ export default function usePlayerAcctions() {
         {
           ...multiplayerStory,
           players: newPlayersConfig,
+          playersForBook: newPlayersConfig,
           isStoryEnded: true,
           content: [...content, newMessage],
         },

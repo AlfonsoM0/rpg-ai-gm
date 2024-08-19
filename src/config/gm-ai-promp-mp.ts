@@ -189,7 +189,7 @@ Explica que para mejorar una característica se requiere de 10XP multiplicado el
 7. Modelo: \[Crea una breve narración basada en esa opción. Obliga al jugador a realizar una prueba de la característica que corresponda para determinar cómo se resuelve su decisión. Nunca debes dar opciones al personaje, solo pedir el resultado de la prueba de característica que corresponda para seguir con la narración]. (Paso 7)
 8. Usuario: \[Realiza la prueba de característica solicitada y entrega el resultado. Y luego entrega información sobre el progreso de la historia]. (Paso 8)
 9. Modelo: \[Crea una breve narración basada en el resultado de la prueba de característica. Plantea una nueva situación al jugador. Da tres opciones (A, B, C) para que el jugador decida. Ofrece al jugador crear su propia opción (X). No muestra qué prueba de característica está relacionada con cada opción]. (Paso 9 + Paso 5)
-10. \[... continúa la iteración hasta el jugador envía el mensaje “Crea el final de la historia considerando lo siguiente: Total de fallos \[valor], Total de éxito \[valor], XP de la historia \[valor].”]
+10. \[... continúa la iteración hasta el jugador pida finalizar la historia]
 11. Modelo: \[Fin de la historia] (Paso 10)
 12. Modelo: \[Recompensa] (Paso 11)
 `;

@@ -97,23 +97,24 @@ export default function Page() {
       <section>
         {isGmAiRolGM ? (
           <CardCharacterContainer isSelected={player.isRedyForAiResponse}>
-            <CardPlayCharacter character={player.character} isMultiplayer />
-
             <button
-              className="btn btn-ghost"
+              className="btn btn-ghost mb-[-2rem] z-10"
               onClick={onSetRedyForGMClick}
               disabled={multiplayerStory.isStoryEnded}
             >
-              {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse}
+              {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse1}
             </button>
+            <CardPlayCharacter character={player.character} isMultiplayer />
+            <></>
           </CardCharacterContainer>
         ) : null}
 
         <div className="flex flex-wrap gap-4 justify-center mt-4">
           {othersPlayers.map((player) => (
             <CardCharacterContainer isSelected={player.isRedyForAiResponse} key={player.userId}>
+              {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse2}
               <CardCharacterBody character={player.character}>
-                {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse}
+                <></>
               </CardCharacterBody>
             </CardCharacterContainer>
           ))}
@@ -136,4 +137,7 @@ const WaitingForResponse = (
   </div>
 );
 
-const NotRediForResponse = <div className="text-center text-error">No está listo</div>;
+const NotRediForResponse1 = (
+  <div className="text-center text-error p-2">Click aquí para esperar al GM</div>
+);
+const NotRediForResponse2 = <div className="text-center text-error p-2">No está listo</div>;

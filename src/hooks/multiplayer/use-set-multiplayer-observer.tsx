@@ -10,16 +10,15 @@ import { Unsubscribe } from 'firebase/auth';
 export default function useSetMultiplayerOberver() {
   const { getFireDoc, observeFireDoc } = useFirebase();
 
-  const { setMultiplayerStory, setUserCurrentMpGame } = useMultiplayer();
+  const { setMultiplayerStory, setUserCurrentMpGame, userCurrentMpGame } = useMultiplayer();
+  const storyId = userCurrentMpGame?.storyId;
 
   /**
    * Get Story ID and User Current Mp Game
    */
-  const [storyId, setStoryId] = useState<string | undefined>(undefined);
   useEffect(() => {
     getFireDoc('USER_GAME').then((doc: false | UserGame | undefined) => {
       if (doc) {
-        setStoryId(doc.currentMultiplayerGame?.storyId);
         setUserCurrentMpGame(doc.currentMultiplayerGame);
       }
     });

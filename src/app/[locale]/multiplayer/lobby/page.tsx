@@ -61,23 +61,6 @@ export default function Page() {
         <ChatOptionsConfig isMultiplayer />
       </section>
 
-      <section className="p-4">
-        <H2>Información de la partida</H2>
-
-        <h3 className="font-bold text-lg">{storyName}</h3>
-        <p>{storyDescription}</p>
-
-        <p className="my-4">
-          <strong>Creada por:</strong> {userCratorName}
-        </p>
-        <p className="mb-4">
-          <strong>{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong> {players[0].userName}
-        </p>
-        <p className="mb-4">
-          <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}
-        </p>
-      </section>
-
       {isHost ? (
         <section>
           <button
@@ -98,6 +81,23 @@ export default function Page() {
             <CardCharacterLobby key={player.userId} player={player} />
           ))}
         </div>
+      </section>
+
+      <section className="p-4">
+        <H2>Información de la partida</H2>
+
+        <h3 className="font-bold text-lg">{storyName}</h3>
+        <p>{storyDescription}</p>
+
+        <p className="my-4">
+          <strong>Creada por:</strong> {userCratorName}
+        </p>
+        <p className="mb-4">
+          <strong>{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong> {players[0].userName}
+        </p>
+        <p className="mb-4">
+          <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}
+        </p>
       </section>
     </Main>
   );

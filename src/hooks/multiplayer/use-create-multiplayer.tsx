@@ -65,6 +65,7 @@ export default function useCreateMultiplayer() {
 
         // Players
         players: [player],
+        playersForBook: [],
 
         // Chat history
         content: [],

@@ -46,6 +46,7 @@ export type MultiplayerStory = {
 
   // Players
   players: Player[];
+  playersForBook: Player[];
 
   // Chat history
   content: ChatMessage[];

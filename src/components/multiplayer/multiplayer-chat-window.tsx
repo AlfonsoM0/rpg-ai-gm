@@ -58,7 +58,7 @@ export default function MultiplayerChatWindow() {
 
         {isMultiplayerLoading ? (
           <div
-            className="flex justify-center items-center h-[70vh]"
+            className="flex justify-center items-center h-[10vh]"
             // ref={refLoader}
           >
             <span className="loading loading-dots loading-lg"></span>

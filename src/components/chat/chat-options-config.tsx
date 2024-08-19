@@ -9,9 +9,9 @@ import ModaIdeasForAI from './chat-options-modals/modal-ai-ideas';
 import { Icon } from 'components/icons';
 import ModalArtThemeConfig from './chat-options-modals/modal-art-theme-config';
 import { useTranslations } from 'next-intl';
-import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
+import useMultiplayer from 'src/hooks/multiplayer';
 import ModalEndMultiplayer from './chat-options-modals/modal-end-multiplayer';
-import { usePathname, useRouter } from 'src/navigation';
+import { usePathname } from 'src/navigation';
 import ModalExitLobby from './chat-options-modals/modal-exit-lobby';
 
 export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: boolean }) {
@@ -23,15 +23,15 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
   const { handlePause } = useTTSStore();
 
   const pathname = usePathname();
+  const isPathLobby = pathname === '/multiplayer/lobby';
   function onEndHistoryClick(): void {
     handlePause();
 
-    const modalToShow =
-      pathname === '/multiplayer/lobby' ? (
-        <ModalExitLobby />
-      ) : (
-        <ModalEndHistory isMultiplayer={isMultiplayer} />
-      );
+    const modalToShow = isPathLobby ? (
+      <ModalExitLobby />
+    ) : (
+      <ModalEndHistory isMultiplayer={isMultiplayer} />
+    );
 
     setModalContent(modalToShow);
     setModalIsOpen(true);
@@ -69,7 +69,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
   const isHost = multiplayerStory?.players[0].userId === userCurrentMpGame?.player.userId;
 
   const isCanRenderAiConfig = (isMultiplayer && isHost) || !isMultiplayer;
-  const isCanRenderMpEnd = isMultiplayer && isHost;
+  const isCanRenderMpEnd = isMultiplayer && isHost && !isPathLobby;
 
   const isLoading = isLoadingContent || isMultiplayerLoading;
 
