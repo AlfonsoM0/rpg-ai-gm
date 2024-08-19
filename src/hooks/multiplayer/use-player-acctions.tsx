@@ -207,7 +207,7 @@ export default function usePlayerAcctions() {
             {
               text: `(((Un jugador ha abandonado el juego. El personaje "${
                 player.character.name
-              }" ahora es un personaje no jugador. Los personajes jugadores que siguen en juego son : ${JSON.stringify(
+              }" ahora es un Personaje No Jugador. Los Personajes Jugadores que siguen en juego son : ${JSON.stringify(
                 newCharacters
               )}. ${CODE_CHARACTERS_CHANGE})))`,
             },
