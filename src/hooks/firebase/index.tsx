@@ -293,6 +293,7 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     try {
       if (fireDB && id) await deleteDoc(doc(fireDB, collectionName, id));
 
+      set({ isFireLoading: false });
       return true;
     } catch (error) {
       console.error(`deleteFireDoc/ ${collectionName} =>`, error);
