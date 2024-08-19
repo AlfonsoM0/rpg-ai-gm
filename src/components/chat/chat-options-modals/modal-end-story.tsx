@@ -7,15 +7,22 @@ import { useLibraryStore } from 'hooks/use-library-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
 import { clearGameSystemMsg } from 'src/utils/gmai-utils';
+import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
+import { calculateStoryXpMp } from 'src/utils/gmai-utils-mp';
 
-export default function ModalEndHistory() {
+export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ModalEndHistory');
-
   const router = useRouter();
+
+  const { addBook, addBookMp } = useLibraryStore();
   const { setModalContent, setModalIsOpen } = useModalState();
+
+  /**
+   * Single Player
+   */
   const {
     storyName,
     storyId,
@@ -29,10 +36,8 @@ export default function ModalEndHistory() {
   const { inGameCharacters, findCharacterByIdAndIcrementXp, removeAllInGameCharacters } =
     useCharacterStore();
 
-  const { addBook } = useLibraryStore();
-
   useEffect(() => {
-    setHistoryId();
+    !isMultiplayer && setHistoryId();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,6 +72,45 @@ export default function ModalEndHistory() {
     router.push('/');
   }
 
+  /**
+   * Multiplayer
+   */
+  const { multiplayerStory, userCurrentMpGame, setIsMultiplayerLoading } = useMultiplayer();
+  const [storyNameMp, setStoryNameMp] = useState(multiplayerStory?.storyName || '');
+  const { leaveGame } = usePlayerAcctions();
+  async function onSaveBookClickMp() {
+    if (!multiplayerStory || !userCurrentMpGame) return;
+    setIsMultiplayerLoading(true);
+
+    // save book to library
+    if (storyNameMp) addBookMp(multiplayerStory);
+
+    // update Characters XP if story ended
+    if (multiplayerStory.isStoryEnded) {
+      const xp = calculateStoryXpMp({
+        totalRolls: multiplayerStory.totalDiceRolls,
+        totalSuccesses: multiplayerStory.totalSuccesses,
+        totalFailures: multiplayerStory.totalFailures,
+      });
+
+      findCharacterByIdAndIcrementXp(userCurrentMpGame.player.character.id, xp);
+      setModalContent(<ModalWinXp xp={xp} PC={[userCurrentMpGame.player.character.name]} />);
+    }
+
+    // Leave Game
+    await leaveGame();
+    router.push('/');
+
+    setIsMultiplayerLoading(false);
+  }
+
+  /**
+   * Render
+   */
+  const inputValue = isMultiplayer ? storyNameMp : storyName;
+  const inputOnChange = isMultiplayer ? setStoryNameMp : setStoryName;
+  const btnOnSaveBookClick = isMultiplayer ? onSaveBookClickMp : onSaveBookClick;
+
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
       <>
@@ -83,14 +127,14 @@ export default function ModalEndHistory() {
           className="input input-bordered w-full text-center"
           type="text"
           placeholder={t('input_placeholder')}
-          value={storyName}
-          onChange={(e) => setStoryName(e.target.value)}
+          value={inputValue}
+          onChange={(e) => inputOnChange(e.target.value)}
         />
 
         <div className="modal-action justify-around">
           <button
             className="btn btn-error"
-            onClick={onSaveBookClick}
+            onClick={btnOnSaveBookClick}
             aria-label={t('btn_End_Game')}
           >
             {t('btn_End_Game')}

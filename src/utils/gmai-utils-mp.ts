@@ -60,3 +60,21 @@ export function calcFailure(currentValue: number, roll?: number) {
   if (roll <= 9) return currentValue + 1;
   return currentValue;
 }
+
+export function calculateStoryXpMp({
+  totalRolls,
+  totalSuccesses,
+  totalFailures,
+}: {
+  totalRolls: number;
+  totalSuccesses: number;
+  totalFailures: number;
+}): number {
+  const minR = Math.max(1, totalRolls);
+  const minS = Math.max(1, totalSuccesses);
+  const minF = Math.max(1, totalFailures);
+  const baseXP = Math.floor(minR / 10);
+  const multp = Math.min(2, Math.max(1, minS / minF));
+
+  return Math.round(baseXP * multp);
+}

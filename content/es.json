@@ -312,6 +312,7 @@
   "ChatOptionsConfig": {
     "Other_Options": "Opciones de juego",
     "End": "Fin.",
+    "Exit": "Salir",
     "Option": {
       "GmAi_Config": "Configuración de Game Master AI",
       "Tips_and_Shortcuts": "Consejos y atajos",
