@@ -23,6 +23,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  deleteDoc,
   collection,
   onSnapshot,
   DocumentSnapshot,
@@ -70,6 +71,11 @@ interface FirebaseActions {
   getAllFireDocs: <T extends CollectionName>(
     collectionName: T
   ) => Promise<CollectionType<T>[] | undefined | false>;
+
+  deleteFireDoc: <T extends CollectionName>(
+    collectionName: T,
+    docId?: string
+  ) => Promise<CollectionType<T> | undefined | boolean>;
 
   observeFireDoc: (
     collectionName: CollectionName,
@@ -275,6 +281,22 @@ const useFirebase = create<FirebaseStore & FirebaseActions>()((set, get) => ({
     } catch (error) {
       console.error(`getAllFireDocs/ ${collectionName} =>`, error);
       set({ isFireLoading: false, fireErrorMsg: 'Error al obtener de la base de datos.' });
+      return false;
+    }
+  },
+
+  deleteFireDoc: async (collectionName, docId) => {
+    const { fireDB, user } = get();
+    const id = docId || user?.uid;
+    set({ isFireLoading: true, fireErrorMsg: '' });
+
+    try {
+      if (fireDB && id) await deleteDoc(doc(fireDB, collectionName, id));
+
+      return true;
+    } catch (error) {
+      console.error(`deleteFireDoc/ ${collectionName} =>`, error);
+      set({ isFireLoading: false, fireErrorMsg: 'Error al eliminar de la base de datos.' });
       return false;
     }
   },
