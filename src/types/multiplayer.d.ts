@@ -33,8 +33,8 @@ export type AiRole = 'Game Master' | 'Game Assistant';
 
 export type MultiplayerStory = {
   // Configs
-  userHostId: string;
-  userHostName: string;
+  userCratorId: string;
+  userCratorName: string;
   storyId: string;
   storyName: string;
   storyDescription: string;

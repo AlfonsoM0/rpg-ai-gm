@@ -21,12 +21,7 @@ export default function Page() {
 
   const [isShowChat, setIsShowChat] = useState(false);
 
-  const isUserHost = useMemo(() => {
-    if (!userCurrentMpGame || !multiplayerStory) return false;
-    const userId = userCurrentMpGame?.player.userId;
-    const hostId = multiplayerStory?.userHostId;
-    return userId === hostId;
-  }, [userCurrentMpGame, multiplayerStory]);
+  const isHost = multiplayerStory?.players[0].userId === userCurrentMpGame?.player.userId;
 
   useEffect(() => {
     // If started, go to Game!
@@ -36,12 +31,13 @@ export default function Page() {
 
   if (!multiplayerStory) return NoGameLoad;
 
-  const { players, storyName, storyDescription, userHostName, aiRole, aiConfig } = multiplayerStory;
+  const { players, storyName, storyDescription, userCratorName, aiRole, aiConfig } =
+    multiplayerStory;
 
   const aiConfigTitle = aiConfigObj.find((obj) => obj.name === aiConfig)!.title;
 
   function onStartClick() {
-    if (!isUserHost) return;
+    if (!isHost) return;
 
     startGame();
   }
@@ -66,7 +62,10 @@ export default function Page() {
         <H2>Información de la partida</H2>
 
         <p className="mb-4">
-          <strong>Anfitrión:</strong> {userHostName}
+          <strong>Creada por:</strong> {userCratorName}
+        </p>
+        <p className="mb-4">
+          <strong>Anfitrión:</strong> {players[0].userName}
         </p>
         <p className="mb-4">
           <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}
@@ -76,7 +75,7 @@ export default function Page() {
         <p>{storyDescription}</p>
       </section>
 
-      {isUserHost ? (
+      {isHost ? (
         <section>
           <button
             className="btn btn-primary"

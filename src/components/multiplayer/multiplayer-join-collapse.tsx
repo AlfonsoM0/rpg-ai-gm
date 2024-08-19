@@ -6,7 +6,7 @@ import { useRouter } from 'src/navigation';
 import { MultiplayerStory } from 'src/types/multiplayer';
 
 export default function MultiplayerJoinCollapse({ game }: { game: MultiplayerStory }) {
-  const { storyName, userHostName, aiRole, aiConfig, storyDescription, locale, storyId } = game;
+  const { storyName, userCratorName, aiRole, aiConfig, storyDescription, locale, storyId } = game;
   const aiConfigObj = useGenerateAiConfigObj();
   const aiConfigTitle = aiConfigObj.find((obj) => obj.name === aiConfig)!.title;
 
@@ -25,11 +25,11 @@ export default function MultiplayerJoinCollapse({ game }: { game: MultiplayerSto
     <div className="collapse w-full bg-primary-content">
       <input type="checkbox" />
       <div className="collapse-title text-xl font-medium text-center">
-        {storyName} ({locale}) | Por {userHostName}
+        {storyName} ({locale}) | Por {userCratorName}
       </div>
       <div className="collapse-content">
         <p className="mb-4">
-          <strong>Anfitrión:</strong> {userHostName}
+          <strong>Anfitrión:</strong> {userCratorName}
         </p>
         <p className="mb-4">
           <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}

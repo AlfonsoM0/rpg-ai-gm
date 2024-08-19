@@ -8,9 +8,9 @@ import { useTranslations } from 'next-intl';
 import { Locale } from 'src/i18n-config';
 import { generateGmAiMpPromptArray } from 'src/config/gm-ai-promp-mp';
 import { ChatMessage, Player } from 'src/types/multiplayer';
-import { AI_ROLE } from 'src/config/constants';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
 import { generateDefultAiChatMessageInfo, getInGameContent } from 'src/utils/gmai-utils-mp';
+import { clearGmAiErrorsMsg } from 'src/utils/gmai-utils';
 
 export default function useGmAiAcctions() {
   const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
@@ -23,26 +23,16 @@ export default function useGmAiAcctions() {
       if (!multiplayerStory || !userCurrentMpGame) return;
       const { players, content, aiConfig, storyId } = multiplayerStory;
 
-      // Clean content for "Empty" and "Error" responses.
-      function clearGmAiErrorsMsg(content: ChatMessage[]): ChatMessage[] {
-        return content.filter((c) => {
-          const isAiModel = c.role === AI_ROLE.MODEL;
-          const msg = c.parts[0].text;
-
-          if (isAiModel && (msg === t('Empty') || msg === t('Error'))) return false;
-
-          return true;
-        });
-      }
-      const cleanContent = clearGmAiErrorsMsg(content);
-
-      // Only Player1 can execute this acction.
+      // Only Host (players[0]) can execute this acction.
       if (userCurrentMpGame.player.userId !== players[0].userId) return;
 
       // All player must be redy for the response.
       for (let i = 0; i < players.length; i++) {
         if (!players[i].isRedyForAiResponse) return;
       }
+
+      // Clean content for "Empty" and "Error" responses.
+      const cleanContent = clearGmAiErrorsMsg(content);
 
       // use only inGame content to generate AI response. But Not for contentToSet.
       const inGameContent = getInGameContent(cleanContent);

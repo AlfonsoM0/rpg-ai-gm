@@ -52,8 +52,8 @@ export default function useCreateMultiplayer() {
 
       const newMultiplayerGame: MultiplayerStory = {
         // Configs
-        userHostId: user.uid,
-        userHostName: user.displayName || 'Player 1',
+        userCratorId: user.uid,
+        userCratorName: user.displayName || 'Player 1',
         storyId,
         storyName,
         storyDescription,

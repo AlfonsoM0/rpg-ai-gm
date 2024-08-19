@@ -15,6 +15,7 @@ import { generateGmAiPromptArray } from 'config/gm-ai-promp';
 import { Locale } from 'src/i18n-config';
 import es from '../../content/es.json';
 import en from '../../content/en.json';
+import { ChatMessage } from 'src/types/multiplayer';
 
 function createStoryContentControl(stateContent: Content[], playersDiceRolls: number[]): Content {
   const gameInfo = calculateStoryXp(playersDiceRolls);
@@ -117,8 +118,8 @@ export async function createGmAiResponseContent(
   }
 }
 
-export function clearGmAiErrorsMsg(content: Content[]): Content[] {
-  return content.filter((c) => {
+export function clearGmAiErrorsMsg<T extends Content[] | ChatMessage[]>(content: T): T {
+  const newContent = content.filter((c) => {
     const isAiModel = c.role === AI_ROLE.MODEL;
     const msg = c.parts[0].text;
 
@@ -133,6 +134,8 @@ export function clearGmAiErrorsMsg(content: Content[]): Content[] {
 
     return true;
   });
+
+  return newContent as T;
 }
 
 export function clearGameSystemMsg(content: Content[]): Content[] {

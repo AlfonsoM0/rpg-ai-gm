@@ -55,9 +55,7 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
     setModalIsOpen(true);
   }
 
-  const hostId = multiplayerStory?.userHostId || 'hostId';
-  const userId = userCurrentMpGame?.player.userId || 'userId';
-  const isHost = hostId === userId;
+  const isHost = multiplayerStory?.players[0].userId === userCurrentMpGame?.player.userId;
 
   const isCanRenderAiConfig = (isMultiplayer && isHost) || !isMultiplayer;
   const isCanRenderMpEnd = isMultiplayer && isHost;
