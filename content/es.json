@@ -3,7 +3,7 @@
 
   "ModalNews": {
     "Title": "¡Atención!",
-    "MarkdownText": "Este juego no está completo y podrías perder información en alguna actualización. \n\n ¡Ya puedes guardar tus datos iniciando sesión con una **cuenta de Google**! \n\n GmAi es gratuito, pero está limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no funciona como esperas, prueba jugar en un horario menos concurrido. Se requerirán cuentas premium para eliminar esta limitación, estamos evaluando las mejores opciones. \n\n Para notificar un error o dar una sugerencia puedes escribirme a [**alfonso.ar**](https://alfonso.ar). \n\n #### **PRÓXIMAMENTE** \n\n Las siguientes son ideas para mejorar esta app en un futuro. \n\n * Multijugador cooperativo con GmAi. \n\n * Generación del avatar del personaje con GmAi. \n\n * Generación de vídeo basado en un libro con GmAi.",
+    "MarkdownText": "Este juego no está completo y podrías perder información en alguna actualización. \n\n ¡Ahora puedes guardar tus datos iniciando sesión con una **cuenta de Google**! \n\n GmAi es gratuito, pero está limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no está funcionando como se espera, intenta jugar en un horario menos concurrido. Se requerirán cuentas Premium para eliminar esta limitación, estamos evaluando las mejores opciones. \n\n Para reportar un error o hacer una sugerencia puedes escribirme a [**alfonso.ar**](https://alfonso.ar). \n\n #### **PRÓXIMAMENTE** \n\n Las siguientes son ideas para mejorar esta aplicación en el futuro. \n\n * ~~Multijugador cooperativo con GmAi.~~ \n\n * Generación del avatar del personaje con GmAi. \n\n * Generación de video basado en un libro con GmAi.",
     "btn_OK": "¡Entendido!"
   },
 

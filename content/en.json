@@ -3,7 +3,7 @@
 
   "ModalNews": {
     "Title": "Warning!",
-    "MarkdownText": "This game is not complete and you could lose information in some update. \n\n You can now save your data by logging in with a **Google account**! \n\n GmAi is free, but it is limited in the number of players it can serve per minute. If GmAi is not working as expected, try playing at a less busy time. Premium accounts will be required to remove this limitation, we are evaluating the best options. \n\n To report a bug or make a suggestion you can write to me at [**alfonso.ar**](https://alfonso.ar). \n\n #### **COMING SOON** \n\n The following are ideas to improve this app in the future. \n\n * Cooperative multiplayer with GmAi. \n\n * Generation of the character's avatar with GmAi. \n\n * Generation of video based on a book with GmAi.",
+    "MarkdownText": "This game is not complete and you could lose information in some update. \n\n You can now save your data by logging in with a **Google account**! \n\n GmAi is free, but it is limited in the number of players it can serve per minute. If GmAi is not working as expected, try playing at a less busy time. Premium accounts will be required to remove this limitation, we are evaluating the best options. \n\n To report a bug or make a suggestion you can write to me at [**alfonso.ar**](https://alfonso.ar). \n\n #### **COMING SOON** \n\n The following are ideas to improve this app in the future. \n\n * ~~Cooperative multiplayer with GmAi.~~ \n\n * Generation of the character's avatar with GmAi. \n\n * Generation of video based on a book with GmAi.",
     "btn_OK": "Got it!"
   },
 
