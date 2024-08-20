@@ -347,8 +347,11 @@
     "p2": "When you end the story, an \"End of the story\" message will appear and the GM will narrate the ending.",
     "p3": "After the \"End of the story\" message, players who leave the game will receive the earned XP for their character.",
 
-    "btn_End_Game": "Yes, end story",
-    "btn_Continue_Game": "No, keep playing"
+    "no_xp_msg": "You haven't earned any XP yet.",
+    "info_xp_msg": "The XP gained so far is ",
+
+    "btn_End_Game": "End story",
+    "btn_Continue_Game": "Keep playing"
   },
 
   "Modal_Exit_lobby": {

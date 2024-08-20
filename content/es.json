@@ -347,8 +347,11 @@
     "p2": "Cuando finalizas la historia, aparecerá el cartel de \"Fin de la historia\" y el GM narrará el final de la historia.",
     "p3": "Luego del cartel de \"Fin de la historia\", los jugadores que salgan del juego recibirán los XP ganados para el personaje.",
 
-    "btn_End_Game": "Sí, finalizar historia",
-    "btn_Continue_Game": "No, seguir jugando"
+    "no_xp_msg": "Todavía no has ganado XP.",
+    "info_xp_msg": "La XP ganada hasta ahora es de ",
+
+    "btn_End_Game": "Finalizar historia",
+    "btn_Continue_Game": "Seguir jugando"
   },
 
   "Modal_Exit_lobby": {
