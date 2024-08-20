@@ -9,7 +9,13 @@ export default function ModalDeleteBook({ id }: { id: string }) {
   const t = useTranslations('Card_Book.modal.ModalDeleteBook');
 
   const { setModalIsOpen } = useModalState();
-  const { removeBook } = useLibraryStore();
+  const { removeBook, removeBookMp, isSinglePlayer } = useLibraryStore();
+
+  function onRemoveClick() {
+    if (isSinglePlayer) removeBook(id);
+    else removeBookMp(id);
+    setModalIsOpen(false);
+  }
 
   return (
     <ModalContentContainer title={t('title')} titleColor="error">
@@ -17,14 +23,7 @@ export default function ModalDeleteBook({ id }: { id: string }) {
         <p className="py-4">{t('p')}</p>
 
         <div className="modal-action">
-          <button
-            className="btn btn-error"
-            onClick={() => {
-              removeBook(id);
-              setModalIsOpen(false);
-            }}
-            aria-label={t('btn.accept')}
-          >
+          <button className="btn btn-error" onClick={onRemoveClick} aria-label={t('btn.accept')}>
             {t('btn.accept')}
           </button>
           <button
