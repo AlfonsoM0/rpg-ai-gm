@@ -15,6 +15,7 @@ import { AI_ROLE } from 'src/config/constants';
 import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/multiplayer';
 import { useTTSStore } from 'src/hooks/use-tts-store';
 import { isGmAiAutomaticResponse } from 'src/utils/gmai-utils-mp';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Page() {
   const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
@@ -49,9 +50,12 @@ export default function Page() {
 
   /**
    * GMAI automatic response
+   * Send if Players are Redy, or Cancel if not.
    */
+  const debounceAiMsg = useDebouncedCallback(gmAiGenerateMsg, 2000);
   useEffect(() => {
-    if (isGmAiAutomaticResponse(multiplayerStory)) gmAiGenerateMsg();
+    if (isGmAiAutomaticResponse(multiplayerStory)) debounceAiMsg();
+    else debounceAiMsg.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiplayerStory?.players]);
 
@@ -131,7 +135,7 @@ const NoGameLoad = (
 );
 
 const WaitingForResponse = (
-  <div className="text-center text-success">
+  <div className="text-center text-success p-2">
     Esperando respuesta del GM...
     <span className="loading loading-spinner loading-xs"></span>
   </div>
@@ -140,4 +144,6 @@ const WaitingForResponse = (
 const NotRediForResponse1 = (
   <div className="text-center text-error p-2">Click aquí para esperar al GM</div>
 );
-const NotRediForResponse2 = <div className="text-center text-error p-2">No está listo</div>;
+const NotRediForResponse2 = (
+  <div className="text-center text-error p-2 mb-[-1rem]">No está listo</div>
+);
