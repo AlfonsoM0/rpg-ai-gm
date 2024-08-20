@@ -19,7 +19,7 @@ export default function useFirebaseAutoSync() {
   const { user } = useFirebase();
   const { charactersCollection } = useCharacterStore();
   const { chatShortcuts, theme } = useUserPreferencesStore();
-  const { library } = useLibraryStore();
+  const { library, multiplayerLibrary } = useLibraryStore();
 
   // 1. From Firebase to Storage. User Login activate sync.
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function useFirebaseAutoSync() {
   }, dT);
   useEffect(() => {
     debounceLibrary();
-  }, [library]);
+  }, [library, multiplayerLibrary]);
 
   // 3. OBSERVERS: Listen to changes in Firebase and update local storage.
   useEffect(() => {
