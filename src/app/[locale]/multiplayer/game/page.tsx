@@ -69,7 +69,10 @@ export default function Page() {
       ) : null}
 
       <section>
-        <MultiplayerChatWindow />
+        <MultiplayerChatWindow
+          currentUserId={userCurrentMpGame.player.userId}
+          multiplayerStory={multiplayerStory}
+        />
         <ChatInputMsg isMultiplayer />
       </section>
 

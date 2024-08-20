@@ -4,6 +4,7 @@ import useMultiplayer from 'src/hooks/multiplayer';
 import ChatWindowFrame from '../chat/chat-window-frame';
 import ChatMessage from '../chat/chat-message';
 import {
+  AI_NAME_TO_SHOW,
   CODE_CHARACTERS_CHANGE,
   CODE_DONT_SHOW_IN_CHAT,
   CODE_STORY_END,
@@ -13,10 +14,15 @@ import MsgStoryEnd from '../chat/chat-message-end';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
 import { isGmAiAutomaticResponse } from 'src/utils/gmai-utils-mp';
 import { useEffect, useRef } from 'react';
+import { MultiplayerStory } from 'src/types/multiplayer';
 
-export default function MultiplayerChatWindow() {
-  const { userCurrentMpGame, multiplayerStory } = useMultiplayer();
-
+export default function MultiplayerChatWindow({
+  currentUserId,
+  multiplayerStory,
+}: {
+  currentUserId?: string;
+  multiplayerStory?: MultiplayerStory;
+}) {
   // AI msg center
   const refWindow = useRef<HTMLDivElement>(null);
   const refLoader = useRef<HTMLDivElement>(null);
@@ -33,7 +39,9 @@ export default function MultiplayerChatWindow() {
   /**
    * Render
    */
-  if (!userCurrentMpGame || !multiplayerStory) return ChatNotAvailable;
+  if (!multiplayerStory) return ChatNotAvailable;
+
+  const cUserId = currentUserId ? currentUserId : AI_NAME_TO_SHOW;
 
   return (
     <div className="pt-2" ref={refWindow}>
@@ -51,7 +59,7 @@ export default function MultiplayerChatWindow() {
             userAvatarAlt,
           } = msg;
           const message = parts.map((p) => p.text).join('\n');
-          const position = userCurrentMpGame.player.userId === userId ? 'end' : 'start';
+          const position = cUserId === userId ? 'end' : 'start';
           const userName = isInGameMsg ? charName : uName;
           const avatarSrc = isInGameMsg ? charAvatarSrc : userAvatarSrc;
           const avatarAlt = isInGameMsg ? charAvatarAlt : userAvatarAlt;

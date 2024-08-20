@@ -28,7 +28,7 @@ export default function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiplayerStory?.isStoryStarted]);
 
-  if (!multiplayerStory)
+  if (!multiplayerStory || !userCurrentMpGame)
     return (
       <Main>
         <H1>Juego no disponible</H1>
@@ -53,7 +53,10 @@ export default function Page() {
       <H1>Lobby</H1>
 
       <section>
-        <MultiplayerChatWindow />
+        <MultiplayerChatWindow
+          currentUserId={userCurrentMpGame.player.userId}
+          multiplayerStory={multiplayerStory}
+        />
         <ChatInputMsg isMultiplayer />
       </section>
 
