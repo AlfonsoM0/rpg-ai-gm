@@ -11,9 +11,16 @@ export default function ModalEditBook({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.modal.ModalEditBook');
 
   const { setModalIsOpen } = useModalState();
-  const { changeBookName } = useLibraryStore();
+  const { changeBookName, changeBookNameMp, isSinglePlayer } = useLibraryStore();
 
   const [newTitle, setNewTitle] = useState(book.title);
+
+  function onChangeBookNameClick() {
+    if (isSinglePlayer) changeBookName(book.id, newTitle);
+    else changeBookNameMp(book.id, newTitle);
+
+    setModalIsOpen(false);
+  }
 
   return (
     <ModalContentContainer title={t('title')} titleColor="warning">
@@ -38,10 +45,7 @@ export default function ModalEditBook({ book }: { book: Book }) {
           </button>
           <button
             className="btn btn-success"
-            onClick={() => {
-              changeBookName(book.id, newTitle);
-              setModalIsOpen(false);
-            }}
+            onClick={onChangeBookNameClick}
             aria-label={t('btn.Save')}
           >
             {t('btn.Save')}
