@@ -20,6 +20,8 @@ export default function ModalEndMultiplayer() {
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
       <p className="py-4">{t('p1')}</p>
+      <p className="pb-4">{t('p2')}</p>
+      <p className="pb-4">{t('p3')}</p>
 
       <div className="modal-action justify-around">
         <button className="btn btn-error" onClick={onEndGameClick} aria-label={t('btn_End_Game')}>

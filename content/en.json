@@ -343,7 +343,9 @@
 
   "ModalEndHistory_Multiplayer": {
     "title": "End of the story",
-    "p1": "You must end the story to earn XP. This action cannot be undone.",
+    "p1": "This action cannot be undone.",
+    "p2": "When you end the story, an \"End of the story\" message will appear and the GM will narrate the ending.",
+    "p3": "After the \"End of the story\" message, players who leave the game will receive the earned XP for their character.",
 
     "btn_End_Game": "Yes, end story",
     "btn_Continue_Game": "No, keep playing"

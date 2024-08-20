@@ -343,7 +343,9 @@
 
   "ModalEndHistory_Multiplayer": {
     "title": "Fin de la historia",
-    "p1": "Debes finalizar la historia para ganar XP. Esta acción no se puede deshacer.",
+    "p1": "Esta acción no se puede deshacer.",
+    "p2": "Cuando finalizas la historia, aparecerá el cartel de \"Fin de la historia\" y el GM narrará el final de la historia.",
+    "p3": "Luego del cartel de \"Fin de la historia\", los jugadores que salgan del juego recibirán los XP ganados para el personaje.",
 
     "btn_End_Game": "Sí, finalizar historia",
     "btn_Continue_Game": "No, seguir jugando"
