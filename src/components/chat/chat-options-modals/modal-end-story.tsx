@@ -97,8 +97,8 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
     } else setModalIsOpen(false);
 
     // Leave Game
-    router.push('/');
     await leaveGame();
+    router.push('/');
 
     setIsMultiplayerLoading(false);
   }

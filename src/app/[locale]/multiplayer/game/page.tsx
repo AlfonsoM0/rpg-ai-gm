@@ -26,7 +26,7 @@ export default function Page() {
    * TTS Config
    */
   const { isTTSEnabled } = useTTSStore();
-  useAutoplayAiTTS(multiplayerStory!.content, -1);
+  useAutoplayAiTTS(multiplayerStory?.content || [], -1);
 
   /**
    * GMAI automatic response
