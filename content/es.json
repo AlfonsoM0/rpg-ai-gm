@@ -48,7 +48,8 @@
 
   "Page_Library": {
     "h1_My_Library": "Mi biblioteca",
-    "input_placeholder_search": "Buscar por nombre"
+    "input_placeholder_search": "Buscar por nombre",
+    "No_books_available": "No hay libros disponibles"
   },
 
   "Page_Book": {
