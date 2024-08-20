@@ -5,8 +5,8 @@ import H1 from 'components/h1';
 import Main from 'components/Main';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
-import LibrarySinglePlayer from 'src/components/library/library-sp';
+import Library from 'src/components/library';
+import { useLibraryStore } from 'src/hooks/use-library-store';
 
 const DynamicBookCard = dynamic(() => import('components/book/card-book'), {
   ssr: false,
@@ -16,7 +16,7 @@ const DynamicBookCard = dynamic(() => import('components/book/card-book'), {
 export default function Page() {
   const t = useTranslations('Page_Library');
 
-  const [isSp, setIsSp] = useState(true);
+  const { isSinglePlayer, setIsSinglePlayer } = useLibraryStore();
 
   /**
    * Render
@@ -31,21 +31,21 @@ export default function Page() {
 
         <ul className="flex justify-center gap-4 mb-4">
           <li
-            className={isSp ? btnStyleSelected : btnStyleNotSelected}
-            onClick={() => setIsSp(true)}
+            className={isSinglePlayer ? btnStyleSelected : btnStyleNotSelected}
+            onClick={() => setIsSinglePlayer(true)}
           >
             <a>Un Jugador</a>
           </li>
           <li
-            className={!isSp ? btnStyleSelected : btnStyleNotSelected}
-            onClick={() => setIsSp(false)}
+            className={!isSinglePlayer ? btnStyleSelected : btnStyleNotSelected}
+            onClick={() => setIsSinglePlayer(false)}
           >
             <a>Multijugador</a>
           </li>
         </ul>
       </div>
 
-      {isSp ? <LibrarySinglePlayer /> : null}
+      <Library />
     </Main>
   );
 }

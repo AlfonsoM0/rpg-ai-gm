@@ -6,6 +6,7 @@ import { devtools, persist } from 'zustand/middleware';
 
 interface LibraryState {
   updatedAt: number;
+  isSinglePlayer: boolean;
 
   // Single Player
   library: Book[];
@@ -17,6 +18,7 @@ interface LibraryState {
 }
 
 interface LibraryActions {
+  setIsSinglePlayer: (isSinglePlayer: boolean) => void;
   // Single Player
   addBook: (book: Book) => void;
   removeBook: (id: string) => void;
@@ -40,12 +42,16 @@ export const useLibraryStore = create<LibraryState & LibraryActions>()(
     persist(
       (set, get) => ({
         updatedAt: 0,
+        isSinglePlayer: true,
 
         library: [],
         bookSelected: undefined,
 
         multiplayerLibrary: [],
         multiplayerBookSelected: undefined,
+
+        // Actions
+        setIsSinglePlayer: (isSinglePlayer) => set({ isSinglePlayer }),
 
         /**
          * Single Player Actions
