@@ -8,37 +8,20 @@ import ChatWindow from 'components/chat/chat-window';
 import H1 from 'components/h1';
 import Main from 'components/Main';
 import TTSControls from 'components/tts/tts-controls';
-import { AI_ROLE } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import useAutoplayAiTTS from 'src/hooks/use-tts-autoplay';
 
 export default function Page() {
   const t = useTranslations('Page_Story');
 
   const { inGameCharacters } = useCharacterStore();
   const { content, isLoadingContent } = useGmAiStore();
-  const { isTTSEnabled, handlePlay, setTTS, handleStop } = useTTSStore();
+  const { isTTSEnabled } = useTTSStore();
 
-  useEffect(() => {
-    if (isTTSEnabled && content.length > 0) {
-      const lastAIContent = content[content.length - 2]; // last is "User: Story control"
-      const isLastContentIsModel = lastAIContent.role === AI_ROLE.MODEL;
-      if (isLastContentIsModel) {
-        const tts = lastAIContent.parts[0].text || '';
-        setTTS(tts);
-        handlePlay();
-      }
-    }
-
-    return () => {
-      handleStop();
-      setTTS('');
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [content]);
+  useAutoplayAiTTS(content, -2);
 
   return (
     <Main>

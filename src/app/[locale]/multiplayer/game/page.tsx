@@ -11,8 +11,8 @@ import H1 from 'src/components/h1';
 import Main from 'src/components/Main';
 import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
 import TTSControls from 'src/components/tts/tts-controls';
-import { AI_ROLE } from 'src/config/constants';
 import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/multiplayer';
+import useAutoplayAiTTS from 'src/hooks/use-tts-autoplay';
 import { useTTSStore } from 'src/hooks/use-tts-store';
 import { isGmAiAutomaticResponse } from 'src/utils/gmai-utils-mp';
 import { useDebouncedCallback } from 'use-debounce';
@@ -25,28 +25,8 @@ export default function Page() {
   /**
    * TTS Config
    */
-  const { isTTSEnabled, handlePlay, setTTS, handleStop } = useTTSStore();
-  useEffect(() => {
-    if (multiplayerStory) {
-      const { content } = multiplayerStory;
-
-      if (isTTSEnabled && content.length > 0) {
-        const lastAIContent = content[content.length - 1];
-        const isLastContentIsModel = lastAIContent.role === AI_ROLE.MODEL;
-        if (isLastContentIsModel) {
-          const tts = lastAIContent.parts[0].text || '';
-          setTTS(tts);
-          handlePlay();
-        }
-      }
-    }
-
-    return () => {
-      handleStop();
-      setTTS('');
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [multiplayerStory?.content]);
+  const { isTTSEnabled } = useTTSStore();
+  useAutoplayAiTTS(multiplayerStory!.content, -1);
 
   /**
    * GMAI automatic response
