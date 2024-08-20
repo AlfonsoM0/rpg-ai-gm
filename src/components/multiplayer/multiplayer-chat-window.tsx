@@ -11,14 +11,32 @@ import {
 import MsgLoadingCharacters from '../chat/chat-message-loading-characterts';
 import MsgStoryEnd from '../chat/chat-message-end';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
+import { isGmAiAutomaticResponse } from 'src/utils/gmai-utils-mp';
+import { useEffect, useRef } from 'react';
 
 export default function MultiplayerChatWindow() {
-  const { userCurrentMpGame, multiplayerStory, isMultiplayerLoading } = useMultiplayer();
+  const { userCurrentMpGame, multiplayerStory } = useMultiplayer();
 
+  // AI msg center
+  const refWindow = useRef<HTMLDivElement>(null);
+  const refLoader = useRef<HTMLDivElement>(null);
+  const isPlayersRedy = isGmAiAutomaticResponse(multiplayerStory);
+
+  useEffect(() => {
+    // If isLoadingContent is true, scroll to the bottom.
+    isPlayersRedy && refLoader.current?.scrollIntoView({ behavior: 'smooth' });
+    !isPlayersRedy && refWindow.current?.scrollIntoView({ behavior: 'smooth' });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlayersRedy]);
+
+  /**
+   * Render
+   */
   if (!userCurrentMpGame || !multiplayerStory) return ChatNotAvailable;
 
   return (
-    <div>
+    <div className="pt-2" ref={refWindow}>
       <ChatWindowFrame>
         {multiplayerStory.content.map((msg) => {
           const {
@@ -56,11 +74,8 @@ export default function MultiplayerChatWindow() {
           );
         })}
 
-        {isMultiplayerLoading ? (
-          <div
-            className="flex justify-center items-center h-[10vh]"
-            // ref={refLoader}
-          >
+        {isPlayersRedy ? (
+          <div className="flex justify-center items-center h-[70vh]" ref={refLoader}>
             <span className="loading loading-dots loading-lg"></span>
           </div>
         ) : null}

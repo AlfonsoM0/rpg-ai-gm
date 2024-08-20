@@ -59,8 +59,10 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
    */
   const submitFunction = isMultiplayer ? submitMpChat : submitChat;
 
-  const isBtnDisable =
-    isLoadingContent || isMultiplayerLoading || userCurrentMpGame?.player.isRedyForAiResponse;
+  const isCurrentPlayerRedy = multiplayerStory?.players.find(
+    (p) => p.userId === userCurrentMpGame?.player.userId
+  )?.isRedyForAiResponse;
+  const isBtnDisable = isCurrentPlayerRedy || isLoadingContent || isMultiplayerLoading;
 
   const btnIcon = isMultiplayer ? (
     <Icon.MsgCirgleUp className="w-6 h-6 stroke-info" />

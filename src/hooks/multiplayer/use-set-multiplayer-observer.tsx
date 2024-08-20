@@ -10,7 +10,8 @@ import { Unsubscribe } from 'firebase/auth';
 export default function useSetMultiplayerOberver() {
   const { getFireDoc, observeFireDoc } = useFirebase();
 
-  const { setMultiplayerStory, setUserCurrentMpGame, userCurrentMpGame } = useMultiplayer();
+  const { setMultiplayerStory, setUserCurrentMpGame, setIsMultiplayerLoading, userCurrentMpGame } =
+    useMultiplayer();
   const storyId = userCurrentMpGame?.storyId;
 
   /**
@@ -49,8 +50,10 @@ export default function useSetMultiplayerOberver() {
       unsuscribe1 = observeFireDoc(
         'MULTIPLAYER_STORY',
         (doc) => {
+          setIsMultiplayerLoading(true);
           const data = doc.data() as MultiplayerStory | undefined;
           setMultiplayerStory(data);
+          setIsMultiplayerLoading(false);
         },
         storyId
       );

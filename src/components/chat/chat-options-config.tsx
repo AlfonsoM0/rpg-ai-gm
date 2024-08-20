@@ -68,7 +68,6 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
 
   const isHost = multiplayerStory?.players[0].userId === userCurrentMpGame?.player.userId;
 
-  const isCanRenderAiConfig = (isMultiplayer && isHost) || !isMultiplayer;
   const isCanRenderMpEnd = isMultiplayer && isHost && !isPathLobby;
 
   const isLoading = isLoadingContent || isMultiplayerLoading;
@@ -78,15 +77,13 @@ export default function ChatOptionsConfig({ isMultiplayer }: { isMultiplayer?: b
       <p className="text-center text-sm mb-1 font-bold">{t('Other_Options')}</p>
 
       <div className="flex gap-2">
-        {isCanRenderAiConfig ? (
-          <button
-            className="btn hover:border-base-content"
-            onClick={onConfigAiClick}
-            aria-label={t('Option.GmAi_Config')}
-          >
-            <Icon.AiBrain className={aiIconStyle[aiConfig]} />
-          </button>
-        ) : null}
+        <button
+          className="btn hover:border-base-content"
+          onClick={onConfigAiClick}
+          aria-label={t('Option.GmAi_Config')}
+        >
+          <Icon.AiBrain className={aiIconStyle[aiConfig]} />
+        </button>
 
         <button
           className="btn hover:border-info"

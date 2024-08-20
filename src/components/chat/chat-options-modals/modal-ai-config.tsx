@@ -29,7 +29,7 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
   /**
    * Multiplayer
    */
-  const { multiplayerStory, isMultiplayerLoading } = useMultiplayer();
+  const { multiplayerStory, isMultiplayerLoading, userCurrentMpGame } = useMultiplayer();
   const { isFireLoading } = useFirebase();
   const { setAiConfigMp } = usePlayerAcctions();
   const dSetAiConfigMp = useDebouncedCallback(setAiConfigMp, 3000);
@@ -41,40 +41,46 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
   const R_setAiConfig = isMultiplayer ? dSetAiConfigMp : setAiConfig;
   const isLoading = isFireLoading || isMultiplayerLoading;
 
+  const isHost = multiplayerStory?.players[0].userId === userCurrentMpGame?.player.userId;
+  const isCanRenderAiConfig = (isMultiplayer && isHost) || !isMultiplayer;
+
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
       <>
         <p className="py-4">{t('p_Config')}</p>
 
-        <h4 className="text-center my-4">
-          <span>
-            <Icon.AiBrain className={`${aiIconStyle[R_AiConfig]} w-4 h-4 inline`} />
-          </span>
-          <strong> {t('p_strong_Style')}</strong>
-        </h4>
-
-        {aiModels.map((model) => (
-          <div className="form-control border-2 rounded-lg my-1 p-1" key={model.name}>
-            <label className="label cursor-pointer">
-              <span className="label-text font-bold">{model.title}</span>
-              {isLoading ? (
-                <div className={model.clsRadio}>
-                  <span className="loading loading-spinner loading-xs"></span>
-                </div>
-              ) : (
-                <input
-                  type="radio"
-                  name="radio-10"
-                  className={model.clsRadio}
-                  checked={R_AiConfig === model.name}
-                  onChange={() => R_setAiConfig(model.name)}
-                  disabled={isLoading}
-                />
-              )}
-            </label>
-            <small className="ml-3">{model.desc}</small>
+        {isCanRenderAiConfig ? (
+          <div>
+            <h4 className="text-center my-4">
+              <span>
+                <Icon.AiBrain className={`${aiIconStyle[R_AiConfig]} w-4 h-4 inline`} />
+              </span>
+              <strong> {t('p_strong_Style')}</strong>
+            </h4>
+            {aiModels.map((model) => (
+              <div className="form-control border-2 rounded-lg my-1 p-1" key={model.name}>
+                <label className="label cursor-pointer">
+                  <span className="label-text font-bold">{model.title}</span>
+                  {isLoading ? (
+                    <div className={model.clsRadio}>
+                      <span className="loading loading-spinner loading-xs"></span>
+                    </div>
+                  ) : (
+                    <input
+                      type="radio"
+                      name="radio-10"
+                      className={model.clsRadio}
+                      checked={R_AiConfig === model.name}
+                      onChange={() => R_setAiConfig(model.name)}
+                      disabled={isLoading}
+                    />
+                  )}
+                </label>
+                <small className="ml-3">{model.desc}</small>
+              </div>
+            ))}
           </div>
-        ))}
+        ) : null}
 
         <TTSConfig />
       </>
