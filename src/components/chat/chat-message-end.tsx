@@ -3,7 +3,6 @@
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTranslations } from 'next-intl';
 import useMultiplayer from 'src/hooks/multiplayer';
-import { MultiplayerStory } from 'src/types/multiplayer';
 import { calculateStoryXpMp } from 'src/utils/gmai-utils-mp';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
 
@@ -17,14 +16,18 @@ export default function MsgStoryEnd({ isMultiplayer }: { isMultiplayer?: boolean
    * Multiplayer
    */
   const { multiplayerStory } = useMultiplayer();
-  const multiplayerXP = calculateStoryXpMp(multiplayerStory as MultiplayerStory);
+  const multiplayerXP = calculateStoryXpMp({
+    totalDiceRolls: multiplayerStory?.totalDiceRolls || 0,
+    totalSuccesses: multiplayerStory?.totalSuccesses || 0,
+    totalFailures: multiplayerStory?.totalFailures || 0,
+  });
 
   /**
    * Remder
    */
   const values = {
-    s: isMultiplayer ? multiplayerStory!.totalSuccesses : totalSuccesses,
-    f: isMultiplayer ? multiplayerStory!.totalFailures : totalFailures,
+    s: isMultiplayer ? multiplayerStory?.totalSuccesses || 0 : totalSuccesses,
+    f: isMultiplayer ? multiplayerStory?.totalFailures || 0 : totalFailures,
     xp: isMultiplayer ? multiplayerXP : storyXp,
   };
 
