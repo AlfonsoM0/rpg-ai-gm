@@ -45,7 +45,7 @@ export default function Page() {
       ) : null}
 
       <section>
-        <ChatWindow content={content.slice(1)} isLoadingContent={false} />
+        <ChatWindow content={content} isLoadingContent={false} />
       </section>
 
       <section className="mb-4">
