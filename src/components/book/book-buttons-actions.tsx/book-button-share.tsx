@@ -7,10 +7,12 @@ import { useTranslations } from 'next-intl';
 import { Book } from 'types/library';
 import ModalShareBook from '../book-modals/book-modal-share';
 import ModalCantShareBook from '../book-modals/book-modal-cant-share';
+import { useLibraryStore } from 'src/hooks/use-library-store';
 
 export default function BookButtonShare({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.btn');
-  const locale = useTranslations()('[locale]');
+
+  const { isSinglePlayer } = useLibraryStore();
 
   const { setModalContent, setModalIsOpen } = useModalState();
   const { userAccount } = useFirebase();
@@ -23,7 +25,10 @@ export default function BookButtonShare({ book }: { book: Book }) {
     }
 
     const domain = window.location.origin;
-    const urlToShare = `${domain}/${locale}/library/book/${userAccount.id}_${book.id}`;
+    let urlToShare: string;
+
+    if (isSinglePlayer) urlToShare = `${domain}/library/book/${userAccount.id}_${book.id}`;
+    else urlToShare = `${domain}/library/book-mp/${userAccount.id}_${book.id}`;
 
     setModalContent(<ModalShareBook urlToShare={urlToShare} />);
     setModalIsOpen(true);

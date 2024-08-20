@@ -1,13 +1,13 @@
-import ChatWindow from 'src/components/chat/chat-window';
 import { Metadata } from 'next/types';
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import { getFireDocSSR } from 'src/server/firebase-ssr';
-import CardCharacter from 'src/components/card-character';
 import Main from 'src/components/Main';
-import { Book } from 'src/types/library';
-import TTSControlsSection from './tts-section';
+import TTSControlsSection from '../../book/[uid_bid]/tts-section';
 import { getContent, Locale } from 'content/get-content';
+import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
+import CardCharacterContainer from 'src/components/card-character/card-character-container';
+import CardCharacterBody from 'src/components/card-character/card-character-body';
 
 export async function generateMetadata({
   params: { uid_bid, locale },
@@ -35,12 +35,13 @@ export default async function Page({
   const t = (await getContent(locale)).Page_Book['[uid_bid]'];
   const [uid, bid] = uid_bid.split('_');
 
-  const user = await getFireDocSSR('USER_ACCOUNT', uid);
-  const userName = user ? user.displayName : '';
-  const userURLAvatar = user ? user.photoURL : '';
-
   const library = await getFireDocSSR('USER_LIBRARY', uid);
-  const book = library ? library.library.find((book: Book) => book.id === bid) : undefined;
+  const book = library
+    ? library.multiplayerLibrary.find((book) => book.storyId === bid)
+    : undefined;
+
+  const players = book?.players.map((p) => p.userName).join(', ') || '';
+  const characters = book?.players.map((p) => p.character) || [];
 
   if (!book)
     return (
@@ -53,24 +54,26 @@ export default async function Page({
 
   return (
     <Main>
-      <H1>{`${t.h1_Story_from} ${userName}`}</H1>
-      <H2>{book.title}</H2>
+      <H1>
+        {t.h1_Story_from}: <br />
+        {players}.
+      </H1>
+      <H2>{book.storyName}</H2>
 
       <TTSControlsSection />
 
       <section>
-        <ChatWindow
-          content={book.content.slice(1)}
-          isLoadingContent={false}
-          userName={userName}
-          userURLAvatar={userURLAvatar}
-        />
+        <MultiplayerChatWindow multiplayerStory={book} />
       </section>
 
       <section className="mb-4">
         <div className="flex flex-wrap gap-4 justify-center">
-          {book.characters.map((character) => (
-            <CardCharacter character={character} key={character.id} isViewOnly isFromAnotherUser />
+          {characters.map((character) => (
+            <CardCharacterContainer key={character.id} isSelected={false}>
+              <CardCharacterBody character={character}>
+                <></>
+              </CardCharacterBody>
+            </CardCharacterContainer>
           ))}
         </div>
       </section>
