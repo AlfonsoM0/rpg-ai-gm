@@ -11,12 +11,12 @@ import { useTTSStore } from './use-tts-store';
  * @param aiNegativeIndex - A negative number for AiMsg position (-1 or -2 for example).
  */
 export default function useAutoplayAiTTS(
-  content: Content[] | ChatMessage[],
+  content: Content[] | ChatMessage[] | undefined,
   aiNegativeIndex: number
 ): void {
   const { isTTSEnabled, handlePlay, setTTS, handleStop } = useTTSStore();
   useEffect(() => {
-    if (isTTSEnabled && content.length > 0) {
+    if (isTTSEnabled && content && content.length > 0) {
       const lastContent = content[content.length + aiNegativeIndex];
       const isLastContentIsAI = lastContent.role === AI_ROLE.MODEL;
       if (isLastContentIsAI) {
