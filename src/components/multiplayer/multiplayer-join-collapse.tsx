@@ -1,5 +1,7 @@
 'use client';
 
+import Markdown from 'markdown-to-jsx';
+import { MarkdownOptions } from 'src/config/constants';
 import useFirebase from 'src/hooks/firebase';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
@@ -29,25 +31,26 @@ export default function MultiplayerJoinCollapse({ game }: { game: MultiplayerSto
   return (
     <div className="collapse w-full bg-primary-content">
       <input type="checkbox" />
-      <div className="collapse-title text-xl font-medium text-center">
+      <div className="collapse-title text-xl font-medium text-center text-info">
         {storyName} ({locale}) | Por {userCratorName} | Jugadores: {game.players.length}
       </div>
       <div className="collapse-content">
-        <h3 className="font-bold text-lg">{storyName}</h3>
-        <p>{storyDescription}</p>
+        <h3 className="font-bold text-lg text-center text-info">{storyName}</h3>
+        <Markdown options={MarkdownOptions}>{storyDescription}</Markdown>
 
         <p className="my-4">
-          <strong>Creada por:</strong> {userCratorName}.
+          <strong className="text-info">Creada por:</strong> {userCratorName}.
         </p>
         <p className="mb-4">
-          <strong>{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong>{' '}
+          <strong className="text-info">{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong>{' '}
           {game.players[0].userName}.
         </p>
         <p className="mb-4">
-          <strong>Jugadores:</strong> {game.players.map((p) => p.userName).join(', ')}.
+          <strong className="text-info">Jugadores:</strong>{' '}
+          {game.players.map((p) => p.userName).join(', ')}.
         </p>
         <p className="mb-4">
-          <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}
+          <strong className="text-info">GmAi:</strong> {aiRole} | {aiConfigTitle}
         </p>
 
         <hr />

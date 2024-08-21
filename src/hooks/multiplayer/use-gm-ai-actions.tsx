@@ -39,7 +39,7 @@ export default function useGmAiAcctions() {
       try {
         const gmAiResponse = await runAIChat(
           promptMsg,
-          [...generateGmAiMpPromptArray(locale), ...inGameContent], // TODO: reemplace for Multiplayer Prompt
+          [...generateGmAiMpPromptArray(locale), ...inGameContent],
           aiConfigObj
         );
 

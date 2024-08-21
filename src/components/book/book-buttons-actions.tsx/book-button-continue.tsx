@@ -10,6 +10,9 @@ import { Book } from 'types/library';
 import { calculateStoryXp } from 'utils/calculate-story-xp';
 import ModalIsAStoryInProgress from '../book-modals/book-modal-is-story-in-progress';
 import { useTranslations } from 'next-intl';
+import { useLibraryStore } from 'src/hooks/use-library-store';
+import { useCreateMultiplayer } from 'src/hooks/multiplayer';
+import { useState } from 'react';
 
 export default function BookButtonContinue({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.btn');
@@ -78,10 +81,35 @@ export default function BookButtonContinue({ book }: { book: Book }) {
     router.push('/story');
   }
 
+  /**
+   * Multiplayer
+   */
+  const { isSinglePlayer, multiplayerLibrary } = useLibraryStore();
+  const { continueMultiplayerGame } = useCreateMultiplayer();
+  const [isLoading, setIsLoading] = useState(false);
+  async function handleContinueStoryMp() {
+    setIsLoading(true);
+    const bookMp = multiplayerLibrary.find((b) => b.storyId === book.id);
+    if (bookMp) {
+      await continueMultiplayerGame(bookMp);
+      router.push('/multiplayer/create');
+    }
+    setIsLoading(false);
+  }
+
+  /**
+   * Render
+   */
+  const onContinueStoryClick = isSinglePlayer ? handleContinueStory : handleContinueStoryMp;
+
   return (
-    <button className="btn btn-sm btn-info" onClick={handleContinueStory}>
+    <button className="btn btn-sm btn-info" onClick={onContinueStoryClick} disabled={isLoading}>
       {t('BookButtonContinue')}{' '}
-      <Icon.Stars className="w-4 h-4" aria-label={t('BookButtonContinue')} />
+      {isLoading ? (
+        <span className="loading loading-spinner loading-xs"></span>
+      ) : (
+        <Icon.Stars className="w-4 h-4" aria-label={t('BookButtonContinue')} />
+      )}
     </button>
   );
 }

@@ -295,6 +295,13 @@
       "ModalCantShareBook": {
         "title": "Cannot Share Book",
         "p": "You must be logged in to share a book."
+      },
+
+      "ModalContinueMpError": {
+        "title_error": "Error continuing",
+        "p_error": "There was an error, please try again later.",
+        "title_fail": "Gmail is thinking...",
+        "p_fail": "Please try again..."
       }
     }
   },

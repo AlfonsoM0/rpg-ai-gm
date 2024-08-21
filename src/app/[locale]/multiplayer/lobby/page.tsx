@@ -1,5 +1,6 @@
 'use client';
 
+import Markdown from 'markdown-to-jsx';
 import { useEffect } from 'react';
 import ChatInputMsg from 'src/components/chat/chat-input-msg';
 import ChatOptionsConfig from 'src/components/chat/chat-options-config';
@@ -8,6 +9,7 @@ import H2 from 'src/components/h2';
 import Main from 'src/components/Main';
 import CardCharacterLobby from 'src/components/multiplayer/lobby/card-character-loby';
 import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
+import { MarkdownOptions } from 'src/config/constants';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { useRouter } from 'src/navigation';
@@ -69,7 +71,7 @@ export default function Page() {
           <button
             className="btn btn-primary"
             onClick={onStartClick}
-            disabled={isMultiplayerLoading}
+            disabled={isMultiplayerLoading || players.length < 2}
           >
             COMENZAR PARTIDA
           </button>
@@ -90,16 +92,17 @@ export default function Page() {
         <H2>Información de la partida</H2>
 
         <h3 className="font-bold text-lg">{storyName}</h3>
-        <p>{storyDescription}</p>
+        <Markdown options={MarkdownOptions}>{storyDescription}</Markdown>
 
         <p className="my-4">
-          <strong>Creada por:</strong> {userCratorName}
+          <strong className="text-info">Creada por:</strong> {userCratorName}
         </p>
         <p className="mb-4">
-          <strong>{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong> {players[0].userName}
+          <strong className="text-info">{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong>{' '}
+          {players[0].userName}
         </p>
         <p className="mb-4">
-          <strong>GmAi:</strong> {aiRole} | {aiConfigTitle}
+          <strong className="text-info">GmAi:</strong> {aiRole} | {aiConfigTitle}
         </p>
       </section>
     </Main>

@@ -295,6 +295,13 @@
       "ModalCantShareBook": {
         "title": "No se puede compartir el libro",
         "p": "Para compartir un libro debes iniciar sesión."
+      },
+
+      "ModalContinueMpError": {
+        "title_error": "Error al continuar",
+        "p_error": "Hubo un error, intenta de nuevo más tarde.",
+        "title_fail": "GmAi está pensando...",
+        "p_fail": "Por favor, inténtalo de nuevo..."
       }
     }
   },

@@ -12,7 +12,6 @@ import { useRouter } from 'src/navigation';
 export default function FormCreateNewMultiplayerGame() {
   const router = useRouter();
   const {
-    storyId,
     storyName,
     setStoryName,
     storyDescription,
