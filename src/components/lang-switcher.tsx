@@ -1,3 +1,4 @@
+'use client';
 // https://www.sitepoint.com/next-js-internationalization/#implementinglanguageswitching
 
 import React, { useState } from 'react';
@@ -9,6 +10,7 @@ import { useTranslations } from 'next-intl';
 
 export default function LangSwitcher() {
   const t = useTranslations('Header');
+  const locale = useTranslations()('[locale]');
 
   interface Option {
     country: string;
@@ -27,7 +29,7 @@ export default function LangSwitcher() {
 
   const setOption = (option: Option) => {
     setIsOptionsExpanded(false);
-    router.push(`/${option.code}`);
+    router.push(`/${option.code}${pathname}`);
   };
 
   return (
@@ -59,9 +61,7 @@ export default function LangSwitcher() {
                 }}
                 onClick={() => setIsOptionsExpanded(false)}
               >
-                <p className={pathname === `/${option.code}` ? 'text-success' : ''}>
-                  {option.country}
-                </p>
+                <p className={locale === option.code ? 'text-success' : ''}>{option.country}</p>
               </li>
             ))}
           </ul>
