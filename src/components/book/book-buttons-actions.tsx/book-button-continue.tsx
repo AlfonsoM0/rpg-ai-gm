@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from 'components/icons';
-import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_STORY_END } from 'config/constants';
+import { AI_ROLE, APP_URL, CODE_CHARACTERS_CHANGE, CODE_STORY_END } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
@@ -78,7 +78,7 @@ export default function BookButtonContinue({ book }: { book: Book }) {
       ],
     });
 
-    router.push('/story');
+    router.push(APP_URL.STORY);
   }
 
   /**
@@ -92,7 +92,7 @@ export default function BookButtonContinue({ book }: { book: Book }) {
     const bookMp = multiplayerLibrary.find((b) => b.storyId === book.id);
     if (bookMp) {
       await continueMultiplayerGame(bookMp);
-      router.push('/multiplayer/create');
+      router.push(APP_URL.MULTIPLAYER_CREATE);
     }
     setIsLoading(false);
   }

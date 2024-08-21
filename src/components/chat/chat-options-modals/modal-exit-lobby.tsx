@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { ModalContentContainer } from 'src/components/modal';
+import { APP_URL } from 'src/config/constants';
 import { usePlayerAcctions } from 'src/hooks/multiplayer';
 import { useModalState } from 'src/hooks/use-modal-state';
 import { useRouter } from 'src/navigation';
@@ -18,7 +19,7 @@ export default function ModalExitLobby() {
   function onExitLobby() {
     leaveGame();
     setModalIsOpen(false);
-    router.push('/multiplayer');
+    router.push(APP_URL.HOME_MULTIPLAYER);
   }
 
   return (

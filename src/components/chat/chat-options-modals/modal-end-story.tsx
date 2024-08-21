@@ -12,6 +12,7 @@ import { calculateStoryXp } from 'utils/calculate-story-xp';
 import { clearGameSystemMsg } from 'src/utils/gmai-utils';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import { calculateStoryXpMp } from 'src/utils/gmai-utils-mp';
+import { APP_URL } from 'src/config/constants';
 
 export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ModalEndHistory');
@@ -69,7 +70,7 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
     setIsStoryStarted(false);
     removeAllInGameCharacters();
 
-    router.push('/');
+    router.push(APP_URL.HOME);
   }
 
   /**
@@ -98,7 +99,7 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
 
     // Leave Game
     await leaveGame();
-    router.push('/');
+    router.push(APP_URL.HOME);
 
     setIsMultiplayerLoading(false);
   }

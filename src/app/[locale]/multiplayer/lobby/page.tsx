@@ -9,7 +9,7 @@ import H2 from 'src/components/h2';
 import Main from 'src/components/Main';
 import CardCharacterLobby from 'src/components/multiplayer/lobby/card-character-loby';
 import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
-import { MarkdownOptions } from 'src/config/constants';
+import { APP_URL, MarkdownOptions } from 'src/config/constants';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { useRouter } from 'src/navigation';
@@ -26,7 +26,7 @@ export default function Page() {
 
   useEffect(() => {
     // If started, go to Game!
-    if (multiplayerStory?.isStoryStarted) router.push('/multiplayer/game');
+    if (multiplayerStory?.isStoryStarted) router.push(APP_URL.MULTIPLAYER_GAME);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiplayerStory?.isStoryStarted]);
 

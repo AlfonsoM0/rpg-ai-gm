@@ -5,6 +5,7 @@ import { useRouter } from '@/navigation';
 import { useEffect, useState } from 'react';
 import { UserAccuntPartial } from 'types/firebase-db';
 import { useTranslations } from 'next-intl';
+import { APP_URL } from 'src/config/constants';
 
 export default function UserFormInfo() {
   const t = useTranslations('User.form');
@@ -29,7 +30,7 @@ export default function UserFormInfo() {
 
     setUserAcc({});
 
-    router.push('/');
+    router.push(APP_URL.HOME);
   }
 
   useEffect(() => {

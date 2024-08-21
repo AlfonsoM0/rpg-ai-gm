@@ -4,6 +4,7 @@ import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/navigation';
 import { Character } from 'types/character';
+import { APP_URL } from 'src/config/constants';
 
 interface CopyCharacterProps {
   character: Character;
@@ -23,7 +24,7 @@ export default function ButtonCopyCharacter({ character }: CopyCharacterProps) {
       xp: 250,
     });
 
-    router.push('/new-character');
+    router.push(APP_URL.NEW_CHARACTER);
   }
 
   return (

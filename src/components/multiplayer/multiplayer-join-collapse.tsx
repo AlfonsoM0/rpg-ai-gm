@@ -1,7 +1,7 @@
 'use client';
 
 import Markdown from 'markdown-to-jsx';
-import { MarkdownOptions } from 'src/config/constants';
+import { APP_URL, MarkdownOptions } from 'src/config/constants';
 import useFirebase from 'src/hooks/firebase';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
@@ -21,7 +21,7 @@ export default function MultiplayerJoinCollapse({ game }: { game: MultiplayerSto
   function onJoinClick() {
     if (!characterSelected) return;
     joinGame(game, characterSelected).then(() => {
-      router.push('/multiplayer/lobby');
+      router.push(APP_URL.MULTIPLAYER_LOBBY);
     });
   }
 

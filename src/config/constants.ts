@@ -15,6 +15,27 @@ export enum AI_MODEL {
   GEMINI_FLASH = 'gemini-1.5-flash',
 }
 
+export enum APP_URL {
+  // "HOME_..." are show in navbar
+  HOME = '/',
+  HOME_TUTORIAL = '/tutorial',
+
+  HOME_LIBRARY = '/library',
+  LIBRARY_BOOK = '/library/book',
+  LIBRARY_BOOKMP = '/library/book-mp',
+
+  HOME_MULTIPLAYER = '/multiplayer',
+  MULTIPLAYER_CREATE = '/multiplayer/create',
+  MULTIPLAYER_GAME = '/multiplayer/game',
+  MULTIPLAYER_JOIN = '/multiplayer/join',
+  MULTIPLAYER_LOBBY = '/multiplayer/lobby',
+
+  CHARACTER = '/character',
+  NEW_CHARACTER = '/new-character',
+  STORY = '/story',
+  USER = '/user',
+}
+
 export const CODE_DONT_SHOW_IN_CHAT = '(🆔:❌❌❌)';
 export const CODE_CHARACTERS_CHANGE = '(🆔:⚔️⚔️⚔️)';
 export const CODE_STORY_END = '(🆔:⭐⭐⭐)';

@@ -8,6 +8,7 @@ import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { AiModels } from 'src/utils/generate-ai-config';
 import { AiRole } from 'src/types/multiplayer';
 import { useRouter } from 'src/navigation';
+import { APP_URL } from 'src/config/constants';
 
 export default function FormCreateNewMultiplayerGame() {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function FormCreateNewMultiplayerGame() {
     e.preventDefault();
     if (!isFormRedyForSubmit || !characterSelected) return;
 
-    createMultiplayerGame(characterSelected).then(() => router.push('/multiplayer/lobby'));
+    createMultiplayerGame(characterSelected).then(() => router.push(APP_URL.MULTIPLAYER_LOBBY));
   }
 
   const btnSubmitStyle = isFormRedyForSubmit ? 'btn w-full btn-success' : 'btn w-full';

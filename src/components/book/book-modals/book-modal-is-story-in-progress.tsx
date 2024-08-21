@@ -5,6 +5,7 @@ import { ModalContentContainer } from 'components/modal';
 import { useModalState } from 'hooks/use-modal-state';
 import ModalEndHistory from 'components/chat/chat-options-modals/modal-end-story';
 import { useTranslations } from 'next-intl';
+import { APP_URL } from 'src/config/constants';
 
 export default function ModalIsAStoryInProgress({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('Card_Book.modal.ModalIsAStoryInProgress');
@@ -13,8 +14,8 @@ export default function ModalIsAStoryInProgress({ isMultiplayer }: { isMultiplay
   const { setModalIsOpen, setModalContent } = useModalState();
 
   function onContinueStoryClick() {
-    if (isMultiplayer) router.push('/multiplayer/game');
-    else router.push('/story');
+    if (isMultiplayer) router.push(APP_URL.MULTIPLAYER_GAME);
+    else router.push(APP_URL.STORY);
     setModalIsOpen(false);
   }
 

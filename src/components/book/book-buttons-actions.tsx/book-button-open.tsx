@@ -4,6 +4,7 @@ import { useLibraryStore } from 'hooks/use-library-store';
 import { useRouter } from 'src/navigation';
 import { Book } from 'types/library';
 import { useTranslations } from 'next-intl';
+import { APP_URL } from 'src/config/constants';
 
 export default function BookButtonOpen({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.btn');
@@ -16,12 +17,12 @@ export default function BookButtonOpen({ book }: { book: Book }) {
   function hadleOpenBook() {
     if (isSinglePlayer) {
       setBookSelected(book);
-      router.push('/library/book');
+      router.push(APP_URL.LIBRARY_BOOK);
     } else {
       const bookMp = multiplayerLibrary.find((b) => b.storyId === book.id);
       if (bookMp) {
         setBookSelectedMp(bookMp);
-        router.push('/library/book-mp');
+        router.push(APP_URL.LIBRARY_BOOKMP);
       }
     }
   }

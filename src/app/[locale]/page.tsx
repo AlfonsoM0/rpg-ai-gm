@@ -7,7 +7,7 @@ import { Icon } from 'components/icons';
 import { Input } from 'components/input';
 import Main from 'components/Main';
 import { ModalContentContainer } from 'components/modal';
-import { AI_ROLE, CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
+import { AI_ROLE, APP_URL, CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
@@ -44,7 +44,7 @@ export default function Home() {
   function onCreateNewCharacterClick() {
     clearAllCharacterInfo();
     setStep(0);
-    router.push('/new-character');
+    router.push(APP_URL.NEW_CHARACTER);
   }
 
   function playStory() {
@@ -87,7 +87,7 @@ export default function Home() {
       });
     } else setIsStoryStarted(true);
 
-    router.push('/story');
+    router.push(APP_URL.STORY);
   }
 
   function searchCharacter(charactersCollection: Character[]): Character[] {
@@ -171,7 +171,7 @@ function ModalNoCharactersToPlay() {
 
   function onWatchTutorialClick() {
     setModalIsOpen(false);
-    router.push('/tutorial');
+    router.push(APP_URL.HOME_TUTORIAL);
   }
 
   return (

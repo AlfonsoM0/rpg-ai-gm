@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Navbar, { NavbarLinks } from './navbar';
+import { APP_URL } from 'src/config/constants';
 
 export default function Header() {
   const t = useTranslations('Header.Navbar_links');
@@ -9,19 +10,19 @@ export default function Header() {
   const navbarLinks: NavbarLinks = [
     {
       name: t('/'),
-      url: '/',
+      url: APP_URL.HOME,
     },
     {
       name: t('/tutorial'),
-      url: '/tutorial',
+      url: APP_URL.HOME_TUTORIAL,
     },
     {
       name: t('/library'),
-      url: '/library',
+      url: APP_URL.HOME_LIBRARY,
     },
     {
       name: t('/multiplayer'),
-      url: '/multiplayer',
+      url: APP_URL.HOME_MULTIPLAYER,
     },
   ];
 

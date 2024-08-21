@@ -11,6 +11,7 @@ import { useMemo } from 'react';
 import { characteristicsXpValue } from 'utils/characteristics-xp-value';
 import AiButtonImproveCaracterDescription from './form-character-description-steps-ai-button';
 import { useTranslations } from 'next-intl';
+import { APP_URL } from 'src/config/constants';
 
 export default function FormCharacterDescription() {
   const t = useTranslations('GENERIC');
@@ -67,7 +68,7 @@ export default function FormCharacterDescription() {
     removeACharacterFromCollection(id);
     addACharacterToCollection(newCharacter);
 
-    router.push('/');
+    router.push(APP_URL.HOME);
   }
 
   return (

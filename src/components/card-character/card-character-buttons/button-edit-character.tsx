@@ -4,6 +4,7 @@ import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/navigation';
 import { Character } from 'types/character';
+import { APP_URL } from 'src/config/constants';
 
 interface EditCharacterProps {
   character: Character;
@@ -21,7 +22,7 @@ export default function ButtonEditCharacter({ character }: EditCharacterProps) {
     setPreviousCharacteristics(character.characteristics);
     setIsEdit(true);
     setStep(7);
-    router.push('/new-character');
+    router.push(APP_URL.NEW_CHARACTER);
   }
 
   return (
