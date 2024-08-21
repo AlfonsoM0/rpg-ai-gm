@@ -13,7 +13,6 @@ import {
   calcFailure,
   calcSuccess,
   calculateStoryXpMp,
-  generateDefultAiChatMessageInfo,
   generateDefultUserChatMessageInfo,
 } from 'src/utils/gmai-utils-mp';
 import { AiModels } from 'src/utils/generate-ai-config';

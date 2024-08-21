@@ -3,17 +3,19 @@ import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import { getFireDocSSR } from 'src/server/firebase-ssr';
 import Main from 'src/components/Main';
-import TTSControlsSection from '../../book/[uid_bid]/tts-section';
 import { getContent, Locale } from 'content/get-content';
 import MultiplayerChatWindow from 'src/components/multiplayer/multiplayer-chat-window';
 import CardCharacterContainer from 'src/components/card-character/card-character-container';
 import CardCharacterBody from 'src/components/card-character/card-character-body';
+import TTSControls from 'src/components/tts/tts-controls';
 
 export async function generateMetadata({
   params: { uid_bid, locale },
 }: {
-  params: { uid_bid: string; locale: string };
+  params: { uid_bid: string; locale: Locale };
 }): Promise<Metadata> {
+  const ttsTip = (await getContent(locale)).Page_Book.play_audio_tip;
+
   const [uid, bid] = uid_bid.split('_');
   const user = await getFireDocSSR('USER_ACCOUNT', uid);
   const userName = user ? user.displayName : '';
@@ -33,6 +35,7 @@ export default async function Page({
   params: { uid_bid: string; locale: Locale };
 }) {
   const t = (await getContent(locale)).Page_Book['[uid_bid]'];
+  const ttsTip = (await getContent(locale)).Page_Book.play_audio_tip;
   const [uid, bid] = uid_bid.split('_');
 
   const library = await getFireDocSSR('USER_LIBRARY', uid);
@@ -60,7 +63,7 @@ export default async function Page({
       </H1>
       <H2>{book.storyName}</H2>
 
-      <TTSControlsSection />
+      <TTSControls customTTS={ttsTip} />
 
       <section>
         <MultiplayerChatWindow multiplayerStory={book} />

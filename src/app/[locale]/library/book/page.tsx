@@ -27,7 +27,7 @@ export default function Page() {
       setTTS('');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isTTSEnabled]);
 
   if (!bookSelected) return <></>;
   const { title, characters, content } = bookSelected;
@@ -38,11 +38,9 @@ export default function Page() {
         {t('h1_Book')} <br /> <span className="font-semibold">{title}</span>
       </H1>
 
-      {isTTSEnabled ? (
-        <section className="my-[-1rem]">
-          <TTSControls customTTS={t('play_audio_tip')} />
-        </section>
-      ) : null}
+      <section className="my-[-1rem]">
+        <TTSControls customTTS={t('play_audio_tip')} />
+      </section>
 
       <section>
         <ChatWindow content={content} isLoadingContent={false} />

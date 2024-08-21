@@ -46,14 +46,11 @@ export default function Page() {
   if (!multiplayerStory || !userCurrentMpGame) return <NoGameLoad />;
 
   const { storyName, players, aiRole, userCratorId } = multiplayerStory;
+  const { player } = userCurrentMpGame;
+
   const isGmAiRolGM = aiRole === 'Game Master';
-  const player = players.filter((p) => p.userId === userCurrentMpGame.player.userId)[0];
-  const othersPlayers = players
-    .filter((p) => p.userId !== player.userId)
-    .filter((p) => {
-      if (isGmAiRolGM) return true;
-      else return p.userId !== userCratorId;
-    });
+
+  const othersPlayers = players.filter((p) => p.userId !== player.userId);
 
   function onSetRedyForGMClick() {
     setIsReadyForAiResponse(!player.isRedyForAiResponse);

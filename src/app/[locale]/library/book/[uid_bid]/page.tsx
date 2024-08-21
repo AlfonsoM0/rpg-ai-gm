@@ -6,8 +6,8 @@ import { getFireDocSSR } from 'src/server/firebase-ssr';
 import CardCharacter from 'src/components/card-character';
 import Main from 'src/components/Main';
 import { Book } from 'src/types/library';
-import TTSControlsSection from './tts-section';
 import { getContent, Locale } from 'content/get-content';
+import TTSControls from 'src/components/tts/tts-controls';
 
 export async function generateMetadata({
   params: { uid_bid, locale },
@@ -33,6 +33,8 @@ export default async function Page({
   params: { uid_bid: string; locale: Locale };
 }) {
   const t = (await getContent(locale)).Page_Book['[uid_bid]'];
+
+  const ttsTip = (await getContent(locale)).Page_Book.play_audio_tip;
   const [uid, bid] = uid_bid.split('_');
 
   const user = await getFireDocSSR('USER_ACCOUNT', uid);
@@ -56,7 +58,7 @@ export default async function Page({
       <H1>{`${t.h1_Story_from} ${userName}`}</H1>
       <H2>{book.title}</H2>
 
-      <TTSControlsSection />
+      <TTSControls customTTS={ttsTip} />
 
       <section>
         <ChatWindow

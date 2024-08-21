@@ -31,7 +31,7 @@ export default function Page() {
       setTTS('');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isTTSEnabled]);
 
   if (!multiplayerBookSelected) return <></>;
   const { storyName, players, content } = multiplayerBookSelected;
@@ -43,11 +43,9 @@ export default function Page() {
         {t('h1_Book')} <br /> <span className="font-semibold">{storyName}</span>
       </H1>
 
-      {isTTSEnabled ? (
-        <section className="my-[-1rem]">
-          <TTSControls customTTS={t('play_audio_tip')} />
-        </section>
-      ) : null}
+      <section className="my-[-1rem]">
+        <TTSControls customTTS={t('play_audio_tip')} />
+      </section>
 
       <section>
         <MultiplayerChatWindow
