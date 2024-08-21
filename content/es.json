@@ -569,6 +569,11 @@
     "Response": {
       "Empty": "🤔... No se me ocurre una respuesta... \n\n Dame más información e inténtalo nuevamente. ✨",
       "Error": "⚠️ Lo lamento, no puedo responderte. \n\n Esto puede suceder cuando hay un error en el juego o cuando nuestra conversación se vuelve muy... inapropiada. \n\n Dame más información e inténtalo nuevamente. ✨"
+    },
+
+    "continueMultiplayerGame_prompt": {
+      "Msg_Start": "## **Resumen de la historia anterior:** \n\n",
+      "Msg_end": "## **Trama de la historia actual:** \n\n"
     }
   }
 }

@@ -13,6 +13,7 @@ import runAIChat from 'src/server/gm-ai';
 import ModalContinueMpError from './modal-continue-mp-game-error';
 import { useCreateMultiplayerState } from './use-create-multiplayer-state';
 import { generateAiConfig } from 'src/utils/generate-ai-config';
+import { getContent } from 'content/get-content';
 
 export default function useCreateMultiplayer() {
   const { setFireDoc, user } = useFirebase();
@@ -120,8 +121,9 @@ export default function useCreateMultiplayer() {
       const cleanContent = clearGmAiErrorsMsg(content);
       const inGameContent = getInGameContent(cleanContent);
       const aiConfigObj = generateAiConfig(inGameContent.length, 'Creative_AI');
-      const promptMsg =
-        'Haz un resumen de la historia. Comienza diciendo "## **Resume de la historia anterior:** \n\n". Termina diciendo "## **Trama de la historia actual:** \n\n". Toda la respuesta debe estar en idioma ${locale}" (ISO 639-1).';
+
+      const { Msg_Start, Msg_end } = (await getContent(locale)).GmAi.continueMultiplayerGame_prompt;
+      const promptMsg = `Haz un resumen de la historia. Comienza diciendo "${Msg_Start}". Termina diciendo "${Msg_end}". Toda la respuesta debe estar en idioma ${locale}" (ISO 639-1).`;
 
       // set game state
       function setGameState(aiResume: string) {

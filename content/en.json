@@ -569,6 +569,11 @@
     "Response": {
       "Empty": "🤔... I can't think of an answer... \n\n Give me more information and try again. ✨",
       "Error": "⚠️ I'm sorry, I can't answer you. \n\n This can happen when there is a bug in the game or when our conversation gets too... inappropriate. \n\n Give me more information and try again. ✨"
+    },
+
+    "continueMultiplayerGame_prompt": {
+      "Msg_Start": "## **Summary of the previous story:** \n\n",
+      "Msg_end": "## **Current story plot:** \n\n"
     }
   }
 }
