@@ -19,10 +19,15 @@ export default function CardCharacterMultiplayer({ character }: { character: Cha
 
   const btnStyle = isSelected ? 'btn btn-success' : 'btn';
 
+  function onSelectCharacterClick() {
+    if (!characterSelected) setCharacterSelected(character);
+    else setCharacterSelected();
+  }
+
   return (
     <CardCharacterContainer isSelected={isSelected}>
       <CardCharacterBody character={character}>
-        <button className={btnStyle} onClick={() => setCharacterSelected(character)}>
+        <button className={btnStyle} onClick={onSelectCharacterClick}>
           {isSelected ? t('Selected') : t('Recruit')}
         </button>
       </CardCharacterBody>

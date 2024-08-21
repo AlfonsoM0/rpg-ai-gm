@@ -32,6 +32,7 @@ export default function SelectCharacter() {
 
   useEffect(() => {
     if (characterSelected) setSearch(characterSelected.name);
+    else setSearch('');
   }, [characterSelected]);
 
   return (
