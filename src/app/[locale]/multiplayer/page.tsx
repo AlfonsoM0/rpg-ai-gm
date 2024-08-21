@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import H1 from 'src/components/h1';
 import Main from 'src/components/Main';
 import useFirebase from 'src/hooks/firebase';
@@ -7,8 +8,29 @@ import useMultiplayer from 'src/hooks/multiplayer';
 import { Link } from 'src/navigation';
 
 export default function Page() {
+  const t = useTranslations('Page_Multiplayer');
+
   const { multiplayerStory } = useMultiplayer();
   const { isFireLoading } = useFirebase();
+
+  const NoGame = (
+    <Main>
+      <H1>{t('h1_Multiplayer')}</H1>
+
+      <section className="flex flex-col gap-10">
+        <Link className="btn" href={'/multiplayer/create'}>
+          {t('link_Create_Game')}
+        </Link>
+
+        <Link className="btn" href={'/multiplayer/join'}>
+          {t('link_Join_Game')}
+        </Link>
+      </section>
+
+      <div></div>
+      <div></div>
+    </Main>
+  );
 
   if (isFireLoading) return Loading;
   if (!multiplayerStory) return NoGame;
@@ -17,16 +39,16 @@ export default function Page() {
 
   return (
     <Main>
-      <H1>Multijugador</H1>
+      <H1>{t('h1_Multiplayer')}</H1>
 
       <section className="flex flex-col gap-10">
         {isInLobby ? (
           <Link className="btn" href={'/multiplayer/lobby'}>
-            Regresar al Lobby
+            {t('link_Return_Lobby')}
           </Link>
         ) : (
           <Link className="btn" href={'/multiplayer/game'}>
-            Regresar al Juego
+            {t('link_Return_Game')}
           </Link>
         )}
       </section>
@@ -42,24 +64,5 @@ const Loading = (
     <H1>
       <span className="loading loading-spinner loading-lg" aria-label="Loading..."></span>
     </H1>
-  </Main>
-);
-
-const NoGame = (
-  <Main>
-    <H1>Multijugador</H1>
-
-    <section className="flex flex-col gap-10">
-      <Link className="btn" href={'/multiplayer/create'}>
-        Crear a una partida
-      </Link>
-
-      <Link className="btn" href={'/multiplayer/join'}>
-        Unirse a una partida
-      </Link>
-    </section>
-
-    <div></div>
-    <div></div>
   </Main>
 );

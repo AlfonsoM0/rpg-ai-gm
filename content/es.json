@@ -508,6 +508,63 @@
     }
   },
 
+  "Page_Multiplayer": {
+    "h1_Multiplayer": "Multijugador",
+    "link_Return_Lobby": "Regresar al Lobby",
+    "link_Return_Game": "Regresar al Juego",
+    "link_Create_Game": "Crear una partida",
+    "link_Join_Game": "Unirse a una partida"
+  },
+
+  "Page_Multiplayer_Create": {
+    "h1_Multiplayer": "Multijugador: Crear partida",
+    "h2_Complete_Info": "Completa la siguiente información",
+    "h2_Select_Character": "Elige tu personaje",
+
+    "form_Create": {
+      "Story_Name": "Nombre de la historia",
+      "GmAi_Role": "GmAi ROL",
+      "Role_Game_Master": "Game Master",
+      "Role_Game_Assistant": "Ayudante de GM (Tu eres el GM)",
+      "GmAi_Style": "Estilo de GmAi",
+      "Lenguage_Game": "Idioma",
+      "Story_Description": "Descripción de la historia",
+      "Story_Description_placeholder": "¿Qué historia te gustaría jugar? GmAi usará esta información para crear la historia.",
+      "btn": {
+        "Create_Game": "CREAR PATIDA",
+        "Creating_Game": "CREANDO PARTIDA..."
+      }
+    }
+  },
+
+  "Page_Multiplayer_Game": {
+    "Game_not_available": "Juego no disponible",
+    "Waiting_GM_Response": "Esperando respuesta del GM...",
+    "Click_for_waiting": "Click aquí para esperar al GM",
+    "Not_ready": "No está listo"
+  },
+
+  "Page_Multiplayer_Join": {
+    "h1_Multiplayer_Games": "Partidas Multijugador",
+    "h2_Select_Character": "Elige tu personaje",
+    "btn_Find_Games": "Buscar partidas",
+
+    "Join_Collapse": {
+      "by": "Por",
+      "Players": "Jugadores",
+      "Created_by": "Creada por",
+      "Host": "Anfitrión",
+      "Host/GM": "Anfitrión / Game Master",
+      "Join": "UNIRSE"
+    }
+  },
+
+  "Page_Multiplayer_Lobby": {
+    "btn_Start_game": "COMENZAR PARTIDA",
+    "h2_Characters": "Personajes",
+    "h2_Game_info": "Información de la partida"
+  },
+
   "GmAi": {
     "Response": {
       "Empty": "🤔... No se me ocurre una respuesta... \n\n Dame más información e inténtalo nuevamente. ✨",

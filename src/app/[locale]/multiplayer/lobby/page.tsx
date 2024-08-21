@@ -1,6 +1,7 @@
 'use client';
 
 import Markdown from 'markdown-to-jsx';
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import ChatInputMsg from 'src/components/chat/chat-input-msg';
 import ChatOptionsConfig from 'src/components/chat/chat-options-config';
@@ -15,6 +16,9 @@ import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { useRouter } from 'src/navigation';
 
 export default function Page() {
+  const t = useTranslations('Page_Multiplayer_Lobby');
+  const t2 = useTranslations('Page_Multiplayer_Join.Join_Collapse');
+
   const router = useRouter();
 
   const { multiplayerStory, userCurrentMpGame, isMultiplayerLoading } = useMultiplayer();
@@ -73,13 +77,13 @@ export default function Page() {
             onClick={onStartClick}
             disabled={isMultiplayerLoading || players.length < 2}
           >
-            COMENZAR PARTIDA
+            {t('btn_Start_game')}
           </button>
         </section>
       ) : null}
 
       <section>
-        <H2>Personajes</H2>
+        <H2>{t('h2_Characters')}</H2>
 
         <div className="flex flex-wrap gap-4 justify-center">
           {players.map((player) => (
@@ -89,16 +93,16 @@ export default function Page() {
       </section>
 
       <section className="p-4">
-        <H2>Información de la partida</H2>
+        <H2>{t('h2_Game_info')}</H2>
 
         <h3 className="font-bold text-lg">{storyName}</h3>
         <Markdown options={MarkdownOptions}>{storyDescription}</Markdown>
 
         <p className="my-4">
-          <strong className="text-info">Creada por:</strong> {userCratorName}
+          <strong className="text-info">{t2('Created_by')}:</strong> {userCratorName}
         </p>
         <p className="mb-4">
-          <strong className="text-info">{isAiGM ? 'Anfitrión' : 'Anfitrión/Game Master'}:</strong>{' '}
+          <strong className="text-info">{isAiGM ? t2('Host') : t2('Host/GM')}:</strong>{' '}
           {players[0].userName}
         </p>
         <p className="mb-4">

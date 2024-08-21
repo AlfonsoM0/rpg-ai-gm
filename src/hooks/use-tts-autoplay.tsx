@@ -27,7 +27,6 @@ export default function useAutoplayAiTTS(
     }
 
     return () => {
-      console.log('useAutoplayAiTTS/useEffect/return () => {...}');
       handleStop();
       setTTS('');
     };

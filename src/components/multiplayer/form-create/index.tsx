@@ -9,8 +9,11 @@ import { AiModels } from 'src/utils/generate-ai-config';
 import { AiRole } from 'src/types/multiplayer';
 import { useRouter } from 'src/navigation';
 import { APP_URL } from 'src/config/constants';
+import { useTranslations } from 'next-intl';
 
 export default function FormCreateNewMultiplayerGame() {
+  const t = useTranslations('Page_Multiplayer_Create.form_Create');
+
   const router = useRouter();
   const {
     storyName,
@@ -53,7 +56,7 @@ export default function FormCreateNewMultiplayerGame() {
       <div>
         <label className="form-control w-[20rem]">
           <div className="label">
-            <span className="label-text font-bold">Nombre de la historia</span>
+            <span className="label-text font-bold">{t('Story_Name')}</span>
           </div>
           <input
             className="input input-bordered"
@@ -66,24 +69,24 @@ export default function FormCreateNewMultiplayerGame() {
 
         <label className="form-control w-[20rem]">
           <div className="label">
-            <span className="label-text font-bold">GmAi ROL</span>
+            <span className="label-text font-bold">{t('GmAi_Role')}</span>
           </div>
           <select
             className="select select-bordered"
             onChange={(e) => setAiRole(e.target.value as AiRole)}
           >
             <option selected={aiRole === 'Game Master'} value="Game Master">
-              Game Master
+              {t('Role_Game_Master')}
             </option>
             <option selected={aiRole === 'Game Assistant'} value="Game Assistant" disabled>
-              Game Assistant (Tu eres el GM)
+              {t('Role_Game_Assistant')}
             </option>
           </select>
         </label>
 
         <label className="form-control w-[20rem]">
           <div className="label">
-            <span className="label-text font-bold">Estilo de GmAi</span>
+            <span className="label-text font-bold">{t('GmAi_Style')}</span>
           </div>
           <select
             className="select select-bordered"
@@ -99,7 +102,7 @@ export default function FormCreateNewMultiplayerGame() {
 
         <label className="form-control w-[20rem]">
           <div className="label">
-            <span className="label-text font-bold">Idioma</span>
+            <span className="label-text font-bold">{t('Lenguage_Game')}</span>
           </div>
           <select
             className="select select-bordered"
@@ -117,13 +120,13 @@ export default function FormCreateNewMultiplayerGame() {
 
       <label className="form-control w-[20rem]">
         <div className="label">
-          <span className="label-text font-bold">Descripción de la historia</span>
+          <span className="label-text font-bold">{t('Story_Description')}</span>
         </div>
         <TextareaAutosize
           className="textarea textarea-bordered min-h-[18rem]"
           value={storyDescription}
           onChange={(e) => setStoryDescription(e.target.value)}
-          placeholder="¿Qué historia te gustaría jugar? GmAi usará esta información para crear la historia."
+          placeholder={t('Story_Description_placeholder')}
         />
       </label>
 
@@ -132,7 +135,7 @@ export default function FormCreateNewMultiplayerGame() {
         type="submit"
         disabled={!isFormRedyForSubmit || isMultiplayerLoading}
       >
-        {isMultiplayerLoading ? 'CREANDO PARTIDA...' : 'CREAR PATIDA'}
+        {isMultiplayerLoading ? t('btn.Creating_Game') : t('btn.Create_Game')}
       </button>
     </form>
   );

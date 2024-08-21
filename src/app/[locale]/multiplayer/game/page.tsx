@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import CardCharacterBody from 'src/components/card-character/card-character-body';
 import CardCharacterContainer from 'src/components/card-character/card-character-container';
@@ -42,13 +43,13 @@ export default function Page() {
   /**
    * Player
    */
-  if (!multiplayerStory || !userCurrentMpGame) return NoGameLoad;
+  if (!multiplayerStory || !userCurrentMpGame) return <NoGameLoad />;
 
   const { storyName, players, aiRole, userCratorId } = multiplayerStory;
   const isGmAiRolGM = aiRole === 'Game Master';
   const player = players.filter((p) => p.userId === userCurrentMpGame.player.userId)[0];
   const othersPlayers = players
-    .filter((p) => p.userId !== userCurrentMpGame.player.userId)
+    .filter((p) => p.userId !== player.userId)
     .filter((p) => {
       if (isGmAiRolGM) return true;
       else return p.userId !== userCratorId;
@@ -69,10 +70,7 @@ export default function Page() {
       ) : null}
 
       <section>
-        <MultiplayerChatWindow
-          currentUserId={userCurrentMpGame.player.userId}
-          multiplayerStory={multiplayerStory}
-        />
+        <MultiplayerChatWindow currentUserId={player.userId} multiplayerStory={multiplayerStory} />
         <ChatInputMsg isMultiplayer />
       </section>
 
@@ -89,7 +87,7 @@ export default function Page() {
               onClick={onSetRedyForGMClick}
               disabled={multiplayerStory.isStoryEnded}
             >
-              {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse1}
+              {player.isRedyForAiResponse ? <WaitingForResponse /> : <NotRediForResponse1 />}
             </button>
             <CardPlayCharacter character={player.character} isMultiplayer />
             <></>
@@ -99,7 +97,7 @@ export default function Page() {
         <div className="flex flex-wrap gap-4 justify-center mt-4">
           {othersPlayers.map((player) => (
             <CardCharacterContainer isSelected={player.isRedyForAiResponse} key={player.userId}>
-              {player.isRedyForAiResponse ? WaitingForResponse : NotRediForResponse2}
+              {player.isRedyForAiResponse ? <WaitingForResponse /> : <NotRediForResponse2 />}
               <CardCharacterBody character={player.character}>
                 <></>
               </CardCharacterBody>
@@ -111,22 +109,31 @@ export default function Page() {
   );
 }
 
-const NoGameLoad = (
-  <Main>
-    <H1>Juego no disponible</H1>
-  </Main>
-);
+const NoGameLoad = () => {
+  const t = useTranslations('Page_Multiplayer_Game');
+  return (
+    <Main>
+      <H1>{t('Game_not_available')}</H1>
+    </Main>
+  );
+};
 
-const WaitingForResponse = (
-  <div className="text-center text-success p-2">
-    Esperando respuesta del GM...
-    <span className="loading loading-spinner loading-xs"></span>
-  </div>
-);
+const WaitingForResponse = () => {
+  const t = useTranslations('Page_Multiplayer_Game');
+  return (
+    <div className="text-center text-success p-2">
+      {t('Waiting_GM_Response')}
+      <span className="loading loading-spinner loading-xs"></span>
+    </div>
+  );
+};
 
-const NotRediForResponse1 = (
-  <div className="text-center text-error p-2">Click aquí para esperar al GM</div>
-);
-const NotRediForResponse2 = (
-  <div className="text-center text-error p-2 mb-[-1rem]">No está listo</div>
-);
+const NotRediForResponse1 = () => {
+  const t = useTranslations('Page_Multiplayer_Game');
+  return <div className="text-center text-error p-2">{t('Click_for_waiting')}</div>;
+};
+
+const NotRediForResponse2 = () => {
+  const t = useTranslations('Page_Multiplayer_Game');
+  return <div className="text-center text-error p-2 mb-[-1rem]">{t('Not_ready')}</div>;
+};

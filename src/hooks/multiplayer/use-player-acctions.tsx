@@ -189,7 +189,7 @@ export default function usePlayerAcctions() {
       const storyEndPrompt = `(((${CODE_STORY_END}
         ## Información del sistema de juego (no mostrar en chat):
         ${gameInfoJson}}
-        Crea el final de la historia.
+        Crea el final de la historia basado en la información del sistema de juego. Solo si "totalXp" es mayor a 0, avisa a los jugadores que tienen XP para mejorar sus personajes.
         )))`;
 
       const newMessage: ChatMessage = {

@@ -508,6 +508,63 @@
     }
   },
 
+  "Page_Multiplayer": {
+    "h1_Multiplayer": "Multiplayer",
+    "link_Return_Lobby": "Return to Lobby",
+    "link_Return_Game": "Return to Game",
+    "link_Create_Game": "Create a Game",
+    "link_Join_Game": "Join a Game"
+  },
+
+  "Page_Multiplayer_Create": {
+    "h1_Multiplayer": "Multiplayer: Create Game",
+    "h2_Complete_Info": "Complete the following information",
+    "h2_Select_Character": "Select your character",
+
+    "form_Create": {
+      "Story_Name": "Story Name",
+      "GmAi_Role": "GmAi Role",
+      "Role_Game_Master": "Game Master",
+      "Role_Game_Assistant": "GM Assistant (You are the GM)",
+      "GmAi_Style": "GmAi Style",
+      "Lenguage_Game": "Language",
+      "Story_Description": "Story Description",
+      "Story_Description_placeholder": "What story would you like to play? GmAi will use this information to create the story.",
+      "btn": {
+        "Create_Game": "CREATE GAME",
+        "Creating_Game": "CREATING GAME..."
+      }
+    }
+  },
+
+  "Page_Multiplayer_Game": {
+    "Game_not_available": "Game not available",
+    "Waiting_GM_Response": "Waiting for GM's response...",
+    "Click_for_waiting": "Click here to wait for GM",
+    "Not_ready": "Not ready"
+  },
+
+  "Page_Multiplayer_Join": {
+    "h1_Multiplayer_Games": "Multiplayer Games",
+    "h2_Select_Character": "Select your character",
+    "btn_Find_Games": "Find Games",
+
+    "Join_Collapse": {
+      "by": "by",
+      "Players": "Players",
+      "Created_by": "Created by",
+      "Host": "Host",
+      "Host/GM": "Host/GM",
+      "Join": "JOIN"
+    }
+  },
+
+  "Page_Multiplayer_Lobby": {
+    "btn_Start_game": "Start Game",
+    "h2_Characters": "Characters",
+    "h2_Game_info": "Game Information"
+  },
+
   "GmAi": {
     "Response": {
       "Empty": "🤔... I can't think of an answer... \n\n Give me more information and try again. ✨",

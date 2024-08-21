@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import Main from 'src/components/Main';
@@ -10,6 +11,8 @@ import useFirebase from 'src/hooks/firebase';
 import { MultiplayerStory } from 'src/types/multiplayer';
 
 export default function Page() {
+  const t = useTranslations('Page_Multiplayer_Join');
+
   const { getAllFireDocs, isFireLoading } = useFirebase();
 
   const [games, setGames] = useState<MultiplayerStory[] | undefined>(undefined);
@@ -25,19 +28,11 @@ export default function Page() {
 
   return (
     <Main>
-      <H1>Partidas Multijugador</H1>
-
-      <section>
-        <H2>Elige tu personaje</H2>
-
-        <SelectCharacter />
-      </section>
-
-      <hr />
+      <H1>{t('h1_Multiplayer_Games')}</H1>
 
       <section className="mx-2 flex flex-col items-center gap-4">
         <button className="btn" onClick={onSearchGames} disabled={isFireLoading}>
-          Buscar partidas
+          {t('btn_Find_Games')}
         </button>
 
         {games?.length ? (
@@ -47,6 +42,14 @@ export default function Page() {
             ))}
           </div>
         ) : null}
+      </section>
+
+      <hr />
+
+      <section>
+        <H2>{t('h2_Select_Character')}</H2>
+
+        <SelectCharacter />
       </section>
     </Main>
   );
