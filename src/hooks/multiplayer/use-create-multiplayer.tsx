@@ -1,13 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { Locale } from 'src/i18n-config';
-import { AiModels, generateAiConfig } from 'src/utils/generate-ai-config';
 import useFirebase from '../firebase';
-import { AiRole, MultiplayerStory } from 'src/types/multiplayer';
+import { MultiplayerStory } from 'src/types/multiplayer';
 import { Character } from 'src/types/character';
 import useMultiplayer from '.';
-import { useGmAiStore } from '../use-gm-ai-chat-store';
 import { useModalState } from '../use-modal-state';
 import ModalIsAStoryInProgress from 'src/components/book/book-modals/book-modal-is-story-in-progress';
 import { clearGmAiErrorsMsg } from 'src/utils/gmai-utils';
@@ -16,12 +12,12 @@ import { generateGmAiMpPromptArray } from 'src/config/gm-ai-promp-mp';
 import runAIChat from 'src/server/gm-ai';
 import ModalContinueMpError from './modal-continue-mp-game-error';
 import { useCreateMultiplayerState } from './use-create-multiplayer-state';
+import { generateAiConfig } from 'src/utils/generate-ai-config';
 
 export default function useCreateMultiplayer() {
-  const { setFireDoc, user, getFireDoc } = useFirebase();
+  const { setFireDoc, user } = useFirebase();
   const { setMultiplayerStory, setUserCurrentMpGame, setIsMultiplayerLoading, multiplayerStory } =
     useMultiplayer();
-  const { aiConfig: spAiCOnfig, locale: L } = useGmAiStore();
   const { setModalIsOpen, setModalContent } = useModalState();
 
   const {
@@ -125,7 +121,7 @@ export default function useCreateMultiplayer() {
       const inGameContent = getInGameContent(cleanContent);
       const aiConfigObj = generateAiConfig(inGameContent.length, 'Creative_AI');
       const promptMsg =
-        'Haz un resumen de la historia. Comienza diciendo "## **Resume de la historia anterior:** \n\n". Termina diciendo "## **Trama de la historia actual:** \n\n".';
+        'Haz un resumen de la historia. Comienza diciendo "## **Resume de la historia anterior:** \n\n". Termina diciendo "## **Trama de la historia actual:** \n\n". Toda la respuesta debe estar en idioma ${locale}" (ISO 639-1).';
 
       // set game state
       function setGameState(aiResume: string) {
