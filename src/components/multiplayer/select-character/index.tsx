@@ -3,8 +3,9 @@
 import { Skeleton_CardCharacter } from 'components/card-character';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from 'src/components/input';
+import useMultiplayer from 'src/hooks/multiplayer';
 import { useCharacterStore } from 'src/hooks/use-character-store';
 import { Character } from 'src/types/character';
 
@@ -17,15 +18,22 @@ const DynamicCardCharacter = dynamic(
 );
 
 export default function SelectCharacter() {
+  const t = useTranslations('Page_Home');
+
   /**
    * Character Search
    */
-  const t = useTranslations('Page_Home');
   const { charactersCollection } = useCharacterStore();
+  const { characterSelected } = useMultiplayer();
   const [search, setSearch] = useState('');
   function searchCharacter(charactersCollection: Character[]): Character[] {
     return charactersCollection.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()));
   }
+
+  useEffect(() => {
+    if (characterSelected) setSearch(characterSelected.name);
+  }, [characterSelected]);
+
   return (
     <div>
       {charactersCollection.length > 3 ? (
