@@ -546,6 +546,7 @@
 
   "Page_Multiplayer_Join": {
     "h1_Multiplayer_Games": "Partidas Multijugador",
+    "small_No_games_found": "No hay partidas para jugar, inicia una nueva búsqueda más tarde.",
     "h2_Select_Character": "Elige tu personaje",
     "btn_Find_Games": "Buscar partidas",
 

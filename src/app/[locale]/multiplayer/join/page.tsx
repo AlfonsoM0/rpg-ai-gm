@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import H1 from 'src/components/h1';
 import H2 from 'src/components/h2';
 import Main from 'src/components/Main';
@@ -26,6 +26,11 @@ export default function Page() {
     });
   }
 
+  useEffect(() => {
+    onSearchGames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Main>
       <H1>{t('h1_Multiplayer_Games')}</H1>
@@ -41,7 +46,9 @@ export default function Page() {
               <MultiplayerJoinCollapse key={game.storyId} game={game} />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <small className="text-error">{t('small_No_games_found')}</small>
+        )}
       </section>
 
       <hr />
