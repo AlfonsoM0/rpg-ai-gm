@@ -49,7 +49,9 @@
   "Page_Library": {
     "h1_My_Library": "Mi biblioteca",
     "input_placeholder_search": "Buscar por nombre",
-    "No_books_available": "No hay libros disponibles"
+    "No_books_available": "No hay libros disponibles",
+    "btn_Singleplayer": "Un Jugador",
+    "btn_Multiplayer": "Multijugador"
   },
 
   "Page_Book": {

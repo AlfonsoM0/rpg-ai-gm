@@ -33,14 +33,18 @@ export default function Page() {
           <li
             className={isSinglePlayer ? btnStyleSelected : btnStyleNotSelected}
             onClick={() => setIsSinglePlayer(true)}
+            role="button"
+            aria-label={t('btn_Singleplayer')}
           >
-            <a>Un Jugador</a>
+            <p>{t('btn_Singleplayer')}</p>
           </li>
           <li
             className={!isSinglePlayer ? btnStyleSelected : btnStyleNotSelected}
             onClick={() => setIsSinglePlayer(false)}
+            role="button"
+            aria-label={t('btn_Multiplayer')}
           >
-            <a>Multijugador</a>
+            <p>{t('btn_Multiplayer')}</p>
           </li>
         </ul>
       </div>
