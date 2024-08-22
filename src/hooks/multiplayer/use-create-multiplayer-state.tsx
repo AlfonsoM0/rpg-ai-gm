@@ -17,6 +17,8 @@ interface CreateMpGameActions {
   setLocale: (locale: Locale) => void;
   setAiConfig: (aiConfig: AiModels) => void;
   setAiRole: (aiRole: AiRole) => void;
+
+  setCreateMultiplayerState: (newState?: Partial<CreateMpGameState>) => void;
 }
 
 const initialCreateMpGameState: CreateMpGameState = {
@@ -41,4 +43,9 @@ export const useCreateMultiplayerState = create<CreateMpGameState & CreateMpGame
   setAiConfig: (aiConfig) => set({ aiConfig }),
 
   setAiRole: (aiRole) => set({ aiRole }),
+
+  setCreateMultiplayerState: (newState) => {
+    if (newState) set({ ...initialCreateMpGameState, ...newState });
+    else set(initialCreateMpGameState);
+  },
 }));

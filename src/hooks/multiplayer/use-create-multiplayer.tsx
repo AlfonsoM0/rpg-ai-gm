@@ -33,6 +33,7 @@ export default function useCreateMultiplayer() {
     setAiConfig,
     aiRole,
     setAiRole,
+    setCreateMultiplayerState,
   } = useCreateMultiplayerState();
 
   const t = locale === 'en' ? en : es;
@@ -48,6 +49,7 @@ export default function useCreateMultiplayer() {
     setAiConfig,
     aiRole,
     setAiRole,
+    setCreateMultiplayerState,
 
     createMultiplayerGame: async (character: Character) => {
       if (!user) return;
