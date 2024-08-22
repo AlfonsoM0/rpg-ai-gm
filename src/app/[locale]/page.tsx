@@ -7,7 +7,13 @@ import { Icon } from 'components/icons';
 import { Input } from 'components/input';
 import Main from 'components/Main';
 import { ModalContentContainer } from 'components/modal';
-import { AI_ROLE, APP_URL, CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
+import {
+  AI_NAME_TO_SHOW,
+  AI_ROLE,
+  APP_URL,
+  CODE_CHARACTERS_CHANGE,
+  CODE_DONT_SHOW_IN_CHAT,
+} from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
@@ -20,6 +26,8 @@ import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-character
 import ChatOptionsConfig from 'components/chat/chat-options-config';
 import CardCreateNewCharacter from 'src/components/card-create-new-character';
 import TryMultiplayerLink from 'src/components/multiplayer/try-multiplayer-link';
+import imgGmAi from 'public/gmai.png';
+import Image from 'next/image';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -90,7 +98,8 @@ export default function Home() {
 
   return (
     <Main>
-      <H1>{t('h1_Welcome')}</H1>
+      <Image src={imgGmAi.src} alt={AI_NAME_TO_SHOW} width={320} height={320} />
+      <H1 className="mt-[-2rem]">{t('h1_Welcome')}</H1>
 
       {/* 
         PLAY GAME
