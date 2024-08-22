@@ -68,7 +68,7 @@ export default function FormCharacterDescription() {
     removeACharacterFromCollection(id);
     addACharacterToCollection(newCharacter);
 
-    router.push(APP_URL.HOME);
+    router.back();
   }
 
   return (
