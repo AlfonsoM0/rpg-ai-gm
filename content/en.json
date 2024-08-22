@@ -547,7 +547,10 @@
     "Game_not_available": "Game not available",
     "Waiting_GM_Response": "Waiting for GM's response...",
     "Click_for_waiting": "Click here to wait for GM",
-    "Not_ready": "Not ready"
+    "Not_ready": "Not ready",
+    "Send_msg_as_GM": "Send as a Game Master: ",
+    "Send_msg_as_Character": "Send as Character: ",
+    "Send_msg_as_Player": "Send as a Player: "
   },
 
   "Page_Multiplayer_Join": {

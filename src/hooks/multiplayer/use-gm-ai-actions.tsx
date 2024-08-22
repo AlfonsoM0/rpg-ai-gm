@@ -93,11 +93,25 @@ export default function useGmAiAcctions() {
       );
     },
 
-    sendAiMsg: async (msg: string) => {
+    sendAiMsg: async (msg: string, isInGameMsg?: boolean) => {
       if (!multiplayerStory || !userCurrentMpGame) return;
+      const { aiRole, players } = multiplayerStory;
+      const { player } = userCurrentMpGame;
+
+      const userInfo = aiRole === 'Game Master' ? undefined : userCurrentMpGame;
+
+      const newPlayers = players.map((p) => {
+        const isCurrentPlayerAndIsGM = p.userId === player.userId && aiRole === 'Game Assistant';
+        if (isCurrentPlayerAndIsGM) return p;
+        else
+          return {
+            ...p,
+            isRedyForAiResponse: false,
+          };
+      });
 
       const newContent: ChatMessage = {
-        ...generateDefultAiChatMessageInfo(),
+        ...generateDefultAiChatMessageInfo(userInfo, isInGameMsg),
         parts: [{ text: msg }],
       };
 
@@ -107,6 +121,7 @@ export default function useGmAiAcctions() {
         {
           ...multiplayerStory,
           content: [...content, newContent],
+          players: newPlayers,
         },
         storyId
       );

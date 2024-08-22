@@ -1,20 +1,31 @@
 import { Content } from '@google/generative-ai';
 import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
+import { UserGame } from 'src/types/firebase-db';
 import { ChatMessage, MultiplayerStory, Player } from 'src/types/multiplayer';
 
-export function generateDefultAiChatMessageInfo(): Omit<ChatMessage, 'parts'> {
+export function generateDefultAiChatMessageInfo(
+  userGM?: UserGame['currentMultiplayerGame'],
+  isInGameMsg?: boolean
+): Omit<ChatMessage, 'parts'> {
+  const charName = userGM ? `Game Master ${userGM.player.userName}` : AI_NAME_TO_SHOW;
+  const userName = userGM ? userGM.player.userName : AI_NAME_TO_SHOW;
+  const id = userGM ? userGM.player.userId : AI_NAME_TO_SHOW;
+  const avatarSrc = userGM ? userGM.player.avatarSrc : '/android-chrome-512x512.png';
+
+  const isInGame = userGM ? Boolean(isInGameMsg) : true;
+
   return {
     id: crypto.randomUUID(),
     role: AI_ROLE.MODEL,
-    isInGameMsg: true,
-    charId: AI_NAME_TO_SHOW,
-    userId: AI_NAME_TO_SHOW,
-    charName: AI_NAME_TO_SHOW,
-    userName: AI_NAME_TO_SHOW,
-    userAvatarSrc: '/android-chrome-512x512.png',
-    userAvatarAlt: `${AI_NAME_TO_SHOW} avatar`,
-    charAvatarSrc: '/android-chrome-512x512.png',
-    charAvatarAlt: `${AI_NAME_TO_SHOW} avatar`,
+    isInGameMsg: isInGame,
+    charId: id,
+    userId: id,
+    charName,
+    userName,
+    userAvatarSrc: avatarSrc,
+    userAvatarAlt: `${userName} avatar`,
+    charAvatarSrc: avatarSrc,
+    charAvatarAlt: `${charName} avatar`,
   };
 }
 

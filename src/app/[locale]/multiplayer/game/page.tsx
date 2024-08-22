@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import CardCharacterBody from 'src/components/card-character/card-character-body';
 import CardCharacterContainer from 'src/components/card-character/card-character-container';
 import CardPlayCharacter from 'src/components/card-play-character';
@@ -43,17 +43,43 @@ export default function Page() {
   /**
    * Player
    */
-  if (!multiplayerStory || !userCurrentMpGame) return <NoGameLoad />;
+  const isGmAiRoleGM = useMemo(
+    () => multiplayerStory?.aiRole === 'Game Master',
+    [multiplayerStory?.aiRole]
+  );
 
-  const { storyName, players, aiRole, userCratorId } = multiplayerStory;
-  const { player } = userCurrentMpGame;
+  const isUserHost = useMemo(
+    () => userCurrentMpGame?.player.userId !== multiplayerStory?.players[0].userId,
+    [userCurrentMpGame?.player.userId, multiplayerStory?.players]
+  );
 
-  const isGmAiRolGM = aiRole === 'Game Master';
+  const othersPlayers = useMemo(() => {
+    if (multiplayerStory?.players && userCurrentMpGame?.player.userId) {
+      const userId = userCurrentMpGame?.player.userId;
+      const players = multiplayerStory.players;
+      return players.filter((p) => {
+        const isCurrentPlayer = p.userId !== userId;
+        if (isGmAiRoleGM) return isCurrentPlayer;
+        else return isCurrentPlayer && p.userId !== players[0].userId;
+      });
+    } else return [];
+  }, [multiplayerStory?.players, userCurrentMpGame?.player.userId, isGmAiRoleGM]);
 
-  const othersPlayers = players.filter((p) => p.userId !== player.userId);
+  const currentPlayer = useMemo(
+    () => multiplayerStory?.players.find((p) => p.userId === userCurrentMpGame?.player.userId),
+    [multiplayerStory?.players, userCurrentMpGame?.player.userId]
+  );
+
+  /**
+   * Render
+   */
+  if (!multiplayerStory || !currentPlayer) return <NoGameLoad />;
+
+  const { storyName, isStoryEnded } = multiplayerStory;
+  const { isRedyForAiResponse, character, userId } = currentPlayer;
 
   function onSetRedyForGMClick() {
-    setIsReadyForAiResponse(!player.isRedyForAiResponse);
+    setIsReadyForAiResponse(!isRedyForAiResponse);
   }
 
   return (
@@ -67,29 +93,31 @@ export default function Page() {
       ) : null}
 
       <section>
-        <MultiplayerChatWindow currentUserId={player.userId} multiplayerStory={multiplayerStory} />
-        <ChatInputMsg isMultiplayer />
+        <MultiplayerChatWindow currentUserId={userId} multiplayerStory={multiplayerStory} />
+        <ChatInputMsg isMultiplayer isUserGM={!isGmAiRoleGM && !isUserHost} />
       </section>
 
-      <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
-        <ChatOptionsABC isMultiplayer />
-        <ChatOptionsConfig isMultiplayer />
-      </section>
+      {!isGmAiRoleGM && !isUserHost ? null : (
+        <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
+          <ChatOptionsABC isMultiplayer />
+          <ChatOptionsConfig isMultiplayer />
+        </section>
+      )}
 
       <section>
-        {isGmAiRolGM ? (
-          <CardCharacterContainer isSelected={player.isRedyForAiResponse}>
+        {!isGmAiRoleGM && !isUserHost ? null : (
+          <CardCharacterContainer isSelected={isRedyForAiResponse}>
             <button
               className="btn btn-ghost mb-[-2rem] z-10"
               onClick={onSetRedyForGMClick}
-              disabled={multiplayerStory.isStoryEnded}
+              disabled={isStoryEnded}
             >
-              {player.isRedyForAiResponse ? <WaitingForResponse /> : <NotRediForResponse1 />}
+              {isRedyForAiResponse ? <WaitingForResponse /> : <NotRediForResponse1 />}
             </button>
-            <CardPlayCharacter character={player.character} isMultiplayer />
+            <CardPlayCharacter character={character} isMultiplayer />
             <></>
           </CardCharacterContainer>
-        ) : null}
+        )}
 
         <div className="flex flex-wrap gap-4 justify-center mt-4">
           {othersPlayers.map((player) => (

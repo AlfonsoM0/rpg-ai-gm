@@ -8,9 +8,11 @@ export const mintxtDescription = 100;
 export default function ButtonAiImprove({
   isLoadingContent,
   contentLength,
+  isHorizontalConfig,
 }: {
   isLoadingContent: boolean;
   contentLength: number;
+  isHorizontalConfig?: boolean;
 }) {
   const t = useTranslations('Page_New_Character');
 
@@ -20,9 +22,19 @@ export default function ButtonAiImprove({
   let txtStyle = !contentLength ? 'text-info' : 'text-error';
   if (contentLength > mintxtDescription) txtStyle = 'text-success';
 
-  if (isLoadingContent) return <span className="loading loading-spinner loading-lg"></span>;
+  const btnStyle = isHorizontalConfig
+    ? 'flex gap-1 items-center'
+    : 'flex flex-col gap-1 items-center';
+
+  if (isLoadingContent)
+    return (
+      <div className={btnStyle}>
+        <span className="loading loading-spinner loading-xs"></span>
+        <p className={txtStyle}>{t('ButtonAiImprove')}</p>
+      </div>
+    );
   return (
-    <div className="flex flex-col gap-1 items-center">
+    <div className={btnStyle}>
       <Icon.Stars className={iconStyle} />
       <p className={txtStyle}>{t('ButtonAiImprove')}</p>
     </div>

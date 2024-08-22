@@ -5,14 +5,22 @@ import { Icon } from 'components/icons';
 import { AI_ROLE } from 'config/constants';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTTSStore } from 'hooks/use-tts-store';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import SR from 'react-speech-recognition';
 import { useTranslations } from 'next-intl';
-import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
+import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/multiplayer';
+import ButtonAiImprove from '../form-new-character/form-character-description-steps-ai-button/button-ai-improve';
 
-export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolean }) {
+export default function ChatInputMsg({
+  isMultiplayer,
+  isUserGM,
+}: {
+  isMultiplayer?: boolean;
+  isUserGM?: boolean;
+}) {
   const t = useTranslations('buttons');
+  const c = useTranslations('Page_Multiplayer_Game');
 
   const { handleStop } = useTTSStore();
   const [chatMsg, setChatMsg] = useState('');
@@ -40,12 +48,17 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   const { isMultiplayerLoading, userCurrentMpGame, isInGameMsg, setIsInGameMsg, multiplayerStory } =
     useMultiplayer();
   const { sendMessage } = usePlayerAcctions();
+  const { gmAiGenerateMsg, sendAiMsg } = useGmAiAcctions();
   function submitMpChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!chatMsg) return;
+
     handleStop();
     SR.stopListening();
-    sendMessage(chatMsg, isInGameMsg);
+
+    if (isUserGM) sendAiMsg(chatMsg, isInGameMsg);
+    else sendMessage(chatMsg, isInGameMsg);
+
     setChatMsg('');
   }
   // Disable Characters Msg when Story is Ended
@@ -55,14 +68,33 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
   }, [multiplayerStory?.isStoryEnded]);
 
   /**
+   * USER GAME MASTER
+   */
+  const [isAiLoading, setIsAiLoading] = useState<boolean>(false);
+  async function onAiImproveClick() {
+    setIsAiLoading(true);
+    const res = await gmAiGenerateMsg(chatMsg, true);
+    res && setChatMsg(res);
+    setIsAiLoading(false);
+  }
+
+  function setChatMsgWhenAiIsNotWorking(text: string) {
+    if (isAiLoading) return;
+    setChatMsg(text);
+  }
+
+  /**
    *  Rendering
    */
   const submitFunction = isMultiplayer ? submitMpChat : submitChat;
 
-  const isCurrentPlayerRedy = multiplayerStory?.players.find(
-    (p) => p.userId === userCurrentMpGame?.player.userId
-  )?.isRedyForAiResponse;
-  const isBtnDisable = isCurrentPlayerRedy || isLoadingContent || isMultiplayerLoading;
+  const isCurrentPlayerRedy = isUserGM
+    ? false
+    : multiplayerStory?.players.find((p) => p.userId === userCurrentMpGame?.player.userId)
+        ?.isRedyForAiResponse;
+
+  const isBtnDisable =
+    isCurrentPlayerRedy || isLoadingContent || isMultiplayerLoading || isAiLoading;
 
   const btnIcon = isMultiplayer ? (
     <Icon.MsgCirgleUp className="w-6 h-6 stroke-info" />
@@ -70,7 +102,8 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
     <Icon.Stars className="w-6 h-6 fill-info" />
   );
 
-  const sendAs = isInGameMsg ? 'Enviar como Personaje: ' : 'Enviar como Jugador: ';
+  const characterOrGM = isUserGM ? c('Send_msg_as_GM') : c('Send_msg_as_Character');
+  const sendAs = isInGameMsg ? characterOrGM : c('Send_msg_as_Player');
   const sendMsgAs =
     (isInGameMsg ? userCurrentMpGame?.player.character.name : userCurrentMpGame?.player.userName) ||
     '';
@@ -79,12 +112,33 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
 
   return (
     <form className="p-2 max-w-[90vw]" onSubmit={submitFunction}>
+      {/* 
+        MULTIPLAYER 
+      */}
       {isMultiplayer ? (
-        <div className="flex justify-between my-2">
+        <div className="flex justify-between gap-2 items-center my-2">
           <p className={sendAsStyle}>
             {sendAs}
             {sendMsgAs}
           </p>
+
+          {/* USER GAME MASTER */}
+          {isUserGM && isInGameMsg ? (
+            <button
+              className="btn btn-xs btn-ghost"
+              type="button"
+              aria-label="Game Master AI generate story"
+              onClick={onAiImproveClick}
+              disabled={isAiLoading}
+            >
+              <ButtonAiImprove
+                isHorizontalConfig
+                isLoadingContent={isAiLoading}
+                contentLength={chatMsg.length}
+              />
+            </button>
+          ) : null}
+
           <input
             type="checkbox"
             className="toggle toggle-info"
@@ -102,7 +156,7 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
           placeholder="..."
           value={chatMsg}
           onChange={(e) => setChatMsg(e.target.value)}
-          disabled={isListening}
+          disabled={isListening || isAiLoading}
         />
 
         <div className="flex flex-col gap-2">
@@ -119,7 +173,11 @@ export default function ChatInputMsg({ isMultiplayer }: { isMultiplayer?: boolea
             )}
           </button>
 
-          <Button.STT text={chatMsg} setText={setChatMsg} setIsListening={setIsListening} />
+          <Button.STT
+            text={chatMsg}
+            setText={setChatMsgWhenAiIsNotWorking}
+            setIsListening={setIsListening}
+          />
         </div>
       </div>
     </form>
