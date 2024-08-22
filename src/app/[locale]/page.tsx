@@ -9,17 +9,17 @@ import Main from 'components/Main';
 import { ModalContentContainer } from 'components/modal';
 import { AI_ROLE, APP_URL, CODE_CHARACTERS_CHANGE, CODE_DONT_SHOW_IN_CHAT } from 'config/constants';
 import { useCharacterStore } from 'hooks/use-character-store';
-import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useModalState } from 'hooks/use-modal-state';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import { useRouter } from '@/navigation';
+import { useRouter, Link } from '@/navigation';
 import { useState } from 'react';
 import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
 import ChatOptionsConfig from 'components/chat/chat-options-config';
 import CardCreateNewCharacter from 'src/components/card-create-new-character';
+import TryMultiplayerLink from 'src/components/multiplayer/try-multiplayer-link';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -36,17 +36,10 @@ export default function Home() {
     removeACharacterFromInGame,
     addACharacterToInGame,
   } = useCharacterStore();
-  const { clearAllCharacterInfo, setStep } = useCreateNewCharacterStore();
   const { setModalContent, setModalIsOpen } = useModalState();
   const { content, addContent, isStoryStarted, setIsStoryStarted } = useGmAiStore();
 
   const [search, setSearch] = useState('');
-
-  function onCreateNewCharacterClick() {
-    clearAllCharacterInfo();
-    setStep(0);
-    router.push(APP_URL.NEW_CHARACTER);
-  }
 
   function playStory() {
     if (!inGameCharacters.length) {
@@ -103,6 +96,9 @@ export default function Home() {
         PLAY GAME
       */}
       <section className="mx-4 flex flex-col items-center gap-8">
+        {/*
+          Singleplayer Button
+        */}
         <div className="flex flex-wrap justify-around items-center gap-4 border-2 p-4 rounded-md shadow-lg bg-primary-content">
           <button
             className="btn btn-lg"
@@ -122,6 +118,9 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        {/* Multiplayer */}
+        <TryMultiplayerLink />
 
         <ChatOptionsConfig />
       </section>
