@@ -516,7 +516,8 @@
     "link_Return_Game": "Regresar al Juego",
     "link_Create_Game": "Crear una partida",
     "link_Join_Game": "Unirse a una partida",
-    "h1_LogIn_for_play": "Debes iniciar sesión para jugar"
+    "h1_LogIn_for_play": "Debes iniciar sesión para jugar",
+    "h1_Character_for_play": "Debes tener un personaje para jugar"
   },
 
   "Page_Multiplayer_Create": {

@@ -516,7 +516,8 @@
     "link_Return_Game": "Return to Game",
     "link_Create_Game": "Create a Game",
     "link_Join_Game": "Join a Game",
-    "h1_LogIn_for_play": "You must log in to play"
+    "h1_LogIn_for_play": "You must log in to play",
+    "h1_Character_for_play": "You must have a character to play"
   },
 
   "Page_Multiplayer_Create": {

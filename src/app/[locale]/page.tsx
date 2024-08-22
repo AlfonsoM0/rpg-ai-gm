@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { Character } from 'types/character';
 import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-characters';
 import ChatOptionsConfig from 'components/chat/chat-options-config';
+import CardCreateNewCharacter from 'src/components/card-create-new-character';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -142,18 +143,7 @@ export default function Home() {
         ) : null}
 
         <div className="flex flex-wrap justify-center gap-4">
-          <div className="card w-80 h-[19rem] border border-primary-content rounded-lg shadow-md">
-            <button
-              className="flex flex-col justify-center items-center mt-[25%]"
-              onClick={onCreateNewCharacterClick}
-              aria-label={t('h2_Create_New_Character')}
-            >
-              <div>
-                <h2 className="card-title">{t('h2_Create_New_Character')}</h2>
-              </div>
-              <div className="text-9xl text-success">+</div>
-            </button>
-          </div>
+          <CardCreateNewCharacter />
 
           {searchCharacter(charactersCollection).map((character) => (
             <DynamicCardCharacter key={character.id} character={character} />

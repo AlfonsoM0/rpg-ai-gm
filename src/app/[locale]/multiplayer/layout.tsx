@@ -4,6 +4,7 @@ import { app_metadata } from 'src/config/app-metadata';
 import { AI_NAME_TO_SHOW } from 'src/config/constants';
 import { Locale } from 'content/get-content';
 import MultiplayerLoader from 'src/components/multiplayer/multiplayer-loader';
+import IsCharacterRedyForPlay from 'src/components/multiplayer/is-character-redy-for-play';
 
 export async function generateMetadata({
   params: { locale },
@@ -25,8 +26,10 @@ export async function generateMetadata({
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <IsSignInForPlay>
-      <MultiplayerLoader />
-      {children}
+      <IsCharacterRedyForPlay>
+        <MultiplayerLoader />
+        {children}
+      </IsCharacterRedyForPlay>
     </IsSignInForPlay>
   );
 }
