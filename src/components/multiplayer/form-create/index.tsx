@@ -63,7 +63,7 @@ export default function FormCreateNewMultiplayerGame() {
             type="text"
             value={storyName}
             onChange={(e) => setStoryName(e.target.value)}
-            placeholder="Crea un nombre original"
+            placeholder={t('Story_Description_placeholder')}
           />
         </label>
 
@@ -78,7 +78,7 @@ export default function FormCreateNewMultiplayerGame() {
             <option selected={aiRole === 'Game Master'} value="Game Master">
               {t('Role_Game_Master')}
             </option>
-            <option selected={aiRole === 'Game Assistant'} value="Game Assistant" disabled>
+            <option selected={aiRole === 'Game Assistant'} value="Game Assistant">
               {t('Role_Game_Assistant')}
             </option>
           </select>

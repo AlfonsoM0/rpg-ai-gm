@@ -528,6 +528,7 @@
 
     "form_Create": {
       "Story_Name": "Nombre de la historia",
+      "Story_Name_placeholder": "Crea un nombre original",
       "GmAi_Role": "GmAi ROL",
       "Role_Game_Master": "Game Master",
       "Role_Game_Assistant": "Ayudante de GM (Tu eres el GM)",
