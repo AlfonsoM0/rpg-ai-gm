@@ -550,7 +550,9 @@
     "Not_ready": "Not ready",
     "Send_msg_as_GM": "Send as a Game Master: ",
     "Send_msg_as_Character": "Send as Character: ",
-    "Send_msg_as_Player": "Send as a Player: "
+    "Send_msg_as_Player": "Send as a Player: ",
+    "All_Players_Redy_for_GM_Response": "All players are ready for the GM's response.",
+    "All_Players_Not_Ready_for_GM_Response": "Not all players are ready for the GM's response"
   },
 
   "Page_Multiplayer_Join": {

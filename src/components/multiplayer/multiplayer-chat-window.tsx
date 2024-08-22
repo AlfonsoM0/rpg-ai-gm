@@ -12,7 +12,7 @@ import {
 import MsgLoadingCharacters from '../chat/chat-message-loading-characterts';
 import MsgStoryEnd from '../chat/chat-message-end';
 import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
-import { isGmAiAutomaticResponse } from 'src/utils/gmai-utils-mp';
+import { areAllPlayersReadyForAiResponse } from 'src/utils/gmai-utils-mp';
 import { useEffect, useRef } from 'react';
 import { MultiplayerStory } from 'src/types/multiplayer';
 
@@ -26,7 +26,7 @@ export default function MultiplayerChatWindow({
   // AI msg center
   const refWindow = useRef<HTMLDivElement>(null);
   const refLoader = useRef<HTMLDivElement>(null);
-  const isPlayersRedy = isGmAiAutomaticResponse(multiplayerStory);
+  const isPlayersRedy = areAllPlayersReadyForAiResponse(multiplayerStory);
 
   useEffect(() => {
     // If isLoadingContent is true, scroll to the bottom.

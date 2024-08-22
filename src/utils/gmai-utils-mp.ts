@@ -1,7 +1,7 @@
 import { Content } from '@google/generative-ai';
 import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
 import { UserGame } from 'src/types/firebase-db';
-import { ChatMessage, MultiplayerStory, Player } from 'src/types/multiplayer';
+import { AiRole, ChatMessage, MultiplayerStory, Player } from 'src/types/multiplayer';
 
 export function generateDefultAiChatMessageInfo(
   userGM?: UserGame['currentMultiplayerGame'],
@@ -90,16 +90,22 @@ export function calculateStoryXpMp({
   return Math.round(baseXP * multp);
 }
 
-export function isGmAiAutomaticResponse(multiplayerStory?: MultiplayerStory): boolean {
+export function areAllPlayersReadyForAiResponse(multiplayerStory?: MultiplayerStory): boolean {
   if (!multiplayerStory) return false;
-  const { players, aiRole } = multiplayerStory;
+  const { players } = multiplayerStory;
 
-  if (aiRole !== 'Game Master') return false;
-
-  // All player must be redy for the response.
   for (let i = 0; i < players.length; i++) {
     if (!players[i].isRedyForAiResponse) return false;
   }
 
   return true;
+}
+
+export function isGmAiAutomaticResponse(multiplayerStory?: MultiplayerStory): boolean {
+  if (!multiplayerStory) return false;
+  const { aiRole } = multiplayerStory;
+
+  if (aiRole !== 'Game Master') return false;
+
+  return areAllPlayersReadyForAiResponse(multiplayerStory);
 }

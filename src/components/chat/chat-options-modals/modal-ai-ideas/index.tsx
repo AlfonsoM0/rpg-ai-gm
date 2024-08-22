@@ -6,24 +6,38 @@ import CollapseShortcuts from './collapse-shortcuts';
 import { ModalContentContainer } from 'components/modal';
 import { useTranslations } from 'next-intl';
 import { usePathname } from '@/navigation';
+import { APP_URL } from 'src/config/constants';
+import useMultiplayer from 'src/hooks/multiplayer';
 
 export default function ModaIdeasForAI({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ModaIdeasForAI');
 
   const pathname = usePathname();
-  const isOutOfStory = pathname !== '/story';
+  const isOutOfStory = !(
+    pathname === (APP_URL.STORY as string) || pathname === (APP_URL.MULTIPLAYER_GAME as string)
+  );
+
+  const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
+
+  const isCurrentUserGm =
+    multiplayerStory?.aiRole === 'Game Assistant' &&
+    multiplayerStory.players[0].userId === userCurrentMpGame?.player.userId;
+  const isRenderShortcuts = isMultiplayer ? !isCurrentUserGm : true;
 
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
       <>
         <p className="my-4 text-sm">{t('p1')}</p>
-        {isOutOfStory ? <p className="pb-4 text-sm text-error">{t('p2')}</p> : null}
+        {isOutOfStory ? <p className="mb-4 text-sm text-error">{t('p2')}</p> : null}
 
         <CollapseTips isMultiplayer={isMultiplayer} />
 
-        <CollapseMyShortcuts isMultiplayer={isMultiplayer} />
-
-        <CollapseShortcuts isMultiplayer={isMultiplayer} />
+        {isRenderShortcuts ? (
+          <>
+            <CollapseMyShortcuts isMultiplayer={isMultiplayer} />
+            <CollapseShortcuts isMultiplayer={isMultiplayer} />
+          </>
+        ) : null}
       </>
     </ModalContentContainer>
   );

@@ -170,7 +170,7 @@ Crea el final de la historia. Crea una narración que dependerá de la cantidad 
 
 Felicita al jugador por terminar la historia.
 
-Avisa al jugador que debe hacer clic en “Finalizar Historia” y colocarle un nombre para guardarla en su biblioteca.
+Avisa al jugador que luego de finalizar la historia, puede colocarle un nombre para guardarla en su biblioteca al salir de la partida.
 
 Avisa al jugador que debe finalizar la historia para ganar los Puntos de Experiencia (XP) y poder comenzar otra historia. El sistema de juego le asignará automáticamente la XP a cada personaje en función de los resultados obtenidos a lo largo de la historia y qué tan larga fue la historia.
 

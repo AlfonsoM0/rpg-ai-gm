@@ -97,12 +97,10 @@ export default function Page() {
         <ChatInputMsg isMultiplayer isUserGM={!isGmAiRoleGM && !isUserHost} />
       </section>
 
-      {!isGmAiRoleGM && !isUserHost ? null : (
-        <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
-          <ChatOptionsABC isMultiplayer />
-          <ChatOptionsConfig isMultiplayer />
-        </section>
-      )}
+      <section className="w-[90vw] max-w-[723px] flex flex-wrap justify-around gap-2">
+        {!isGmAiRoleGM && !isUserHost ? null : <ChatOptionsABC isMultiplayer />}
+        <ChatOptionsConfig isMultiplayer />
+      </section>
 
       <section>
         {!isGmAiRoleGM && !isUserHost ? null : (

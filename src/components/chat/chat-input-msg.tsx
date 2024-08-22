@@ -11,6 +11,7 @@ import SR from 'react-speech-recognition';
 import { useTranslations } from 'next-intl';
 import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/multiplayer';
 import ButtonAiImprove from '../form-new-character/form-character-description-steps-ai-button/button-ai-improve';
+import { areAllPlayersReadyForAiResponse } from 'src/utils/gmai-utils-mp';
 
 export default function ChatInputMsg({
   isMultiplayer,
@@ -94,7 +95,13 @@ export default function ChatInputMsg({
         ?.isRedyForAiResponse;
 
   const isBtnDisable =
-    isCurrentPlayerRedy || isLoadingContent || isMultiplayerLoading || isAiLoading;
+    (isUserGM ? false : isCurrentPlayerRedy) ||
+    isLoadingContent ||
+    isMultiplayerLoading ||
+    isAiLoading;
+
+  const isToggleDisable = isUserGM ? false : multiplayerStory?.isStoryEnded;
+  const isTextAreaDisable = isListening || isAiLoading;
 
   const btnIcon = isMultiplayer ? (
     <Icon.MsgCirgleUp className="w-6 h-6 stroke-info" />
@@ -115,6 +122,16 @@ export default function ChatInputMsg({
       {/* 
         MULTIPLAYER 
       */}
+      {isUserGM && isInGameMsg ? (
+        <div className="text-center text-xs mt-[-0.5rem]">
+          {areAllPlayersReadyForAiResponse(multiplayerStory) ? (
+            <p className="text-success">{c('All_Players_Redy_for_GM_Response')}</p>
+          ) : (
+            <p className="text-error">{c('All_Players_Not_Ready_for_GM_Response')}</p>
+          )}
+        </div>
+      ) : null}
+
       {isMultiplayer ? (
         <div className="flex justify-between gap-2 items-center my-2">
           <p className={sendAsStyle}>
@@ -144,7 +161,7 @@ export default function ChatInputMsg({
             className="toggle toggle-info"
             onChange={() => setIsInGameMsg(!isInGameMsg)}
             checked={isInGameMsg}
-            disabled={multiplayerStory?.isStoryEnded}
+            disabled={isToggleDisable}
           />
         </div>
       ) : null}
@@ -156,7 +173,7 @@ export default function ChatInputMsg({
           placeholder="..."
           value={chatMsg}
           onChange={(e) => setChatMsg(e.target.value)}
-          disabled={isListening || isAiLoading}
+          disabled={isTextAreaDisable}
         />
 
         <div className="flex flex-col gap-2">
