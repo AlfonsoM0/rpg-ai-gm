@@ -26,8 +26,7 @@ import { areTheSameInGameCharacters } from 'utils/are-the-same-in-game-character
 import ChatOptionsConfig from 'components/chat/chat-options-config';
 import CardCreateNewCharacter from 'src/components/card-create-new-character';
 import TryMultiplayerLink from 'src/components/multiplayer/try-multiplayer-link';
-import imgGmAi from 'public/gmai.png';
-import Image from 'next/image';
+import GmAiImag from 'src/components/gmai-img';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -98,7 +97,8 @@ export default function Home() {
 
   return (
     <Main>
-      <Image src={imgGmAi.src} alt={AI_NAME_TO_SHOW} width={320} height={320} />
+      <GmAiImag width={320} height={320} priority />
+
       <H1 className="mt-[-2rem]">{t('h1_Welcome')}</H1>
 
       {/* 

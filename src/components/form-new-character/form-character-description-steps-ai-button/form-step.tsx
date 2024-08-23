@@ -1,12 +1,13 @@
 'use client';
 
 import { CharacterCreationDescription } from 'types/character';
-import ButtonAiImprove, { mintxtDescription } from './button-ai-improve';
+import ButtonAiImprove from './button-ai-improve';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useModalState } from 'hooks/use-modal-state';
 import ModalLowContentAlert from './modal-low-content-alert';
 import { useTranslations } from 'next-intl';
+import { minTxtDescription } from 'src/config/constants';
 
 export default function FormStep({
   descriptionType,
@@ -22,7 +23,7 @@ export default function FormStep({
   const { setModalContent, setModalIsOpen } = useModalState();
 
   async function onAiDescriptionClick() {
-    if (charState[descriptionType].length < mintxtDescription) {
+    if (charState[descriptionType].length < minTxtDescription) {
       setModalContent(<ModalLowContentAlert />);
       setModalIsOpen(true);
       return;
