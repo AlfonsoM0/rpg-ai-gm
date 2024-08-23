@@ -110,7 +110,7 @@ export default function BookButtonContinue({ book }: { book: Book }) {
       disabled={isLoading}
       aria-label={t('BookButtonContinue')}
     >
-      {t('BookButtonContinue')} <Loading.IconStars className="w-4 h-4" isloading={isLoading} />
+      {t('BookButtonContinue')} <Loading.IconStars className="w-4 h-4" isLoading={isLoading} />
     </button>
   );
 }

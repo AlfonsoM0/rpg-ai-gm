@@ -28,7 +28,7 @@ export default function ButtonAiImprove({
 
   return (
     <div className={btnStyle}>
-      <Loading.IconStars className={iconStyle} isloading={isLoadingContent} />
+      <Loading.IconStars className={iconStyle} isLoading={isLoadingContent} />
       <p className={txtStyle}>{t('ButtonAiImprove')}</p>
     </div>
   );

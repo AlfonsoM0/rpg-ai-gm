@@ -107,7 +107,7 @@ export default function ChatInputMsg({
   const btnIcon = isMultiplayer ? (
     <Icon.MsgCirgleUp className="w-6 h-6 stroke-info" />
   ) : (
-    <Loading.IconStars className="w-6 h-6 fill-info" isloading={isLoadingContent} />
+    <Loading.IconStars className="w-6 h-6 fill-info" isLoading={isLoadingContent} />
   );
 
   const characterOrGM = isUserGM ? c('Send_msg_as_GM') : c('Send_msg_as_Character');

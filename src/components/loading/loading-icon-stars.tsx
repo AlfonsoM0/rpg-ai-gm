@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import { Icon } from '../icons';
-import { IconStarProps } from '../icons/icon-stars';
 
-interface LoadingIconStarsProps extends IconStarProps {
-  isloading?: boolean;
+interface LoadingIconStarsProps {
+  className?: ComponentProps<'svg'>['className'];
+  isLoading?: boolean;
   interval?: number;
 }
 
@@ -105,9 +105,11 @@ const starsCongfig: LoadingStarsConfig[] = [
   },
 ];
 
-export default function IconStars(props: LoadingIconStarsProps) {
-  const { isloading = true, interval = 1000, className } = props;
-
+export default function IconStars({
+  isLoading = true,
+  className,
+  interval = 1000,
+}: LoadingIconStarsProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -122,10 +124,9 @@ export default function IconStars(props: LoadingIconStarsProps) {
   const { iconBaseFill, star1class, star2class, star3class, plus1class, plus2class, plus3class } =
     starsCongfig[index];
 
-  if (isloading)
+  if (isLoading)
     return (
       <Icon.Stars
-        {...props}
         className={`${className} ${iconBaseFill}`}
         star1class={star1class}
         star2class={star2class}
@@ -136,5 +137,5 @@ export default function IconStars(props: LoadingIconStarsProps) {
       />
     );
 
-  return <Icon.Stars {...props} />;
+  return <Icon.Stars className={className} />;
 }
