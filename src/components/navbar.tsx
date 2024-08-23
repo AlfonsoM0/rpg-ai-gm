@@ -75,7 +75,7 @@ export function Navbar({ navbarLinks }: NavbarProps): JSX.Element {
 
         <Link className="btn btn-ghost text-sm md:text-xl" href={'/'}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="Game Master AI" src={srcLogo.src} width={32} />
+          <img alt="Game Master AI" src={srcLogo.src} width={32} height={32} />
           Game Master AI
         </Link>
       </div>
