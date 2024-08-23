@@ -7,6 +7,8 @@ import { Button } from 'components/button';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useCreateNewCharacterStore } from 'hooks/use-create-new-character-state';
 import { useTranslations } from 'next-intl';
+import calculeteTextPercentage from 'src/utils/calculate-text-percentage';
+import { minTxtDescription } from 'src/config/constants';
 
 export default function FromCharacterDescriptionStep({
   descriptionType,
@@ -30,7 +32,11 @@ export default function FromCharacterDescriptionStep({
   return (
     <label className="form-control w-full max-w-xs h-96" key={'step-1'}>
       <div className="label">
-        <span className="label-text">{title}</span> <DescriptionIdeas ideas={ideas} />
+        <span className="label-text">{title}</span>
+        <span className="opacity-50 label-text-alt">
+          {calculeteTextPercentage(Char[descriptionType], minTxtDescription)} %
+        </span>
+        <DescriptionIdeas ideas={ideas} />
       </div>
 
       <TextareaAutosize

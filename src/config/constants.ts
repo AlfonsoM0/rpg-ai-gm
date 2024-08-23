@@ -62,3 +62,5 @@ export const MarkdownOptions: MarkdownToJSX.Options = {
     },
   },
 };
+
+export const minTxtDescription = 100;

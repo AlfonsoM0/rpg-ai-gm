@@ -8,8 +8,9 @@ import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
 import { AiModels } from 'src/utils/generate-ai-config';
 import { AiRole } from 'src/types/multiplayer';
 import { useRouter } from 'src/navigation';
-import { APP_URL } from 'src/config/constants';
+import { APP_URL, minTxtDescription } from 'src/config/constants';
 import { useTranslations } from 'next-intl';
+import calculeteTextPercentage from 'src/utils/calculate-text-percentage';
 
 export default function FormCreateNewMultiplayerGame() {
   const t = useTranslations('Page_Multiplayer_Create.form_Create');
@@ -57,13 +58,16 @@ export default function FormCreateNewMultiplayerGame() {
         <label className="form-control w-[20rem]">
           <div className="label">
             <span className="label-text font-bold">{t('Story_Name')}</span>
+            <span className="opacity-50 label-text-alt">
+              {calculeteTextPercentage(storyName, 10)} %
+            </span>
           </div>
           <input
             className="input input-bordered"
             type="text"
             value={storyName}
             onChange={(e) => setStoryName(e.target.value)}
-            placeholder={t('Story_Description_placeholder')}
+            placeholder={t('Story_Name')}
           />
         </label>
 
@@ -121,6 +125,9 @@ export default function FormCreateNewMultiplayerGame() {
       <label className="form-control w-[20rem]">
         <div className="label">
           <span className="label-text font-bold">{t('Story_Description')}</span>
+          <span className="opacity-50 label-text-alt">
+            {calculeteTextPercentage(storyDescription, minTxtDescription)} %
+          </span>
         </div>
         <TextareaAutosize
           className="textarea textarea-bordered min-h-[18rem]"
