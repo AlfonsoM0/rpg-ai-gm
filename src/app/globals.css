@@ -7,3 +7,14 @@
     @apply rounded-xl;
   }
 }
+
+@layer components {
+  .tex-shadow-around-white {
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff,
+      1px -1px #fff, -1px 1px #fff;
+  }
+  .tex-shadow-around-black {
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000,
+      1px -1px #000, -1px 1px #000;
+  }
+}
