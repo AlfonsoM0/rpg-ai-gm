@@ -1,7 +1,7 @@
 'use client';
 
-import { Icon } from 'components/icons';
 import { useTranslations } from 'next-intl';
+import Loading from 'src/components/loading';
 
 export const mintxtDescription = 100;
 
@@ -26,16 +26,9 @@ export default function ButtonAiImprove({
     ? 'flex gap-1 items-center'
     : 'flex flex-col gap-1 items-center';
 
-  if (isLoadingContent)
-    return (
-      <div className={btnStyle}>
-        <span className="loading loading-spinner loading-xs"></span>
-        <p className={txtStyle}>{t('ButtonAiImprove')}</p>
-      </div>
-    );
   return (
     <div className={btnStyle}>
-      <Icon.Stars className={iconStyle} />
+      <Loading.IconStars className={iconStyle} isloading={isLoadingContent} />
       <p className={txtStyle}>{t('ButtonAiImprove')}</p>
     </div>
   );

@@ -13,18 +13,23 @@ export default function ImgMaskAndButton({
   linkUrl?: string;
 }) {
   return (
-    <Link className="flex flex-col items-center" href={linkUrl} onClick={onClickBtn}>
-      <Image
-        className="max-w-xs mask mask-hexagon hover:cursor-pointer hover:brightness-125"
-        src={src}
-        alt={alt}
-        width={320}
-        height={320}
-      />
+    <button onClick={onClickBtn} aria-label={alt}>
+      <Link
+        className="flex flex-col items-center hover:cursor-pointer hover:brightness-125"
+        href={linkUrl}
+      >
+        <Image
+          className="max-w-xs mask mask-hexagon"
+          src={src}
+          alt={alt}
+          width={320}
+          height={320}
+        />
 
-      <div className="mt-[-5rem] mb-10" style={{ zIndex: 1 }}>
-        <p className="text-lg font-extrabold text-white tex-shadow-around-black">{alt}</p>
-      </div>
-    </Link>
+        <div className="mt-[-5rem] mb-10" style={{ zIndex: 1 }}>
+          <p className="text-lg font-extrabold text-white tex-shadow-around-black">{alt}</p>
+        </div>
+      </Link>
+    </button>
   );
 }

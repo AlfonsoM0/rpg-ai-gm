@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import { useLibraryStore } from 'src/hooks/use-library-store';
 import { useCreateMultiplayer } from 'src/hooks/multiplayer';
 import { useState } from 'react';
+import Loading from 'src/components/loading';
 
 export default function BookButtonContinue({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.btn');
@@ -103,13 +104,13 @@ export default function BookButtonContinue({ book }: { book: Book }) {
   const onContinueStoryClick = isSinglePlayer ? handleContinueStory : handleContinueStoryMp;
 
   return (
-    <button className="btn btn-sm btn-info" onClick={onContinueStoryClick} disabled={isLoading}>
-      {t('BookButtonContinue')}{' '}
-      {isLoading ? (
-        <span className="loading loading-spinner loading-xs"></span>
-      ) : (
-        <Icon.Stars className="w-4 h-4" aria-label={t('BookButtonContinue')} />
-      )}
+    <button
+      className="btn btn-sm btn-info"
+      onClick={onContinueStoryClick}
+      disabled={isLoading}
+      aria-label={t('BookButtonContinue')}
+    >
+      {t('BookButtonContinue')} <Loading.IconStars className="w-4 h-4" isloading={isLoading} />
     </button>
   );
 }

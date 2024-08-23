@@ -11,8 +11,7 @@ import { useRouter } from 'src/navigation';
 import imgCreateGame from 'public/img/create-game.jpeg';
 import imgJoinGame from 'public/img/join-game.jpeg';
 import ImgMaskAndButton from 'src/components/image-mask-and-button';
-import LoadingAllPage from 'src/components/loading-all-page';
-
+import Loading from 'src/components/loading';
 export default function Page() {
   const t = useTranslations('Page_Multiplayer');
 
@@ -29,7 +28,7 @@ export default function Page() {
   }
 
   // Page Loadimg
-  if (isFireLoading) return <LoadingAllPage />;
+  if (isFireLoading) return <Loading.AllPage />;
 
   // No Game
   if (!multiplayerStory)

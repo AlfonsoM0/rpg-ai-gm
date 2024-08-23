@@ -1,7 +1,7 @@
-import H1 from './h1';
-import Main from './Main';
+import H1 from '../h1';
+import Main from '../Main';
 
-export default function LoadingAllPage() {
+export default function AllPage() {
   return (
     <Main>
       <H1>

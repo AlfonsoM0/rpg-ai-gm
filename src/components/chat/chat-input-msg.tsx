@@ -12,6 +12,7 @@ import { useTranslations } from 'next-intl';
 import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/multiplayer';
 import ButtonAiImprove from '../form-new-character/form-character-description-steps-ai-button/button-ai-improve';
 import { areAllPlayersReadyForAiResponse } from 'src/utils/gmai-utils-mp';
+import Loading from '../loading';
 
 export default function ChatInputMsg({
   isMultiplayer,
@@ -106,7 +107,7 @@ export default function ChatInputMsg({
   const btnIcon = isMultiplayer ? (
     <Icon.MsgCirgleUp className="w-6 h-6 stroke-info" />
   ) : (
-    <Icon.Stars className="w-6 h-6 fill-info" />
+    <Loading.IconStars className="w-6 h-6 fill-info" isloading={isLoadingContent} />
   );
 
   const characterOrGM = isUserGM ? c('Send_msg_as_GM') : c('Send_msg_as_Character');
@@ -183,11 +184,7 @@ export default function ChatInputMsg({
             disabled={isBtnDisable}
             aria-label={t('Send_message')}
           >
-            {isLoadingContent ? (
-              <span className="loading loading-spinner loading-xs"></span>
-            ) : (
-              btnIcon
-            )}
+            {btnIcon}
           </button>
 
           <Button.STT
