@@ -146,13 +146,15 @@ export default function usePlayerAcctions() {
 
       const { aiRole, players, storyDescription } = multiplayerStory;
 
-      const allPlayersAreRedy = multiplayerStory.players.map((p) => ({
+      const allPlayersAreRedy = players.map((p) => ({
         ...p,
         isRedyForAiResponse: true,
       }));
 
       const characters = multiplayerStory.players.map((p) => p.character);
-      const charactersInfo = `(((Información de los personajes: ${JSON.stringify(characters)}
+      const charactersToUse = aiRole === 'Game Assistant' ? characters.slice(1) : characters;
+
+      const charactersInfo = `(((Información de los personajes: ${JSON.stringify(charactersToUse)}
             ${CODE_DONT_SHOW_IN_CHAT})))`;
       const storyInfo = `(((Crea la introducción a esta historia (Paso 4): ${storyDescription}. Y crea una situación y opciones (Paso 5). ${CODE_DONT_SHOW_IN_CHAT})))`;
 
@@ -222,7 +224,7 @@ export default function usePlayerAcctions() {
       if (!multiplayerStory || !userCurrentMpGame) return;
       setIsMultiplayerLoading(true);
 
-      const { players, content } = multiplayerStory;
+      const { players, content, aiRole } = multiplayerStory;
       const { player } = userCurrentMpGame;
 
       const newPlayers = players.filter((p) => p.userId !== player.userId);
@@ -233,6 +235,9 @@ export default function usePlayerAcctions() {
       } else {
         // Edit game players and set newContent Prompt
         const newCharacters = newPlayers.map((p) => p.character);
+        const newCharactersToUse =
+          aiRole === 'Game Assistant' ? newCharacters.slice(1) : newCharacters;
+
         const newContent: ChatMessage = {
           ...generateDefultUserChatMessageInfo(userCurrentMpGame),
           isInGameMsg: true,
@@ -241,7 +246,7 @@ export default function usePlayerAcctions() {
               text: `(((Un jugador ha abandonado el juego. El personaje "${
                 player.character.name
               }" ahora es un Personaje No Jugador. Los Personajes Jugadores que siguen en juego son : ${JSON.stringify(
-                newCharacters
+                newCharactersToUse
               )}. ${CODE_CHARACTERS_CHANGE})))`,
             },
           ],
