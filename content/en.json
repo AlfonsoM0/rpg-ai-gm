@@ -346,10 +346,12 @@
     "title": "End of Story",
     "p1": "If you name your story, it will be saved in your library and you can use it to play another chapter from where you left off.",
     "p2": "If your story does not end with the \"End of story\" sign, which shows the XP earned, you will not earn XP, but your progress will be saved for when you decide to continue.",
+    "p2_multiplayer": "If your story does not end with the \"End of story\" sign, which shows the XP earned, you will not earn XP.",
     "p3_strong": "Choose an original name.",
     "input_placeholder": "Story name",
-    "btn_End_Game": "Yes, end story",
-    "btn_Continue_Game": "No, keep playing"
+    "btn_End_Game": "Yes, end",
+    "btn_Continue_Game": "No, continue",
+    "btn_Exit_and_dont_save": "Exit without saving"
   },
 
   "ModalEndHistory_Multiplayer": {

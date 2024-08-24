@@ -346,10 +346,12 @@
     "title": "Fin de la historia",
     "p1": "Si pones un nombre a tu historia, se guardará en tu biblioteca y podrás usarla para jugar otro capítulo desde donde dejaste la anterior.",
     "p2": "Si tu historia no finaliza con el cartel de \"Fin de la historia\", que muestra los XP ganados, no ganarás los XP, pero tu progreso se guardará para cuando decidas continuarla.",
+    "p2_multiplayer": "Si tu historia no finaliza con el cartel de \"Fin de la historia\", que muestra los XP ganados, no ganarás los XP.",
     "p3_strong": "Elige un nombre original.",
     "input_placeholder": "Nombre de la historia",
-    "btn_End_Game": "Sí, finalizar historia",
-    "btn_Continue_Game": "No, seguir jugando"
+    "btn_End_Game": "Sí, finalizar",
+    "btn_Continue_Game": "No, continuar",
+    "btn_Exit_and_dont_save": "Salir sin guardar"
   },
 
   "ModalEndHistory_Multiplayer": {

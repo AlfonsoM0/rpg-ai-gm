@@ -84,7 +84,11 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
     setIsMultiplayerLoading(true);
 
     // save book to library
-    if (storyNameMp) addBookMp(multiplayerStory);
+    if (storyNameMp)
+      addBookMp({
+        ...multiplayerStory,
+        content: clearGameSystemMsg(multiplayerStory.content),
+      });
 
     // update Characters XP if story ended
     const xp = calculateStoryXpMp({
@@ -111,13 +115,18 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
   const inputOnChange = isMultiplayer ? setStoryNameMp : setStoryName;
   const btnOnSaveBookClick = isMultiplayer ? onSaveBookClickMp : onSaveBookClick;
 
+  const p2 = isMultiplayer ? t('p2_multiplayer') : t('p2');
+  const inputPlaceholder = isMultiplayer
+    ? multiplayerStory?.storyName || t('input_placeholder')
+    : t('input_placeholder');
+
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
       <>
         <p className="py-4">
           {t('p1')} <br />
           <br />
-          {t('p2')}
+          {p2}
           <br />
           <br />
           <strong>{t('p3_strong')}</strong> <br />
@@ -126,7 +135,7 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
         <input
           className="input input-bordered w-full text-center"
           type="text"
-          placeholder={t('input_placeholder')}
+          placeholder={inputPlaceholder}
           value={inputValue}
           onChange={(e) => inputOnChange(e.target.value)}
         />
@@ -139,6 +148,7 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
           >
             {t('btn_End_Game')}
           </button>
+
           <button
             className="btn btn-success"
             onClick={() => setModalIsOpen(false)}

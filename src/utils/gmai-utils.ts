@@ -138,8 +138,8 @@ export function clearGmAiErrorsMsg<T extends Content[] | ChatMessage[]>(content:
   return newContent as T;
 }
 
-export function clearGameSystemMsg(content: Content[]): Content[] {
-  return content.filter((c) => {
+export function clearGameSystemMsg<T extends Content[] | ChatMessage[]>(content: T): T {
+  const newContent = content.filter((c) => {
     const isUser = c.role === AI_ROLE.USER;
     const msg = c.parts[0].text;
 
@@ -153,4 +153,6 @@ export function clearGameSystemMsg(content: Content[]): Content[] {
 
     return true;
   });
+
+  return newContent as T;
 }
