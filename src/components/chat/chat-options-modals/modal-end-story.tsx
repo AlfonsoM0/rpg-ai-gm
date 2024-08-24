@@ -77,7 +77,7 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
    * Multiplayer
    */
   const { multiplayerStory, userCurrentMpGame, setIsMultiplayerLoading } = useMultiplayer();
-  const [storyNameMp, setStoryNameMp] = useState(multiplayerStory?.storyName || '');
+  const [storyNameMp, setStoryNameMp] = useState('');
   const { leaveGame } = usePlayerAcctions();
   async function onSaveBookClickMp() {
     if (!multiplayerStory || !userCurrentMpGame) return;
@@ -116,9 +116,10 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
   const btnOnSaveBookClick = isMultiplayer ? onSaveBookClickMp : onSaveBookClick;
 
   const p2 = isMultiplayer ? t('p2_multiplayer') : t('p2');
-  const inputPlaceholder = isMultiplayer
-    ? multiplayerStory?.storyName || t('input_placeholder')
-    : t('input_placeholder');
+
+  const labelStyle = inputValue.length
+    ? 'input input-bordered input-success flex items-center gap-2'
+    : 'input input-bordered flex items-center gap-2';
 
   return (
     <ModalContentContainer title={t('title')} titleColor="info">
@@ -132,13 +133,31 @@ export default function ModalEndHistory({ isMultiplayer }: { isMultiplayer?: boo
           <strong>{t('p3_strong')}</strong> <br />
         </p>
 
-        <input
-          className="input input-bordered w-full text-center"
-          type="text"
-          placeholder={inputPlaceholder}
-          value={inputValue}
-          onChange={(e) => inputOnChange(e.target.value)}
-        />
+        <label className={labelStyle}>
+          {isMultiplayer ? (
+            <button
+              className="btn btn-xs btn-circle ml-[-0.5rem]"
+              aria-label="Use Story Name"
+              onClick={() => inputOnChange(multiplayerStory?.storyName || '')}
+            >
+              →
+            </button>
+          ) : null}
+          <input
+            className="grow text-center"
+            type="text"
+            placeholder={t('input_placeholder')}
+            value={inputValue}
+            onChange={(e) => inputOnChange(e.target.value)}
+          />
+          <button
+            className="btn btn-xs btn-circle mr-[-0.5rem]"
+            aria-label="Clear text"
+            onClick={() => inputOnChange('')}
+          >
+            X
+          </button>
+        </label>
 
         <div className="modal-action justify-around">
           <button
