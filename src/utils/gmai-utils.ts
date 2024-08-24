@@ -6,7 +6,7 @@ import {
   CODE_STORY_END,
   CODE_CHARACTERS_CHANGE,
 } from 'config/constants';
-import { deleteCodesFromText } from './delete-text-from-text';
+import { deleteCodesFromText } from './delete-codes-from-text';
 import { AiModels, generateAiConfig } from './generate-ai-config';
 import runAIChat from 'server/gm-ai';
 import { generateGmAiPromptArray } from 'config/gm-ai-promp';

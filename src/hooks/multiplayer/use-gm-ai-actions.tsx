@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { Locale } from 'src/i18n-config';
 import { generateGmAiMpPromptArray } from 'src/config/gm-ai-promp-mp';
 import { ChatMessage, Player } from 'src/types/multiplayer';
-import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
+import { deleteCodesFromText } from 'src/utils/delete-codes-from-text';
 import { generateDefultAiChatMessageInfo, getInGameContent } from 'src/utils/gmai-utils-mp';
 import { clearGmAiErrorsMsg } from 'src/utils/gmai-utils';
 

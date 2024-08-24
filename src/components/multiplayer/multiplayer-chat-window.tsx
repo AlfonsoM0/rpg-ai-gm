@@ -11,7 +11,7 @@ import {
 } from 'src/config/constants';
 import MsgLoadingCharacters from '../chat/chat-message-loading-characterts';
 import MsgStoryEnd from '../chat/chat-message-end';
-import { deleteCodesFromText } from 'src/utils/delete-text-from-text';
+import { deleteCodesFromText } from 'src/utils/delete-codes-from-text';
 import { areAllPlayersReadyForAiResponse } from 'src/utils/gmai-utils-mp';
 import { useEffect, useRef } from 'react';
 import { MultiplayerStory } from 'src/types/multiplayer';
