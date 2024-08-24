@@ -22,7 +22,7 @@ export default function ModalDeleteBook({ id }: { id: string }) {
       <>
         <p className="py-4">{t('p')}</p>
 
-        <div className="modal-action">
+        <div className="modal-action justify-around">
           <button className="btn btn-error" onClick={onRemoveClick} aria-label={t('btn.accept')}>
             {t('btn.accept')}
           </button>
