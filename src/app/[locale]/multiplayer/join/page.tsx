@@ -47,7 +47,7 @@ export default function Page() {
             ))}
           </div>
         ) : (
-          <small className="text-error">{t('small_No_games_found')}</small>
+          <small className="text-error text-center mx-4">{t('small_No_games_found')}</small>
         )}
       </section>
 

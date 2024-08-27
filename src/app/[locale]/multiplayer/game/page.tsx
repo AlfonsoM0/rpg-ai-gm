@@ -104,17 +104,19 @@ export default function Page() {
 
       <section>
         {!isGmAiRoleGM && !isUserHost ? null : (
-          <CardCharacterContainer isSelected={isRedyForAiResponse}>
-            <button
-              className="btn btn-ghost mb-[-2rem] z-10"
-              onClick={onSetRedyForGMClick}
-              disabled={isStoryEnded}
-            >
-              {isRedyForAiResponse ? <WaitingForResponse /> : <NotRediForResponse1 />}
-            </button>
-            <CardPlayCharacter character={character} isMultiplayer />
-            <></>
-          </CardCharacterContainer>
+          <div className="flex justify-center">
+            <CardCharacterContainer isSelected={isRedyForAiResponse}>
+              <button
+                className="btn btn-ghost mb-[-2rem] z-10"
+                onClick={onSetRedyForGMClick}
+                disabled={isStoryEnded}
+              >
+                {isRedyForAiResponse ? <WaitingForResponse /> : <NotRediForResponse1 />}
+              </button>
+              <CardPlayCharacter character={character} isMultiplayer />
+              <></>
+            </CardCharacterContainer>
+          </div>
         )}
 
         <div className="flex flex-wrap gap-4 justify-center mt-4">
