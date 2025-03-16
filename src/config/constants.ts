@@ -11,8 +11,8 @@ export enum AI_ROLE {
 }
 
 export enum AI_MODEL {
-  GEMINI_PRO = 'gemini-1.5-pro', // best option for GmAi
-  GEMINI_FLASH = 'gemini-1.5-flash',
+  GEMINI_PRO = 'gemini-2.0-pro-exp-02-05', // best option for GmAi
+  GEMINI_FLASH = 'gemini-2.0-flash',
 }
 
 export enum APP_URL {
