@@ -1,7 +1,6 @@
 'use server';
 
 // https://ai.google.dev/gemini-api/docs/get-started/node
-
 import {
   GoogleGenerativeAI,
   HarmCategory,
@@ -10,11 +9,11 @@ import {
   GenerationConfig,
   SafetySetting,
 } from '@google/generative-ai';
-import { AI_MODEL } from 'config/constants';
+import { AI_MODEL, AI_MODELS, AI_ROLE } from 'config/constants';
 
-const API_KEY = process.env.AI_APY_KEY || '';
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: AI_MODEL.GEMINI_PRO });
+// https://platform.openai.com/docs/overview
+import OpenAI from 'openai';
+import { ResponseInputItem } from 'openai/resources/responses/responses.mjs';
 
 const generationConfigDefault: GenerationConfig = {
   // Strict AI
@@ -50,26 +49,65 @@ export default async function runAIChat(
   history?: Content[],
   generationConfigCustom?: GenerationConfig
 ) {
-  const contents = history ? history : [];
+  function mapConfigToOpenAI(config: GenerationConfig) {
+    return {
+      temperature: config.temperature,
+      top_p: config.topP,
+      max_output_tokens: config.maxOutputTokens,
+    };
+  }
+  function mapHistoryToOpenAI(history: Content[] | undefined = []): ResponseInputItem[] {
+    return history.map((item) => ({
+      role: item.role === AI_ROLE.USER ? 'user' : 'assistant',
+      content: item.parts.map((p) => p.text).join(' '),
+    }));
+  }
 
-  const chat = model.startChat({
-    generationConfig: generationConfigCustom || generationConfigDefault,
-    safetySettings,
-    history,
-  });
+  const configs = generationConfigCustom || generationConfigDefault;
 
-  const result = await chat.sendMessage(userInput);
-  const response = result.response;
-  const { text, promptFeedback, usageMetadata } = response;
+  for (const ai of AI_MODELS) {
+    try {
+      if (ai.MODEL === AI_MODEL.GEMINI_PRO) {
+        console.log(`🟡 Usando ${ai.MODEL}...`);
 
-  // console.log('AI result/response/promptFeedback => ', promptFeedback);
-  console.log(
-    'AI result/response/usageMetadata/totalTokenCount => ',
-    usageMetadata?.totalTokenCount
-  );
-  // console.log('AI result/response/text => ', text);
+        const genAI = new GoogleGenerativeAI(ai.API_KEY);
+        const model = genAI.getGenerativeModel({ model: ai.MODEL });
+        const chat = model.startChat({
+          generationConfig: configs,
+          safetySettings,
+          history,
+        });
+        const result = await chat.sendMessage(userInput);
+        const response = result.response;
+        const textResult = response.text();
 
-  return text();
+        if (typeof textResult === 'string' && textResult.trim().length > 0) {
+          console.log(`🟢 Respuesta de ${ai.MODEL}: ${textResult}`);
+          return textResult;
+        }
+      } else if (ai.MODEL === AI_MODEL.OPENAI_GPT) {
+        console.log(`🟡 Usando ${ai.MODEL}...`);
+
+        const openai = new OpenAI({ apiKey: ai.API_KEY });
+        // Usar el endpoint de responses.create según la nueva documentación
+        const response = await openai.responses.create({
+          model: ai.MODEL,
+          input: [...mapHistoryToOpenAI(history), { role: 'user', content: userInput }],
+          ...mapConfigToOpenAI(configs),
+        });
+        const textResult = response.output_text?.trim() || '';
+
+        if (textResult.length > 0) {
+          console.log(`🟢 Respuesta de ${ai.MODEL}: ${textResult}`);
+          return textResult;
+        }
+      }
+    } catch (err) {
+      console.error(`🔴 Error con modelo ${ai.MODEL} => `, err);
+      continue;
+    }
+  }
+  return '';
 }
 
 /* //|> Opciones de configuraciones

@@ -11,9 +11,20 @@ export enum AI_ROLE {
 }
 
 export enum AI_MODEL {
-  GEMINI_PRO = 'gemini-2.0-pro-exp-02-05', // best option for GmAi
-  GEMINI_FLASH = 'gemini-2.0-flash',
+  GEMINI_PRO = 'gemini-1.5-pro',
+  OPENAI_GPT = 'gpt-3.5-turbo-0125',
 }
+
+export const AI_MODELS = [
+  {
+    MODEL: AI_MODEL.GEMINI_PRO,
+    API_KEY: process.env.AI_GEMINI_API_KEY || '',
+  },
+  {
+    MODEL: AI_MODEL.OPENAI_GPT,
+    API_KEY: process.env.AI_OPENAI_API_KEY || '',
+  },
+];
 
 export enum APP_URL {
   // "HOME_..." are show in navbar
