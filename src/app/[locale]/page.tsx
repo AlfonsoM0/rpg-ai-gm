@@ -27,6 +27,7 @@ import ChatOptionsConfig from 'components/chat/chat-options-config';
 import CardCreateNewCharacter from 'src/components/card-create-new-character';
 import TryMultiplayerLink from 'src/components/multiplayer/try-multiplayer-link';
 import GmAiImag from 'src/components/gmai-img';
+import { useUserPreferencesStore } from 'src/hooks/use-user-preferences-store';
 
 const DynamicCardCharacter = dynamic(() => import('components/card-character'), {
   ssr: false,
@@ -48,6 +49,7 @@ export default function Home() {
 
   const [search, setSearch] = useState('');
 
+  const { aiModels } = useUserPreferencesStore();
   function playStory() {
     if (!inGameCharacters.length) {
       setModalContent(<ModalNoCharactersToPlay />);
@@ -55,15 +57,18 @@ export default function Home() {
     }
 
     if (!content.length) {
-      addContent({
-        role: AI_ROLE.USER,
-        parts: [
-          {
-            text: `(((Información de mis personajes: ${JSON.stringify(inGameCharacters)}
+      addContent(
+        {
+          role: AI_ROLE.USER,
+          parts: [
+            {
+              text: `(((Información de mis personajes: ${JSON.stringify(inGameCharacters)}
             ${CODE_DONT_SHOW_IN_CHAT})))`,
-          },
-        ],
-      });
+            },
+          ],
+        },
+        aiModels
+      );
     }
 
     const areTheSameChars = areTheSameInGameCharacters(charactersCollection, inGameCharacters);
@@ -74,18 +79,21 @@ export default function Home() {
         addACharacterToInGame(findUpdatedChar);
         return findUpdatedChar;
       });
-      addContent({
-        role: AI_ROLE.USER,
-        parts: [
-          {
-            text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(
-              newCharactersInGame
-            )}.
+      addContent(
+        {
+          role: AI_ROLE.USER,
+          parts: [
+            {
+              text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(
+                newCharactersInGame
+              )}.
             Muéstrame los cambios en fromato de tabla comparativa para asegurarme de que todo está bien.
             ${CODE_CHARACTERS_CHANGE})))`,
-          },
-        ],
-      });
+            },
+          ],
+        },
+        aiModels
+      );
     } else setIsStoryStarted(true);
 
     router.push(APP_URL.STORY);

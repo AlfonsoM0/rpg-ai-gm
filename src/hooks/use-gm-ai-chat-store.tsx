@@ -8,6 +8,7 @@ import runAIChat from 'server/gm-ai';
 
 import i18nEs from '../../content/es.json';
 import { Locale } from 'src/i18n-config';
+import { AI_MODEL_TYPE } from 'src/config/constants';
 
 const ideas = i18nEs.New_Character.Description;
 
@@ -32,7 +33,7 @@ interface GmAiActions {
   // Chat history
   setHistoryId: () => void;
   setStoryName: (storyName: string) => void;
-  addContent: (newContent: Content) => void;
+  addContent: (newContent: Content, userAiModels: AI_MODEL_TYPE[] | undefined) => void;
   resetChat: (newGmAiState?: Omit<GmAiStore, 'locale'>) => void;
   setIsStoryStarted: (isStoryStarted: boolean) => void;
 
@@ -46,7 +47,8 @@ interface GmAiActions {
   improveDescription: (
     characterName: string,
     description: string,
-    descriptionType: CharacterCreationDescription
+    descriptionType: CharacterCreationDescription,
+    userAiModels?: AI_MODEL_TYPE[]
   ) => Promise<string>;
 }
 
@@ -77,7 +79,7 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
 
         setStoryName: (storyName) => set(() => ({ storyName })),
 
-        addContent: async (newContent) => {
+        addContent: async (newContent, userAiModels) => {
           const { locale } = get();
           set({ isLoadingContent: true });
 
@@ -88,7 +90,8 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
             content,
             newContent,
             playersDiceRolls,
-            locale
+            locale,
+            userAiModels
           );
 
           set(() => ({
@@ -109,14 +112,19 @@ export const useGmAiStore = create<GmAiStore & GmAiActions>()(
         addPlayersDiceRoll: (playersDiceRoll) =>
           set((state) => ({ playersDiceRolls: [...state.playersDiceRolls, playersDiceRoll] })),
 
-        improveDescription: async (characterName, description, descriptionType) => {
+        improveDescription: async (characterName, description, descriptionType, userAiModels) => {
           set({ isLoadingContent: true });
           const { aiConfig } = get();
 
           const prompt = `Crea una descripción de "${descriptionType}" para un personaje de ficción llamado ${characterName}. La descripción debe basarse en la siguiente información "${description}", debe ser en el mismo idioma que la información y debe considerar las siguientes preguntas "${ideas[descriptionType]}".`;
 
           try {
-            const aiRes = await runAIChat(prompt, undefined, generateAiConfig(10, aiConfig));
+            const aiRes = await runAIChat(
+              prompt,
+              undefined,
+              generateAiConfig(10, aiConfig),
+              userAiModels
+            );
             set({ isLoadingContent: false });
 
             if (!aiRes) return description;

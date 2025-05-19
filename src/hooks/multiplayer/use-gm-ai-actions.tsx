@@ -11,8 +11,10 @@ import { ChatMessage, Player } from 'src/types/multiplayer';
 import { deleteCodesFromText } from 'src/utils/delete-codes-from-text';
 import { generateDefultAiChatMessageInfo, getInGameContent } from 'src/utils/gmai-utils-mp';
 import { clearGmAiErrorsMsg } from 'src/utils/gmai-utils';
+import { useUserPreferencesStore } from '../use-user-preferences-store';
 
 export default function useGmAiAcctions() {
+  const { aiModels } = useUserPreferencesStore();
   const { multiplayerStory, userCurrentMpGame } = useMultiplayer();
   const { setFireDoc } = useFirebase();
   const locale = useTranslations()('[locale]') as Locale;
@@ -40,7 +42,8 @@ export default function useGmAiAcctions() {
         const gmAiResponse = await runAIChat(
           promptMsg,
           [...generateGmAiMpPromptArray(locale), ...inGameContent],
-          aiConfigObj
+          aiConfigObj,
+          aiModels
         );
 
         if (!gmAiResponse) console.warn('⚠️ GmAi Empty Response => ', gmAiResponse);

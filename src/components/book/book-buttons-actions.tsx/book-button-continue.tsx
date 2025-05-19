@@ -14,6 +14,7 @@ import { useLibraryStore } from 'src/hooks/use-library-store';
 import { useCreateMultiplayer } from 'src/hooks/multiplayer';
 import { useState } from 'react';
 import Loading from 'src/components/loading';
+import { useUserPreferencesStore } from 'src/hooks/use-user-preferences-store';
 
 export default function BookButtonContinue({ book }: { book: Book }) {
   const t = useTranslations('Card_Book.btn');
@@ -24,6 +25,7 @@ export default function BookButtonContinue({ book }: { book: Book }) {
   const { charactersCollection, addACharacterToCollection, addACharacterToInGame } =
     useCharacterStore();
   const { addContent, isStoryStarted, resetChat, aiConfig } = useGmAiStore();
+  const { aiModels } = useUserPreferencesStore();
 
   function handleContinueStory() {
     // if the story has started, alert the user that they cannot continue a story because it is another story in progress.
@@ -63,21 +65,24 @@ export default function BookButtonContinue({ book }: { book: Book }) {
       playersDiceRolls: isStoryEndedBefore ? [] : playersDiceRolls,
       content: clearContent,
     });
-    addContent({
-      role: AI_ROLE.USER,
-      parts: [
-        {
-          text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(
-            updatedCharacters
-          )}.
+    addContent(
+      {
+        role: AI_ROLE.USER,
+        parts: [
+          {
+            text: `(((Actualiza mis personajes con la siguiente información: ${JSON.stringify(
+              updatedCharacters
+            )}.
             Si hay cambios en la información de personajes, explíca los cambios para asegurarme de que todo está bien. Si no hay cambios en la información de personajes, solo responde "Todo listo... ¡Continuemos con la Historia!".
             ${CODE_CHARACTERS_CHANGE})))`,
-        },
-        {
-          text: `Quiero continuar con esta historia. Establece el total de éxitos en 0. Establece el total de fallos en 0. Comienza una nueva historia a partir de donde terminó la anterior, empieza el juego en el "Paso 4 - Game Master AI crea la introducción a la historia".`,
-        },
-      ],
-    });
+          },
+          {
+            text: `Quiero continuar con esta historia. Establece el total de éxitos en 0. Establece el total de fallos en 0. Comienza una nueva historia a partir de donde terminó la anterior, empieza el juego en el "Paso 4 - Game Master AI crea la introducción a la historia".`,
+          },
+        ],
+      },
+      aiModels
+    );
 
     router.push(APP_URL.STORY);
   }

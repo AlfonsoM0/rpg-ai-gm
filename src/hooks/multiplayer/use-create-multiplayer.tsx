@@ -15,8 +15,10 @@ import { useCreateMultiplayerState } from './use-create-multiplayer-state';
 import { generateAiConfig } from 'src/utils/generate-ai-config';
 import en from 'content/en.json';
 import es from 'content/es.json';
+import { useUserPreferencesStore } from '../use-user-preferences-store';
 
 export default function useCreateMultiplayer() {
+  const { aiModels } = useUserPreferencesStore();
   const { setFireDoc, user } = useFirebase();
   const { setMultiplayerStory, setUserCurrentMpGame, setIsMultiplayerLoading, multiplayerStory } =
     useMultiplayer();
@@ -143,7 +145,8 @@ export default function useCreateMultiplayer() {
         const gmAiResponse = await runAIChat(
           promptMsg,
           [...generateGmAiMpPromptArray(locale), ...inGameContent],
-          aiConfigObj
+          aiConfigObj,
+          aiModels
         );
 
         if (gmAiResponse) setGameState(gmAiResponse);

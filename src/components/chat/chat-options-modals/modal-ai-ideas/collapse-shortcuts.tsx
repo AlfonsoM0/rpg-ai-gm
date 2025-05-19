@@ -29,7 +29,7 @@ export default function CollapseShortcuts({ isMultiplayer }: { isMultiplayer?: b
   ];
   const { addContent } = useGmAiStore();
   const { setModalIsOpen } = useModalState();
-  const { addChatShortcut, chatShortcuts } = useUserPreferencesStore();
+  const { addChatShortcut, chatShortcuts, aiModels } = useUserPreferencesStore();
 
   const pathname = usePathname();
 
@@ -44,10 +44,13 @@ export default function CollapseShortcuts({ isMultiplayer }: { isMultiplayer?: b
 
     if (isMultiplayer) sendMessage(idea, true);
     else
-      addContent({
-        role: AI_ROLE.USER,
-        parts: [{ text: idea }],
-      });
+      addContent(
+        {
+          role: AI_ROLE.USER,
+          parts: [{ text: idea }],
+        },
+        aiModels
+      );
 
     setModalIsOpen(false);
   }

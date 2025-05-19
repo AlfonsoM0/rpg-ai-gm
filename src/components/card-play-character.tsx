@@ -8,6 +8,7 @@ import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 import { useTranslations } from 'next-intl';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
+import { useUserPreferencesStore } from 'src/hooks/use-user-preferences-store';
 
 interface CardPlayCharacterProps {
   character: Character;
@@ -27,6 +28,7 @@ export default function CardPlayCharacter({ character, isMultiplayer }: CardPlay
    * Single Player
    */
   const { addContent, isLoadingContent, addPlayersDiceRoll } = useGmAiStore();
+  const { aiModels } = useUserPreferencesStore();
   function rollCharacteristicSp(characteristic: Characteristic, value: number): void {
     handleStop();
 
@@ -35,16 +37,19 @@ export default function CardPlayCharacter({ character, isMultiplayer }: CardPlay
     const { total } = roll2d6(value);
     addPlayersDiceRoll(total);
 
-    addContent({
-      role: AI_ROLE.USER,
-      parts: [
-        {
-          text: `**${name}** ${tPC('roll2d6.take a test')} ${t(Char)} (2d6+${value})... \n\n ${tPC(
-            'roll2d6.and gets a result of'
-          )}: **${total}**`,
-        },
-      ],
-    });
+    addContent(
+      {
+        role: AI_ROLE.USER,
+        parts: [
+          {
+            text: `**${name}** ${tPC('roll2d6.take a test')} ${t(
+              Char
+            )} (2d6+${value})... \n\n ${tPC('roll2d6.and gets a result of')}: **${total}**`,
+          },
+        ],
+      },
+      aiModels
+    );
   }
 
   /**

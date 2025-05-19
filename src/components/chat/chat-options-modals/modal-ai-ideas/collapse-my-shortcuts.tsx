@@ -14,7 +14,7 @@ export default function CollapseMyShortcuts({ isMultiplayer }: { isMultiplayer?:
 
   const { addContent } = useGmAiStore();
   const { setModalIsOpen } = useModalState();
-  const { chatShortcuts, addChatShortcut, removeChatShortcut, moveChatShortcut } =
+  const { chatShortcuts, addChatShortcut, removeChatShortcut, moveChatShortcut, aiModels } =
     useUserPreferencesStore();
 
   const [newIdea, setNewIdea] = useState('');
@@ -47,10 +47,13 @@ export default function CollapseMyShortcuts({ isMultiplayer }: { isMultiplayer?:
 
     if (isMultiplayer) sendMessage(idea, true);
     else
-      addContent({
-        role: AI_ROLE.USER,
-        parts: [{ text: idea }],
-      });
+      addContent(
+        {
+          role: AI_ROLE.USER,
+          parts: [{ text: idea }],
+        },
+        aiModels
+      );
 
     setModalIsOpen(false);
   }

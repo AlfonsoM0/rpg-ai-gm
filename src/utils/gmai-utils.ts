@@ -5,6 +5,7 @@ import {
   CODE_DONT_SHOW_IN_CHAT,
   CODE_STORY_END,
   CODE_CHARACTERS_CHANGE,
+  AI_MODEL_TYPE,
 } from 'config/constants';
 import { deleteCodesFromText } from './delete-codes-from-text';
 import { AiModels, generateAiConfig } from './generate-ai-config';
@@ -68,7 +69,8 @@ export async function createGmAiResponseContent(
   stateContent: Content[],
   newContent: Content,
   playersDiceRolls: number[],
-  locale: Locale
+  locale: Locale,
+  userAiModels: AI_MODEL_TYPE[] | undefined
 ): Promise<Content[]> {
   const lang = locale === 'en' ? en : es;
   const t = lang.GmAi.Response;
@@ -83,7 +85,8 @@ export async function createGmAiResponseContent(
     const gmAiResponse = await runAIChat(
       newContentText,
       [...generateGmAiPromptArray(locale), ...stateContent, infoStoryControl],
-      generateAiConfig(stateContent.length, aiConfig)
+      generateAiConfig(stateContent.length, aiConfig),
+      userAiModels
     );
 
     if (!gmAiResponse) console.warn('⚠️ GmAi Empty Response => ', gmAiResponse);

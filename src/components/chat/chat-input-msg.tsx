@@ -13,6 +13,7 @@ import useMultiplayer, { useGmAiAcctions, usePlayerAcctions } from 'src/hooks/mu
 import ButtonAiImprove from '../form-new-character/form-character-description-steps-ai-button/button-ai-improve';
 import { areAllPlayersReadyForAiResponse } from 'src/utils/gmai-utils-mp';
 import Loading from '../loading';
+import { useUserPreferencesStore } from 'src/hooks/use-user-preferences-store';
 
 export default function ChatInputMsg({
   isMultiplayer,
@@ -32,15 +33,19 @@ export default function ChatInputMsg({
    * Single Player Settings
    */
   const { addContent, isLoadingContent } = useGmAiStore();
+  const { aiModels } = useUserPreferencesStore();
   function submitChat(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!chatMsg) return;
     handleStop();
     SR.stopListening();
-    addContent({
-      role: AI_ROLE.USER,
-      parts: [{ text: chatMsg }],
-    });
+    addContent(
+      {
+        role: AI_ROLE.USER,
+        parts: [{ text: chatMsg }],
+      },
+      aiModels
+    );
     setChatMsg('');
   }
 

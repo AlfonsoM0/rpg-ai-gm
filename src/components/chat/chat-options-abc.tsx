@@ -5,6 +5,8 @@ import { useTTSStore } from 'hooks/use-tts-store';
 import { AI_ROLE } from 'config/constants';
 import { useTranslations } from 'next-intl';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
+import { useUserPreferencesStore } from 'src/hooks/use-user-preferences-store';
+
 export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: boolean }) {
   const t = useTranslations('ChatOptionsABC');
 
@@ -12,6 +14,7 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
    * Single Player
    */
   const { addContent, isLoadingContent, content } = useGmAiStore();
+  const { aiModels } = useUserPreferencesStore();
   const { handleStop } = useTTSStore();
 
   /**
@@ -26,10 +29,13 @@ export default function ChatOptionsABC({ isMultiplayer }: { isMultiplayer?: bool
 
     if (isMultiplayer) sendMessage(msg, true);
     else
-      addContent({
-        role: AI_ROLE.USER,
-        parts: [{ text: msg }],
-      });
+      addContent(
+        {
+          role: AI_ROLE.USER,
+          parts: [{ text: msg }],
+        },
+        aiModels
+      );
   }
 
   /**
