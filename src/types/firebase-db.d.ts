@@ -1,3 +1,4 @@
+import { AI_MODEL_TYPE } from 'src/config/constants';
 import { Character } from './character';
 import { Book } from './library';
 import { MultiplayerStory, Player } from './multiplayer';
@@ -27,6 +28,7 @@ export type UserAccuntPartial = Partial<Omit<UserAccount, 'id' | 'createdAt'>>;
 export type UserPreferences = {
   theme: string;
   chatShortcuts: string[];
+  aiModels: AI_MODEL_TYPE[];
   // language?: string;
   updatedAt: number;
 };

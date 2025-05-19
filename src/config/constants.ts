@@ -15,7 +15,12 @@ export enum AI_MODEL {
   OPENAI_GPT = 'gpt-3.5-turbo-0125',
 }
 
-export const AI_MODELS = [
+export type AI_MODEL_TYPE = {
+  MODEL: string;
+  API_KEY: string;
+};
+
+export const AI_MODELS: AI_MODEL_TYPE[] = [
   {
     MODEL: AI_MODEL.GEMINI_PRO,
     API_KEY: process.env.AI_GEMINI_API_KEY || '',

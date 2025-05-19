@@ -9,7 +9,7 @@ import {
   GenerationConfig,
   SafetySetting,
 } from '@google/generative-ai';
-import { AI_MODEL, AI_MODELS, AI_ROLE } from 'config/constants';
+import { AI_MODEL, AI_MODEL_TYPE, AI_MODELS, AI_ROLE } from 'config/constants';
 
 // https://platform.openai.com/docs/overview
 import OpenAI from 'openai';
@@ -47,8 +47,11 @@ const safetySettings: SafetySetting[] = [
 export default async function runAIChat(
   userInput: string,
   history?: Content[],
-  generationConfigCustom?: GenerationConfig
+  generationConfigCustom?: GenerationConfig,
+  aiModels?: AI_MODEL_TYPE[]
 ) {
+  aiModels = aiModels ? [...aiModels, ...AI_MODELS] : AI_MODELS;
+
   function mapConfigToOpenAI(config: GenerationConfig) {
     return {
       temperature: config.temperature,
@@ -65,9 +68,10 @@ export default async function runAIChat(
 
   const configs = generationConfigCustom || generationConfigDefault;
 
-  for (const ai of AI_MODELS) {
+  for (const ai of aiModels) {
     try {
-      if (ai.MODEL === AI_MODEL.GEMINI_PRO) {
+      if (ai.MODEL.includes('gemini')) {
+        // Si el modelo es Gemini, se usa la configuración de GoogleGenerativeAI
         console.log(`🟡 Usando ${ai.MODEL}...`);
 
         const genAI = new GoogleGenerativeAI(ai.API_KEY);
@@ -85,7 +89,8 @@ export default async function runAIChat(
           console.log(`🟢 Respuesta de ${ai.MODEL}: ${textResult}`);
           return textResult;
         }
-      } else if (ai.MODEL === AI_MODEL.OPENAI_GPT) {
+      } else if (ai.MODEL.includes('gpt')) {
+        // Si el modelo es OpenAI, se usa la configuración de OpenAI
         console.log(`🟡 Usando ${ai.MODEL}...`);
 
         const openai = new OpenAI({ apiKey: ai.API_KEY });

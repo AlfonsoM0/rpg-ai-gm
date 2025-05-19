@@ -24,6 +24,7 @@ export default function useSyncStorageAndFirebase() {
   const {
     theme,
     chatShortcuts,
+    aiModels,
     clearOrSetUserPreferences,
     updatedAt: uAtUserPref,
   } = useUserPreferencesStore();
@@ -50,7 +51,12 @@ export default function useSyncStorageAndFirebase() {
           if (currentFireDoc && currentFireDoc.updatedAt > uAtUserPref)
             clearOrSetUserPreferences(currentFireDoc);
           else if (!currentFireDoc)
-            setFireDoc('USER_PREFERENCES', { theme, chatShortcuts, updatedAt: uAtUserPref });
+            setFireDoc('USER_PREFERENCES', {
+              theme,
+              chatShortcuts,
+              aiModels,
+              updatedAt: uAtUserPref,
+            });
         },
 
         userCharacters: async () => {
@@ -84,7 +90,12 @@ export default function useSyncStorageAndFirebase() {
           const currentFireDoc = await getFireDoc('USER_PREFERENCES');
 
           if ((currentFireDoc && currentFireDoc.updatedAt < uAtUserPref) || !currentFireDoc)
-            setFireDoc('USER_PREFERENCES', { theme, chatShortcuts, updatedAt: uAtUserPref });
+            setFireDoc('USER_PREFERENCES', {
+              theme,
+              chatShortcuts,
+              aiModels,
+              updatedAt: uAtUserPref,
+            });
         },
 
         userCharacters: async () => {
