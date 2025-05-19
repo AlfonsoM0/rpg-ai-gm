@@ -5,6 +5,7 @@ import { ModalContentContainer } from 'components/modal';
 import TTSConfig from 'components/tts/tts-config';
 import { useGmAiStore } from 'hooks/use-gm-ai-chat-store';
 import { useTranslations } from 'next-intl';
+import UserAiModels from 'src/components/user-ai-models';
 import useFirebase from 'src/hooks/firebase';
 import useMultiplayer, { usePlayerAcctions } from 'src/hooks/multiplayer';
 import useGenerateAiConfigObj from 'src/hooks/use-generate-ai-config-model';
@@ -83,6 +84,8 @@ export default function ModalConfigAI({ isMultiplayer }: { isMultiplayer?: boole
         ) : null}
 
         <TTSConfig />
+
+        <UserAiModels />
       </>
     </ModalContentContainer>
   );

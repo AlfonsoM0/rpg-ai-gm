@@ -2,8 +2,8 @@
   "[locale]": "es",
 
   "ModalNews": {
-    "Title": "¡Atención!",
-    "MarkdownText": "Este juego no está completo y podrías perder información en alguna actualización. \n\n ¡Ahora puedes guardar tus datos iniciando sesión con una **cuenta de Google**! \n\n GmAi es gratuito, pero está limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no está funcionando como se espera, intenta jugar en un horario menos concurrido. Se requerirán cuentas Premium para eliminar esta limitación, estamos evaluando las mejores opciones. \n\n Para reportar un error o hacer una sugerencia puedes escribirme a [**alfonso.ar**](https://alfonso.ar). \n\n #### **PRÓXIMAMENTE** \n\n Las siguientes son ideas para mejorar esta aplicación en el futuro. \n\n * ~~Multijugador cooperativo con GmAi.~~ \n\n * Generación del avatar del personaje con GmAi. \n\n * Generación de video basado en un libro con GmAi.",
+    "Title": "Actualización 19 de Mayo 2025",
+    "MarkdownText": "Este juego no está completo y podrías perder información en alguna actualización.\n\n¡Ahora puedes guardar tus datos iniciando sesión con una **cuenta de Google**!\n\nGmAi es gratuito, pero está limitado en la cantidad de jugadores que puede atender por minuto. Si GmAi no está funcionando como se espera, intenta jugar en un horario menos concurrido. Se requerirán cuentas Premium para eliminar esta limitación en el futuro, estamos evaluando las mejores opciones.\n\n- **Nuevo:** Se añadió la opción de cargar tus propios modelos de Ai para jugar con GmAi. Esto te permitirá jugar bajo tu propio coste mientras el juego se encuentra en beta. En modo multi-jugador, el sistema usa la Ai del anfitrión.\n\nPara reportar un error o hacer una sugerencia puedes escribirme a [**alfonso.ar**](https://alfonso.ar).\n\n#### **PRÓXIMAMENTE**\n\nLas siguientes son ideas para mejorar esta aplicación en el futuro.\n\n* ~~Multijugador cooperativo con GmAi.~~\n\n* Generación del avatar del personaje con GmAi.\n\n* Generación de video basado en un libro con GmAi.",
     "btn_OK": "¡Entendido!"
   },
 
@@ -511,6 +511,23 @@
       "Pause": "Pausar",
       "Stop": "Detener"
     }
+  },
+
+  "ModalUserAiModels": {
+    "title": "Mis Ai Models",
+    "tip1": "Aquí puedes configurar tus propios modelos de Ai",
+    "tip2": "Solo puedes usar modelos 'Gemini' o 'GPT'",
+    "tip3": "Los modelos se usan en el orden que los colocas.",
+    "tip4": "Si un modelo falla, se activa el siguiente.",
+    "input_model_placeholder": "Ej: gemini-1.5-pro o gpt-3.5-turbo",
+    "input_apikey_placeholder": "API KEY",
+    "error_required": "Debes completar ambos campos.",
+    "error_invalid": "El modelo solo puede ser Gemini o GPT",
+    "btn_add": "Agregar modelo",
+    "no_models": "No tienes modelos guardados.",
+    "remove": "Eliminar modelo",
+    "move_up": "Mover arriba",
+    "move_down": "Mover abajo"
   },
 
   "Page_Multiplayer": {
