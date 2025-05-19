@@ -11,7 +11,7 @@ export enum AI_ROLE {
 }
 
 export enum AI_MODEL {
-  GEMINI_PRO = 'gemini-1.5-pro',
+  GEMINI_PRO = 'gemini-2.5-flash-preview-04-17',
   OPENAI_GPT = 'gpt-3.5-turbo-0125',
 }
 
