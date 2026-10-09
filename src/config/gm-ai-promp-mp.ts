@@ -1,4 +1,4 @@
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import { AI_ROLE } from './constants';
 import { Locale } from 'src/i18n-config';
 

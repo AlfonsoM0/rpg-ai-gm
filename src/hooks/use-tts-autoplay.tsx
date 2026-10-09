@@ -1,6 +1,6 @@
 'use client';
 
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import { useEffect } from 'react';
 import { AI_ROLE } from 'src/config/constants';
 import { ChatMessage } from 'src/types/multiplayer';

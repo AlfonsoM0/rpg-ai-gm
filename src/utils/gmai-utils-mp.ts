@@ -1,4 +1,4 @@
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import { AI_NAME_TO_SHOW, AI_ROLE } from 'src/config/constants';
 import { UserGame } from 'src/types/firebase-db';
 import { AiRole, ChatMessage, MultiplayerStory, Player } from 'src/types/multiplayer';

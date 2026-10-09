@@ -1,27 +1,24 @@
 'use server';
 
-// https://ai.google.dev/gemini-api/docs/get-started/node
+// https://ai.google.dev/gemini-api/docs/quickstart?lang=node
 import {
-  GoogleGenerativeAI,
+  GoogleGenAI,
   HarmCategory,
   HarmBlockThreshold,
-  Content,
-  GenerationConfig,
   SafetySetting,
-} from '@google/generative-ai';
+  ThinkingLevel,
+} from '@google/genai';
+import { Content } from 'types/ai';
+import { AiConfig } from 'utils/generate-ai-config';
 import { AI_MODEL, AI_MODEL_TYPE, AI_MODELS, AI_ROLE } from 'config/constants';
 
 // https://platform.openai.com/docs/overview
 import OpenAI from 'openai';
 import { ResponseInputItem } from 'openai/resources/responses/responses.mjs';
 
-const generationConfigDefault: GenerationConfig = {
+const generationConfigDefault: AiConfig = {
   // Strict AI
-  temperature: 0.3,
-  topP: 0.9,
-  topK: 40,
   maxOutputTokens: 1500,
-  responseMimeType: 'text/plain',
 };
 
 // See https://ai.google.dev/gemini-api/docs/safety-settings
@@ -47,15 +44,13 @@ const safetySettings: SafetySetting[] = [
 export default async function runAIChat(
   userInput: string,
   history?: Content[],
-  generationConfigCustom?: GenerationConfig,
+  generationConfigCustom?: AiConfig,
   aiModels?: AI_MODEL_TYPE[]
 ) {
   aiModels = aiModels ? [...aiModels, ...AI_MODELS] : AI_MODELS;
 
-  function mapConfigToOpenAI(config: GenerationConfig) {
+  function mapConfigToOpenAI(config: AiConfig) {
     return {
-      temperature: config.temperature,
-      top_p: config.topP,
       max_output_tokens: config.maxOutputTokens,
     };
   }
@@ -74,16 +69,22 @@ export default async function runAIChat(
         // Si el modelo es Gemini, se usa la configuración de GoogleGenerativeAI
         console.log(`🟡 Usando ${ai.MODEL}...`);
 
-        const genAI = new GoogleGenerativeAI(ai.API_KEY);
-        const model = genAI.getGenerativeModel({ model: ai.MODEL });
-        const chat = model.startChat({
-          generationConfig: configs,
-          safetySettings,
+        const genAI = new GoogleGenAI({ apiKey: ai.API_KEY });
+        const chat = genAI.chats.create({
+          model: ai.MODEL,
           history,
+          config: {
+            ...configs,
+            safetySettings,
+            // Thinking tokens count toward maxOutputTokens: keep reasoning short.
+            // Gemini 1.x/2.x (e.g. user AI models) reject thinkingLevel.
+            ...(!/^gemini-[12]\./.test(ai.MODEL) && {
+              thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
+            }),
+          },
         });
-        const result = await chat.sendMessage(userInput);
-        const response = result.response;
-        const textResult = response.text();
+        const response = await chat.sendMessage({ message: userInput });
+        const textResult = response.text ?? '';
 
         if (typeof textResult === 'string' && textResult.trim().length > 0) {
           console.log(`🟢 Respuesta de ${ai.MODEL}: ${textResult}`);
@@ -116,12 +117,14 @@ export default async function runAIChat(
 }
 
 /* //|> Opciones de configuraciones
+
+NOTA: originalmente cada opción se implementaba con temperature/topP/topK, que Gemini deprecó.
+Se conservan como referencia para el rediseño de los perfiles (ver TODO en utils/generate-ai-config.ts).
  
 //|> Opción 1: Game Master AI Conservador - "Maestro de las Reglas"
 
 Esta configuración se centra en seguir estrictamente las reglas y crear una experiencia más clásica.
 
-{ "temperature": 0.3, "topP": 0.9, "topK": 40, "maxOutputTokens": 1500, "responseMimeType": "text/plain" }
 
 Descripción: Un Game Master AI que se ajusta con estrictez a las reglas del juego. Sus respuestas son más previsibles y consistentes, siguiendo un patrón más estable.
 
@@ -132,7 +135,6 @@ Desventajas: Menos innovación y sorpresas en la narrativa, respuestas más rest
 
 Esta configuración está enfocada en la narrativa audaz, con un énfasis en la imaginación y la espontaneidad.
 
-{ "temperature": 0.8, "topP": 0.7, "topK": 80, "maxOutputTokens": 2000, "responseMimeType": "text/plain" }
 
 Descripción: Un Game Master AI que se anima a romper los moldes tradicionales de la narración y busca impactar con su creatividad e innovación.
 
@@ -143,7 +145,6 @@ Desventajas: Mayor probabilidad de incoherencias o saltos bruscos en la narraci�
 
 Esta configuración es una combinación equilibrada de reglas y creatividad, dando lugar a una experiencia más fluida e interesante.
 
-{ "temperature": 0.6, "topP": 0.85, "topK": 60, "maxOutputTokens": 1800, "responseMimeType": "text/plain" }
 
 Descripción: Un Game Master AI que se acomoda al equilibrio entre la coherencia y el elemento imaginativo. Ofrece una narrativa fluida, interesante y más viva.
 

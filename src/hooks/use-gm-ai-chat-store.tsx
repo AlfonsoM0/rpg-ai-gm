@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import { AiModels, generateAiConfig } from 'utils/generate-ai-config';
 import { createGmAiResponseContent } from 'utils/gmai-utils';
 import { CharacterCreationDescription } from 'types/character';

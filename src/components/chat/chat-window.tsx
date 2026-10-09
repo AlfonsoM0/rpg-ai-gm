@@ -1,6 +1,6 @@
 'use client';
 
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import ChatMessage from './chat-message';
 import { useEffect, useRef } from 'react';
 import imgGmAi from 'public/android-chrome-512x512.png';

@@ -1,4 +1,4 @@
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import { Locale } from 'src/i18n-config';
 import { AiModels } from 'utils/generate-ai-config';
 import { Character } from './character';

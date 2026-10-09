@@ -1,4 +1,4 @@
-import type { Content } from '@google/generative-ai';
+import type { Content } from 'types/ai';
 import { Character } from 'types/character';
 
 export type Book = {

@@ -1,4 +1,4 @@
-import { Content } from '@google/generative-ai';
+import { Content } from 'types/ai';
 import { calculateStoryXp } from './calculate-story-xp';
 import {
   AI_ROLE,
